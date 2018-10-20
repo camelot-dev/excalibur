@@ -19,6 +19,10 @@ requires = [
     'SQLAlchemy>=1.2.12'
 ]
 dev_requires = [
+    'codecov>=2.0.15',
+    'pytest>=3.8.0',
+    'pytest-cov>=2.6.0',
+    'pytest-runner>=4.2',
     'Sphinx>=1.8.1'
 ]
 
