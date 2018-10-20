@@ -6,7 +6,7 @@ install:
 	pip install ".[dev]"
 
 test:
-	pytest --verbose --cov-config .coveragerc --cov-report term --cov-report xml --cov=camelot tests
+	pytest --verbose --cov-config .coveragerc --cov-report term --cov-report xml --cov=excalibur tests
 
 docs:
 	cd docs && make html
@@ -16,4 +16,4 @@ publish:
 	pip install twine
 	python setup.py sdist
 	twine upload dist/*
-	rm -fr build dist .egg camelot_py.egg-info
+	rm -fr build dist .egg excalibur_py.egg-info
