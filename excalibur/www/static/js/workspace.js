@@ -141,22 +141,23 @@ $(document).ready(function () {
 
   $('body').on('click', '.add-separator', function () {
     const position = $('#image-div').position();
-    const column = $('<div>', {
-      class: 'draggable-column'
-    });
+    const column = $('<div id="dc" class="draggable-column"><div class="background"></div><div id="line" class="line"></div></div>');
     $(column).css({
       'position': 'absolute',
       'top': position.top,
       'left': position.left + 20,
-      'background-color': 'blue',
       'height': $('#image-div').height(),
-      'width': '4px',
+      'width': '20px',
       'z-index': 200
     });
     $('#image-div').append(column);
     $('.draggable-column').draggable({
       axis: 'x',
-      containment: 'parent'
+      containment: 'parent',
+      drag: function(e) {
+        console.log($('#dc').position());
+        console.log($('#line').position());
+      }
     });
   });
 

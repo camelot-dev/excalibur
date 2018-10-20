@@ -22,3 +22,10 @@ div .image-area {
 div .draggable-column:active {
   cursor: ew-resize;
 }
+
+.line {
+  position: relative;
+  height: 100%;
+  width: 2px;
+  background-color: aqua;
+}
