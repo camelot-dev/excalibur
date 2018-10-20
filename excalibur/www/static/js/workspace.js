@@ -1,8 +1,6 @@
 let columnCountBuffer = 0;
 
 // https://coderwall.com/p/flonoa/simple-string-format-in-javascript
-let columnCountBuffer = 0;
-
 String.prototype.format = function() {
   let str = this;
   for (let i in arguments) {
