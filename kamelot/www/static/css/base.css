@@ -1,0 +1,111 @@
+html, body {
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', sans-serif;
+}
+
+body {
+  padding-top: 5rem;
+}
+
+.starter-template {
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+label {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+small {
+  line-height: 1;
+}
+
+input:focus, .form-control:focus,
+input:active, .form-control:active {
+  box-shadow: none;
+}
+
+.primary-bg {
+  background-color: #2196F3 !important;
+}
+
+.primary-text {
+  color: #2196F3;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.depth-1 {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.depth-2 {
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.depth-3 {
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+/* FILES */
+
+
+.table td, .table th {
+  /* OVERWRITE */
+  vertical-align: middle;
+}
+
+.table-hover tbody tr:hover {
+  /* OVERWRITE */
+  background-color: rgba(0,0,0,.02);
+}
+
+.uploadFile .uploadFile__input {
+  cursor: pointer;
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  min-height: 4em;
+  outline: none;
+  visibility: hidden;
+  cursor: pointer;
+}
+
+.uploadFile .uploadFile__label {
+  cursor: pointer;
+  font-size: 18px;
+  padding-top: 0.85em;
+  min-height: 4em;
+  z-index: 2;
+  position: absolute;
+  top: -15px;
+  left: 0;
+  width: 100%;
+  line-height: 2em;
+  opacity: 1;
+  color: #2196F3;
+  visibility: visible;
+  text-align: center;
+  border: 0.1em dashed #2196F3;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  overflow: hidden;
+}
+
+.uploadFile .uploadFile__input:hover ~ .uploadFile__label  {
+  border-style: solid;
+  box-shadow: inset 0px 0px 0px 0.05em #2196F3;
+}
+
+
+/* Workspace */
+
+.draggable-column.ui-draggable.ui-draggable-handle {
+  cursor: col-resize;
+}

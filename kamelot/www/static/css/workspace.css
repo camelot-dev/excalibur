@@ -1,0 +1,24 @@
+img {
+  max-width: 100%;
+  max-height: auto;
+  margin: 0 auto;
+}
+
+div .image-area {
+  -moz-border-radius : 5px 5px 5px 5px;
+  -moz-box-shadow : 0 0 6px #c8c8c8;
+  -webkit-border-radius : 5px 5px 5px 5px;
+  -webkit-box-shadow : 0 0 6px #c8c8c8;
+  background-color : #ffffff;
+  border : 0;
+  border-radius : 5px 5px 5px 5px;
+  box-shadow : 0 0 6px #c8c8c8;
+  display : inline-block;
+  padding : 0;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+div .draggable-column:active {
+  cursor: ew-resize;
+}

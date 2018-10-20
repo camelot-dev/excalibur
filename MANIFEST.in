@@ -1,0 +1,9 @@
+include MANIFEST.in
+include README.md
+include HISTORY.md
+include LICENSE
+include setup.py
+include setup.cfg
+graft excalibur/www/static
+graft excalibur/www/templates
+global-exclude *.pyc

@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+{% block stylesheet %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/vendor/jquery.selectareas.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/vendor/jquery-ui.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/vendor/jquery-ui.theme.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/vendor/jquery-ui.structure.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/workspace.css') }}">
+{% endblock %}
+
+{% block workspace %}
+  {% if imagepath is not none %}
+    <div class="container">
+      <div class="row pb-4">
+        <div class="col-md-12">
+          <h2>Workspace</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 col-sm-12 pb-5">
+          <form>
+            <div class="form-group form-group__custom">
+              <label for="page-numbers"><b>Page numbers (comma separated)</b></label>
+              <div class="input-group">
+                <input type="text" class="form-control form-control-lg" aria-describedby="page-numbers-help" placeholder="Example: 1,5,8 or 3,6-end" autocomplete="false">
+                <div class="input-group-append">
+                  <button type="button" onclick="extract()" class="btn btn-success btn-lg">Extract</button>
+                </div>
+              </div>
+              <small id="page-numbers-help" class="form-text text-muted">Page numbers to extract tables from. By default, tables from only this page will be extracted.</small>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="row">
+        <section class="col-md-3">
+            <div class="row mx-0 mb-3 card">
+            <div class="card-body">
+              <div class="card-title">
+                  <h3>Rules</h3>
+              </div>
+              <form class="form-group">
+                <div class="row py-3">
+                    <div class="col-md-12">
+                        <label for="flavors">Extraction flavor</label>
+                        <select class="form-control" name="flavors" id="flavors">
+                          <option selected disabled>Select flavor</option>
+                          <option>Lattice</option>
+                          <option>Stream</option>
+                        </select>
+                    </div>
+                    <div class="row mx-0 lattice mt-3" style="display: none">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label for="process-background">Process background</label>
+                          <input type="text" class="form-control" id="process-background" aria-describedby="process-background-help" placeholder="false">
+                          <small id="process-background-help" class="form-text text-muted">Process background lines.</small>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label for="line-size-scaling">Line size scaling factor</label>
+                          <input type="text" class="form-control" id="line-size-scaling" aria-describedby="line-size-scaling-help" placeholder="15">
+                          <small id="line-size-scaling-help" class="form-text text-muted">The larger the value the smaller the detected lines. Making it very large will lead to text being detected as lines.</small>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label for="split-text-l">Split text</label>
+                          <input type="text" class="form-control" id="split-text-l" aria-describedby="split-text-l-help" placeholder="false">
+                          <small id="split-text-l-help" class="form-text text-muted">Split text that spans across multiple cells.</small>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label for="flag-size-l">Flag size</label>
+                          <input type="text" class="form-control" id="flag-size-l" aria-describedby="flag-size-l-help" placeholder="false">
+                          <small id="flag-size-l-help" class="form-text text-muted">Flag text based on font size. Useful to detect super/subscripts.</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mx-0 stream mt-3" style="display: none">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label for="row-close-tol">Row close tolerance</label>
+                          <input type="text" class="form-control" id="row-close-tol" aria-describedby="row-close-tol-help" placeholder="2">
+                          <small id="row-close-tol-help" class="form-text text-muted">Tolerance parameter used to combine text vertically, to generate rows.</small>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label for="col-close-tol">Column close tolerance</label>
+                          <input type="text" class="form-control" id="col-close-tol" aria-describedby="col-close-tol-help" placeholder="0">
+                          <small id="col-close-tol-help" class="form-text text-muted">Tolerance parameter used to combine text horizontally, to generate columns.</small>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label for="split-text-s">Split text</label>
+                          <input type="text" class="form-control" id="split-text-s" aria-describedby="split-text-s-help" placeholder="false">
+                          <small id="split-text-s-help" class="form-text text-muted">Split text that spans across multiple cells.</small>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label for="flag-size-s">Flag size</label>
+                          <input type="text" class="form-control" id="flag-size-s" aria-describedby="flag-size-s-help" placeholder="false">
+                          <small id="flag-size-s-help" class="form-text text-muted">Flag text based on font size. Useful to detect super/subscripts.</small>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <button type="button" id="add-separator" class="btn btn-block btn-primary add-separator">Add separator</button>
+                      </div>
+                    </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+        <section class="col-md-9">
+          <div class="jumbotron">
+            <div class="row mx-0">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div id="image-div">
+                  <img src="{{ imagepath }}" id="image" class="image-area"/>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  {% else %}
+    <div class="container">
+      <div class="jumbotron">
+        <h1 class="display-4">Refresh</h1>
+        <p class="lead">Please wait while the page is converted to an image. Refresh again after some time.</p>
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/vendor/jquery.selectareas.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/vendor/jquery-ui.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/workspace.js') }}"></script>
+<script type="text/javascript">
+  var file_dimensions = {{ file_dimensions|safe }};
+  var image_dimensions = {{ image_dimensions|safe }};
+</script>
+{% endblock %}

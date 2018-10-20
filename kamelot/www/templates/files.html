@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block stylesheet %}
+{% endblock %}
+
+{% block files %}
+<div class="container">
+  <div class="row mb-4 border-bottom mb-5">
+    <div class="col-md-12 text-center">
+        <h1 class="display-4 align-items-center d-flex justify-content-center">
+            <img src="https://camelot-py.readthedocs.io/en/master/_static/png/camelot-logo.png" class="img-responsive" width="40" height="auto" alt="Kamelot">
+            <span>Kamelot</span>
+        </h1>
+        <p class="lead">A web interface for Camelot: PDF Table Extraction for Humans.</p>
+    </div>
+  </div>
+
+  <div class="row mb-2 pt-5">
+    <div class="col-md-12">
+      <p class="lead">Lets Begin..</p>
+    </div>
+  </div>
+
+  <form class="mb-5">
+    <div class="row align-items-center">
+      <div class="col-md-6 col-sm-6 col-xs-12">
+          <div class="input-group">
+            <div class="custom-file uploadFile">
+              <input type="file" class="uploadFile__input" id="file" name="file" accept="application/pdf">
+              <label for="file" class="uploadFile__label">Upload PDF</label>
+            </div>
+          </div>
+      </div>
+      <div class="col-md-6 col-sm-6 col-xs-12 py-2">
+          <label for="page-number">Page number</label>
+          <div class="input-group">
+            <input type="text" class="form-control" id="page-number" placeholder="A single page number to create an extraction rule on">
+            <div class="input-group-append">
+              <button type="button" id="upload" class="btn btn-outline-secondary">Upload</button>
+            </div>
+          </div>
+      </div>
+    </div>
+  </form>
+  <h5 class="card-title py-3 mb-0 text-dark font-weight-bold">Previous Uploads</h5>
+
+  <div class="card depth-1 mb-5">
+    <div class="card-body p-0">
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table text-left table-borderless table-hover mb-0">
+                  <thead class="thead-light">
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Filename</th>
+                      <th scope="col">Uploaded at</th>
+                      <th scope="col">&nbsp</th>
+                      <th scope="col">&nbsp</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% if files_response|length > 0 %}
+                      {% for file in files_response %}
+                        <tr>
+                          <th width="10%" scope="row">{{ loop.index }}</th>
+                          <td width="40%">{{ file.filename }}</td>
+                          <td width="20%">{{ file.uploaded_at }}</td>
+                          <td width="15%"><a href="/workspaces/{{ file.file_id }}" class="btn btn-sm btn-outline-success">Extract Again</button></td>
+                          <td width="15%"><a href="/jobs/{{ file.job_id }}" class="btn btn-sm btn-outline-primary">Download</button></td>
+                        </tr>
+                      {% endfor %}
+                    {% else %}
+                      <tr>
+                        <td colspan="5" style="text-align: center">No files uploaded.</td>
+                      </tr>
+                    {% endif %}
+                  </tbody>
+                </table>
+            </div>
+          </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/files.js') }}"></script>
+{% endblock %}

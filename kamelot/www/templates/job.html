@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block stylesheet %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/job.css') }}">
+{% endblock %}
+
+{% block job %}
+{% if is_finished %}
+  <div class="container mt-2">
+    <div class="row align-items-center">
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <h4>Extracted Data</h4>
+      </div>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+          <form action="/download" method="post" id="download-form">
+            <label for="format">Download</label>
+            <div class="input-group">
+              <select class="form-control" name="format" id="format">
+                <option selected disabled>Select format</option>
+                <option>CSV</option>
+                <option>Excel</option>
+                <option>JSON</option>
+                <option>HTML</option>
+              </select>
+              <div class="input-group-append mb-3">
+                <button type="button" id="download" class="btn btn-outline-secondary">Download</button>
+              </div>
+            </div>
+          </form>
+      </div>
+    </div>
+    {% for d in data %}
+      <div class="card depth-1 mb-5">
+        <div class="card-body p-0">
+          <table class="table text-left table-bordered table-hover mb-0">
+            <caption class="text-right text-dark mr-3"> <h6>{{ d.title }}</h6> </caption>
+            <thead class="thead-light">
+              <tr>
+                {% for column in d.columns %}
+                  <th>{{ column }}</th>
+                {% endfor %}
+              </tr>
+            </thead>
+            <tbody>
+              {% for record in d.records %}
+                <tr>
+                  {% for column in d.columns %}
+                  <td>{{ record[column] }}</td>
+                  {% endfor %}
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="container">
+    <div class="jumbotron">
+      <h1 class="display-4">Refresh</h1>
+      <p class="lead">Please wait while the tables are extracted. Refresh again after some time.</p>
+    </div>
+  </div>
+{% endif %}
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/job.js') }}"></script>
+{% endblock %}
