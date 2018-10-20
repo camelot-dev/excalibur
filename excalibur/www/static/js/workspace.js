@@ -13,13 +13,8 @@ const compare = function (a, b) {
   return a - b;
 }
 
-const translate = function (x1, x2) {
-  x2 += x1;
-  return x2;
-}
-
 const getScaleOffset = function (imgHeight, selectedArea, scalingFactorY) {
-  const absArea = Math.abs(translate(-imgHeight, selectedArea));
+  const absArea = Math.abs(selectedArea - imgHeight);
   return absArea * scalingFactorY;
 }
 
@@ -45,7 +40,7 @@ const getColumns = function (columns, scalingFactorX) {
   let cols = [];
 
   columns.forEach(col => {
-    cols.push(getScaleOffset(col, scalingFactorX));
+    cols.push(col * scalingFactorX);
   });
   cols.sort(compare);
 
@@ -128,9 +123,8 @@ const extract = () => {
 }
 
 const getNewColPosOffset = () => {
+  let prevColPos = 0, newOffset = 0;
   const columnList = document.getElementsByClassName("draggable-column");;
-  let prevColPos = 0;
-  let newOffset = 0;
   const position = $('#image-div').position();
   const divWidth = $('#image-div').width() - position.left;
 
