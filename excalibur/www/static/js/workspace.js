@@ -1,3 +1,5 @@
+let columnCountBuffer = 0;
+
 // https://coderwall.com/p/flonoa/simple-string-format-in-javascript
 String.prototype.format = function() {
   let str = this;
@@ -11,17 +13,12 @@ const compare = function (a, b) {
   return a - b;
 }
 
-const translate = function (x1, x2) {
-  x2 += x1;
-  return x2;
-}
-
 const getScaleOffset = function (imgHeight, selectedArea, scalingFactorY) {
-  const absArea = Math.abs(translate(-imgHeight, selectedArea));
+  const absArea = Math.abs(selectedArea - imgHeight);
   return absArea * scalingFactorY;
 }
 
-const getTransformArea = function (selectedArea, scalingFactorX, scalingFactorY, doTranslate, image_height) {
+const getTransformArea = function (selectedArea, scalingFactorX, scalingFactorY, doTranslate, imageHeight) {
   let tArea = [];
   let x1, x2, y1, y2;
   for (let i = 0; i < selectedArea.length; i++) {
@@ -31,8 +28,8 @@ const getTransformArea = function (selectedArea, scalingFactorX, scalingFactorY,
     y2 = (selectedArea[i].y + selectedArea[i].height) * scalingFactorY;
 
     if (doTranslate) {
-      y1 = getScaleOffset(image_height, selectedArea[i].y, scalingFactorY);
-      y2 = getScaleOffset(image_height, (selectedArea[i].y + selectedArea[i].height), scalingFactorY);
+      y1 = getScaleOffset(imageHeight, selectedArea[i].y, scalingFactorY);
+      y2 = getScaleOffset(imageHeight, (selectedArea[i].y + selectedArea[i].height), scalingFactorY);
     }
     tArea.push([x1, y1, x2, y2].join());
   }
@@ -59,14 +56,14 @@ const getRuleOptions = function () {
   const flavor = $('#flavors').val();
   ruleOptions['flavor'] = flavor;
   const selectedAreas = $('#image').selectAreas('areas');
-  const image_width = $('#image').width();
-  const image_height = $('#image').height();
-  const scalingFactorX = file_dimensions[0] / image_width;
-  const scalingFactorY = file_dimensions[1] / image_height;
+  const imageWidth = $('#image').width();
+  const imageHeight = $('#image').height();
+  const scalingFactorX = file_dimensions[0] / imageWidth;
+  const scalingFactorY = file_dimensions[1] / imageHeight;
   const hasColumnSeparator = $('.draggable-column').length > 0;
 
   if (selectedAreas.length > 0) {
-    ruleOptions['table_area'] = getTransformArea(selectedAreas, scalingFactorX, scalingFactorY, true, image_height);
+    ruleOptions['table_area'] = getTransformArea(selectedAreas, scalingFactorX, scalingFactorY, true, imageHeight);
   } else {
     ruleOptions['table_area'] = null;
   }
@@ -125,6 +122,25 @@ const extract = () => {
   });
 }
 
+const getNewColPosOffset = () => {
+  let prevColPos = 0, newOffset = 0;
+  const columnList = document.getElementsByClassName("draggable-column");;
+  const position = $('#image-div').position();
+  const divWidth = $('#image-div').width() - position.left;
+
+  if (columnList.length) {
+    prevColPos = parseInt(columnList[columnList.length-1].style.left);
+  }
+
+  if ((prevColPos + 25) > divWidth) {
+    prevColPos = 0;
+  }
+
+  newOffset = prevColPos + 25;
+
+  return newOffset;
+}
+
 $(document).ready(function () {
   $('.image-area').selectAreas({
     onChanged: debugQtyAreas
@@ -141,18 +157,13 @@ $(document).ready(function () {
   });
 
   $('body').on('click', '.add-separator', function () {
+    columnCountBuffer++;
     const position = $('#image-div').position();
-    const column = $('<div>', {
-      class: 'draggable-column'
-    });
+    const column = $('<div id="dc" class="draggable-column"><div class="background"></div><div id="line" class="line"></div></div>');
     $(column).css({
-      'position': 'absolute',
       'top': position.top,
-      'left': position.left + 20,
-      'background-color': 'blue',
-      'height': $('#image-div').height(),
-      'width': '4px',
-      'z-index': 200
+      'left': position.left + getNewColPosOffset(),
+      'height': $('#image-div').height()
     });
     $('#image-div').append(column);
     $('.draggable-column').draggable({

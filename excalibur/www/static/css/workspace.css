@@ -19,6 +19,33 @@ div .image-area {
   margin-bottom: 10px;
 }
 
-div .draggable-column:active {
+.draggable-column {
   cursor: ew-resize;
+  position: absolute;
+  width: 20px;
+  z-index: 200;
+}
+
+.draggable-column > .background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  filter:blur(4px);
+  -o-filter:blur(4px);
+  -ms-filter:blur(4px);
+  -moz-filter:blur(4px);
+  -webkit-filter:blur(4px);
+
+  background-color: rgba(175,175,175,0.2);
+}
+
+.line {
+  position: relative;
+  height: 100%;
+  width: 2px;
+  background-color: #2196F3;
+  margin: 0 auto;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
