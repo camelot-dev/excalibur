@@ -134,11 +134,11 @@ const getNewColPosOffset = () => {
   let newOffset = 0;
   const position = $('#image-div').position();
   const divWidth = $('#image-div').width() - position.left;
-  
+
   if (columnList.length) {
     prevColPos = parseInt(columnList[columnList.length-1].style.left);
   }
-  
+
   if ((prevColPos + 25) > divWidth) {
     prevColPos = 0;
   }
@@ -172,7 +172,7 @@ $(document).ready(function () {
       'left': position.left + getNewColPosOffset(),
       'height': $('#image-div').height()
     });
-    $('#image-div').append(column); 
+    $('#image-div').append(column);
     $('.draggable-column').draggable({
       axis: 'x',
       containment: 'parent'
