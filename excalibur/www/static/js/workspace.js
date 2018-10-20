@@ -26,7 +26,6 @@ const getScaleOffset = function (imgHeight, selectedArea, scalingFactorY) {
 const getTransformArea = function (selectedArea, scalingFactorX, scalingFactorY, doTranslate, imageHeight) {
   let tArea = [];
   let x1, x2, y1, y2;
-
   for (let i = 0; i < selectedArea.length; i++) {
     x1 = selectedArea[i].x * scalingFactorX;
     x2 = selectedArea[i].x * selectedArea[i].width, scalingFactorX;
