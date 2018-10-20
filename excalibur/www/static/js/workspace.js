@@ -23,11 +23,12 @@ const getScaleOffset = function (imgHeight, selectedArea, scalingFactorY) {
 
 const getTransformArea = function (selectedArea, scalingFactorX, scalingFactorY, doTranslate, image_height) {
   let tArea = [];
+  let x1, x2, y1, y2;
   for (let i = 0; i < selectedArea.length; i++) {
-    let x1 = selectedArea[i].x * scalingFactorX;
-    let x2 = selectedArea[i].x * selectedArea[i].width, scalingFactorX;
-    let y1 = selectedArea[i].y * scalingFactorY;
-    let y2 = (selectedArea[i].y + selectedArea[i].height) * scalingFactorY;
+    x1 = selectedArea[i].x * scalingFactorX;
+    x2 = selectedArea[i].x * selectedArea[i].width, scalingFactorX;
+    y1 = selectedArea[i].y * scalingFactorY;
+    y2 = (selectedArea[i].y + selectedArea[i].height) * scalingFactorY;
 
     if (doTranslate) {
       y1 = getScaleOffset(image_height, selectedArea[i].y, scalingFactorY);
@@ -38,11 +39,11 @@ const getTransformArea = function (selectedArea, scalingFactorX, scalingFactorY,
   return tArea;
 };
 
-const getColumns = function (columns, scaling_factor_x) {
+const getColumns = function (columns, scalingFactorX) {
   let cols = [];
 
   columns.forEach(col => {
-    cols.push(scale(col, scaling_factor_x));
+    cols.push(getScaleOffset(col, scalingFactorX));
   });
   cols.sort(compare);
 
