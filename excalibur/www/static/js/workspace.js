@@ -43,7 +43,7 @@ const getColumns = function (columns, scalingFactorX) {
   let cols = [];
 
   columns.forEach(col => {
-    cols.push(getScaleOffset(col, scalingFactorX));
+    cols.push(col * scalingFactorX);
   });
   cols.sort(compare);
 
