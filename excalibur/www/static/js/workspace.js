@@ -1,6 +1,6 @@
-// https://coderwall.com/p/flonoa/simple-string-format-in-javascript
 let columnCountBuffer = 0;
 
+// https://coderwall.com/p/flonoa/simple-string-format-in-javascript
 String.prototype.format = function() {
   let str = this;
   for (let i in arguments) {
@@ -69,7 +69,7 @@ const getRuleOptions = function () {
   const hasColumnSeparator = $('.draggable-column').length > 0;
 
   if (selectedAreas.length > 0) {
-    ruleOptions['table_area'] = getTransformArea(selectedAreas, scalingFactorX ? scalingFactorX : 0, scalingFactorY, true, imageHeight);
+    ruleOptions['table_area'] = getTransformArea(selectedAreas, scalingFactorX, scalingFactorY, true, imageHeight);
   } else {
     ruleOptions['table_area'] = null;
   }
