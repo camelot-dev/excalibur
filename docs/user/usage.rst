@@ -45,7 +45,7 @@ As the table is located in a small part of the page, you need to select the tabl
     :scale: 40%
     :align: center
 
-Optionally, you can also select a column separator by clicking on "Add Separator" inside the Stream Rule box.
+Optionally, you can also select a column separator by clicking on "Add Separator" inside the Stream Rule box. Double-clicking on a column separator will delete it.
 
 .. image:: ../_static/screenshots/stream/column.png
     :scale: 40%

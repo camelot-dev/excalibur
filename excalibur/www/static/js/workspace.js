@@ -1,7 +1,7 @@
 let columnCountBuffer = 0;
 
 // https://coderwall.com/p/flonoa/simple-string-format-in-javascript
-String.prototype.format = function() {
+String.prototype.format = function () {
   let str = this;
   for (let i in arguments) {
     str = str.replace(new RegExp('\\{' + i + '\\}', 'gm'), arguments[i]);
@@ -13,12 +13,13 @@ const compare = function (a, b) {
   return a - b;
 }
 
-const getScaleOffset = function (imgHeight, selectedArea, scalingFactorY) {
-  const absArea = Math.abs(selectedArea - imgHeight);
-  return absArea * scalingFactorY;
+const doTranslateAndScale = function (relCoordinate, scalingFactorY) {
+  const imageHeight = $('#image').height();
+  const absCoordinate = Math.abs(relCoordinate - imageHeight);
+  return absCoordinate * scalingFactorY;
 }
 
-const getTransformArea = function (selectedArea, scalingFactorX, scalingFactorY, doTranslate, imageHeight) {
+const getTableArea = function (selectedArea, scalingFactorX, scalingFactorY, doTranslate) {
   let tArea = [];
   let x1, x2, y1, y2;
   for (let i = 0; i < selectedArea.length; i++) {
@@ -28,23 +29,23 @@ const getTransformArea = function (selectedArea, scalingFactorX, scalingFactorY,
     y2 = (selectedArea[i].y + selectedArea[i].height) * scalingFactorY;
 
     if (doTranslate) {
-      y1 = getScaleOffset(imageHeight, selectedArea[i].y, scalingFactorY);
-      y2 = getScaleOffset(imageHeight, (selectedArea[i].y + selectedArea[i].height), scalingFactorY);
+      y1 = doTranslateAndScale(selectedArea[i].y, scalingFactorY);
+      y2 = doTranslateAndScale((selectedArea[i].y + selectedArea[i].height), scalingFactorY);
     }
     tArea.push([x1, y1, x2, y2].join());
   }
   return tArea;
 };
 
-const getColumns = function (columns, scalingFactorX) {
-  let cols = [];
+const getColumnSeparators = function (selectedSeparators, scalingFactorX) {
+  let colSeparators = [];
 
-  columns.forEach(col => {
-    cols.push(col * scalingFactorX);
+  selectedSeparators.forEach(sep => {
+    colSeparators.push(sep * scalingFactorX);
   });
-  cols.sort(compare);
+  colSeparators.sort(compare);
 
-  return cols.join();
+  return [colSeparators.join()];
 };
 
 const debugQtyAreas = function (event, id, areas) {
@@ -63,7 +64,7 @@ const getRuleOptions = function () {
   const hasColumnSeparator = $('.draggable-column').length > 0;
 
   if (selectedAreas.length > 0) {
-    ruleOptions['table_area'] = getTransformArea(selectedAreas, scalingFactorX, scalingFactorY, true, imageHeight);
+    ruleOptions['table_area'] = getTableArea(selectedAreas, scalingFactorX, scalingFactorY, true);
   } else {
     ruleOptions['table_area'] = null;
   }
@@ -83,12 +84,11 @@ const getRuleOptions = function () {
       ruleOptions['flag_size'] = $("#flag-size-s").val() ? true : false;
 
       if (hasColumnSeparator) {
-        let cols = []
+        let selectedSeparators = []
         $('.draggable-column').each(function (id, col) {
-          cols.push(($(col).offset().left - $(col).parent().offset().left) + ($(col).width() / 2));
+          selectedSeparators.push(($(col).offset().left - $(col).parent().offset().left) + ($(col).width() / 2));
         });
-        cols = getColumns(cols, scalingFactorX);
-        ruleOptions['columns'] = [cols];
+        ruleOptions['columns'] = getColumnSeparators(selectedSeparators, scalingFactorX);
       } else {
         ruleOptions['columns'] = null;
       }
@@ -101,7 +101,7 @@ const getRuleOptions = function () {
   return ruleOptions;
 };
 
-const extract = () => {
+const extract = function () {
   const loc = window.location.pathname.split('/');
   const rule_options = getRuleOptions();
   $.ajax({
@@ -112,11 +112,11 @@ const extract = () => {
       rule_options: JSON.stringify(rule_options)
     },
     type: 'POST',
-    success: (data) => {
+    success: function (data) {
       const redirectUrl = '{0}//{1}/jobs/{2}'.format(window.location.protocol, window.location.host, data['job_id']);
       window.location.replace(redirectUrl);
     },
-    error: (error) => {
+    error: function (error) {
       console.error(error);
     }
   });
