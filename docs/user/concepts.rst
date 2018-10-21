@@ -21,7 +21,7 @@ Rule
     :scale: 65%
     :align: right
 
-A table extraction rule contains a set of parameters which Camelot can use to extract table from PDFs. Camelot contains two table parsing flavors, Stream and Lattice, each having a set of configuration parameters.
+A table extraction rule contains a set of parameters which Camelot can use to extract tables from PDFs. Camelot contains two table parsing flavors, Stream and Lattice, each having a set of configuration parameters.
 
 .. note:: The names for Camelot parsing flavors were inspired from Tabula and the concept of a table extraction rule inside Excalibur was inspired from Docparser.
 
