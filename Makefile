@@ -14,6 +14,6 @@ docs:
 
 publish:
 	pip install twine
-	python setup.py sdist
+	python setup.py sdist bdist_wheel --universal
 	twine upload dist/*
 	rm -fr build dist .egg excalibur_py.egg-info
