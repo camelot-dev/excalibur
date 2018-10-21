@@ -70,8 +70,8 @@ This part of the documentation focuses on instructions to get you up and running
 
    user/intro
    user/install
-   user/usage
    user/concepts
+   user/usage
 
 The Contributor Guide
 ---------------------

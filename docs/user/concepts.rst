@@ -5,6 +5,15 @@ Concepts
 
 This part of the documentation explains some core ideas used inside Excalibur.
 
+Workspace
+---------
+
+.. image:: ../_static/screenshots/workspace.png
+    :scale: 40%
+    :align: center
+
+A workspace is the part of the web interface where you can create table extraction rules. Additionally, you can specify the PDF page numbers that you want Excalibur to process.
+
 Rule
 ----
 
