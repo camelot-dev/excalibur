@@ -43,7 +43,7 @@ And then start the webserver using::
 
 Now you can go to http://localhost:5000 and extract data tables from your PDFs using the web interface! Check out the `usage section`_ for instructions.
 
-.. _usage section: https://excalibur-py.readthedocs.io/en/latest/user/usage.html
+.. _usage section: https://excalibur-py.readthedocs.io/en/master/user/usage.html
 
 .. image:: _static/usage.gif
 

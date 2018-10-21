@@ -14,7 +14,7 @@
 
 ## Using Excalibur
 
-After [installation](https://excalibur-py.readthedocs.io/en/latest/user/install.html), you need to initialize the Excalibur metadata database using:
+After [installation](https://excalibur-py.readthedocs.io/en/master/user/install.html), you need to initialize the Excalibur metadata database using:
 
 <pre>
 $ excalibur initdb
@@ -26,15 +26,15 @@ And then start the webserver using:
 $ excalibur webserver
 </pre>
 
-Now you can go to http://localhost:5000 and extract data tables from your PDFs using the web interface! Check out the [usage section](https://excalibur-py.readthedocs.io/en/latest/user/usage.html) of the documentation for instructions.
+Now you can go to http://localhost:5000 and extract data tables from your PDFs using the web interface! Check out the [usage section](https://excalibur-py.readthedocs.io/en/master/user/usage.html) of the documentation for instructions.
 
-![usage.gif](https://excalibur-py.readthedocs.io/en/latest/_images/usage.gif)
+![usage.gif](https://excalibur-py.readthedocs.io/en/master/_images/usage.gif)
 
 ## Why Excalibur?
 
 - **Your data remains with you.** All file storage and processing happens on your own local or remote machine.
-- Table extraction [rules](https://excalibur-py.readthedocs.io/en/latest/user/concepts.html#rule) can be **saved as presets** which can then be applied on different PDFs to extract tables with similar structures. (*in v0.2.0*)
-- Execution of [jobs](https://excalibur-py.readthedocs.io/en/latest/user/concepts.html#job) which use a rule to extract tables from **multiple PDFs in one go**. (*in v0.2.0*)
+- Table extraction [rules](https://excalibur-py.readthedocs.io/en/master/user/concepts.html#rule) can be **saved as presets** which can then be applied on different PDFs to extract tables with similar structures. (*in v0.2.0*)
+- Execution of [jobs](https://excalibur-py.readthedocs.io/en/master/user/concepts.html#job) which use a rule to extract tables from **multiple PDFs in one go**. (*in v0.2.0*)
 - **Configurable with MySQL and Celery** for heavy workloads. (*in v0.2.0*) By default, sqlite and multiprocessing are used for light workloads.
 - Job scheduling and incoming/outgoing webhooks. (*in v0.3.0*)
 
@@ -71,7 +71,7 @@ Great documentation is available at [http://excalibur-py.readthedocs.io/](http:/
 
 ## Development
 
-The [Contributor's Guide](https://excalibur-py.readthedocs.io/en/latest/dev/contributing.html) has detailed information about contributing code, documentation, tests and more. We've included some basic information in this README.
+The [Contributor's Guide](https://excalibur-py.readthedocs.io/en/master/dev/contributing.html) has detailed information about contributing code, documentation, tests and more. We've included some basic information in this README.
 
 ### Source code
 
