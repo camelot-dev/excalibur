@@ -15,6 +15,7 @@
 import os
 import sys
 sys.path.insert(0, os.path.abspath('..'))
+sys.path.insert(0, os.path.abspath('_themes'))
 
 import excalibur
 
@@ -66,7 +67,7 @@ language = None
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = None
+pygments_style = 'flask_theme_support.FlaskyStyle'
 
 
 # -- Options for HTML output -------------------------------------------------
