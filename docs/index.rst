@@ -11,8 +11,8 @@ Excalibur: A web interface for Camelot
 
 Release v\ |version|. (:ref:`Installation <install>`)
 
-.. image:: https://readthedocs.org/projects/camelot-py/badge/?version=master
-    :target: https://camelot-py.readthedocs.io/en/master/
+.. image:: https://readthedocs.org/projects/excalibur-py/badge/?version=master
+    :target: https://excalibur-py.readthedocs.io/en/master/
     :alt: Documentation Status
 
 .. image:: https://img.shields.io/pypi/v/excalibur-py.svg
