@@ -14,4 +14,5 @@ EXECUTOR = 'SequentialExecutor'
 SECRET_KEY = 'secret_key'
 
 # for sqlalchemy
-SQL_ALCHEMY_CONN = 'sqlite:///{}/{}'.format(PROJECT_ROOT, 'excalibur.db')
+DB = 'excalibur.db'
+SQL_ALCHEMY_CONN = 'sqlite:///{}/{}'.format(PROJECT_ROOT, DB)
