@@ -8,7 +8,7 @@ This part of the documentation covers how to install Excalibur.
 Using pip
 ---------
 
-After installing `ghostscript`_, which is one of the dependencies of Camelot (See `install instructions`_), you can simply use pip to install Excalibur::
+After installing `ghostscript`_, which is one of the requirements for Camelot (See `install instructions`_), you can simply use pip to install Excalibur::
 
     $ pip install excalibur-py
 
