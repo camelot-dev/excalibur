@@ -44,7 +44,7 @@ If Excalibur solves your PDF table extraction needs, please consider supporting 
 
 ### Using pip
 
-After [installing the dependencies for Camelot](https://camelot-py.readthedocs.io/en/master/user/install.html#using-pip) ([tk](https://packages.ubuntu.com/trusty/python-tk) and [ghostscript](https://www.ghostscript.com/)), you can simply use pip to install Excalibur:
+After installing [ghostscript](https://www.ghostscript.com/), which is one of the dependencies of Camelot (See [install instructions](https://camelot-py.readthedocs.io/en/master/user/install.html#using-pip)), you can simply use pip to install Excalibur:
 
 <pre>
 $ pip install excalibur-py
@@ -52,7 +52,7 @@ $ pip install excalibur-py
 
 ### From the source code
 
-After [installing the dependencies for Camelot](https://camelot-py.readthedocs.io/en/master/user/install.html#using-pip), clone the repo using:
+After installing ghostscript, clone the repo using:
 
 <pre>
 $ git clone https://www.github.com/camelot-dev/excalibur
