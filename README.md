@@ -8,7 +8,7 @@
 
 [![Documentation Status](https://readthedocs.org/projects/excalibur-py/badge/?version=master)](https://excalibur-py.readthedocs.io/en/master/) [![image](https://img.shields.io/pypi/v/excalibur-py.svg)](https://pypi.org/project/excalibur-py/) [![image](https://img.shields.io/pypi/l/excalibur-py.svg)](https://pypi.org/project/excalibur-py/) [![image](https://img.shields.io/pypi/pyversions/excalibur-py.svg)](https://pypi.org/project/excalibur-py/)
 
-**Excalibur** is a web interface to extract data tables from PDFs! It is powered by [Camelot](https://camelot-py.readthedocs.io/) and works with **Python 3**.
+**Excalibur** is a web interface to extract data tables from PDFs, written in **Python 3**! It is powered by [Camelot](https://camelot-py.readthedocs.io/).
 
 **Note:** Excalibur only works with text-based PDFs and not scanned documents. (As Tabula [explains](https://github.com/tabulapdf/tabula#why-tabula), "If you can click and drag to select text in your table in a PDF viewer, then your PDF is text-based".)
 
@@ -26,19 +26,23 @@ And then start the webserver using:
 $ excalibur webserver
 </pre>
 
-Now you can go to http://localhost:5000 and extract data tables from your PDFs using the web interface! Check out the [usage section](https://excalibur-py.readthedocs.io/en/master/user/usage.html) of the documentation for instructions.
+That's it! Now you can go to http://localhost:5000 and extract data tables from your PDFs using the web interface! Check out the [usage section](https://excalibur-py.readthedocs.io/en/master/user/usage.html) of the documentation for step-by-step instructions.
 
 ![usage.gif](https://excalibur-py.readthedocs.io/en/master/_images/usage.gif)
 
 ## Why Excalibur?
 
-- **Your data remains with you.** All file storage and processing happens on your own local or remote machine.
+- **Excalibur gives you complete control over your data**. All file storage and processing happens on your own local or remote machine.
 - Table extraction [rules](https://excalibur-py.readthedocs.io/en/master/user/concepts.html#rule) can be **saved as presets** which can then be applied on different PDFs to extract tables with similar structures. (*in v0.2.0*)
-- Execution of [jobs](https://excalibur-py.readthedocs.io/en/master/user/concepts.html#job) which use a rule to extract tables from **multiple PDFs in one go**. (*in v0.2.0*)
-- **Configurable with MySQL and Celery** for parallel and distributed workloads. (*in v0.2.0*) By default, sqlite and multiprocessing are used for sequential workloads.
-- Job scheduling and incoming/outgoing webhooks. (*in v0.3.0*)
+- Extract tables from **multiple PDFs in one go** using an extraction rule, by starting [jobs](https://excalibur-py.readthedocs.io/en/master/user/concepts.html#job). (*in v0.2.0*)
+- Excalibur **can be configured with MySQL and Celery** for parallel and distributed workloads. (*in v0.2.0*) By default, sqlite and multiprocessing are used for sequential workloads.
+- In the future (*after v0.2.0*), Excalibur will have configurable job scheduling and incoming/outgoing webhooks. (*in v0.3.0*)
 
-Excalibur uses [Camelot](https://camelot-py.readthedocs.io/) under the hood. See [comparison with other PDF table extraction libraries and tools](https://github.com/socialcopsdev/camelot/wiki/Comparison-with-other-PDF-Table-Extraction-libraries-and-tools).
+Excalibur uses [Camelot](https://camelot-py.readthedocs.io/) under the hood. You can check out its [comparison with other PDF table extraction libraries and tools](https://github.com/socialcopsdev/camelot/wiki/Comparison-with-other-PDF-Table-Extraction-libraries-and-tools).
+
+## Support us on Patreon
+
+If Excalibur solves your PDF table extraction needs, please consider supporting its development by [becoming a patron](https://www.patreon.com/vinayakmehta)!
 
 ## Installation
 

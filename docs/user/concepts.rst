@@ -12,7 +12,7 @@ Workspace
     :scale: 40%
     :align: center
 
-A workspace is the part of the web interface where you can create table extraction rules. Additionally, you can specify the PDF page numbers that you want Excalibur to process.
+A workspace is the part of the web interface where you can create table extraction rules. Additionally, you can specify the PDF page numbers that you want Excalibur to extract tables from.
 
 Rule
 ----
@@ -21,15 +21,15 @@ Rule
     :scale: 65%
     :align: right
 
-A table extraction rule contains a set of parameters which Camelot can use to extract tables from PDFs. Camelot contains two table parsing flavors, Stream and Lattice, each having a set of configuration parameters.
+A table extraction rule consists of a set of parameters which Camelot uses to extract tables from PDFs. Camelot contains two table parsing flavors, Stream and Lattice, each having a set of configuration parameters.
 
-.. note:: The names for Camelot parsing flavors were inspired from Tabula and the concept of a table extraction rule inside Excalibur was inspired from Docparser.
+.. note:: The names for Camelot parsing flavors were inspired from Tabula and the concept of a table extraction rule inside Excalibur was inspired from Tabula's templates and Docparser's parsing rules.
 
-You can check out Camelot's `read_pdf`_ interface to see a list of all configuration parameters.
+You can check out Camelot's `read_pdf`_ documentation to see a list of all configuration parameters it supports.
 
 .. _read_pdf: https://camelot-py.readthedocs.io/en/master/api.html#main-interface
 
-**Examples**:
+**For example**:
 
 - Lattice with `line_size_scaling=40` is a rule.
 - Stream with a `table_area` and `columns` is a rule.

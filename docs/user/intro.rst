@@ -3,14 +3,14 @@
 Introduction
 ============
 
-Excalibur is a web interface built on top of `Camelot`_ which is a Python library to extract data tables from PDFs.
+Excalibur is a web interface built on top of `Camelot`_, which is a Python library to extract data tables from PDFs.
 
 .. _Camelot: https://camelot-py.readthedocs.io/
 
 What's in a name?
 -----------------
 
-Camelot was named after `The Camelot Project`_ (also a castle in the `Arthurian legend`_). To follow the same theme, this project was named `Excalibur`_, which is the legendary sword of King Arthur.
+Camelot was named after `The Camelot Project`_ (also the name of a castle in the `Arthurian legend`_). To follow the same theme, this project was named `Excalibur`_, which is the legendary sword of King Arthur.
 
 .. _The Camelot Project: http://www.planetpdf.com/planetpdf/pdfs/warnock_camelot.pdf
 .. _Arthurian legend: https://en.wikipedia.org/wiki/King_Arthur

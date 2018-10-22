@@ -23,17 +23,17 @@ You can also see previously uploaded PDFs, extract tables from them by creating 
 Create table extraction rule
 ----------------------------
 
-Clicking on "Upload" or "Extract Again" will take you to the *workspace* screen.
+Clicking on "Upload" or "Extract Again" will take you to the *workspace* for a PDF.
 
 .. image:: ../_static/screenshots/workspace.png
     :scale: 40%
     :align: center
 
-Here you can create a table extraction rule on the PDF page number you selected, and apply it on that same page or multiple pages of the PDF. Let's create an extraction rule for this `PDF`_.
+Here you can create a table extraction rule on the PDF page number you selected, and apply it on that same or multiple pages of the PDF. Let's create an extraction rule on a `PDF`_.
 
 .. _PDF: https://github.com/socialcopsdev/camelot/blob/master/tests/files/tabula/us-007.pdf
 
-Since the table has no lines, we will use the Stream flavor.
+Since the table has no lines, you should use the Stream flavor.
 
 .. image:: ../_static/screenshots/stream/rule_options.png
     :scale: 65%
@@ -45,7 +45,9 @@ As the table is located in a small part of the page, you need to select the tabl
     :scale: 40%
     :align: center
 
-Optionally, you can also select a column separator by clicking on "Add Separator" inside the Stream Rule box. Double-clicking on a column separator will delete it.
+Optionally, you can also select a column separator by clicking on "Add Separator" inside the Stream Rule box.
+
+.. note:: Double-clicking on a column separator will delete it.
 
 .. image:: ../_static/screenshots/stream/column.png
     :scale: 40%
