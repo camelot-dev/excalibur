@@ -14,19 +14,15 @@
 
 ## Using Excalibur
 
-After [installation](https://excalibur-py.readthedocs.io/en/master/user/install.html), you need to initialize the Excalibur metadata database using:
-
-<pre>
-$ excalibur initdb
-</pre>
-
-And then start the webserver using:
+After [installation with pip](https://excalibur-py.readthedocs.io/en/master/user/install.html), you can start the webserver using:
 
 <pre>
 $ excalibur webserver
 </pre>
 
 That's it! Now you can go to http://localhost:5000 and extract data tables from your PDFs using the web interface! Check out the [usage section](https://excalibur-py.readthedocs.io/en/master/user/usage.html) of the documentation for step-by-step instructions.
+
+**Note:** You can also download executables for Windows and Linux from the [releases page](https://github.com/camelot-dev/excalibur/releases)!
 
 ![usage.gif](https://excalibur-py.readthedocs.io/en/master/_images/usage.gif)
 
