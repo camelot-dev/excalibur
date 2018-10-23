@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import atexit
+import os
 
 import click
 
@@ -24,13 +24,10 @@ def cli(*args, **kwargs):
 
 @cli.command()
 def webserver(*args, **kwargs):
+    if not os.path.exists(os.path.join(conf.PROJECT_ROOT, conf.DB)):
+        initialize_database()
     app = create_app(conf)
     app.run(use_reloader=False)
-
-
-@cli.command()
-def initdb(*args, **kwargs):
-    initialize_database()
 
 
 @cli.command()

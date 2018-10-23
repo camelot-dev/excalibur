@@ -1,7 +1,6 @@
 .PHONY: docs
 
 install:
-	$(INSTALL)
 	pip install --upgrade pip
 	pip install ".[dev]"
 
@@ -14,6 +13,10 @@ docs:
 
 publish:
 	pip install twine
-	python setup.py sdist
+	python setup.py sdist bdist_wheel --universal
 	twine upload dist/*
 	rm -fr build dist .egg excalibur_py.egg-info
+
+build-executable:
+	pip install pyinstaller
+	pyinstaller --add-data 'excalibur/www/templates:excalibur/www/templates' --add-data 'excalibur/www/static:excalibur/www/static' arthur.py
