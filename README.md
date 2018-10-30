@@ -2,7 +2,7 @@
    <img src="https://raw.githubusercontent.com/camelot-dev/excalibur/master/docs/_static/excalibur-logo.png" width="200">
 </p>
 
-# Excalibur: A web interface for Camelot
+# Excalibur: A web interface to extract tabular data from PDFs
 
 ## (PDF Table Extraction for Humans)
 
@@ -98,7 +98,7 @@ $ python setup.py test
 
 ## Versioning
 
-Camelot uses [Semantic Versioning](https://semver.org/). For the available versions, see the tags on this repository. For the changelog, you can check out [HISTORY.md](https://github.com/camelot-dev/excalibur/blob/master/HISTORY.md).
+Excalibur uses [Semantic Versioning](https://semver.org/). For the available versions, see the tags on this repository. For the changelog, you can check out [HISTORY.md](https://github.com/camelot-dev/excalibur/blob/master/HISTORY.md).
 
 ## License
 
