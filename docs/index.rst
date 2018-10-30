@@ -53,7 +53,6 @@ Why Excalibur?
 - Table extraction :ref:`rules <concepts>` can be **saved as presets** which can then be applied on different PDFs to extract tables with similar structures. (*in v0.2.0*)
 - Extract tables from **multiple PDFs in one go** using an extraction rule, by starting :ref:`jobs <concepts>`. (*in v0.2.0*)
 - Excalibur **can be configured with MySQL and Celery** for parallel and distributed workloads. (*in v0.2.0*) By default, sqlite and multiprocessing are used for sequential workloads.
-- Job scheduling and incoming/outgoing webhooks. (*in v0.3.0*)
 
 Excalibur uses `Camelot <https://camelot-py.readthedocs.io/>`_ under the hood. You can check out its `comparison with other PDF table extraction libraries and tools`_.
 
