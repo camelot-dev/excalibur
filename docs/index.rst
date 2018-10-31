@@ -24,6 +24,9 @@ Release v\ |version|. (:ref:`Installation <install>`)
 .. image:: https://img.shields.io/pypi/pyversions/excalibur-py.svg
     :target: https://pypi.org/project/excalibur-py/
 
+.. image:: https://badges.gitter.im/camelot-dev/Lobby.png
+    :target: https://gitter.im/camelot-dev/Lobby
+
 **Excalibur** is a web interface to extract data tables from PDFs, written in **Python 3**! It powered by `Camelot <https://camelot-py.readthedocs.io/>`_.
 
 .. note:: Excalibur only works with text-based PDFs and not scanned documents. (As Tabula `explains`_, "If you can click and drag to select text in your table in a PDF viewer, then your PDF is text-based".)
