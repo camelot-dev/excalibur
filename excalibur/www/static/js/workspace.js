@@ -19,23 +19,67 @@ const doTranslateAndScale = function (relCoordinate, scalingFactorY) {
   return absCoordinate * scalingFactorY;
 }
 
-const getTableArea = function (selectedArea, scalingFactorX, scalingFactorY, doTranslate) {
+const detectTableAreas = function(flavor) {
+  const areaPadding = 2;
+  const imageWidth = $('#image').width();
+  const imageHeight = $('#image').height();
+  const scalingFactorX = imageWidth / imageDim[0];
+  const scalingFactorY = imageHeight / imageDim[1];
+
+  let areaOptions = [];
+  let x1, x2, y1, y2;
+  for (let i = 0; detectedAreas[flavor].length; i++) {
+    x1 = detectedAreas[flavor][i][0] * scalingFactorX;
+    y1 = detectedAreas[flavor][i][1] * scalingFactorY;
+    x2 = detectedAreas[flavor][i][2] * scalingFactorX;
+    y2 = detectedAreas[flavor][i][3] * scalingFactorY;
+    const areaOption = {
+      x: Math.floor(x1) - areaPadding,
+      y: Math.floor(y1) - areaPadding,
+      width: Math.floor(Math.abs(x2 - x1)) + areaPadding,
+      height: Math.floor(Math.abs(y2 - y1)) + areaPadding
+    };
+    areaOptions.push(areaOption);
+  }
+  return areaOptions;
+};
+
+const getTableAreas = function (selectedAreas, scalingFactorX, scalingFactorY, doTranslate) {
   let tArea = [];
   let x1, x2, y1, y2;
-  for (let i = 0; i < selectedArea.length; i++) {
-    x1 = selectedArea[i].x * scalingFactorX;
-    x2 = selectedArea[i].x * selectedArea[i].width, scalingFactorX;
-    y1 = selectedArea[i].y * scalingFactorY;
-    y2 = (selectedArea[i].y + selectedArea[i].height) * scalingFactorY;
+  for (let i = 0; i < selectedAreas.length; i++) {
+    x1 = selectedAreas[i].x * scalingFactorX;
+    x2 = selectedAreas[i].x * selectedAreas[i].width, scalingFactorX;
+    y1 = selectedAreas[i].y * scalingFactorY;
+    y2 = (selectedAreas[i].y + selectedAreas[i].height) * scalingFactorY;
 
     if (doTranslate) {
-      y1 = doTranslateAndScale(selectedArea[i].y, scalingFactorY);
-      y2 = doTranslateAndScale((selectedArea[i].y + selectedArea[i].height), scalingFactorY);
+      y1 = doTranslateAndScale(selectedAreas[i].y, scalingFactorY);
+      y2 = doTranslateAndScale((selectedAreas[i].y + selectedArea[i].height), scalingFactorY);
     }
     tArea.push([x1, y1, x2, y2].join());
   }
   return tArea;
 };
+
+const getNewColPosOffset = () => {
+  let prevColPos = 0, newOffset = 0;
+  const columnList = document.getElementsByClassName("draggable-column");;
+  const position = $('#image-div').position();
+  const divWidth = $('#image-div').width() - position.left;
+
+  if (columnList.length) {
+    prevColPos = parseInt(columnList[columnList.length-1].style.left);
+  }
+
+  if ((prevColPos + 25) > divWidth) {
+    prevColPos = 0;
+  }
+
+  newOffset = prevColPos + 25;
+
+  return newOffset;
+}
 
 const getColumnSeparators = function (selectedSeparators, scalingFactorX) {
   let colSeparators = [];
@@ -48,10 +92,6 @@ const getColumnSeparators = function (selectedSeparators, scalingFactorX) {
   return [colSeparators.join()];
 };
 
-const debugQtyAreas = function (event, id, areas) {
-  return;
-};
-
 const getRuleOptions = function () {
   let ruleOptions = {};
   const flavor = $('#flavors').val();
@@ -59,12 +99,12 @@ const getRuleOptions = function () {
   const selectedAreas = $('#image').selectAreas('areas');
   const imageWidth = $('#image').width();
   const imageHeight = $('#image').height();
-  const scalingFactorX = file_dimensions[0] / imageWidth;
-  const scalingFactorY = file_dimensions[1] / imageHeight;
+  const scalingFactorX = fileDim[0] / imageWidth;
+  const scalingFactorY = fileDim[1] / imageHeight;
   const hasColumnSeparator = $('.draggable-column').length > 0;
 
   if (selectedAreas.length > 0) {
-    ruleOptions['table_area'] = getTableArea(selectedAreas, scalingFactorX, scalingFactorY, true);
+    ruleOptions['table_area'] = getTableAreas(selectedAreas, scalingFactorX, scalingFactorY, true);
   } else {
     ruleOptions['table_area'] = null;
   }
@@ -122,24 +162,9 @@ const extract = function () {
   });
 }
 
-const getNewColPosOffset = () => {
-  let prevColPos = 0, newOffset = 0;
-  const columnList = document.getElementsByClassName("draggable-column");;
-  const position = $('#image-div').position();
-  const divWidth = $('#image-div').width() - position.left;
-
-  if (columnList.length) {
-    prevColPos = parseInt(columnList[columnList.length-1].style.left);
-  }
-
-  if ((prevColPos + 25) > divWidth) {
-    prevColPos = 0;
-  }
-
-  newOffset = prevColPos + 25;
-
-  return newOffset;
-}
+const debugQtyAreas = function (event, id, areas) {
+  return;
+};
 
 $(document).ready(function () {
   $('.image-area').selectAreas({
@@ -154,6 +179,20 @@ $(document).ready(function () {
       $('.stream').show();
       $('.lattice').hide();
     }
+  });
+
+  $('#detect-lattice-areas').click(function () {
+    areaOptions = detectTableAreas('lattice');
+    $('.image-area').selectAreas('add', areaOptions);
+  });
+
+  $('#detect-stream-areas').click(function () {
+    areaOptions = detectTableAreas('stream');
+    $('.image-area').selectAreas('add', areaOptions);
+  });
+
+  $('.reset-areas').click(function () {
+    $('.image-area').selectAreas('reset');
   });
 
   $('body').on('click', '.add-separator', function () {

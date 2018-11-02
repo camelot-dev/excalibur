@@ -47,7 +47,7 @@ def files():
     if file and allowed_filename(file.filename):
         file_id = generate_uuid()
         uploaded_at = dt.datetime.now()
-        page_number = request.form['page_number']
+        page_number = int(request.form['page_number'])
         filename = secure_filename(file.filename)
         filepath = os.path.join(conf.PDFS_FOLDER, file_id)
         mkdirs(filepath)
@@ -74,14 +74,16 @@ def workspaces(file_id):
     session = Session()
     file = session.query(File).filter(File.file_id == file_id).first()
     session.close()
-    imagepath, file_dimensions, image_dimensions = [None] * 3
+    imagepath, file_dimensions, image_dimensions, detected_areas = [None] * 4
     if file.has_image:
         imagepath = file.imagepath.replace(
             os.path.join(conf.PROJECT_ROOT, 'www'), '')
         file_dimensions = json.loads(file.file_dimensions)
         image_dimensions = json.loads(file.image_dimensions)
-    return render_template('workspace.html', imagepath=imagepath,
-        file_dimensions=file_dimensions, image_dimensions=image_dimensions)
+        detected_areas = json.loads(file.detected_areas)
+    return render_template(
+        'workspace.html', imagepath=imagepath, file_dimensions=file_dimensions,
+        image_dimensions=image_dimensions, detected_areas=detected_areas)
 
 
 @views.route('/rules', methods=['GET', 'POST'], defaults={'rule_id': None})

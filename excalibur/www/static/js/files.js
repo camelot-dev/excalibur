@@ -21,7 +21,7 @@ $(document).ready(function () {
     $.each($('#file')[0].files, function (i, file) {
       data.append('file-' + i, file);
     });
-    var page_number = $('#page-number').val();
+    var page_number = $('#page-number').val() ? Number($('#page-number').val()) : 1;
     data.append('page_number', page_number);
     $.ajax({
       url: '/files',

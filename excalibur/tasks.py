@@ -13,19 +13,44 @@ from . import configuration as conf
 from .models import File, Rule, Job
 from .settings import Session
 from .utils.file import mkdirs
-from .utils.task import save_page, get_page_layout, get_file_dimensions, get_image_dimensions
+from .utils.task import (save_page, get_page_layout, get_file_dimensions,
+                         get_image_dimensions)
 
 
 def split(file_id):
     try:
-        def get_platform():
+        def get_executable():
             import platform
+            from distutils.spawn import find_executable
 
-            info = {
-                'system': platform.system().lower(),
-                'machine': platform.machine().lower()
-            }
-            return info
+            class GhostscriptNotFound(Exception): pass
+
+            gs = None
+            system = platform.system().lower()
+            try:
+                if system == 'windows':
+                    if find_executable('gswin32c.exe'):
+                        gs = 'gswin32c.exe'
+                    elif find_executable('gswin64c.exe'):
+                        gs = 'gswin64c.exe'
+                    else:
+                        raise ValueError
+                else:
+                    if find_executable('gs'):
+                        gs = 'gs'
+                    elif find_executable('gsc'):
+                        gs = 'gsc'
+                    else:
+                        raise ValueError
+                if 'ghostscript' not in subprocess.check_output(
+                        [gs, '-version']).decode('utf-8').lower():
+                    raise ValueError
+            except ValueError:
+                raise GhostscriptNotFound(
+                    'Please make sure that Ghostscript is installed'
+                    ' and available on the PATH environment variable')
+
+            return gs
 
         session = Session()
         file = session.query(File).filter(File.file_id == file_id).first()
@@ -35,6 +60,7 @@ def split(file_id):
         filepath = os.path.join(conf.PDFS_FOLDER, file_id, filename)
         imagename = ''.join([filename.replace('.pdf', ''), '.png'])
         imagepath = os.path.join(conf.PDFS_FOLDER, file_id, imagename)
+
         gs_call = [
             '-q',
             '-sDEVICE=png16m',
@@ -43,15 +69,8 @@ def split(file_id):
             '-r600',
             filepath
         ]
-        info = get_platform()
-        if info['system'] == 'windows':
-            bit = info['machine'][-2:]
-            gs_call.insert(0, 'gswin{}c.exe'.format(bit))
-        else:
-            if 'ghostscript' in subprocess.check_output(['gs', '-version']).decode('utf-8').lower():
-                gs_call.insert(0, 'gs')
-            else:
-                gs_call.insert(0, "gsc")
+        gs = get_executable()
+        gs_call.insert(0, gs)
         process = subprocess.Popen(gs_call)
         out = process.communicate()[0]
         ret = process.wait()
@@ -59,8 +78,34 @@ def split(file_id):
         file.has_image = True
         file.imagename = imagename
         file.imagepath = imagepath
-        file.file_dimensions = json.dumps(get_file_dimensions(filepath))
-        file.image_dimensions = json.dumps(get_image_dimensions(imagepath))
+
+        file_dimensions = get_file_dimensions(filepath)
+        image_dimensions = get_image_dimensions(imagepath)
+        pdf_width_scaler = image_dimensions[0] / float(file_dimensions[0])
+        pdf_height_scaler = image_dimensions[1] / float(file_dimensions[1])
+
+        file.file_dimensions = json.dumps(file_dimensions)
+        file.image_dimensions = json.dumps(image_dimensions)
+
+        lattice_areas, stream_areas = [None] * 2
+        # lattice
+        tables = camelot.read_pdf(filepath, flavor='lattice')
+        if len(tables):
+            lattice_areas = list(tables[0]._image[1].keys())
+        # stream
+        tables = camelot.read_pdf(filepath, flavor='stream')
+        if len(tables):
+            x1 = int(tables[0].cols[0][0] * pdf_width_scaler)
+            y1 = int(tables[0].rows[0][0] * pdf_height_scaler)
+            x2 = int(tables[0].cols[-1][-1] * pdf_width_scaler)
+            y2 = int(tables[0].rows[-1][-1] * pdf_height_scaler)
+            stream_areas = [(x1, y1, x2, y2)]
+
+        detected_areas = {
+            'lattice': lattice_areas,
+            'stream': stream_areas
+        }
+        file.detected_areas = json.dumps(detected_areas)
 
         session.commit()
         session.close()
