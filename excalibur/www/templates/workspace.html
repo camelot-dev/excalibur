@@ -51,6 +51,20 @@
                     <div class="row mx-0 lattice mt-3" style="display: none">
                       <div class="col-md-12">
                         <div class="form-group">
+                          <label>Table areas</label>
+                          <small class="form-text text-muted">Detect table areas.</small>
+                          <div class="row mt-1">
+                            <div class="col-md-6">
+                              <button type="button" class="btn btn-block btn-primary detect-areas" data-flavor="lattice">Detect</button>
+                            </div>
+                            <div class="col-md-6">
+                              <button type="button" id="reset-areas" class="btn btn-block btn-primary reset-areas">Clear</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="form-group">
                           <label for="process-background">Process background</label>
                           <input type="text" class="form-control" id="process-background" aria-describedby="process-background-help" placeholder="false">
                           <small id="process-background-help" class="form-text text-muted">Process background lines.</small>
@@ -77,14 +91,29 @@
                           <small id="flag-size-l-help" class="form-text text-muted">Flag text based on font size. Useful to detect super/subscripts.</small>
                         </div>
                       </div>
-                      <div class="col-md-12">
-                        <button type="button" id="detect-lattice-areas" class="btn btn-block btn-primary">Detect tables</button>
-                      </div>
-                      <div class="col-md-12">
-                        <button type="button" id="reset-areas" class="btn btn-block btn-primary reset-areas">Clear tables</button>
-                      </div>
                     </div>
                     <div class="row mx-0 stream mt-3" style="display: none">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label>Table areas</label>
+                          <small class="form-text text-muted">Detect table areas.</small>
+                          <div class="row mt-1">
+                            <div class="col-md-6">
+                              <button type="button" class="btn btn-block btn-primary detect-areas" data-flavor="stream">Detect</button>
+                            </div>
+                            <div class="col-md-6">
+                              <button type="button" id="reset-areas" class="btn btn-block btn-primary reset-areas">Clear</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label>Columns</label>
+                          <small class="form-text text-muted">Add column separators.</small>
+                          <button type="button" id="add-separator" class="btn btn-block btn-primary add-separator mt-1">Add separator</button>
+                        </div>
+                      </div>
                       <div class="col-md-12">
                         <div class="form-group">
                           <label for="row-close-tol">Row close tolerance</label>
@@ -112,15 +141,6 @@
                           <input type="text" class="form-control" id="flag-size-s" aria-describedby="flag-size-s-help" placeholder="false">
                           <small id="flag-size-s-help" class="form-text text-muted">Flag text based on font size. Useful to detect super/subscripts.</small>
                         </div>
-                      </div>
-                      <div class="col-md-12">
-                        <button type="button" id="detect-stream-areas" class="btn btn-block btn-primary">Detect tables</button>
-                      </div>
-                      <div class="col-md-12">
-                        <button type="button" id="reset-areas" class="btn btn-block btn-primary reset-areas">Clear tables</button>
-                      </div>
-                      <div class="col-md-12">
-                        <button type="button" id="add-separator" class="btn btn-block btn-primary add-separator">Add separator</button>
                       </div>
                     </div>
                 </div>

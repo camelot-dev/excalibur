@@ -170,13 +170,9 @@ $(document).ready(function () {
     }
   });
 
-  $('#detect-lattice-areas').click(function () {
-    tableAreas = detectTableAreas(detectedAreas['lattice']);
-    $('.image-area').selectAreas('add', tableAreas);
-  });
-
-  $('#detect-stream-areas').click(function () {
-    tableAreas = detectTableAreas(detectedAreas['stream']);
+  $('.detect-areas').click(function () {
+    const flavor = $(this).attr('data-flavor');
+    tableAreas = detectTableAreas(detectedAreas[flavor]);
     $('.image-area').selectAreas('add', tableAreas);
   });
 
