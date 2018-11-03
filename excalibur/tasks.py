@@ -91,15 +91,17 @@ def split(file_id):
         # lattice
         tables = camelot.read_pdf(filepath, flavor='lattice')
         if len(tables):
-            lattice_areas = list(tables[0]._image[1].keys())
+            lattice_areas = []
+            for table in tables:
+                x1, y1, x2, y2 = tables[0]._bbox
+                lattice_areas.append((x1, y2, x2, y1))
         # stream
         tables = camelot.read_pdf(filepath, flavor='stream')
         if len(tables):
-            x1 = int(tables[0].cols[0][0] * pdf_width_scaler)
-            y1 = int(tables[0].rows[0][0] * pdf_height_scaler)
-            x2 = int(tables[0].cols[-1][-1] * pdf_width_scaler)
-            y2 = int(tables[0].rows[-1][-1] * pdf_height_scaler)
-            stream_areas = [(x1, y1, x2, y2)]
+            stream_areas = []
+            for table in tables:
+                x1, y1, x2, y2 = tables[0]._bbox
+                stream_areas.append((x1, y2, x2, y1))
 
         detected_areas = {
             'lattice': lattice_areas,

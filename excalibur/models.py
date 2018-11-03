@@ -26,6 +26,7 @@ class File(Base):
     imagepath = Column(String(STR_LEN))
     file_dimensions = Column(Text)
     image_dimensions = Column(Text)
+    detected_areas = Column(Text)
 
 
 class Rule(Base):

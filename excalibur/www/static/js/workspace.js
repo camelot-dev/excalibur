@@ -13,56 +13,49 @@ const compare = function (a, b) {
   return a - b;
 }
 
-const doTranslateAndScale = function (relCoordinate, scalingFactorY) {
-  const imageHeight = $('#image').height();
-  const absCoordinate = Math.abs(relCoordinate - imageHeight);
-  return absCoordinate * scalingFactorY;
-}
-
-const detectTableAreas = function(flavor) {
-  const areaPadding = 2;
+const detectTableAreas = function (detectedAreas) {
   const imageWidth = $('#image').width();
   const imageHeight = $('#image').height();
-  const scalingFactorX = imageWidth / imageDim[0];
-  const scalingFactorY = imageHeight / imageDim[1];
+  const scalingFactorX = imageWidth / fileDim[0];
+  const scalingFactorY = imageHeight / fileDim[1];
 
-  let areaOptions = [];
+  let tableAreas = [];
   let x1, x2, y1, y2;
-  for (let i = 0; detectedAreas[flavor].length; i++) {
-    x1 = detectedAreas[flavor][i][0] * scalingFactorX;
-    y1 = detectedAreas[flavor][i][1] * scalingFactorY;
-    x2 = detectedAreas[flavor][i][2] * scalingFactorX;
-    y2 = detectedAreas[flavor][i][3] * scalingFactorY;
-    const areaOption = {
-      x: Math.floor(x1) - areaPadding,
-      y: Math.floor(y1) - areaPadding,
-      width: Math.floor(Math.abs(x2 - x1)) + areaPadding,
-      height: Math.floor(Math.abs(y2 - y1)) + areaPadding
+  for (let i = 0; i < detectedAreas.length; i++) {
+    x1 = detectedAreas[i][0] * scalingFactorX;
+    x2 = detectedAreas[i][2] * scalingFactorX;
+    y1 = (detectedAreas[i][1]) * scalingFactorY;
+    y2 = (detectedAreas[i][3]) * scalingFactorY;
+    const tableArea = {
+      x: Math.floor(x1),
+      y: Math.floor(Math.abs(y1 - imageHeight)),
+      width: Math.floor(Math.abs(x2 - x1)),
+      height: Math.floor(Math.abs(y2 - y1))
     };
-    areaOptions.push(areaOption);
+    tableAreas.push(tableArea);
   }
-  return areaOptions;
+  return tableAreas;
 };
 
-const getTableAreas = function (selectedAreas, scalingFactorX, scalingFactorY, doTranslate) {
-  let tArea = [];
+const getTableAreas = function (selectedAreas) {
+  const imageWidth = $('#image').width();
+  const imageHeight = $('#image').height();
+  const scalingFactorX = fileDim[0] / imageWidth;
+  const scalingFactorY = fileDim[1] / imageHeight;
+
+  let tableAreas = [];
   let x1, x2, y1, y2;
   for (let i = 0; i < selectedAreas.length; i++) {
     x1 = selectedAreas[i].x * scalingFactorX;
-    x2 = selectedAreas[i].x * selectedAreas[i].width, scalingFactorX;
-    y1 = selectedAreas[i].y * scalingFactorY;
-    y2 = (selectedAreas[i].y + selectedAreas[i].height) * scalingFactorY;
-
-    if (doTranslate) {
-      y1 = doTranslateAndScale(selectedAreas[i].y, scalingFactorY);
-      y2 = doTranslateAndScale((selectedAreas[i].y + selectedArea[i].height), scalingFactorY);
-    }
-    tArea.push([x1, y1, x2, y2].join());
+    x2 = (selectedAreas[i].x + selectedAreas[i].width) * scalingFactorX;
+    y1 = Math.abs(selectedAreas[i].y - imageHeight) * scalingFactorY;
+    y2 = Math.abs(selectedAreas[i].y + selectedAreas[i].height - imageHeight) * scalingFactorY;
+    tableAreas.push([x1, y1, x2, y2].join());
   }
-  return tArea;
+  return tableAreas;
 };
 
-const getNewColPosOffset = () => {
+const getNewColPosOffset = function () {
   let prevColPos = 0, newOffset = 0;
   const columnList = document.getElementsByClassName("draggable-column");;
   const position = $('#image-div').position();
@@ -97,16 +90,12 @@ const getRuleOptions = function () {
   const flavor = $('#flavors').val();
   ruleOptions['flavor'] = flavor;
   const selectedAreas = $('#image').selectAreas('areas');
-  const imageWidth = $('#image').width();
-  const imageHeight = $('#image').height();
-  const scalingFactorX = fileDim[0] / imageWidth;
-  const scalingFactorY = fileDim[1] / imageHeight;
   const hasColumnSeparator = $('.draggable-column').length > 0;
 
   if (selectedAreas.length > 0) {
-    ruleOptions['table_area'] = getTableAreas(selectedAreas, scalingFactorX, scalingFactorY, true);
+    ruleOptions['table_areas'] = getTableAreas(selectedAreas);
   } else {
-    ruleOptions['table_area'] = null;
+    ruleOptions['table_areas'] = null;
   }
 
   switch(flavor.toString().toLowerCase()) {
@@ -182,13 +171,13 @@ $(document).ready(function () {
   });
 
   $('#detect-lattice-areas').click(function () {
-    areaOptions = detectTableAreas('lattice');
-    $('.image-area').selectAreas('add', areaOptions);
+    tableAreas = detectTableAreas(detectedAreas['lattice']);
+    $('.image-area').selectAreas('add', tableAreas);
   });
 
   $('#detect-stream-areas').click(function () {
-    areaOptions = detectTableAreas('stream');
-    $('.image-area').selectAreas('add', areaOptions);
+    tableAreas = detectTableAreas(detectedAreas['stream']);
+    $('.image-area').selectAreas('add', tableAreas);
   });
 
   $('.reset-areas').click(function () {
