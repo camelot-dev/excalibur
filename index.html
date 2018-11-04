@@ -40,7 +40,7 @@
               <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a>
             </li>
             <li class="nav-item mx-0 mx-lg-1">
-              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#features">Features</a>
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#features">How-to</a>
             </li>
             <li class="nav-item mx-0 mx-lg-1">
               <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#developers">Developers</a>
@@ -69,10 +69,11 @@
         <hr class="star-dark mb-5">
         <div class="row">
           <div class="col-lg-4 ml-auto">
-            <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem adipisci laudantium enim veritatis excepturi maxime quidem voluptatibus eligendi similique consequuntur non suscipit perspiciatis obcaecati error explicabo repellat ea nostrum odit, commodi soluta. Accusamus assumenda dolorum at magni possimus eveniet. Deleniti!</p>
+            <p class="lead"><strong class="font-weight-bold">Excalibur is an open-source web app to extract tabular data from PDFs.</strong> There are both open and closed-source tools that are widely used for this task. They either give a nice output or fail miserably. This is not helpful since everything in the real world, including PDF table extraction, is fuzzy. This leads to the creation of ad-hoc table extraction scripts for each type of PDF table.</p>
           </div>
           <div class="col-lg-4 mr-auto">
-            <p class="lead">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repellendus asperiores nemo, labore maiores placeat suscipit aliquam et molestiae! Odio iure officiis quibusdam officia fugit consequatur vero pariatur rerum, aut exercitationem nam provident atque temporibus molestias a vitae veritatis ullam sint!</p>
+            <p class="lead">Excalibur uses <a href="https://camelot-py.readthedocs.io">Camelot</a> under the hood, which was created to offer users complete control over table extraction. If you can’t get your desired output with the default settings, you can tweak them and get the job done! <br> You can check out fantastic documentation at <a href="https://excalibur-py.readthedocs.io/">https://excalibur-py.readthedocs.io/</a>.
+            </p>
           </div>
         </div>
       </div>
@@ -82,39 +83,50 @@
     <!-- features Grid Section -->
     <section class="bg-primary features" id="features">
       <div class="container">
-        <h2 class="text-center text-uppercase text-white mt-5 mb-0">Features</h2>
+        <h2 class="text-center text-uppercase text-white mt-5 mb-0">How-to</h2>
         <hr class="star-light mb-5">
         <div class="row align-items-center mb-5 text-white">
           <div class="col-md-6 order-lg-first">
             <a href="#">
-              <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/640x360" alt="">
+              <img class="img-fluid rounded mb-3 mb-md-0" src="https://excalibur-py.readthedocs.io/en/master/_static/gifs/upload.gif" alt="">
             </a>
           </div>
           <div class="col-md-6 order-lg-last">
-            <h3>Feature One</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos perspiciatis atque eveniet unde.</p>
+            <h3>Upload PDF</h3>
+            <p>Upload your PDF on Excalibur's web interface. All file storage and processing happens on your own local or remote machine. <strong class="font-weight-bold">You have complete control over your data.</strong></p>
           </div>
         </div>
         <div class="row align-items-center mb-5 text-white">
           <div class="col-md-6 order-lg-last">
             <a href="#">
-              <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/640x360" alt="">
+              <img class="img-fluid rounded mb-3 mb-md-0" src="https://excalibur-py.readthedocs.io/en/master/_static/gifs/detect.gif" alt="">
             </a>
           </div>
           <div class="col-md-6 order-lg-first">
-            <h3>Feature Two</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos perspiciatis atque eveniet unde.</p>
+            <h3>Auto-detect tables</h3>
+            <p>View the tables detected by Excalibur on your PDF page.</p>
           </div>
         </div>
         <div class="row align-items-center mb-5 text-white">
           <div class="col-md-6 order-lg-first">
             <a href="#">
-              <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/640x360" alt="">
+              <img class="img-fluid rounded mb-3 mb-md-0" src="https://excalibur-py.readthedocs.io/en/master/_static/gifs/columns.gif" alt="">
             </a>
           </div>
           <div class="col-md-6 order-lg-last">
-            <h3>Feature Three</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos perspiciatis atque eveniet unde.</p>
+            <h3>Select tables and columns</h3>
+            <p>Draw a table boundary and also add column separators for cases where Excalibur is not able to detect the tables.</p>
+          </div>
+        </div>
+        <div class="row align-items-center mb-5 text-white">
+          <div class="col-md-6 order-lg-last">
+            <a href="#">
+              <img class="img-fluid rounded mb-3 mb-md-0" src="https://excalibur-py.readthedocs.io/en/master/_static/gifs/download.gif" alt="">
+            </a>
+          </div>
+          <div class="col-md-6 order-lg-first">
+            <h3>Download in any format</h3>
+            <p>View the extracted tables and then download them in the format you prefer. Excalibur supports CSV, Excel, JSON and HTML.</p>
           </div>
         </div>
       </div>
