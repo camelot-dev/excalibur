@@ -20,7 +20,6 @@ CELERY_CREATE_MISSING_QUEUES = True
 CELERYD_PREFETCH_MULTIPLIER = 1
 CELERY_ACKS_LATE = True
 
-
 # for sqlalchemy
 DB = 'excalibur.db'
 # SQL_ALCHEMY_CONN = 'sqlite:///{}/{}'.format(PROJECT_ROOT, DB)
