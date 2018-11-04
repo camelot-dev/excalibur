@@ -74,7 +74,10 @@ const getNewColPosOffset = function () {
   return newOffset;
 }
 
-const getColumnSeparators = function (selectedSeparators, scalingFactorX) {
+const getColumnSeparators = function (selectedSeparators) {
+  const imageWidth = $('#image').width();
+  const scalingFactorX = fileDim[0] / imageWidth;
+
   let colSeparators = [];
 
   selectedSeparators.forEach(sep => {
@@ -117,7 +120,7 @@ const getRuleOptions = function () {
         $('.draggable-column').each(function (id, col) {
           selectedSeparators.push(($(col).offset().left - $(col).parent().offset().left) + ($(col).width() / 2));
         });
-        ruleOptions['columns'] = getColumnSeparators(selectedSeparators, scalingFactorX);
+        ruleOptions['columns'] = getColumnSeparators(selectedSeparators);
       } else {
         ruleOptions['columns'] = null;
       }
