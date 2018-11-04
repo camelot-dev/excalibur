@@ -13,29 +13,66 @@ const compare = function (a, b) {
   return a - b;
 }
 
-const doTranslateAndScale = function (relCoordinate, scalingFactorY) {
+const detectTableAreas = function (detectedAreas) {
+  const imageWidth = $('#image').width();
   const imageHeight = $('#image').height();
-  const absCoordinate = Math.abs(relCoordinate - imageHeight);
-  return absCoordinate * scalingFactorY;
-}
+  const scalingFactorX = imageWidth / fileDim[0];
+  const scalingFactorY = imageHeight / fileDim[1];
 
-const getTableArea = function (selectedArea, scalingFactorX, scalingFactorY, doTranslate) {
-  let tArea = [];
+  let tableAreas = [];
   let x1, x2, y1, y2;
-  for (let i = 0; i < selectedArea.length; i++) {
-    x1 = selectedArea[i].x * scalingFactorX;
-    x2 = selectedArea[i].x * selectedArea[i].width, scalingFactorX;
-    y1 = selectedArea[i].y * scalingFactorY;
-    y2 = (selectedArea[i].y + selectedArea[i].height) * scalingFactorY;
-
-    if (doTranslate) {
-      y1 = doTranslateAndScale(selectedArea[i].y, scalingFactorY);
-      y2 = doTranslateAndScale((selectedArea[i].y + selectedArea[i].height), scalingFactorY);
-    }
-    tArea.push([x1, y1, x2, y2].join());
+  for (let i = 0; i < detectedAreas.length; i++) {
+    x1 = detectedAreas[i][0] * scalingFactorX;
+    x2 = detectedAreas[i][2] * scalingFactorX;
+    y1 = (detectedAreas[i][1]) * scalingFactorY;
+    y2 = (detectedAreas[i][3]) * scalingFactorY;
+    const tableArea = {
+      x: Math.floor(x1),
+      y: Math.floor(Math.abs(y1 - imageHeight)),
+      width: Math.floor(Math.abs(x2 - x1)),
+      height: Math.floor(Math.abs(y2 - y1))
+    };
+    tableAreas.push(tableArea);
   }
-  return tArea;
+  return tableAreas;
 };
+
+const getTableAreas = function (selectedAreas) {
+  const imageWidth = $('#image').width();
+  const imageHeight = $('#image').height();
+  const scalingFactorX = fileDim[0] / imageWidth;
+  const scalingFactorY = fileDim[1] / imageHeight;
+
+  let tableAreas = [];
+  let x1, x2, y1, y2;
+  for (let i = 0; i < selectedAreas.length; i++) {
+    x1 = selectedAreas[i].x * scalingFactorX;
+    x2 = (selectedAreas[i].x + selectedAreas[i].width) * scalingFactorX;
+    y1 = Math.abs(selectedAreas[i].y - imageHeight) * scalingFactorY;
+    y2 = Math.abs(selectedAreas[i].y + selectedAreas[i].height - imageHeight) * scalingFactorY;
+    tableAreas.push([x1, y1, x2, y2].join());
+  }
+  return tableAreas;
+};
+
+const getNewColPosOffset = function () {
+  let prevColPos = 0, newOffset = 0;
+  const columnList = document.getElementsByClassName("draggable-column");;
+  const position = $('#image-div').position();
+  const divWidth = $('#image-div').width() - position.left;
+
+  if (columnList.length) {
+    prevColPos = parseInt(columnList[columnList.length-1].style.left);
+  }
+
+  if ((prevColPos + 25) > divWidth) {
+    prevColPos = 0;
+  }
+
+  newOffset = prevColPos + 25;
+
+  return newOffset;
+}
 
 const getColumnSeparators = function (selectedSeparators, scalingFactorX) {
   let colSeparators = [];
@@ -48,25 +85,17 @@ const getColumnSeparators = function (selectedSeparators, scalingFactorX) {
   return [colSeparators.join()];
 };
 
-const debugQtyAreas = function (event, id, areas) {
-  return;
-};
-
 const getRuleOptions = function () {
   let ruleOptions = {};
   const flavor = $('#flavors').val();
   ruleOptions['flavor'] = flavor;
   const selectedAreas = $('#image').selectAreas('areas');
-  const imageWidth = $('#image').width();
-  const imageHeight = $('#image').height();
-  const scalingFactorX = file_dimensions[0] / imageWidth;
-  const scalingFactorY = file_dimensions[1] / imageHeight;
   const hasColumnSeparator = $('.draggable-column').length > 0;
 
   if (selectedAreas.length > 0) {
-    ruleOptions['table_area'] = getTableArea(selectedAreas, scalingFactorX, scalingFactorY, true);
+    ruleOptions['table_areas'] = getTableAreas(selectedAreas);
   } else {
-    ruleOptions['table_area'] = null;
+    ruleOptions['table_areas'] = null;
   }
 
   switch(flavor.toString().toLowerCase()) {
@@ -122,24 +151,9 @@ const extract = function () {
   });
 }
 
-const getNewColPosOffset = () => {
-  let prevColPos = 0, newOffset = 0;
-  const columnList = document.getElementsByClassName("draggable-column");;
-  const position = $('#image-div').position();
-  const divWidth = $('#image-div').width() - position.left;
-
-  if (columnList.length) {
-    prevColPos = parseInt(columnList[columnList.length-1].style.left);
-  }
-
-  if ((prevColPos + 25) > divWidth) {
-    prevColPos = 0;
-  }
-
-  newOffset = prevColPos + 25;
-
-  return newOffset;
-}
+const debugQtyAreas = function (event, id, areas) {
+  return;
+};
 
 $(document).ready(function () {
   $('.image-area').selectAreas({
@@ -154,6 +168,16 @@ $(document).ready(function () {
       $('.stream').show();
       $('.lattice').hide();
     }
+  });
+
+  $('.detect-areas').click(function () {
+    const flavor = $(this).attr('data-flavor');
+    tableAreas = detectTableAreas(detectedAreas[flavor]);
+    $('.image-area').selectAreas('add', tableAreas);
+  });
+
+  $('.reset-areas').click(function () {
+    $('.image-area').selectAreas('reset');
   });
 
   $('body').on('click', '.add-separator', function () {
