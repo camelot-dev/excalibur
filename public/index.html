@@ -5,10 +5,10 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Excalibur, PDF, Parsing, Table, OCR">
+    <meta name="description" content="Excalibur, PDF, Parsing, Table, Extraction, OCR">
     <meta name="author" content="Vinayak, Mehta, Nikhil, Sikka">
 
-    <title>Excalibur - PDF Parsing for Humans</title>
+    <title>Excalibur - PDF Table Extraction for Humans</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous" />
@@ -19,11 +19,8 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
-    <!-- Plugin CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet" type="text/css">
-
     <!-- Custom styles for this template -->
-    <link href="css/index.min.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet">
 
   </head>
 
@@ -46,7 +43,7 @@
               <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#features">Features</a>
             </li>
             <li class="nav-item mx-0 mx-lg-1">
-              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">Contributors</a>
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#developers">Developers</a>
             </li>
           </ul>
         </div>
@@ -56,12 +53,11 @@
     <!-- Header -->
     <header class="masthead bg-primary text-white text-center">
       <div class="container">
-        <img src="https://excalibur-py.readthedocs.io/en/master/_static/excalibur-logo.png" class="rounded img-fluid mb-5 d-block mx-auto" 
+        <img src="https://excalibur-py.readthedocs.io/en/master/_static/excalibur-logo.png" class="rounded img-fluid mb-5 d-block mx-auto"
             width="150" height="auto" alt="Excalibur">
         <hr class="star-light">
         <h1 class="text-uppercase mb-1 lead">Excalibur</h1>
-        <h4>PDF Table Extraction for humans</h4>
-        <!-- <h2 class="font-weight-light mb-0">Web Developer - Graphic Artist - User Experience Designer</h2> -->
+        <h4>PDF Table Extraction for Humans</h4>
       </div>
     </header>
 
@@ -69,7 +65,7 @@
     <!-- About Section -->
     <section class="text-secondary mb-0" id="about">
       <div class="container-fluid">
-        <h2 class="text-center text-uppercase text-secondary">About</h2>
+        <h2 class="text-center text-uppercase text-secondary mt-5">About</h2>
         <hr class="star-dark mb-5">
         <div class="row">
           <div class="col-lg-4 ml-auto">
@@ -86,7 +82,7 @@
     <!-- features Grid Section -->
     <section class="bg-primary features" id="features">
       <div class="container">
-        <h2 class="text-center text-uppercase text-white mb-0">What does it do?</h2>
+        <h2 class="text-center text-uppercase text-white mt-5 mb-0">Features</h2>
         <hr class="star-light mb-5">
         <div class="row align-items-center mb-5 text-white">
           <div class="col-md-6 order-lg-first">
@@ -121,28 +117,16 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos perspiciatis atque eveniet unde.</p>
           </div>
         </div>
-        <!-- <div class="row align-items-center mb-5">
-          <div class="col-md-6 order-lg-last">
-            <a href="#">
-              <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/520x240" alt="">
-            </a>
-          </div>
-          <div class="col-md-6 order-lg-first">
-            <h3>Project One</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos perspiciatis atque eveniet unde.</p>
-            <a class="btn btn-primary" href="#">View Project</a>
-          </div>
-        </div> -->
       </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact">
+    <section id="developers">
       <div class="container">
-        <h2 class="text-center text-uppercase text-secondary mb-0">Contributors</h2>
+        <h2 class="text-center text-uppercase text-secondary mt-5 mb-0">Developers</h2>
         <hr class="star-dark mb-5">
         <div class="row">
-          
+
           <div class="col-lg-6 col-sm-6 col-xs-12 text-center mb-4">
             <img class="rounded-circle img-fluid d-block mx-auto" height="200" width="200"
                   src="https://avatars1.githubusercontent.com/u/4329421?s=460&v=4" alt="Vinayak Mehta">
@@ -189,7 +173,7 @@
         <div class="row">
           <div class="col-md-6 mb-5 mb-lg-0">
             <h4 class="text-uppercase mb-4">Location</h4>
-            <p class="lead mb-0">Earth</p>
+            <p class="lead mb-0">New Delhi, India</p>
           </div>
           <div class="col-md-6 mb-5 mb-lg-0">
             <h4 class="text-uppercase mb-4">Github</h4>
@@ -220,18 +204,14 @@
 
     <!-- Bootstrap core JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" async></script>
+    <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js" async></script>
 
     <!-- Plugin JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.compatibility.min.js" async></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js" async></script>
-
-    <!-- Contact Form JavaScript -->
-    <script src="js/jqBootstrapValidation.js"></script>
-    <script src="js/contact_me.js"></script>
 
     <!-- Custom scripts for this template -->
-    <script src="js/freelancer.min.js"></script>
+    <script src="js/freelancer.js"></script>
 
   </body>
 
