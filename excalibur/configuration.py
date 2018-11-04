@@ -8,6 +8,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 # for excalibur
 PDFS_FOLDER = os.path.join(PROJECT_ROOT, 'www/static/uploads')
 ALLOWED_EXTENSIONS = ['pdf']
+# EXECUTOR = 'SequentialExecutor'
 EXECUTOR = 'CeleryExecutor'
 
 # for flask
@@ -22,4 +23,6 @@ CELERY_ACKS_LATE = True
 
 # for sqlalchemy
 DB = 'excalibur.db'
-SQL_ALCHEMY_CONN = 'sqlite:///{}/{}'.format(PROJECT_ROOT, DB)
+# SQL_ALCHEMY_CONN = 'sqlite:///{}/{}'.format(PROJECT_ROOT, DB)
+SQL_ALCHEMY_CONN = 'mysql://vinayak:vinayak@localhost:3306/excalibur'
+USING_SQLITE = True if SQL_ALCHEMY_CONN.startswith('sqlite') else False

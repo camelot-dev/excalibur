@@ -23,9 +23,23 @@ def cli(*args, **kwargs):
     pass
 
 
+@cli.command('initdb')
+def initdb(*args, **kwargs):
+    initialize_database()
+
+
+@cli.command('resetdb')
+def resetdb(*args, **kwargs):
+    click.confirm(
+        "This will drop existing tables if they exist. Proceed?", abort=True)
+
+    reset_database()
+    initialize_database()
+
+
 @cli.command('webserver')
 def webserver(*args, **kwargs):
-    if not os.path.exists(os.path.join(conf.PROJECT_ROOT, conf.DB)):
+    if conf.USING_SQLITE and not os.path.exists(os.path.join(conf.PROJECT_ROOT, conf.DB)):
         initialize_database()
     app = create_app(conf)
     app.run(use_reloader=False)
@@ -42,15 +56,6 @@ def worker(*args, **kwargs):
         'loglevel': 'INFO'
     }
     worker.run(**options)
-
-
-@cli.command('resetdb')
-def resetdb(*args, **kwargs):
-    click.confirm(
-        "This will drop existing tables if they exist. Proceed?", abort=True)
-
-    reset_database()
-    initialize_database()
 
 
 @cli.command('run')
