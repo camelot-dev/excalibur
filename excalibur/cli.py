@@ -33,7 +33,15 @@ def webserver(*args, **kwargs):
 
 @cli.command('worker')
 def worker(*args, **kwargs):
-    pass
+    from celery.bin import worker
+    from .executors.celery_executor import app as celery_app
+
+    worker = worker.worker(app=celery_app)
+    options = {
+        'concurrency': 1,
+        'loglevel': 'INFO'
+    }
+    worker.run(**options)
 
 
 @cli.command('resetdb')

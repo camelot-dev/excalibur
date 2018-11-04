@@ -8,7 +8,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 # for excalibur
 PDFS_FOLDER = os.path.join(PROJECT_ROOT, 'www/static/uploads')
 ALLOWED_EXTENSIONS = ['pdf']
-EXECUTOR = 'SequentialExecutor'
+EXECUTOR = 'CeleryExecutor'
 
 # for flask
 SECRET_KEY = 'secret_key'
