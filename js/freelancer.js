@@ -49,18 +49,6 @@
   // Collapse the navbar when page is scrolled
   $(window).scroll(navbarCollapse);
 
-  // Modal popup$(function () {
-  $('.portfolio-item').magnificPopup({
-    type: 'inline',
-    preloader: false,
-    focus: '#username',
-    modal: true
-  });
-  $(document).on('click', '.portfolio-modal-dismiss', function(e) {
-    e.preventDefault();
-    $.magnificPopup.close();
-  });
-
   // Floating label headings for the contact form
   $(function() {
     $("body").on("input propertychange", ".floating-label-form-group", function(e) {
