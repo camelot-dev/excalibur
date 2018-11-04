@@ -37,3 +37,13 @@ def resetdb(*args, **kwargs):
 
     reset_database()
     initialize_database()
+
+
+@cli.command()
+def worker(*args, **kwargs):
+    pass
+
+
+@cli.command()
+def run(*args, **kwargs):
+    pass
