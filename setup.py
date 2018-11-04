@@ -13,11 +13,14 @@ with open('README.md', 'r') as f:
     readme = f.read()
 
 requires = [
-    'camelot-py[all]>=0.2.3',
+    'camelot-py[cv]>=0.2.3',
     'Click>=7.0',
     'Flask>=1.0.2',
     'SQLAlchemy>=1.2.12'
 ]
+celery = ['celery>=4.1.1']
+mysql = ['mysqlclient>=1.3.6']
+all_requires = requires + celery + mysql
 dev_requires = [
     'codecov>=2.0.15',
     'pytest>=3.8.0',
@@ -41,6 +44,9 @@ def setup_package():
                     include_package_data=True,
                     install_requires=requires,
                     extras_require={
+                        'all': all_requires,
+                        'celery': celery,
+                        'mysql': mysql,
                         'dev': dev_requires
                     },
                     entry_points={
