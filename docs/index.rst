@@ -53,7 +53,7 @@ Why Excalibur?
 --------------
 
 - **Excalibur gives you complete control over your data**. All file storage and processing happens on your own local or remote machine.
-- Excalibur **can be configured with MySQL and Celery** for parallel and distributed workloads. By default, sqlite and multiprocessing are used for sequential workloads.
+- Excalibur can be configured with **MySQL and Celery** for parallel and distributed workloads. By default, sqlite and multiprocessing are used for sequential workloads.
 - You can save table extraction :ref:`rules <concepts>` as **presets** and apply them on different PDFs to extract tables with similar structures. (*in v0.3.0*)
 - You can extract tables from **multiple PDFs in one go** using an extraction rule by starting :ref:`jobs <concepts>`. (*in v0.4.0*)
 

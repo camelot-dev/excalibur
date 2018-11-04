@@ -29,7 +29,7 @@ That's it! Now you can go to http://localhost:5000 and extract data tables from 
 ## Why Excalibur?
 
 - **Excalibur gives you complete control over your data**. All file storage and processing happens on your own local or remote machine.
-- Excalibur **can be configured with MySQL and Celery** for parallel and distributed workloads. By default, sqlite and multiprocessing are used for sequential workloads.
+- Excalibur can be configured with **MySQL and Celery** for parallel and distributed workloads. By default, sqlite and multiprocessing are used for sequential workloads.
 - You can save table extraction [rules](https://excalibur-py.readthedocs.io/en/master/user/concepts.html#rule) as **presets** and apply them on different PDFs to extract tables with similar structures. (*in v0.3.0*)
 - You can extract tables from **multiple PDFs in one go** using an extraction rule by starting [jobs](https://excalibur-py.readthedocs.io/en/master/user/concepts.html#job). (*in v0.4.0*)
 
