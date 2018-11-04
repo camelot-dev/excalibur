@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Excalibur, PDF, Parsing, Table, Extraction, OCR">
+    <meta name="author" content="Vinayak, Mehta, Nikhil, Sikka">
+
+    <title>Excalibur - PDF Table Extraction for Humans</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous" />
+
+    <!-- Custom fonts for this template -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template -->
+    <link href="css/index.min.css" rel="stylesheet">
+
+  </head>
+
+  <body id="page-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">Excalibur</a>
+        <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item mx-0 mx-lg-1">
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a>
+            </li>
+            <li class="nav-item mx-0 mx-lg-1">
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#features">How-to</a>
+            </li>
+            <li class="nav-item mx-0 mx-lg-1">
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#developers">Developers</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="masthead bg-primary text-white text-center">
+      <div class="container">
+        <img src="https://excalibur-py.readthedocs.io/en/master/_static/excalibur-logo-circle.png" class="rounded-circle img-fluid mb-5 d-block mx-auto"
+            width="150" height="auto" alt="Excalibur">
+        <hr class="star-light">
+        <h1 class="text-uppercase mb-1 lead">Excalibur</h1>
+        <h4>PDF Table Extraction for Humans</h4>
+        <!-- Place this tag where you want the button to render. -->
+        <a class="github-button" href="https://github.com/camelot-dev/excalibur" data-size="large" data-show-count="true" aria-label="Star camelot-dev/excalibur on GitHub">Star</a>
+      </div>
+    </header>
+
+    <!-- About Section -->
+    <section class="text-secondary mb-0" id="about">
+      <div class="container-fluid">
+        <h2 class="text-center text-uppercase text-secondary">About</h2>
+        <hr class="star-dark mb-5">
+        <div class="row">
+          <div class="col-lg-4 ml-auto">
+            <p class="lead"><strong class="font-weight-bold">Excalibur is a web interface to extract tabular data from PDFs.</strong> There are both open and closed-source tools that are widely used for this task. They either give a nice output or fail miserably. This is not helpful since everything in the real world, including PDF table extraction, is fuzzy. This leads to the creation of ad-hoc table extraction scripts for each type of PDF table.</p>
+          </div>
+          <div class="col-lg-4 mr-auto">
+            <p class="lead">Excalibur uses <a href="https://camelot-py.readthedocs.io">Camelot</a> under the hood, which offers users complete control over table extraction. If you don't get the desired output with default settings, you can tweak them and get the job done!<br><br>You can check out fantastic documentation at <a href="https://excalibur-py.readthedocs.io/">https://excalibur-py.readthedocs.io/</a>.
+            </p>
+          </div>
+        </div>
+        <div class="text-center mt-4">
+          <a class="btn btn-xl btn-outline-dark" href="https://github.com/camelot-dev/excalibur/releases" target="_blank">
+            <i class="fas fa-download mr-2"></i>
+            Download Now!
+          </a>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- features Grid Section -->
+    <section class="bg-primary features" id="features">
+      <div class="container">
+        <h2 class="text-center text-uppercase text-white mb-0">How-to</h2>
+        <hr class="star-light mb-5">
+        <div class="row align-items-center mb-5 text-white">
+          <div class="col-md-6 order-lg-first">
+            <a href="#">
+              <img class="img-fluid rounded mb-3 mb-md-0" src="https://excalibur-py.readthedocs.io/en/master/_static/gifs/upload.gif" alt="">
+            </a>
+          </div>
+          <div class="col-md-6 order-lg-last">
+            <h3>Upload PDF</h3>
+            <p>You can upload your PDF using the web interface. You can also see previous uploads. All file storage and processing happens on your own local or remote machine, which means that you have complete control over your data.</p>
+          </div>
+        </div>
+        <div class="row align-items-center mb-5 text-white">
+          <div class="col-md-6 order-lg-last">
+            <a href="#">
+              <img class="img-fluid rounded mb-3 mb-md-0" src="https://excalibur-py.readthedocs.io/en/master/_static/gifs/columns.gif" alt="">
+            </a>
+          </div>
+          <div class="col-md-6 order-lg-first">
+            <h3>Draw table areas and/or column separators</h3>
+            <p>You can draw a table area and also add column separators in cases where the table is really buried inside the text on the PDF page.</p>
+          </div>
+        </div>
+        <div class="row align-items-center mb-5 text-white">
+          <div class="col-md-6 order-lg-first">
+            <a href="#">
+              <img class="img-fluid rounded mb-3 mb-md-0" src="https://excalibur-py.readthedocs.io/en/master/_static/gifs/detect.gif" alt="">
+            </a>
+          </div>
+          <div class="col-md-6 order-lg-last">
+            <h3>Or auto-detect table areas</h3>
+            <p>You won't need to draw table areas and column separators in most cases, because Excalibur can do that on its own.</p>
+          </div>
+        </div>
+        <div class="row align-items-center mb-5 text-white">
+          <div class="col-md-6 order-lg-last">
+            <a href="#">
+              <img class="img-fluid rounded mb-3 mb-md-0" src="https://excalibur-py.readthedocs.io/en/master/_static/gifs/download.gif" alt="">
+            </a>
+          </div>
+          <div class="col-md-6 order-lg-first">
+            <h3>Download in multiple formats</h3>
+            <p>You can view the extracted tables and then download them in widely used tabular data formats. Excalibur supports CSV, Excel, JSON and HTML.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="developers">
+      <div class="container">
+        <h2 class="text-center text-uppercase text-secondary mb-0">Developers</h2>
+        <hr class="star-dark mb-5">
+        <div class="row">
+
+          <div class="col-lg-6 col-sm-6 col-xs-12 text-center mb-4">
+            <img class="rounded-circle img-fluid d-block mx-auto" height="200" width="200"
+                  src="https://avatars1.githubusercontent.com/u/4329421?s=460&v=4" alt="Vinayak Mehta">
+            <h3 class="mb-1 mt-4">Vinayak Mehta</h3>
+            <ul class="list-inline social-icons">
+              <li class="list-inline-item">
+                <a href="https://vinayak-mehta.github.io/about/" target="_blank">
+                  <i class="fas fa-globe-asia fa-lg"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://www.linkedin.com/in/mehtavinayak/" target="_blank">
+                  <i class="fab fa-fw fa-linkedin fa-lg"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://github.com/vinayak-mehta" target="_blank">
+                  <i class="fab fa-fw fa-github fa-lg"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-lg-6 col-sm-6 col-xs-12 text-center mb-4">
+            <img class="rounded-circle img-fluid d-block mx-auto" height="200" width="200"
+                  src="https://media.licdn.com/dms/image/C4E03AQHxyta3vScPzA/profile-displayphoto-shrink_800_800/0?e=1546473600&v=beta&t=zMqdJEBtF-jkpfHGykbVCVRFhxXDsvxpPwhVrTJ3kHU" alt="Nikhil Sikka">
+            <h3 class="mb-1 mt-4">Nikhil Sikka</h3>
+            <ul class="list-inline social-icons">
+              <li class="list-inline-item">
+                <a href="#">
+                  <i class="fas fa-globe-asia fa-lg"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                  <a href="https://www.linkedin.com/in/nikhilsikka/" target="_blank">
+                    <i class="fab fa-fw fa-linkedin fa-lg"></i>
+                  </a>
+              </li>
+              <li class="list-inline-item">
+                <i class="fab fa-fw fa-github fa-lg"></i>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 mb-5 mb-lg-0">
+            <h4 class="text-uppercase mb-4">Location</h4>
+            <p class="lead mb-0">New Delhi, India</p>
+          </div>
+          <div class="col-md-6 mb-5 mb-lg-0">
+            <h4 class="text-uppercase mb-4">Github</h4>
+            <ul class="list-inline mb-0">
+              <li class="list-inline-item">
+                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="https://github.com/camelot-dev/excalibur" target="_blank">
+                  <i class="fab fa-fw fa-github"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <div class="copyright py-4 text-center text-white">
+      <div class="container">
+        <small>Copyright <a href="https://github.com/camelot-dev/" target="_blank">&copy; Camelot Dev</a> 2018</small>
+      </div>
+    </div>
+
+    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+    <div class="scroll-to-top d-lg-none position-fixed ">
+      <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top">
+        <i class="fa fa-chevron-up"></i>
+      </a>
+    </div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/freelancer.js"></script>
+
+  </body>
+
+</html>
