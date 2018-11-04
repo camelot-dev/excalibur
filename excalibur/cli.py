@@ -39,8 +39,6 @@ def resetdb(*args, **kwargs):
 
 @cli.command('webserver')
 def webserver(*args, **kwargs):
-    if conf.USING_SQLITE and not os.path.exists(os.path.join(conf.PROJECT_ROOT, conf.DB)):
-        initialize_database()
     app = create_app(conf)
     app.run(use_reloader=False)
 
@@ -50,10 +48,11 @@ def worker(*args, **kwargs):
     from celery.bin import worker
     from .executors.celery_executor import app as celery_app
 
+
     worker = worker.worker(app=celery_app)
     options = {
-        'concurrency': 1,
-        'loglevel': 'INFO'
+        'concurrency': int(conf.get('celery', 'WORKER_CONCURRENCY')),
+        'loglevel': conf.get('core', 'LOGGING_LEVEL')
     }
     worker.run(**options)
 

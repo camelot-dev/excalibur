@@ -15,6 +15,7 @@ with open('README.md', 'r') as f:
 requires = [
     'camelot-py[cv]>=0.2.3',
     'Click>=7.0',
+    'configparser>=3.5.0, <3.6.0',
     'Flask>=1.0.2',
     'SQLAlchemy>=1.2.12'
 ]

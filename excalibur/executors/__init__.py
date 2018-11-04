@@ -21,7 +21,7 @@ def get_default_executor():
     if DEFAULT_EXECUTOR is not None:
         return DEFAULT_EXECUTOR
 
-    configure_executor(conf.EXECUTOR)
+    configure_executor(conf.get('core', 'EXECUTOR'))
 
     return DEFAULT_EXECUTOR
 
@@ -45,5 +45,5 @@ def dispose_executor():
         DEFAULT_EXECUTOR.stop()
 
 
-configure_executor(conf.EXECUTOR)
+configure_executor(conf.get('core', 'EXECUTOR'))
 atexit.register(dispose_executor)

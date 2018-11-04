@@ -8,10 +8,20 @@ from celery import Celery
 
 from .base_executor import BaseExecutor
 from .. import configuration as conf
+from ..config_templates.default_celery import DEFAULT_CELERY_CONFIG
+from ..utils.module_loading import import_string
 
 
-app = Celery()
-app.config_from_object('excalibur.configuration')
+if conf.has_option('celery', 'celery_config_options'):
+    celery_configuration = import_string(
+        conf.get('celery', 'celery_config_options'))
+else:
+    celery_configuration = DEFAULT_CELERY_CONFIG
+
+
+app = Celery(
+    conf.get('celery', 'CELERY_APP_NAME'),
+    config_source=celery_configuration)
 
 
 @app.task
