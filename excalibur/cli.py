@@ -4,7 +4,7 @@ import os
 
 import click
 
-from . import __version__
+from . import __version__, settings
 from . import configuration as conf
 from .operators.python_operator import PythonOperator
 from .tasks import split, extract
@@ -39,6 +39,11 @@ def resetdb(*args, **kwargs):
 
 @cli.command('webserver')
 def webserver(*args, **kwargs):
+    if conf.USING_SQLITE:
+        sqlite_path = settings.SQL_ALCHEMY_CONN.replace('sqlite:///', '')
+        if not os.path.isfile(sqlite_path):
+            initialize_database()
+
     app = create_app(conf)
     app.run(use_reloader=False)
 

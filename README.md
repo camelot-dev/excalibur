@@ -14,7 +14,13 @@
 
 ## Using Excalibur
 
-After [installation with pip](https://excalibur-py.readthedocs.io/en/master/user/install.html), you can start the webserver using:
+After [installation with pip](https://excalibur-py.readthedocs.io/en/master/user/install.html), you can initialize the metadata database using:
+
+<pre>
+$ excalibur initdb
+</pre>
+
+And then start the webserver using:
 
 <pre>
 $ excalibur webserver

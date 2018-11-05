@@ -3,11 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Excalibur: A web interface for Camelot
-======================================
-
-(PDF Table Extraction for Humans)
----------------------------------
+Excalibur: PDF Table Extraction for Humans
+==========================================
 
 Release v\ |version|. (:ref:`Installation <install>`)
 
@@ -36,7 +33,11 @@ Release v\ |version|. (:ref:`Installation <install>`)
 Using Excalibur
 ---------------
 
-After :ref:`installation <install>`, you can start the webserver using::
+After :ref:`installation with pip <install>`, you can initialize the metadata database using::
+
+    $ excalibur initdb
+
+And then start the webserver using::
 
     $ excalibur webserver
 
@@ -78,6 +79,7 @@ This part of the documentation focuses on instructions to get you up and running
 
    user/intro
    user/install
+   user/howto
    user/concepts
    user/usage
 
