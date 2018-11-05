@@ -97,10 +97,7 @@ else:
 mkdirs(EXCALIBUR_HOME)
 
 if 'EXCALIBUR_CONFIG' not in os.environ:
-    if os.path.isfile(expand_env_var('~/excalibur.cfg')):
-        EXCALIBUR_CONFIG = expand_env_var('~/excalibur.cfg')
-    else:
-        EXCALIBUR_CONFIG = EXCALIBUR_HOME + '/excalibur.cfg'
+    EXCALIBUR_CONFIG = EXCALIBUR_HOME + '/excalibur.cfg'
 else:
     EXCALIBUR_CONFIG = expand_env_var(os.environ['EXCALIBUR_CONFIG'])
 
@@ -121,9 +118,11 @@ def parameterized_config(template):
 if not os.path.isfile(EXCALIBUR_CONFIG):
     print('Creating new Excalibur configuration file in: {}'.format(
         EXCALIBUR_CONFIG))
-    default_config_path = os.path.join(
-        os.path.dirname(__file__), 'config_templates', 'default_excalibur.cfg')
-    shutil.copy(default_config_path, EXCALIBUR_CONFIG)
+    with open(EXCALIBUR_CONFIG, 'w') as f:
+        cfg = parameterized_config(DEFAULT_CONFIG)
+        if six.PY2:
+            cfg = cfg.encode('utf8')
+        f.write(cfg)
 
 
 conf = ExcaliburConfigParser(default_config=parameterized_config(DEFAULT_CONFIG))
