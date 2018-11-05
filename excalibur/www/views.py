@@ -12,10 +12,9 @@ from flask import (Blueprint, jsonify, redirect, render_template, request,
                    send_from_directory, url_for)
 
 from .. import configuration as conf
-from ..executors import DEFAULT_EXECUTOR
+from ..executors import get_default_executor
 from ..models import File, Rule, Job
 from ..settings import Session
-from ..tasks import split, extract
 from ..utils.file import mkdirs, allowed_filename
 from ..utils.metadata import generate_uuid, random_string
 
@@ -65,7 +64,11 @@ def files():
         session.add(f)
         session.commit()
         session.close()
-        DEFAULT_EXECUTOR.execute_async(split, file_id)
+
+        command = 'excalibur run --task {} --uuid {}'.format('split', file_id)
+        command_as_list = command.split(' ')
+        executor = get_default_executor()
+        executor.execute_async(command_as_list)
     return jsonify(file_id=file_id)
 
 
@@ -155,7 +158,11 @@ def jobs(job_id):
     session.add(j)
     session.commit()
     session.close()
-    DEFAULT_EXECUTOR.execute_async(extract, job_id)
+
+    command = 'excalibur run --task {} --uuid {}'.format('extract', job_id)
+    command_as_list = command.split(' ')
+    executor = get_default_executor()
+    executor.execute_async(command_as_list)
     return jsonify(job_id=job_id)
 
 
