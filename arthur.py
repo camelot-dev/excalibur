@@ -2,10 +2,9 @@
 
 import multiprocessing
 
-from excalibur.cli import webserver, initdb
+from excalibur.cli import webserver
 
 
 if __name__ == '__main__':
     multiprocessing.freeze_support()
-    initdb()
     webserver()

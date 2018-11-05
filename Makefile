@@ -19,4 +19,4 @@ publish:
 
 build-executable:
 	pip install pyinstaller
-	pyinstaller --add-data 'excalibur/www/templates:excalibur/www/templates' --add-data 'excalibur/www/static:excalibur/www/static' arthur.py
+	pyinstaller --add-data 'excalibur/www/templates:excalibur/www/templates' --add-data 'excalibur/www/static:excalibur/www/static' --add-data 'excalibur/config_templates:excalibur/config_templates' arthur.py
