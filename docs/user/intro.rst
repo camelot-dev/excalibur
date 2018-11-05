@@ -7,7 +7,7 @@ Excalibur is a web interface built on top of `Camelot`_, which is a Python libra
 
 .. _Camelot: https://camelot-py.readthedocs.io/
 
-What's in a name?
+What's in a Name?
 -----------------
 
 Camelot was named after `The Camelot Project`_ (also the name of a castle in the `Arthurian legend`_). To follow the same theme, this project was named `Excalibur`_, which is the legendary sword of King Arthur.
@@ -16,7 +16,7 @@ Camelot was named after `The Camelot Project`_ (also the name of a castle in the
 .. _Arthurian legend: https://en.wikipedia.org/wiki/King_Arthur
 .. _Excalibur: https://en.wikipedia.org/wiki/Excalibur
 
-Why another PDF table extraction tool?
+Why Another PDF Table Extraction tool?
 --------------------------------------
 
 There are both open (`Tabula`_, `pdf-table-extract`_) and closed-source (`Smallpdf`_, `Docparser`_) tools that are widely used to extract data tables from PDFs. They either give a nice output or fail miserably. There is no in between. This is not helpful since everything in the real world, including PDF table extraction, is fuzzy. This leads to the creation of ad-hoc table extraction scripts for each type of PDF table.
@@ -31,7 +31,7 @@ Here is a `comparison`_ of Camelot's output with outputs from other open-source 
 .. _Docparser: https://docparser.com
 .. _comparison: https://github.com/socialcopsdev/camelot/wiki/Comparison-with-other-PDF-Table-Extraction-libraries-and-tools
 
-Excalibur License
+Excalibur LICENSE
 -----------------
 
     .. include:: ../../LICENSE

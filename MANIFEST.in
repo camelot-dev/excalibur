@@ -6,4 +6,5 @@ include setup.py
 include setup.cfg
 graft excalibur/www/static
 graft excalibur/www/templates
+graft excalibur/config_templates
 global-exclude *.pyc
