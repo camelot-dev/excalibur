@@ -17,6 +17,16 @@ def abort_if_false(ctx, param, value):
         ctx.abort()
 
 
+def _run(task_name, task_id):
+    task_bag = {
+        'split': split,
+        'extract': extract
+    }
+    python_callable = task_bag[task_name]
+    task = PythonOperator(python_callable, op_args=[task_id])
+    task.execute()
+
+
 @click.group()
 @click.version_option(version=__version__)
 def cli(*args, **kwargs):
@@ -66,13 +76,4 @@ def worker(*args, **kwargs):
 @click.option('-t', '--task')
 @click.option('-id', '--uuid')
 def run(*args, **kwargs):
-    task_name = kwargs['task']
-    task_id = kwargs['uuid']
-
-    task_bag = {
-        'split': split,
-        'extract': extract
-    }
-    python_callable = task_bag[task_name]
-    task = PythonOperator(python_callable, op_args=[task_id])
-    task.execute()
+    _run(kwargs['task'], kwargs['uuid'])
