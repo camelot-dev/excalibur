@@ -20,5 +20,6 @@ publish:
 build-executable:
 	pip install pyinstaller
 	# https://pythonhosted.org/PyInstaller/when-things-go-wrong.html#helping-pyinstaller-find-modules
+	# pyi-makespec --paths=excalibur/executors/celery_executor.py arthur.py
 	# replace : with ; for Windows
 	pyinstaller --add-data "excalibur/www/templates:excalibur/www/templates" --add-data "excalibur/www/static:excalibur/www/static" --add-data "excalibur/config_templates:excalibur/config_templates" arthur.py
