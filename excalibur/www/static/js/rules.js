@@ -7,6 +7,23 @@ String.prototype.format = function () {
   return str;
 }
 
+const onRuleDownload = (elRef) => {
+  const ruleId = elRef.getAttribute('data-rule-id');
+  console.log({type: 'hidden', name: 'rule_id', val: ruleId});
+  // $.ajax({
+  //   url: '/download/rule',
+  //   type: 'POST',
+  //   cache: false,
+  //   contentType: false,
+  //   data: {type: 'hidden', name: 'rule_id', val: ruleId},
+  //   processData: false,
+  //   success: function (data) {
+  //     console.log(data)
+  //     // window.location.replace(redirect);
+  //   }
+  // });
+}
+
 $(document).ready(function () {
   $('#upload').on('click', function () {
     var data = new FormData();

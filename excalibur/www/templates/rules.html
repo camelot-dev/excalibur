@@ -18,8 +18,8 @@
       <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="input-group">
             <div class="custom-file uploadFile">
-              <input type="file" class="uploadFile__input" id="file" name="file" accept="application/pdf">
-              <label for="file" class="uploadFile__label">Upload JSON</label>
+              <input type="file" class="uploadFile__input" id="rules" name="rule_upload" accept="application/json">
+              <label for="rule_upload" class="uploadFile__label">Upload Rules via JSON</label>
             </div>
           </div>
       </div>
@@ -46,7 +46,7 @@
                           <th width="10%" scope="row">{{ loop.index }}</th>
                           <td width="40%">{{ rule.rule_name }}</td>
                           <td width="20%">{{ rule.created_at }}</td>
-                          <td width="15%"><a href="/jobs/{{ rule.rule_id }}" class="btn btn-sm btn-outline-primary">Download</button></td>
+                          <td width="15%"><button data-rule-id="{{ rule.rule_id }}" class="btn btn-sm btn-outline-primary"  onclick="onRuleDownload(this)">Download</button></td>
                         </tr>
                       {% endfor %}
                     {% else %}
