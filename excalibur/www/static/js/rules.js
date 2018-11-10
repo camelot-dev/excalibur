@@ -18,25 +18,22 @@ const onRuleDownload = (e) => {
 }
 
 $(document).ready(function () {
-  $('#upload').on('click', function () {
+  $('#rule_upload').on('change', function () {
     var data = new FormData();
     // TODO: add support to upload multiple files
-    $.each($('#file')[0].files, function (i, file) {
+    $.each($('#rule_upload')[0].files, function (i, file) {
       data.append('file-' + i, file);
     });
-    var page_number = $('#page-number').val() ? Number($('#page-number').val()) : 1;
-    data.append('page_number', page_number);
-    // $.ajax({
-    //   url: '/files',
-    //   type: 'POST',
-    //   cache: false,
-    //   contentType: false,
-    //   data: data,
-    //   processData: false,
-    //   success: function (data) {
-    //     var redirect = '{0}//{1}/workspaces/{2}'.format(window.location.protocol, window.location.host, data['file_id']);
-    //     window.location.replace(redirect);
-    //   }
-    // });
+    $.ajax({
+      url: '/rules',
+      type: 'POST',
+      cache: false,
+      contentType: false,
+      data: data,
+      processData: false,
+      success: function (data) {
+        window.location.reload();
+      }
+    });
   });
 });

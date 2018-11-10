@@ -112,7 +112,7 @@ def rules(rule_id):
                 rule_options = json.loads(rule.rule_options)
             return jsonify(message=message, rule_options=rule_options)
         session = Session()
-        rules = session.query(Rule).all()
+        rules = session.query(Rule).order_by(Rule.created_at.desc()).all()
         session.close()
         saved_rules = [
             {
@@ -123,6 +123,26 @@ def rules(rule_id):
             }
             for rule in rules]
         return render_template('rules.html', saved_rules=saved_rules)
+    message='Rule invalid'
+    file = request.files['file-0']
+    if file and allowed_filename(file.filename):
+        rule_id = generate_uuid()
+        created_at = dt.datetime.now()
+        rule_name = os.path.splitext(secure_filename(file.filename))[0]
+        rule_options = file.read()
+        message = 'Rule saved'
+
+        session = Session()
+        r = Rule(
+            rule_id=rule_id,
+            created_at=created_at,
+            rule_name=rule_name,
+            rule_options=rule_options
+        )
+        session.add(r)
+        session.commit()
+        session.close()
+    return jsonify(message=message)
 
 
 @views.route('/jobs', methods=['GET', 'POST'], defaults={'job_id': None})
