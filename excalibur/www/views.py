@@ -150,9 +150,7 @@ def jobs(job_id):
                 started_at=job.started_at, finished_at=job.finished_at,
                 datapath=job.datapath, data=data)
         return render_template('jobs.html')
-    print(dict(request.form))
     file_id = request.form['file_id']
-    print(file_id)
 
     session = Session()
     file = session.query(File).filter(File.file_id == file_id).first()
