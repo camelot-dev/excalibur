@@ -105,7 +105,7 @@ def rules(rule_id):
             rule_options = {}
             if rule is not None:
                 message = ''
-                rule_options = rule.rule_options
+                rule_options = json.loads(rule.rule_options)
             return jsonify(message=message, **rule_options)
         session = Session()
         rules = session.query(Rule).all()

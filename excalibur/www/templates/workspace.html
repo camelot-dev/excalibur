@@ -41,11 +41,11 @@
               <form class="form-group">
                 <div class="row py-3">
                   <div class="col-md-12">
-                    <select class="form-control" name="rules" id="rules">
+                    <select class="form-control" name="rules" id="rules" onchange="onSavedOptionClick()">
                       <option selected disabled>Select rule</option>
                       {{ rules }}
                       {% for rule in saved_rules %}
-                        <option data-rule-id="{{ rule.rule_id }}">{{ rule.rule_name }}</option>
+                        <option value="{{ rule.rule_id }}">{{ rule.rule_name }}</option>
                       {% endfor %}
                     </select>
                   </div>

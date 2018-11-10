@@ -158,21 +158,28 @@ const debugQtyAreas = function (event, id, areas) {
   return;
 };
 
+const onSavedOptionClick = function () {
+  const rule_id = document.getElementById('rules').value;
+  $.ajax({
+      url: '/rules/{0}'.format(rule_id),
+      type: 'GET',
+      success: function (data) {
+        console.log(data)
+      },
+      error: function (error) {
+      }
+    });
+};
+
 $(document).ready(function () {
   $('.image-area').selectAreas({
     onChanged: debugQtyAreas
   });
 
-  $("select[name='rules']").on('change', function () {
-    $.ajax({
-      url: String.format('/rules/', $(this).val()),
-      type: 'GET',
-      success: function (data) {
-      },
-      error: function (error) {
-      }
-    });
-  });
+  // $("select[name='rules']").on('change', function () {
+  //   console.log($(this).val());
+
+  // });
 
   $("select[name='flavors']").on('change', function () {
     if ($(this).val() == 'Lattice') {
