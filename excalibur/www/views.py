@@ -86,7 +86,11 @@ def workspaces(file_id):
         image_dimensions = json.loads(file.image_dimensions)
         detected_areas = json.loads(file.detected_areas)
         saved_rules = [
-            {'rule_id': rule.rule_id, 'rule_name': rule.rule_name} for rule in rules]
+            {
+                'rule_id': rule.rule_id,
+                'rule_name': rule.rule_name
+            }
+            for rule in rules]
     return render_template(
         'workspace.html', imagepath=imagepath, file_dimensions=file_dimensions,
         image_dimensions=image_dimensions, detected_areas=detected_areas,
@@ -106,12 +110,17 @@ def rules(rule_id):
             if rule is not None:
                 message = ''
                 rule_options = json.loads(rule.rule_options)
-            return jsonify(message=message, **rule_options)
+            return jsonify(message=message, rule_options=rule_options)
         session = Session()
         rules = session.query(Rule).all()
         session.close()
         saved_rules = [
-            {'rule_id': rule.rule_id, 'rule_name': rule.rule_name} for rule in rules]
+            {
+                'rule_id': rule.rule_id,
+                'created_at': rule.created_at,
+                'rule_name': rule.rule_name
+            }
+            for rule in rules]
         return render_template('rules.html', saved_rules=saved_rules)
 
 
@@ -152,6 +161,7 @@ def jobs(job_id):
         page_numbers = file.page_number
 
     rule_id = generate_uuid()
+    created_at = dt.datetime.now()
     rule_name = random_string(10)
     rule_options = request.form['rule_options']
 
@@ -161,6 +171,7 @@ def jobs(job_id):
     session = Session()
     r = Rule(
         rule_id=rule_id,
+        created_at=created_at,
         rule_name=rule_name,
         rule_options=rule_options
     )
