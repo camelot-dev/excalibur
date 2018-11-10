@@ -163,6 +163,17 @@ $(document).ready(function () {
     onChanged: debugQtyAreas
   });
 
+  $("select[name='rules']").on('change', function () {
+    $.ajax({
+      url: String.format('/rules/', $(this).val()),
+      type: 'GET',
+      success: function (data) {
+      },
+      error: function (error) {
+      }
+    });
+  });
+
   $("select[name='flavors']").on('change', function () {
     if ($(this).val() == 'Lattice') {
       $('.stream').hide();
