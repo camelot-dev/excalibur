@@ -150,7 +150,9 @@ def jobs(job_id):
                 started_at=job.started_at, finished_at=job.finished_at,
                 datapath=job.datapath, data=data)
         return render_template('jobs.html')
+    print(dict(request.form))
     file_id = request.form['file_id']
+    print(file_id)
 
     session = Session()
     file = session.query(File).filter(File.file_id == file_id).first()
@@ -194,19 +196,22 @@ def jobs(job_id):
     return jsonify(job_id=job_id)
 
 
-@views.route('/download', methods=['POST'])
-def download():
-    job_id = request.form['job_id']
-    f = request.form['format']
+@views.route('/download/<string:dtype>', methods=['POST'])
+def download(dtype):
+    if dtype == 'rule':
+        pass
+    elif dtype == 'job':
+        job_id = request.form['job_id']
+        f = request.form['format']
 
-    session = Session()
-    job = session.query(Job).filter(Job.job_id == job_id).first()
-    session.close()
+        session = Session()
+        job = session.query(Job).filter(Job.job_id == job_id).first()
+        session.close()
 
-    datapath = os.path.join(job.datapath, f.lower())
-    zipfile = glob.glob(os.path.join(datapath, '*.zip'))[0]
+        datapath = os.path.join(job.datapath, f.lower())
+        zipfile = glob.glob(os.path.join(datapath, '*.zip'))[0]
 
-    directory = os.path.join(os.getcwd(), datapath)
-    filename = os.path.basename(zipfile)
-    return send_from_directory(
-        directory=directory, filename=filename, as_attachment=True)
+        directory = os.path.join(os.getcwd(), datapath)
+        filename = os.path.basename(zipfile)
+        return send_from_directory(
+            directory=directory, filename=filename, as_attachment=True)

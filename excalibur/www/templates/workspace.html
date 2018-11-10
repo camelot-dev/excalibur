@@ -23,7 +23,7 @@
               <div class="input-group">
                 <input type="text" class="form-control form-control-lg" aria-describedby="page-numbers-help" placeholder="Example: 1,5,8 or 3,6-end" autocomplete="false">
                 <div class="input-group-append">
-                  <button type="button" onclick="extract()" class="btn btn-success btn-lg">Extract</button>
+                  <button type="button" onclick="startJob()" class="btn btn-success btn-lg">Extract</button>
                 </div>
               </div>
               <small id="page-numbers-help" class="form-text text-muted">Page numbers to extract tables from. By default, tables from only this page will be extracted.</small>
@@ -41,7 +41,7 @@
               <form class="form-group">
                 <div class="row py-3">
                   <div class="col-md-12">
-                    <select class="form-control" name="rules" id="rules" onchange="onSavedOptionClick()">
+                    <select class="form-control" name="rules" id="rules" onchange="onSavedRuleChange()">
                       <option selected disabled>Select rule</option>
                       {{ rules }}
                       {% for rule in saved_rules %}
@@ -62,10 +62,10 @@
                 <div class="row py-3">
                   <div class="col-md-12">
                     <label for="flavors">Extraction flavor</label>
-                    <select class="form-control" name="flavors" id="flavors">
+                    <select class="form-control" name="flavors" id="flavors" onchange="onFlavorChange()">
                       <option selected disabled>Select flavor</option>
-                      <option>Lattice</option>
-                      <option>Stream</option>
+                      <option value="Lattice">Lattice</option>
+                      <option value="Stream">Stream</option>
                     </select>
                   </div>
                     <div class="row mx-0 lattice mt-3" style="display: none">
