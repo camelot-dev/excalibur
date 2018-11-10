@@ -33,21 +33,41 @@
       </div>
       <div class="row">
         <section class="col-md-3">
-            <div class="row mx-0 mb-3 card">
+          <div class="row mx-0 mb-3 card">
             <div class="card-body">
               <div class="card-title">
-                  <h3>Rule</h3>
+                <h3>Saved Rules</h3>
               </div>
               <form class="form-group">
                 <div class="row py-3">
-                    <div class="col-md-12">
-                        <label for="flavors">Extraction flavor</label>
-                        <select class="form-control" name="flavors" id="flavors">
-                          <option selected disabled>Select flavor</option>
-                          <option>Lattice</option>
-                          <option>Stream</option>
-                        </select>
-                    </div>
+                  <div class="col-md-12">
+                    <select class="form-control" name="rules" id="rules">
+                      <option selected disabled>Select rule</option>
+                      {{ rules }}
+                      {% for rule in saved_rules %}
+                        <option data-rule-id="{{ rule.rule_id }}">{{ rule.rule_name }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="row mx-0 mb-3 card">
+            <div class="card-body">
+              <div class="card-title">
+                <h3>Rule</h3>
+              </div>
+              <form class="form-group">
+                <div class="row py-3">
+                  <div class="col-md-12">
+                    <label for="flavors">Extraction flavor</label>
+                    <select class="form-control" name="flavors" id="flavors">
+                      <option selected disabled>Select flavor</option>
+                      <option>Lattice</option>
+                      <option>Stream</option>
+                    </select>
+                  </div>
                     <div class="row mx-0 lattice mt-3" style="display: none">
                       <div class="col-md-12">
                         <div class="form-group">
@@ -159,7 +179,6 @@
             </div>
           </div>
         </section>
-
       </div>
     </div>
   {% else %}

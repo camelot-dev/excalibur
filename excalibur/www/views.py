@@ -76,6 +76,7 @@ def files():
 def workspaces(file_id):
     session = Session()
     file = session.query(File).filter(File.file_id == file_id).first()
+    rules = session.query(Rule).all()
     session.close()
     imagepath, file_dimensions, image_dimensions, detected_areas = [None] * 4
     if file.has_image:
@@ -84,9 +85,12 @@ def workspaces(file_id):
         file_dimensions = json.loads(file.file_dimensions)
         image_dimensions = json.loads(file.image_dimensions)
         detected_areas = json.loads(file.detected_areas)
+        saved_rules = [
+            {'rule_id': rule.rule_id, 'rule_name': rule.rule_name} for rule in rules]
     return render_template(
         'workspace.html', imagepath=imagepath, file_dimensions=file_dimensions,
-        image_dimensions=image_dimensions, detected_areas=detected_areas)
+        image_dimensions=image_dimensions, detected_areas=detected_areas,
+        saved_rules=saved_rules)
 
 
 @views.route('/rules', methods=['GET', 'POST'], defaults={'rule_id': None})
@@ -94,8 +98,17 @@ def workspaces(file_id):
 def rules(rule_id):
     if request.method == 'GET':
         if rule_id is not None:
-            return render_template('rule.html')
-        return render_template('rules.html')
+            session = Session()
+            rule = session.query(Rule).filter(Rule.rule_id == rule_id).first()
+            session.close()
+            return jsonify()
+        session = Session()
+        rules = session.query(Rule).all()
+        session.close()
+        saved_rules = [
+            {'rule_id': rule.rule_id, 'rule_name': rule.rule_name} for rule in rules]
+        return render_template('rules.html', saved_rules=saved_rules)
+    # upload rule
 
 
 @views.route('/jobs', methods=['GET', 'POST'], defaults={'job_id': None})

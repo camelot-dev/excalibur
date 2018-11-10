@@ -33,7 +33,7 @@ class Rule(Base):
     __tablename__ = "rules"
 
     rule_id = Column(String(ID_LEN), primary_key=True)
-    rule_name = Column(String(STR_LEN), primary_key=True)
+    rule_name = Column(String(STR_LEN))
     rule_options = Column(Text)
 
 
