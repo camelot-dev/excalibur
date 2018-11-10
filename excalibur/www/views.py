@@ -78,7 +78,7 @@ def workspaces(file_id):
     file = session.query(File).filter(File.file_id == file_id).first()
     rules = session.query(Rule).all()
     session.close()
-    imagepath, file_dimensions, image_dimensions, detected_areas = [None] * 4
+    imagepath, file_dimensions, image_dimensions, detected_areas, saved_rules = [None] * 5
     if file.has_image:
         imagepath = file.imagepath.replace(
             os.path.join(conf.PROJECT_ROOT, 'www'), '')
