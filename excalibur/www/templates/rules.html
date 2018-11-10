@@ -41,7 +41,7 @@
                   </thead>
                   <tbody>
                     {% if rules_response|length > 0 %}
-                      {% for rule in rules_response %}
+                      {% for rule in saved_rules %}
                         <tr>
                           <th width="10%" scope="row">{{ loop.index }}</th>
                           <td width="40%">{{ rule.rulename }}</td>
@@ -51,7 +51,7 @@
                       {% endfor %}
                     {% else %}
                       <tr>
-                        <td colspan="5" style="text-align: center">No Rules Saved yet.</td>
+                        <td colspan="5" style="text-align: center">No rules saved yet.</td>
                       </tr>
                     {% endif %}
                   </tbody>
