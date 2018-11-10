@@ -117,7 +117,6 @@ const getColumnSeparators = function (selectedSeparators) {
   return [colSeparators.join()];
 };
 
-
 const onSavedRuleChange = function () {
   const rule_id = document.getElementById('rules').value;
   $.ajax({
@@ -136,10 +135,10 @@ const onSavedRuleChange = function () {
             table_areas.forEach(function (t) {
               tableAreas.push(t.split(',').map(Number));
             })
-        
+
             resetTableAreas();
             drawTableAreas(tableAreas);
-        
+
             document.getElementById('process-background').value = ruleOptions['process_background'];
             document.getElementById('line-size-scaling').value = ruleOptions['line_size_scaling'];
             document.getElementById('split-text-l').value = ruleOptions['split_text'];
@@ -150,19 +149,19 @@ const onSavedRuleChange = function () {
             table_areas.forEach(function (t) {
               tableAreas.push(t.split(',').map(Number));
             })
-        
+
             resetTableAreas();
             drawTableAreas(tableAreas);
-        
+
             let columnSeparators = [];
             const columns = ruleOptions['columns'];
             columns.forEach(function (c) {
               columnSeparators.push(c.split(',').map(Number));
             })
-        
+
             resetColumnSeparators();
             drawColumnSeparators(columnSeparators);
-        
+
             document.getElementById('row-close-tol').value = ruleOptions['row_close_tol'];
             document.getElementById('col_close_tol').value = ruleOptions['col_close_tol'];
             document.getElementById('split-text-s').value = ruleOptions['split_text'];
