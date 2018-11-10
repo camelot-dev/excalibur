@@ -157,11 +157,11 @@ section h2 {
   }
   #mainNav .navbar-nav > li.nav-item > a.nav-link.active {
     color: #fff;
-    background: #2196F3;
+    background: #00A34A;
   }
   #mainNav .navbar-nav > li.nav-item > a.nav-link.active:active, #mainNav .navbar-nav > li.nav-item > a.nav-link.active:focus, #mainNav .navbar-nav > li.nav-item > a.nav-link.active:hover {
     color: #fff;
-    background: #2196F3;
+    background: #00A34A;
   }
   #mainNav.navbar-shrink {
     padding-top: 0.5rem;
@@ -291,11 +291,11 @@ header.masthead h2 {
 }
 
 a {
-  color: #2196F3;
+  color: #00A34A;
 }
 
 a:focus, a:hover, a:active {
-  color: #0c7cd5;
+  color: #007033;
 }
 
 .btn {
@@ -312,6 +312,14 @@ a:focus, a:hover, a:active {
 
 .text-primary {
   color: #2196F3 !important;
+}
+
+.text-accent {
+  color: #00A34A !important;
+}
+
+.text-helper {
+  color: #597ea2 !important;
 }
 
 .text-secondary {
