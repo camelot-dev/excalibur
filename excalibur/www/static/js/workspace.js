@@ -117,6 +117,7 @@ const getColumnSeparators = function (selectedSeparators) {
   return [colSeparators.join()];
 };
 
+
 const onSavedRuleChange = function () {
   const rule_id = document.getElementById('rules').value;
   $.ajax({
@@ -127,43 +128,45 @@ const onSavedRuleChange = function () {
           console.log(data['message']);
         } else {
           const ruleOptions = data['rule_options'];
+          onFlavorChange();
+          document.getElementById('flavors').value = ruleOptions['flavor'];
           if (ruleOptions['flavor'].toLowerCase() == 'lattice') {
             let tableAreas = [];
             const table_areas = ruleOptions['table_areas'];
             table_areas.forEach(function (t) {
               tableAreas.push(t.split(',').map(Number));
             })
-
+        
             resetTableAreas();
             drawTableAreas(tableAreas);
-
-            // const process_background = ruleOptions['process_background'];
-            // const line_size_scaling = ruleOptions['line_size_scaling'];
-            // const split_text = ruleOptions['split_text'];
-            // const flag_size = ruleOptions['flag_size'];
+        
+            document.getElementById('process-background').value = ruleOptions['process_background'];
+            document.getElementById('line-size-scaling').value = ruleOptions['line_size_scaling'];
+            document.getElementById('split-text-l').value = ruleOptions['split_text'];
+            document.getElementById('flag_size-l').value = ruleOptions['flag_size'];
           } else if (ruleOptions['flavor'].toLowerCase() == 'stream') {
             let tableAreas = [];
             const table_areas = ruleOptions['table_areas'];
             table_areas.forEach(function (t) {
               tableAreas.push(t.split(',').map(Number));
             })
-
+        
             resetTableAreas();
             drawTableAreas(tableAreas);
-
+        
             let columnSeparators = [];
             const columns = ruleOptions['columns'];
             columns.forEach(function (c) {
               columnSeparators.push(c.split(',').map(Number));
             })
-
+        
             resetColumnSeparators();
             drawColumnSeparators(columnSeparators);
-
-            // const row_close_tol = ruleOptions['row_close_tol'];
-            // const col_close_tol = ruleOptions['col_close_tol'];
-            // const split_text = ruleOptions['split_text'];
-            // const flag_size = ruleOptions['flag_size'];
+        
+            document.getElementById('row-close-tol').value = ruleOptions['row_close_tol'];
+            document.getElementById('col_close_tol').value = ruleOptions['col_close_tol'];
+            document.getElementById('split-text-s').value = ruleOptions['split_text'];
+            document.getElementById('flag_size-s').value = ruleOptions['flag_size'];
           } else {
             console.log('Unknown flavor {0}'.format(ruleOptions['flavor']));
           }
