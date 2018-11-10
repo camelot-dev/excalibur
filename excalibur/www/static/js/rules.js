@@ -7,21 +7,14 @@ String.prototype.format = function () {
   return str;
 }
 
-const onRuleDownload = (elRef) => {
-  const ruleId = elRef.getAttribute('data-rule-id');
-  console.log({type: 'hidden', name: 'rule_id', val: ruleId});
-  // $.ajax({
-  //   url: '/download/rule',
-  //   type: 'POST',
-  //   cache: false,
-  //   contentType: false,
-  //   data: {type: 'hidden', name: 'rule_id', val: ruleId},
-  //   processData: false,
-  //   success: function (data) {
-  //     console.log(data)
-  //     // window.location.replace(redirect);
-  //   }
-  // });
+const onRuleDownload = (e) => {
+  // https://stackoverflow.com/a/30800715/2780127
+  const ruleName = e.nextElementSibling.getAttribute('data-rule-name');
+  const ruleOptions = e.nextElementSibling.getAttribute('data-rule-options');
+  const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(ruleOptions);
+  e.nextElementSibling.setAttribute("href", dataStr);
+  e.nextElementSibling.setAttribute("download", "{0}.json".format(ruleName));
+  e.nextElementSibling.click();
 }
 
 $(document).ready(function () {

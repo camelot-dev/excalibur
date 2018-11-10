@@ -118,7 +118,8 @@ def rules(rule_id):
             {
                 'rule_id': rule.rule_id,
                 'created_at': rule.created_at,
-                'rule_name': rule.rule_name
+                'rule_name': rule.rule_name,
+                'rule_options': rule.rule_options
             }
             for rule in rules]
         return render_template('rules.html', saved_rules=saved_rules)
@@ -194,22 +195,19 @@ def jobs(job_id):
     return jsonify(job_id=job_id)
 
 
-@views.route('/download/<string:dtype>', methods=['POST'])
-def download(dtype):
-    if dtype == 'rule':
-        pass
-    elif dtype == 'job':
-        job_id = request.form['job_id']
-        f = request.form['format']
+@views.route('/download', methods=['POST'])
+def download():
+    job_id = request.form['job_id']
+    f = request.form['format']
 
-        session = Session()
-        job = session.query(Job).filter(Job.job_id == job_id).first()
-        session.close()
+    session = Session()
+    job = session.query(Job).filter(Job.job_id == job_id).first()
+    session.close()
 
-        datapath = os.path.join(job.datapath, f.lower())
-        zipfile = glob.glob(os.path.join(datapath, '*.zip'))[0]
+    datapath = os.path.join(job.datapath, f.lower())
+    zipfile = glob.glob(os.path.join(datapath, '*.zip'))[0]
 
-        directory = os.path.join(os.getcwd(), datapath)
-        filename = os.path.basename(zipfile)
-        return send_from_directory(
-            directory=directory, filename=filename, as_attachment=True)
+    directory = os.path.join(os.getcwd(), datapath)
+    filename = os.path.basename(zipfile)
+    return send_from_directory(
+        directory=directory, filename=filename, as_attachment=True)

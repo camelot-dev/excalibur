@@ -7,7 +7,7 @@
   <div class="row mb-4 border-bottom mb-5">
     <div class="col-md-12 text-center">
         <h1 class="display-4 align-items-center d-flex justify-content-center">
-            <span>Rules Manager</span>
+          <span>Rules Manager</span>
         </h1>
         <p class="lead">Manage Your rules</p>
     </div>
@@ -16,53 +16,51 @@
   <form class="mb-5">
     <div class="row align-items-center">
       <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="input-group">
-            <div class="custom-file uploadFile">
-              <input type="file" class="uploadFile__input" id="rules" name="rule_upload" accept="application/json">
-              <label for="rule_upload" class="uploadFile__label">Upload Rules via JSON</label>
-            </div>
+        <div class="input-group">
+          <div class="custom-file uploadFile">
+            <input type="file" class="uploadFile__input" id="rules" name="rule_upload" accept="application/json">
+            <label for="rule_upload" class="uploadFile__label">Upload Rules via JSON</label>
           </div>
+        </div>
       </div>
     </div>
   </form>
 
   <div class="card depth-1 mb-5">
     <div class="card-body p-0">
-        <div class="row">
-            <div class="col-md-12">
-                <table class="table text-left table-borderless table-hover mb-0">
-                  <thead class="thead-light">
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Rule Name</th>
-                      <th scope="col">Created at</th>
-                      <th scope="col">&nbsp</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {% if saved_rules|length > 0 %}
-                      {% for rule in saved_rules %}
-                        <tr>
-                          <th width="10%" scope="row">{{ loop.index }}</th>
-                          <td width="40%">{{ rule.rule_name }}</td>
-                          <td width="20%">{{ rule.created_at }}</td>
-                          <td width="15%"><button data-rule-id="{{ rule.rule_id }}" class="btn btn-sm btn-outline-primary"  onclick="onRuleDownload(this)">Download</button></td>
-                        </tr>
-                      {% endfor %}
-                    {% else %}
-                      <tr>
-                        <td colspan="5" style="text-align: center">No rules saved yet.</td>
-                      </tr>
-                    {% endif %}
-                  </tbody>
-                </table>
-            </div>
-          </div>
+      <div class="row">
+        <div class="col-md-12">
+          <table class="table text-left table-borderless table-hover mb-0">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Rule Name</th>
+                <th scope="col">Created at</th>
+                <th scope="col">&nbsp</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% if saved_rules|length > 0 %}
+                {% for rule in saved_rules %}
+                  <tr>
+                    <th width="10%" scope="row">{{ loop.index }}</th>
+                    <td width="40%">{{ rule.rule_name }}</td>
+                    <td width="20%">{{ rule.created_at }}</td>
+                    <td width="15%"><button class="btn btn-sm btn-outline-primary" onclick="onRuleDownload(this)">Download</button><a data-rule-name="{{ rule.rule_name }}" data-rule-options="{{ rule.rule_options }}" style="display:none"></a></td>
+                  </tr>
+                {% endfor %}
+              {% else %}
+                <tr>
+                  <td colspan="5" style="text-align: center">No rules saved yet.</td>
+                </tr>
+              {% endif %}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-
-
 {% endblock %}
 
 {% block javascript %}
