@@ -44,7 +44,7 @@
                       {% for rule in saved_rules %}
                         <tr>
                           <th width="10%" scope="row">{{ loop.index }}</th>
-                          <td width="40%">{{ rule.rulename }}</td>
+                          <td width="40%">{{ rule.rule_name }}</td>
                           <td width="20%">{{ rule.created_at }}</td>
                           <td width="15%"><a href="/jobs/{{ rule.rule_id }}" class="btn btn-sm btn-outline-primary">Download</button></td>
                         </tr>
