@@ -101,14 +101,18 @@ def rules(rule_id):
             session = Session()
             rule = session.query(Rule).filter(Rule.rule_id == rule_id).first()
             session.close()
-            return jsonify()
+            message = 'Rule not found'
+            rule_options = {}
+            if rule is not None:
+                message = ''
+                rule_options = rule.rule_options
+            return jsonify(message=message, **rule_options)
         session = Session()
         rules = session.query(Rule).all()
         session.close()
         saved_rules = [
             {'rule_id': rule.rule_id, 'rule_name': rule.rule_name} for rule in rules]
         return render_template('rules.html', saved_rules=saved_rules)
-    # upload rule
 
 
 @views.route('/jobs', methods=['GET', 'POST'], defaults={'job_id': None})
