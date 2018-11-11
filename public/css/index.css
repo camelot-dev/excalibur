@@ -103,6 +103,20 @@ section h2 {
   line-height: 3.1rem;
 }
 
+.title-separator {
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+  width: 100%;
+  height: 10px;
+}
+
+@media (max-width: 767px) {
+  .title-separator {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+}
+
 #mainNav {
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -351,4 +365,15 @@ a:focus, a:hover, a:active {
 .btn-secondary:hover, .btn-secondary:focus, .btn-secondary:active {
   background-color: #1a252f;
   border-color: #1a252f;
+}
+
+.btn-accent {
+  background-color: #00A34A;
+  border-color: #00A34A;
+  color: #fff;
+}
+
+.btn-accent:hover, .btn-accent:focus, .btn-accent:active {
+  background-color: #007033;
+  border-color: #007033;
 }
