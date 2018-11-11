@@ -96,3 +96,16 @@ section {
     line-height: 3.1rem;
   }
 }
+
+
+.title-separator {
+  transform: rotate(90deg);
+  width: 100%;
+  height: 10px;
+
+  @media (max-width: 767px) {
+  
+    transform: rotate(0deg)
+    
+  }
+}
