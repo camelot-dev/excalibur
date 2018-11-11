@@ -14,7 +14,8 @@ h6 {
 
 // Custom Horizontal Rule with Star Icon
 hr.star-light,
-hr.star-dark {
+hr.star-dark,
+hr.star-grey {
   max-width: 15rem;
   padding: 0;
   text-align: center;
@@ -27,7 +28,8 @@ hr.star-dark {
 }
 
 hr.star-light:after,
-hr.star-dark:after {
+hr.star-dark:after,
+hr.star-grey:after {
   position: relative;
   top: -.8em;
   display: inline-block;
@@ -52,6 +54,14 @@ hr.star-dark {
 hr.star-dark:after {
   color: $secondary;
   background-color: white;
+}
+
+hr.star-grey {
+  border-color: $secondary;
+}
+hr.star-grey:after {
+  color: $secondary;
+  background-color: $grey;
 }
 
 // Section Padding Settings
@@ -104,8 +114,8 @@ section {
   height: 10px;
 
   @media (max-width: 767px) {
-  
+
     transform: rotate(0deg)
-    
+
   }
 }
