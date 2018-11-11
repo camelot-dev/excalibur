@@ -298,6 +298,13 @@ a:focus, a:hover, a:active {
   color: #007033;
 }
 
+.form-control {
+  border-radius: 2px;
+  border: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
 .btn {
   border-width: 2px;
 }

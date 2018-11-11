@@ -51,15 +51,35 @@
     </nav>
 
     <!-- Header -->
-    <header class="masthead bg-primary text-white text-center">
+    <header class="masthead bg-primary text-white">
       <div class="container">
-        <img src="https://excalibur-py.readthedocs.io/en/master/_static/excalibur-logo-circle.png" class="rounded-circle img-fluid mb-5 d-block mx-auto"
-            width="150" height="auto" alt="Excalibur">
-        <hr class="star-light">
-        <h1 class="text-uppercase mb-1 lead">Excalibur</h1>
-        <h4>PDF Table Extraction for Humans</h4>
-        <!-- Place this tag where you want the button to render. -->
-        <a class="github-button" href="https://github.com/camelot-dev/excalibur" data-size="large" data-show-count="true" aria-label="Star camelot-dev/excalibur on GitHub">Star</a>
+        <div class="row">
+          <div class="col-md-6 col-sm-12 col-xs-12 text-center">
+            <img src="https://excalibur-py.readthedocs.io/en/master/_static/excalibur-logo-circle.png" class="rounded-circle img-fluid mb-5 d-block mx-auto"
+              width="150" height="auto" alt="Excalibur">
+            <hr class="star-light">
+            <h1 class="text-uppercase mb-1 lead">Excalibur</h1>
+            <h4 class="mb-4 mt-3">PDF Table Extraction for Humans</h4>
+            <a class="github-button" href="https://github.com/camelot-dev/excalibur" data-size="large" data-show-count="true" aria-label="Star camelot-dev/excalibur on GitHub">Star</a>
+          </div>
+          <div class="col-md-4 offset-md-2 offset-sm-0 col-sm-12 col-xs-12">
+            <h4 class="lead">Tell us what you think about Excalibur. We definitely listen!</h4>
+            <hr>
+            <div class="d-flex align-items-center justify-content-center mt-2">
+              <form action="https://formspree.io/vmehta94@gmail.com" method="POST">
+                <label class="text-white" for="emailID">Email ID</label>
+                <input class="form-control form-control-lg mb-3" type="email"  name="emailID" id="email" placeholder="firstname@somesite.com">
+                
+                <label class="text-white" for="comment">Note to Author</label>
+                <textarea class="form-control form-control-lg mb-3" name="comment" id="comment" cols="30" rows="5" placeholder="Anything you'd like to say?"></textarea>
+  
+                <div class="text-right">
+                  <button type="submit" value="Send" class="btn btn-lg btn-secondary">Submit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
     </header>
 
