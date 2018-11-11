@@ -23,7 +23,7 @@
               <div class="input-group">
                 <input type="text" class="form-control form-control-lg" aria-describedby="page-numbers-help" placeholder="Example: 1,5,8 or 3,6-end" autocomplete="false">
                 <div class="input-group-append">
-                  <button type="button" onclick="extract()" class="btn btn-success btn-lg">Extract</button>
+                  <button type="button" onclick="startJob()" class="btn btn-success btn-lg">Extract</button>
                 </div>
               </div>
               <small id="page-numbers-help" class="form-text text-muted">Page numbers to extract tables from. By default, tables from only this page will be extracted.</small>
@@ -33,21 +33,41 @@
       </div>
       <div class="row">
         <section class="col-md-3">
-            <div class="row mx-0 mb-3 card">
+          <div class="row mx-0 mb-3 card">
             <div class="card-body">
               <div class="card-title">
-                  <h3>Rule</h3>
+                <h3>Saved Rules</h3>
               </div>
               <form class="form-group">
                 <div class="row py-3">
-                    <div class="col-md-12">
-                        <label for="flavors">Extraction flavor</label>
-                        <select class="form-control" name="flavors" id="flavors">
-                          <option selected disabled>Select flavor</option>
-                          <option>Lattice</option>
-                          <option>Stream</option>
-                        </select>
-                    </div>
+                  <div class="col-md-12">
+                    <select class="form-control" name="rules" id="rules" onchange="onSavedRuleChange()">
+                      <option selected disabled>Select rule</option>
+                      {{ rules }}
+                      {% for rule in saved_rules %}
+                        <option value="{{ rule.rule_id }}">{{ rule.rule_name }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="row mx-0 mb-3 card">
+            <div class="card-body">
+              <div class="card-title">
+                <h3>Rule</h3>
+              </div>
+              <form class="form-group">
+                <div class="row py-3">
+                  <div class="col-md-12">
+                    <label for="flavors">Extraction flavor</label>
+                    <select class="form-control" name="flavors" id="flavors" onchange="onFlavorChange()">
+                      <option selected disabled>Select flavor</option>
+                      <option value="Lattice">Lattice</option>
+                      <option value="Stream">Stream</option>
+                    </select>
+                  </div>
                     <div class="row mx-0 lattice mt-3" style="display: none">
                       <div class="col-md-12">
                         <div class="form-group">
@@ -159,7 +179,6 @@
             </div>
           </div>
         </section>
-
       </div>
     </div>
   {% else %}

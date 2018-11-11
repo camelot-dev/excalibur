@@ -130,7 +130,7 @@ conf = ExcaliburConfigParser(default_config=parameterized_config(DEFAULT_CONFIG)
 conf.read(EXCALIBUR_CONFIG)
 
 # for Flask
-ALLOWED_EXTENSIONS = ['pdf']
+ALLOWED_EXTENSIONS = ['pdf', 'json']
 SECRET_KEY = conf.get('webserver', 'SECRET_KEY')
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 PDFS_FOLDER = os.path.join(PROJECT_ROOT, 'www/static/uploads')
