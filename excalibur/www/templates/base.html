@@ -28,17 +28,26 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
+      <!-- http://jinja.pocoo.org/docs/2.10/tricks/#highlighting-active-menu-items -->
+      {% set navigation_bar = [
+          ('/files', 'files', 'Files'),
+          ('/rules', 'rules', 'Rules'),
+          ('#', 'jobs', 'Jobs')
+      ] -%}
+      {% set active_page = active_page|default('files') -%}
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav ml-auto ">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Files</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/rules">Rules</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Jobs</a>
-          </li>
+        <ul class="navbar-nav ml-auto">
+          {% for href, id, caption in navigation_bar %}
+            {% if id == active_page %}
+              <li class="nav-item active">
+                <a class="nav-link" href="{{ href|e }}">{{ caption|e }}</a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{{ href|e }}">{{ caption|e }}</a>
+              </li>
+            {% endif %}
+          {% endfor %}
         </ul>
       </div>
     </nav>
