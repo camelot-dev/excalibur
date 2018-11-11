@@ -8,6 +8,12 @@ a {
   }
 }
 
+.form-control {
+  border-radius: 2px;
+  border: none;
+  box-shadow: none;
+}
+
 .btn {
   border-width: 2px;
 }
@@ -55,5 +61,17 @@ a {
   &:active {
     background-color: darken($secondary, 10%);
     border-color: darken($secondary, 10%);
+  }
+}
+
+.btn-accent {
+  background-color: $accent;
+  border-color: $accent;
+  color: #fff;
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: darken($accent, 10%);
+    border-color: darken($accent, 10%);
   }
 }
