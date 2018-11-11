@@ -26,6 +26,10 @@ a {
   background-color: $secondary !important;
 }
 
+.bg-grey {
+  background-color: $grey !important;
+}
+
 .text-primary {
   color: $primary !important;
 }
@@ -73,5 +77,6 @@ a {
   &:active {
     background-color: darken($accent, 10%);
     border-color: darken($accent, 10%);
+    color: #fff;
   }
 }

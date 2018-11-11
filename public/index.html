@@ -8,7 +8,7 @@
     <meta name="description" content="Excalibur, PDF, Parsing, Table, Extraction, OCR">
     <meta name="author" content="Vinayak, Mehta, Nikhil, Sikka">
 
-    <title>Excalibur - PDF Table Extraction for Humans</title>
+    <title>Excalibur | PDF Table Extraction for Humans</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous" />
@@ -40,10 +40,13 @@
               <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a>
             </li>
             <li class="nav-item mx-0 mx-lg-1">
-              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#features">How-to</a>
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#usage">Usage</a>
             </li>
             <li class="nav-item mx-0 mx-lg-1">
-              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#developers">Developers</a>
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#download">Download</a>
+            </li>
+            <li class="nav-item mx-0 mx-lg-1">
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#team">Team</a>
             </li>
           </ul>
         </div>
@@ -64,17 +67,17 @@
           </div>
           <div class="col-md-4 offset-md-2 offset-sm-0 col-sm-12 col-xs-12 mt-4">
             <div>
-              <h4 class="lead">Tell us what you think about Excalibur. We definitely listen!</h4>
+              <h4 class="lead">Do you want us to build a new feature? Just holler!</h4>
               <hr>
             </div>
             <div class="d-flex align-items-center justify-content-center mt-2">
               <form action="https://formspree.io/vmehta94@gmail.com" method="POST">
-                <label class="text-white" for="emailID">Email ID</label>
-                <input class="form-control form-control-lg mb-3" type="email"  name="emailID" id="email" placeholder="firstname@somesite.com">
-                
-                <label class="text-white" for="comment">Note to Author</label>
-                <textarea class="form-control form-control-lg mb-3" name="comment" id="comment" cols="30" rows="5" placeholder="Anything you'd like to say?"></textarea>
-  
+                <label class="text-white" for="emailID">Email</label>
+                <input class="form-control form-control-lg mb-3" type="email" name="emailID" id="email" placeholder="someone@gmail.com">
+
+                <label class="text-white" for="comment">Message</label>
+                <textarea class="form-control form-control-lg mb-3" name="comment" id="comment" cols="30" rows="5" placeholder="Tell us about your use case or just say hello!"></textarea>
+
                 <div class="text-right">
                   <button type="submit" value="Send" class="btn btn-lg btn-block btn-accent">Submit</button>
                 </div>
@@ -97,53 +100,46 @@
             <div class="media mt-4">
               <h3><i class="fa fa-table text-accent mr-3"></i></h3>
               <div class="media-body">
-                <h5 class="mb-1 text-accent">Extract Tabular data from PDFs.</h5>
-                <p class="lead text-helper">There are both open and closed-source tools that are widely used for this task. They either give a nice output or fail miserably. This is not helpful since everything in the real world, including PDF table extraction, is fuzzy. This leads to the creation of ad-hoc table extraction scripts for each type of PDF table.</p>
+                <h5 class="mb-1 text-accent">Extracting tables from PDFs is hard</h5>
+                <p class="lead text-helper">The Portable Document Format (PDF) was not designed for tabular data. Sadly, a lot of open data is shared as PDFs and getting tables out for analysis and record-keeping is a pain. Excalibur makes PDF table extraction very easy. You can download the extracted tables as CSVs or an Excel spreadsheet. All data remains on your machine.</p>
               </div>
             </div>
           </div>
           <div class="col-lg-6">
             <div class="media mt-4">
-              <h3><i class="fa fa-magic text-accent mr-3"></i></h3>
+              <h3><i class="fa fa-wrench text-accent mr-3"></i></h3>
               <div class="media-body">
-                <h5 class="mb-1 text-accent">Amped up by Camelot</h5>
-                <p class="lead text-helper">Excalibur uses <a href="https://camelot-py.readthedocs.io">Camelot</a> under the hood, which offers users complete control over table extraction. If you don't get the desired output with default settings, you can tweak them and get the job done!<br><br>You can check out fantastic documentation at <a href="https://excalibur-py.readthedocs.io/">https://excalibur-py.readthedocs.io/</a>.</p>
+                <h5 class="mb-1 text-accent">Why another tool?</h5>
+                <p class="lead text-helper">There are both open and closed-source tools that are widely used for PDF table extraction. They either give a nice output or fail miserably. Excalibur is powered by <a href="https://camelot-py.readthedocs.io">Camelot</a> (written by one of the authors) which gives users complete control over table extraction. If you don't get the desired output with default settings, you can tweak them and get the job done!</p>
               </div>
             </div>
           </div>
           <div class="col-lg-6">
             <div class="media mt-4">
-              <h3><i class="fa fa-info-circle text-accent mr-3"></i></h3>
+              <h3><i class="fa fa-cubes text-accent mr-3"></i></h3>
               <div class="media-body">
-                <h5 class="mb-1 text-accent">Use Case Title</h5>
-                <p class="lead text-helper">Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque magnam eos debitis error ea mollitia omnis quos labore illum. Ipsam recusandae enim voluptates in quam vel perspiciatis mollitia quidem harum!</p>
+                <h5 class="mb-1 text-accent">Automate your workflow</h5>
+                <p class="lead text-helper">Excalibur can detected tables in your PDFs automatically. For cases where it doesn't, you can tweak table extraction settings, save them as presets and then apply them on different PDFs with similar table structures. After v0.5.0, Excalibur will have a web API which can be used to start table extraction jobs and download extracted tables when jobs finish.</p>
               </div>
             </div>
           </div>
           <div class="col-lg-6">
             <div class="media mt-4">
-              <h3><i class="fa fa-info-circle text-accent mr-3"></i></h3>
+              <h3><i class="fa fa-rocket text-accent mr-3"></i></h3>
               <div class="media-body">
-                <h5 class="mb-1 text-accent">Use Case Title</h5>
-                <p class="lead text-helper">Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque magnam eos debitis error ea mollitia omnis quos labore illum. Ipsam recusandae enim voluptates in quam vel perspiciatis mollitia quidem harum!</p>
+                <h5 class="mb-1 text-accent">Built for scale</h5>
+                <p class="lead text-helper">Excalibur can be configured with MySQL and <a href="http://www.celeryproject.org/" target="_blank">Celery</a> to execute table extraction jobs in a parallel and distributed manner. By default, jobs are executed sequentially. You can check out the documentation at <a href="https://excalibur-py.readthedocs.io" target="_blank">https://excalibur-py.readthedocs.io</a> for more details.</p>
               </div>
             </div>
           </div>
-        </div>
-        <div class="text-center mt-4">
-          <a class="btn btn-xl btn-outline-dark" href="https://github.com/camelot-dev/excalibur/releases" target="_blank">
-            <i class="fas fa-download mr-2"></i>
-            Download Now!
-          </a>
         </div>
       </div>
     </section>
 
-
-    <!-- features Grid Section -->
-    <section class="bg-primary features" id="features">
+    <!-- Features Section -->
+    <section class="bg-primary features" id="usage">
       <div class="container">
-        <h2 class="text-center text-uppercase text-white mb-0">How-to</h2>
+        <h2 class="text-center text-uppercase text-white mb-0">Usage</h2>
         <hr class="star-light mb-5">
         <div class="row align-items-center mb-5 text-white">
           <div class="col-md-6 order-lg-first">
@@ -192,11 +188,36 @@
       </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="developers">
-      <div class="container">
-        <h2 class="text-center text-uppercase text-secondary mb-0">Developers</h2>
+    <section id="download">
+      <div class="container-fluid">
+        <h2 class="text-center text-uppercase text-secondary">Download</h2>
         <hr class="star-dark mb-5">
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center mt-4">
+            <h5 class="mb-1 text-accent">Available for Windows and Linux</h5>
+            <p class="lead text-helper">Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque magnam eos debitis error ea mollitia omnis quos labore illum. Ipsam recusandae enim voluptates in quam vel perspiciatis mollitia quidem harum!</p>
+            <div class="text-center">
+              <a href="https://pypi.org/project/excalibur-py/" target="_blank">
+                <img src="pip-excalibur.png" class="rounded mb-2" width="289.19">
+              </a>
+            </div>
+            <p class="lead text-helper">or</p>
+            <a class="btn btn-xl btn-accent" href="https://github.com/camelot-dev/excalibur/releases" target="_blank">
+              <i class="fas fa-download mr-2"></i>
+              Download Executable!
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="bg-grey" id="team">
+      <div class="container">
+        <h2 class="text-center text-uppercase text-secondary mb-0">Team</h2>
+        <hr class="star-grey mb-5">
         <div class="row">
 
           <div class="col-lg-6 col-sm-6 col-xs-12 text-center mb-4">
@@ -205,18 +226,18 @@
             <h3 class="mb-1 mt-4">Vinayak Mehta</h3>
             <ul class="list-inline social-icons">
               <li class="list-inline-item">
-                <a href="https://vinayakmehta.com/about/" target="_blank">
+                <a href="https://www.vinayakmehta.com/about/" target="_blank">
                   <i class="fas fa-globe-asia fa-lg"></i>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a href="https://www.linkedin.com/in/mehtavinayak/" target="_blank">
-                  <i class="fab fa-fw fa-linkedin fa-lg"></i>
                 </a>
               </li>
               <li class="list-inline-item">
                 <a href="https://github.com/vinayak-mehta" target="_blank">
                   <i class="fab fa-fw fa-github fa-lg"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://www.linkedin.com/in/mehtavinayak/" target="_blank">
+                  <i class="fab fa-fw fa-linkedin fa-lg"></i>
                 </a>
               </li>
             </ul>
@@ -228,12 +249,14 @@
             <h3 class="mb-1 mt-4">Nikhil Sikka</h3>
             <ul class="list-inline social-icons">
               <li class="list-inline-item">
-                  <a href="https://www.linkedin.com/in/nikhilsikka/" target="_blank">
-                    <i class="fab fa-fw fa-linkedin fa-lg"></i>
-                  </a>
+                <a href="https://github.com/n-sikka" target="_blank">
+                  <i class="fab fa-fw fa-github fa-lg"></i>
+                </a>
               </li>
               <li class="list-inline-item">
-                <i class="fab fa-fw fa-github fa-lg"></i>
+                <a href="https://www.linkedin.com/in/nikhilsikka/" target="_blank">
+                  <i class="fab fa-fw fa-linkedin fa-lg"></i>
+                </a>
               </li>
             </ul>
           </div>
@@ -242,26 +265,10 @@
       </div>
     </section>
 
-
-    <section class="bg-primary">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 text-center mt-4">
-            <h6 class="text-white mb-5"t>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis, omnis. Odit similique delectus iusto accusantium possimus? Et consequatur facere est temporibus illum sint reiciendis. Voluptate?</h6>
-            <a class="btn btn-xl btn-outline-light" href="https://github.com/camelot-dev/excalibur/releases" target="_blank">
-              <i class="fas fa-download mr-2"></i>
-              Download Now!
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-
     <!-- Footer -->
     <footer class="footer text-center">
       <div class="container">
-        <div class="row"> 
+        <div class="row">
           <div class="col-md-12">
             <ul class="list-inline mb-0">
               <li class="list-inline-item">
@@ -270,7 +277,7 @@
                 </a>
               </li>
             </ul>
-            <a class="mt-2 d-inline-block text-white" href="https://github.com/camelot-dev/excalibur" target="_blank">View Github</a>
+            <a class="mt-2 d-inline-block text-white" href="https://github.com/camelot-dev/excalibur" target="_blank">View on Github</a>
           </div>
         </div>
       </div>
