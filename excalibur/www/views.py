@@ -117,7 +117,7 @@ def rules(rule_id):
         saved_rules = [
             {
                 'rule_id': rule.rule_id,
-                'created_at': rule.created_at,
+                'created_at': rule.created_at.strftime('%Y-%m-%dT%H:%M:%S'),
                 'rule_name': rule.rule_name,
                 'rule_options': rule.rule_options
             }
@@ -172,35 +172,41 @@ def jobs(job_id):
                 datapath=job.datapath, data=data)
         return render_template('jobs.html')
     file_id = request.form['file_id']
+    rule_id = request.form['rule_id']
 
     session = Session()
     file = session.query(File).filter(File.file_id == file_id).first()
     session.close()
 
-    page_numbers = request.form['page_numbers']
-    if page_numbers == '1':
-        page_numbers = file.page_number
+    if not rule_id:
+        rule_id = generate_uuid()
+        created_at = dt.datetime.now()
+        rule_name = '_'.join([os.path.splitext(file.filename)[0], random_string(6)])
+        rule_options = request.form['rule_options']
 
-    rule_id = generate_uuid()
-    created_at = dt.datetime.now()
-    rule_name = random_string(10)
-    rule_options = request.form['rule_options']
+        session = Session()
+        r = Rule(
+            rule_id=rule_id,
+            created_at=created_at,
+            rule_name=rule_name,
+            rule_options=rule_options
+        )
+        session.add(r)
+        session.commit()
+        session.close()
 
     job_id = generate_uuid()
     started_at = dt.datetime.now()
 
+    page_numbers = request.form['page_numbers']
+    if page_numbers == '1':
+        page_numbers = file.page_number
+
     session = Session()
-    r = Rule(
-        rule_id=rule_id,
-        created_at=created_at,
-        rule_name=rule_name,
-        rule_options=rule_options
-    )
-    session.add(r)
     j = Job(
         job_id=job_id,
-        page_numbers=page_numbers,
         started_at=started_at,
+        page_numbers=page_numbers,
         file_id=file_id,
         rule_id=rule_id
     )

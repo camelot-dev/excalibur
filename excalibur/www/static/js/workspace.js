@@ -13,7 +13,7 @@ const compare = function (a, b) {
   return a - b;
 }
 
-const scaleTableAreas = function (detectedAreas) {
+const getTableAreasForRender = function (detectedAreas) {
   const imageWidth = $('#image').width();
   const imageHeight = $('#image').height();
   const scalingFactorX = imageWidth / fileDim[0];
@@ -37,12 +37,12 @@ const scaleTableAreas = function (detectedAreas) {
   return tableAreas;
 };
 
-const drawTableAreas = function (tableAreas) {
-  tableAreas = scaleTableAreas(tableAreas);
+const renderTableAreas = function (tableAreas) {
+  tableAreas = getTableAreasForRender(tableAreas);
   $('.image-area').selectAreas('add', tableAreas);
 };
 
-const getTableAreas = function (selectedAreas) {
+const getTableAreasForJob = function (selectedAreas) {
   const imageWidth = $('#image').width();
   const imageHeight = $('#image').height();
   const scalingFactorX = fileDim[0] / imageWidth;
@@ -81,7 +81,7 @@ const getNewColPosOffset = function () {
 
 const addColumnSeparator = function (colPosOffset) {
   const position = $('#image-div').position();
-  const column = $('<div id="dc" class="draggable-column"><div class="background"></div><div id="line" class="line"></div></div>');
+  const column = $('<div id="dc" class="draggable-column" ondblclick="onColumnSeparatorDoubleClick(this)"><div class="background"></div><div id="line" class="line"></div></div>');
   $(column).css({
     'top': position.top,
     'left': position.left + colPosOffset,
@@ -94,7 +94,7 @@ const addColumnSeparator = function (colPosOffset) {
   });
 };
 
-const drawColumnSeparators = function(columnSeparators) {
+const renderColumnSeparators = function(columnSeparators) {
   const imageWidth = $('#image').width();
   const scalingFactorX = imageWidth / fileDim[0];
 
@@ -117,6 +117,17 @@ const getColumnSeparators = function (selectedSeparators) {
   return [colSeparators.join()];
 };
 
+const onFlavorChange = function () {
+  const flavor = document.getElementById('flavors').value;
+  if (flavor == 'Lattice') {
+    $('.stream').hide();
+    $('.lattice').show();
+  } else {
+    $('.stream').show();
+    $('.lattice').hide();
+  }
+};
+
 const onSavedRuleChange = function () {
   const rule_id = document.getElementById('rules').value;
   $.ajax({
@@ -137,7 +148,7 @@ const onSavedRuleChange = function () {
             })
 
             resetTableAreas();
-            drawTableAreas(tableAreas);
+            renderTableAreas(tableAreas);
 
             document.getElementById('process-background').value = ruleOptions['process_background'];
             document.getElementById('line-size-scaling').value = ruleOptions['line_size_scaling'];
@@ -151,7 +162,7 @@ const onSavedRuleChange = function () {
             })
 
             resetTableAreas();
-            drawTableAreas(tableAreas);
+            renderTableAreas(tableAreas);
 
             let columnSeparators = [];
             const columns = ruleOptions['columns'];
@@ -160,7 +171,7 @@ const onSavedRuleChange = function () {
             })
 
             resetColumnSeparators();
-            drawColumnSeparators(columnSeparators);
+            renderColumnSeparators(columnSeparators);
 
             document.getElementById('row-close-tol').value = ruleOptions['row_close_tol'];
             document.getElementById('col_close_tol').value = ruleOptions['col_close_tol'];
@@ -176,26 +187,43 @@ const onSavedRuleChange = function () {
     });
 };
 
-const onFlavorChange = function () {
-  const flavor = document.getElementById('flavors').value;
-  if (flavor == 'Lattice') {
-    $('.stream').hide();
-    $('.lattice').show();
-  } else {
-    $('.stream').show();
-    $('.lattice').hide();
-  }
+const resetTableAreas = () => {
+  $('.image-area').selectAreas('reset');
 };
+
+const resetColumnSeparators = function () {
+  const columnSeparatorsCollection = document.getElementsByClassName('draggable-column');
+  const columnSeparators = Array.from(columnSeparatorsCollection);
+  columnSeparators.forEach(function (e) {
+    e.parentNode.removeChild(e);
+  });
+};
+
+const onDetectAreasClick = (e) => {
+  const flavor = e.getAttribute('data-flavor');
+  renderTableAreas(detectedAreas[flavor]);
+}
+
+const onAddSeparatorClick = (e) => {
+  columnCountBuffer++;
+  const colPosOffset = getNewColPosOffset();
+  addColumnSeparator(colPosOffset);
+}
+
+const onColumnSeparatorDoubleClick = (e) => {
+  e.parentNode.removeChild(e);
+}
 
 const getRuleOptions = function () {
   let ruleOptions = {};
   const flavor = $('#flavors').val();
-  ruleOptions['flavor'] = flavor;
   const selectedAreas = $('#image').selectAreas('areas');
   const hasColumnSeparator = $('.draggable-column').length > 0;
 
+  ruleOptions['flavor'] = flavor;
+
   if (selectedAreas.length > 0) {
-    ruleOptions['table_areas'] = getTableAreas(selectedAreas);
+    ruleOptions['table_areas'] = getTableAreasForJob(selectedAreas);
   } else {
     ruleOptions['table_areas'] = null;
   }
@@ -233,12 +261,17 @@ const getRuleOptions = function () {
 };
 
 const startJob = function () {
+  let ruleOptions = {};
   const loc = window.location.pathname.split('/');
-  const ruleOptions = getRuleOptions();
+  const rule_id = document.getElementById('rules').value;
+  if (!rule_id) {
+    ruleOptions = getRuleOptions();
+  }
   $.ajax({
     url: '/jobs',
     data: {
       file_id: loc[loc.length - 1],
+      rule_id: rule_id,
       page_numbers: $('#page-numbers').val() ? $('#page-numbers').val() : '1',
       rule_options: JSON.stringify(ruleOptions)
     },
@@ -257,39 +290,8 @@ const debugQtyAreas = function (event, id, areas) {
   return;
 };
 
-const resetTableAreas = function () {
-  $('.image-area').selectAreas('reset');
-};
-
-const resetColumnSeparators = function () {
-  const columnSeparatorsCollection = document.getElementsByClassName('draggable-column');
-  const columnSeparators = Array.from(columnSeparatorsCollection);
-  columnSeparators.forEach(function (e) {
-    e.parentNode.removeChild(e);
-  });
-};
-
 $(document).ready(function () {
   $('.image-area').selectAreas({
     onChanged: debugQtyAreas
-  });
-
-  $('.detect-areas').click(function () {
-    const flavor = $(this).attr('data-flavor');
-    drawTableAreas(detectedAreas[flavor]);
-  });
-
-  $('.reset-areas').click(function () {
-    resetTableAreas();
-  });
-
-  $('body').on('click', '.add-separator', function () {
-    columnCountBuffer++;
-    const colPosOffset = getNewColPosOffset();
-    addColumnSeparator(colPosOffset);
-  });
-
-  $('body').on('dblclick', '.draggable-column', function () {
-    $(this).remove();
   });
 });

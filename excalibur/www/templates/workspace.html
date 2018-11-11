@@ -75,10 +75,10 @@
                           <small class="form-text text-muted">Detect table areas.</small>
                           <div class="row mt-1">
                             <div class="col-md-6">
-                              <button type="button" class="btn btn-block btn-primary detect-areas" data-flavor="lattice">Detect</button>
+                              <button type="button" class="btn btn-block btn-primary detect-areas" data-flavor="lattice" onclick="onDetectAreasClick(this)">Detect</button>
                             </div>
                             <div class="col-md-6">
-                              <button type="button" id="reset-areas" class="btn btn-block btn-primary reset-areas">Clear</button>
+                              <button type="button" id="reset-areas" class="btn btn-block btn-primary reset-areas" onclick="resetTableArea()">Clear</button>
                             </div>
                           </div>
                         </div>
@@ -119,10 +119,10 @@
                           <small class="form-text text-muted">Detect table areas.</small>
                           <div class="row mt-1">
                             <div class="col-md-6">
-                              <button type="button" class="btn btn-block btn-primary detect-areas" data-flavor="stream">Detect</button>
+                              <button type="button" class="btn btn-block btn-primary detect-areas" data-flavor="stream" onclick="onDetectAreasClick(this)">Detect</button>
                             </div>
                             <div class="col-md-6">
-                              <button type="button" id="reset-areas" class="btn btn-block btn-primary reset-areas">Clear</button>
+                              <button type="button" id="reset-areas" class="btn btn-block btn-primary reset-areas" onclick="resetTableArea()">Clear</button>
                             </div>
                           </div>
                         </div>
@@ -131,7 +131,7 @@
                         <div class="form-group">
                           <label>Columns</label>
                           <small class="form-text text-muted">Add column separators.</small>
-                          <button type="button" id="add-separator" class="btn btn-block btn-primary add-separator mt-1">Add separator</button>
+                          <button type="button" id="add-separator" class="btn btn-block btn-primary add-separator mt-1" onclick="onAddSeparatorClick(this)">Add separator</button>
                         </div>
                       </div>
                       <div class="col-md-12">
