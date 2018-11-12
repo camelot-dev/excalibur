@@ -53,7 +53,7 @@ Optionally, you can also select a column separator by clicking on "Add Separator
     :scale: 40%
     :align: center
 
-Finally, you can click on "Extract" to start a table extraction *job*.
+Finally, you can click on "Extract" to start a table extraction *job*. This will save the extraction rule that you created above as a preset which you can use in the future on PDFs with similar table structures as the one you created the rule on.
 
 .. note:: The Lattice flavor for tables with lines doesn't have a "Add Separator" button. It also doesn't need a table area (though you can specify it) since it reliably detects table boundaries and column separators on its own. In most cases, you won't need to tweak any of its configuration options.
 

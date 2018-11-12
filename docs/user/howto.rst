@@ -17,6 +17,15 @@ For example, the metadata database connection string can be set in ``excalibur.c
     [core]
     sql_alchemy_conn = my_conn_string
 
+Resetting the Metadata Database
+-------------------------------
+
+.. warning:: The following command will wipe your Excalibur metadata database, removing all information about uploaded files, saved extraction rules and finished/in-progress jobs.
+
+You can reset the metadata database using::
+
+    $ excalibur resetdb
+
 Using the MySQL Database Backend
 --------------------------------
 

@@ -8,7 +8,7 @@
   <div class="row mb-4 border-bottom mb-5">
     <div class="col-md-12 text-center">
         <h1 class="display-4 align-items-center d-flex justify-content-center">
-          <span>Rules Manager</span>
+          <span>Rule Manager</span>
         </h1>
         <p class="lead">Upload/Download rules</p>
     </div>
@@ -45,14 +45,21 @@
                 {% for rule in saved_rules %}
                   <tr>
                     <th width="10%" scope="row">{{ loop.index }}</th>
-                    <td width="40%">{{ rule.rule_name }}</td>
+                    <td width="40%">
+                      <a data-toggle="collapse" href="#{{ rule.rule_id }}">
+                        {{ rule.rule_name }}
+                      </a>
+                    </td>
                     <td width="20%">{{ rule.created_at }}</td>
                     <td width="15%"><button class="btn btn-sm btn-outline-primary" onclick="onRuleDownload(this)">Download</button><a data-rule-name="{{ rule.rule_name }}" data-rule-options="{{ rule.rule_options }}" style="display:none"></a></td>
+                  </tr>
+                  <tr id="{{ rule.rule_id }}" class="collapse">
+                    <td colspan="4"><pre>{{ rule.rule_options|pretty }}</pre></td>
                   </tr>
                 {% endfor %}
               {% else %}
                 <tr>
-                  <td colspan="5" style="text-align: center">No rules saved.</td>
+                  <td colspan="4" style="text-align: center">No rules saved.</td>
                 </tr>
               {% endif %}
             </tbody>

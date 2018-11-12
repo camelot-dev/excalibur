@@ -59,8 +59,12 @@
                           <th width="10%" scope="row">{{ loop.index }}</th>
                           <td width="40%">{{ file.filename }}</td>
                           <td width="20%">{{ file.uploaded_at }}</td>
-                          <td width="15%"><a href="/workspaces/{{ file.file_id }}" class="btn btn-sm btn-outline-success">Extract Again</button></td>
-                          <td width="15%"><a href="/jobs/{{ file.job_id }}" class="btn btn-sm btn-outline-primary">Download</button></td>
+                          <td width="15%"><a href="/workspaces/{{ file.file_id }}" class="btn btn-sm btn-outline-success" role="button">Extract Again</a></td>
+                          {% if file.job_id %}
+                            <td width="15%"><a href="/jobs/{{ file.job_id }}" class="btn btn-sm btn-outline-primary" role="button">Download</a></td>
+                          {% else %}
+                            <td width="15%"><button class="btn btn-sm btn-outline-primary" disabled><a>Download</a></button></td>
+                          {% endif %}
                         </tr>
                       {% endfor %}
                     {% else %}
