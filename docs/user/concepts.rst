@@ -36,14 +36,18 @@ You can check out Camelot's `read_pdf`_ documentation to see a list of all confi
 
 Inside Excalibur, a rule can be specified by selecting a flavor and its corresponding options in the rule box on the workspace. (As shown on the right)
 
-From *v0.2.0*, you will be able to give each rule a name and save them as a preset for use on different PDFs to extract tables with similar structures.
+When you create an extraction rule and start an extraction job, the rule is saved as a preset can be used in the future for PDFs having the same table structure as the one you created the rule on. A saved rule can be loaded on the workspace by selecting it from the "Saved Rules" dropdown.
+
+.. image:: ../_static/gifs/saved-rule.gif
+    :scale: 65%
+    :align: center
 
 Job
 ---
 
 When you create a rule and apply it on a PDF, a table extraction job is created.
 
-From *v0.2.0*, you will be able to apply a rule on multiple PDFs at once.
+From *v0.4.0*, you will be able to apply a rule on multiple PDFs at once.
 
 ----
 
