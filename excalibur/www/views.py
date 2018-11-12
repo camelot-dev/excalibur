@@ -36,7 +36,7 @@ def files():
             job = session.query(Job).filter(Job.file_id == file.file_id).order_by(Job.started_at.desc()).first()
             files_response.append({
                 'file_id': file.file_id,
-                'job_id': job.job_id,
+                'job_id': job.job_id if job is not None else '',
                 'uploaded_at': file.uploaded_at.strftime('%Y-%m-%dT%H:%M:%S'),
                 'filename': file.filename
             })
