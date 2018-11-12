@@ -76,17 +76,25 @@ def files():
 def workspaces(file_id):
     session = Session()
     file = session.query(File).filter(File.file_id == file_id).first()
+    rules = session.query(Rule).all()
     session.close()
-    imagepath, file_dimensions, image_dimensions, detected_areas = [None] * 4
+    imagepath, file_dimensions, image_dimensions, detected_areas, saved_rules = [None] * 5
     if file.has_image:
         imagepath = file.imagepath.replace(
             os.path.join(conf.PROJECT_ROOT, 'www'), '')
         file_dimensions = json.loads(file.file_dimensions)
         image_dimensions = json.loads(file.image_dimensions)
         detected_areas = json.loads(file.detected_areas)
+        saved_rules = [
+            {
+                'rule_id': rule.rule_id,
+                'rule_name': rule.rule_name
+            }
+            for rule in rules]
     return render_template(
         'workspace.html', imagepath=imagepath, file_dimensions=file_dimensions,
-        image_dimensions=image_dimensions, detected_areas=detected_areas)
+        image_dimensions=image_dimensions, detected_areas=detected_areas,
+        saved_rules=saved_rules)
 
 
 @views.route('/rules', methods=['GET', 'POST'], defaults={'rule_id': None})
@@ -94,8 +102,47 @@ def workspaces(file_id):
 def rules(rule_id):
     if request.method == 'GET':
         if rule_id is not None:
-            return render_template('rule.html')
-        return render_template('rules.html')
+            session = Session()
+            rule = session.query(Rule).filter(Rule.rule_id == rule_id).first()
+            session.close()
+            message = 'Rule not found'
+            rule_options = {}
+            if rule is not None:
+                message = ''
+                rule_options = json.loads(rule.rule_options)
+            return jsonify(message=message, rule_options=rule_options)
+        session = Session()
+        rules = session.query(Rule).order_by(Rule.created_at.desc()).all()
+        session.close()
+        saved_rules = [
+            {
+                'rule_id': rule.rule_id,
+                'created_at': rule.created_at,
+                'rule_name': rule.rule_name,
+                'rule_options': rule.rule_options
+            }
+            for rule in rules]
+        return render_template('rules.html', saved_rules=saved_rules)
+    message='Rule invalid'
+    file = request.files['file-0']
+    if file and allowed_filename(file.filename):
+        rule_id = generate_uuid()
+        created_at = dt.datetime.now()
+        rule_name = os.path.splitext(secure_filename(file.filename))[0]
+        rule_options = file.read()
+        message = 'Rule saved'
+
+        session = Session()
+        r = Rule(
+            rule_id=rule_id,
+            created_at=created_at,
+            rule_name=rule_name,
+            rule_options=rule_options
+        )
+        session.add(r)
+        session.commit()
+        session.close()
+    return jsonify(message=message)
 
 
 @views.route('/jobs', methods=['GET', 'POST'], defaults={'job_id': None})
@@ -135,6 +182,7 @@ def jobs(job_id):
         page_numbers = file.page_number
 
     rule_id = generate_uuid()
+    created_at = dt.datetime.now()
     rule_name = random_string(10)
     rule_options = request.form['rule_options']
 
@@ -144,6 +192,7 @@ def jobs(job_id):
     session = Session()
     r = Rule(
         rule_id=rule_id,
+        created_at=created_at,
         rule_name=rule_name,
         rule_options=rule_options
     )
