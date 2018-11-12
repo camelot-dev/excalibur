@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-VERSION = (0, 2, 1)
+VERSION = (0, 3, 0)
 
 __title__ = 'excalibur-py'
 __description__ = 'A web interface for Camelot (PDF Table Extraction for Humans).'
