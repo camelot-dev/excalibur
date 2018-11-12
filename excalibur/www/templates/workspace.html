@@ -42,7 +42,7 @@
                 <div class="row py-3">
                   <div class="col-md-12">
                     <select class="form-control" name="rules" id="rules" onchange="onSavedRuleChange()">
-                      <option selected disabled>Select rule</option>
+                      <option value="" selected disabled>Select rule</option>
                       {{ rules }}
                       {% for rule in saved_rules %}
                         <option value="{{ rule.rule_id }}">{{ rule.rule_name }}</option>
