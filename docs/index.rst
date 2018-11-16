@@ -65,9 +65,9 @@ Excalibur uses `Camelot <https://camelot-py.readthedocs.io/>`_ under the hood. Y
 Support us on Patreon
 ---------------------
 
-If Excalibur solves your PDF table extraction needs, please consider supporting its development by `becoming a patron`_!
+If Excalibur solves your PDF table extraction needs, please consider supporting its development by `becoming a backer or a sponsor on OpenCollective`_!
 
-.. _becoming a patron: https://www.patreon.com/vinayakmehta
+.. _becoming a backer or a sponsor on OpenCollective: https://opencollective.com/excalibur
 
 The User Guide
 --------------
