@@ -41,7 +41,7 @@ That's it! Now you can go to http://localhost:5000 and extract data tables from 
 
 Excalibur uses [Camelot](https://camelot-py.readthedocs.io/) under the hood. You can check out its [comparison with other PDF table extraction libraries and tools](https://github.com/socialcopsdev/camelot/wiki/Comparison-with-other-PDF-Table-Extraction-libraries-and-tools).
 
-## Support us on Patreon
+## Support us on OpenCollective
 
 If Excalibur solves your PDF table extraction needs, please consider supporting its development by [becoming a backer or a sponsor on OpenCollective](https://opencollective.com/excalibur)!
 

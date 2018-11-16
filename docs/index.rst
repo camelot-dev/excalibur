@@ -62,8 +62,8 @@ Excalibur uses `Camelot <https://camelot-py.readthedocs.io/>`_ under the hood. Y
 
 .. _comparison with other PDF table extraction libraries and tools: https://github.com/socialcopsdev/camelot/wiki/Comparison-with-other-PDF-Table-Extraction-libraries-and-tools
 
-Support us on Patreon
----------------------
+Support us on OpenCollective
+----------------------------
 
 If Excalibur solves your PDF table extraction needs, please consider supporting its development by `becoming a backer or a sponsor on OpenCollective`_!
 
