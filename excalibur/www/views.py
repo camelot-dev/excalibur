@@ -170,7 +170,18 @@ def jobs(job_id):
             return render_template('job.html', is_finished=job.is_finished,
                 started_at=job.started_at, finished_at=job.finished_at,
                 datapath=job.datapath, data=data)
-        return render_template('jobs.html')
+        jobs_response = []
+        session = Session()
+        for job in session.query(Job).order_by(Job.started_at.desc()).all():
+            file = session.query(File).filter(File.file_id == job.file_id).first()
+            jobs_response.append({
+                'filename': file.filename,
+                'job_id': job.job_id,
+                'started_at': job.started_at.strftime('%Y-%m-%dT%H:%M:%S'),
+                'finished_at': job.finished_at.strftime('%Y-%m-%dT%H:%M:%S')
+            })
+        session.close()
+        return render_template('jobs.html', jobs_response=jobs_response)
     file_id = request.form['file_id']
     rule_id = request.form['rule_id']
 
