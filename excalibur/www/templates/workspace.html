@@ -43,6 +43,11 @@
         </section>
         <section class="col-md-8">
           <div class="jumbotron">
+            <div class="row mx-0 mb-2">
+              <div class="col-md-3 col-sm-3 col-xs-3">
+                <button type="button" id="add-separator" class="btn btn-block btn-primary add-separator mt-1" onclick="onAddSeparatorClick(this)" disabled><i class="fas fa-columns mr-2"></i>Add column</button>
+              </div>
+            </div>
             <div class="row mx-0">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div id="image-div">
@@ -99,13 +104,6 @@
                       </div>
                     </div>
                     <div class="row mx-0 stream mt-3" style="display: none">
-                      <div class="col-md-12">
-                        <div class="form-group">
-                          <label>Columns</label>
-                          <small class="form-text text-muted">Add vertical cutters.</small>
-                          <button type="button" id="add-separator" class="btn btn-block btn-primary add-separator mt-1" onclick="onAddSeparatorClick(this)">Add cutter</button>
-                        </div>
-                      </div>
                       <div class="col-md-12">
                         <div class="form-group">
                           <label for="row-close-tol">Row close tolerance</label>

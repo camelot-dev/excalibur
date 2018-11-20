@@ -122,9 +122,11 @@ const onFlavorChange = function () {
   if (flavor == 'Lattice') {
     $('.stream').hide();
     $('.lattice').show();
+    $('.add-separator').prop('disabled', true);
   } else {
     $('.stream').show();
     $('.lattice').hide();
+    $('.add-separator').prop('disabled', false);
   }
 };
 
