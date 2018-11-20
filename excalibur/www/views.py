@@ -92,9 +92,9 @@ def workspaces(file_id):
             }
             for rule in rules]
     return render_template(
-        'workspace.html', imagepath=imagepath, file_dimensions=file_dimensions,
-        image_dimensions=image_dimensions, detected_areas=detected_areas,
-        saved_rules=saved_rules)
+        'workspace.html', filename=file.filename, imagepath=imagepath,
+        file_dimensions=file_dimensions, image_dimensions=image_dimensions,
+        saved_rules=saved_rules, detected_areas=detected_areas)
 
 
 @views.route('/rules', methods=['GET', 'POST'], defaults={'rule_id': None})
