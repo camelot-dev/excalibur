@@ -56,9 +56,9 @@ Why Excalibur?
 - **Excalibur gives you complete control over your data**. All file storage and processing happens on your own local or remote machine.
 - Excalibur can be configured with **MySQL and Celery** for parallel and distributed workloads. By default, sqlite and multiprocessing are used for sequential workloads.
 - You can save table extraction :ref:`rules <concepts>` as **presets** and apply them on different PDFs to extract tables with similar structures.
-- Excalibur uses `Camelot <https://camelot-py.readthedocs.io/>`_ under the hood. You can check out its `comparison with other PDF table extraction libraries and tools`_.
+- Excalibur uses `Camelot <https://camelot-py.readthedocs.io/>`_ under the hood, which can detect and extract tables better than other open-source libraries and tools. You can check out a `comparison with other libraries and tools here`_.
 
-.. _comparison with other PDF table extraction libraries and tools: https://github.com/socialcopsdev/camelot/wiki/Comparison-with-other-PDF-Table-Extraction-libraries-and-tools
+.. _comparison with other libraries and tools here: https://github.com/socialcopsdev/camelot/wiki/Comparison-with-other-PDF-Table-Extraction-libraries-and-tools
 
 Support us on OpenCollective
 ----------------------------
