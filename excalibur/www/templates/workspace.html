@@ -40,8 +40,20 @@
       <div class="row">
         <section class="col-md-2">
           <!-- Add thumbnails and scrollspy -->
+          <div class="row mx-0">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <ul id="thumbnail-list" class="thumbnail-list">
+                <li id="thumbnail-page">
+                  <a href="#image-div">
+                    <img src="{{ imagepath }}" id="image" class="img-thumbnail" data-page="1"/>
+                  </a>
+                  <p class="text-center">1</p>
+                </li>
+              </ul>
+            </div>
+          </div>
         </section>
-        <section class="col-md-8">
+        <section class="col-md-8" data-spy="scroll" data-target="#thumbnail-list">
           <div class="jumbotron">
             <div class="row mx-0 mb-2">
               <div class="col-md-3 col-sm-3 col-xs-3">
