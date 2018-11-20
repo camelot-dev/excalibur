@@ -46,7 +46,7 @@ def files():
     if file and allowed_filename(file.filename):
         file_id = generate_uuid()
         uploaded_at = dt.datetime.now()
-        page_number = int(request.form['page_number'])
+        pages = request.form['pages']
         filename = secure_filename(file.filename)
         filepath = os.path.join(conf.PDFS_FOLDER, file_id)
         mkdirs(filepath)
@@ -57,7 +57,7 @@ def files():
         f = File(
             file_id=file_id,
             uploaded_at=uploaded_at,
-            page_number=page_number,
+            pages=pages,
             filename=filename,
             filepath=filepath
         )
@@ -76,15 +76,18 @@ def files():
 def workspaces(file_id):
     session = Session()
     file = session.query(File).filter(File.file_id == file_id).first()
-    rules = session.query(Rule).all()
+    rules = session.query(Rule).order_by(Rule.created_at.desc()).all()
     session.close()
-    imagepath, file_dimensions, image_dimensions, detected_areas, saved_rules = [None] * 5
+    imagepaths, saved_rules = (None for i in range(2))
+    filedims, imagedims, detected_areas = ('null' for i in range(3))
     if file.has_image:
-        imagepath = file.imagepath.replace(
+        imagepaths = json.loads(file.imagepaths)
+        for page in imagepaths:
+            imagepaths[page] = imagepaths[page].replace(
             os.path.join(conf.PROJECT_ROOT, 'www'), '')
-        file_dimensions = json.loads(file.file_dimensions)
-        image_dimensions = json.loads(file.image_dimensions)
-        detected_areas = json.loads(file.detected_areas)
+        filedims = file.filedims
+        imagedims = file.imagedims
+        detected_areas = file.detected_areas
         saved_rules = [
             {
                 'rule_id': rule.rule_id,
@@ -92,9 +95,9 @@ def workspaces(file_id):
             }
             for rule in rules]
     return render_template(
-        'workspace.html', filename=file.filename, imagepath=imagepath,
-        file_dimensions=file_dimensions, image_dimensions=image_dimensions,
-        saved_rules=saved_rules, detected_areas=detected_areas)
+        'workspace.html', filename=file.filename, imagepaths=imagepaths,
+        filedims=filedims, imagedims=imagedims, detected_areas=detected_areas,
+        saved_rules=saved_rules)
 
 
 @views.route('/rules', methods=['GET', 'POST'], defaults={'rule_id': None})
@@ -209,15 +212,10 @@ def jobs(job_id):
     job_id = generate_uuid()
     started_at = dt.datetime.now()
 
-    page_numbers = request.form['page_numbers']
-    if page_numbers == '1':
-        page_numbers = file.page_number
-
     session = Session()
     j = Job(
         job_id=job_id,
         started_at=started_at,
-        page_numbers=page_numbers,
         file_id=file_id,
         rule_id=rule_id
     )

@@ -18,21 +18,21 @@
   <form class="mb-5">
     <div class="row align-items-center">
       <div class="col-md-6 col-sm-6 col-xs-12">
-          <div class="input-group">
-            <div class="custom-file uploadFile">
-              <input type="file" class="uploadFile__input" id="file" name="file" accept="application/pdf">
-              <label for="file" class="uploadFile__label">Upload PDF</label>
-            </div>
+        <div class="input-group">
+          <div class="custom-file uploadFile">
+            <input type="file" class="uploadFile__input" id="file" name="file" accept="application/pdf">
+            <label for="file" class="uploadFile__label">Upload PDF</label>
           </div>
+        </div>
       </div>
       <div class="col-md-6 col-sm-6 col-xs-12 py-2">
-          <label for="page-number">Page number</label>
-          <div class="input-group">
-            <input type="text" class="form-control" id="page-number" placeholder="A single page number to create an extraction rule on">
-            <div class="input-group-append">
-              <button type="button" id="upload" class="btn btn-outline-secondary">Upload</button>
-            </div>
+        <label for="pages">Page numbers (example inputs: 1,3 or 5-8 or 1-end or all)</label>
+        <div class="input-group">
+          <input type="text" class="form-control" id="pages" placeholder="Comma-separated page numbers to extract tables from.">
+          <div class="input-group-append">
+            <button type="button" id="upload" class="btn btn-outline-secondary">Upload</button>
           </div>
+        </div>
       </div>
     </div>
   </form>

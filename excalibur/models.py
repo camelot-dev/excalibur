@@ -18,14 +18,18 @@ class File(Base):
 
     file_id = Column(String(ID_LEN), primary_key=True)
     uploaded_at = Column(DateTime)
-    page_number = Column(Integer)
+    pages = Column(String(STR_LEN))
+    total_pages = Column(Integer)
+    extract_pages = Column(Text)
     filename = Column(String(STR_LEN))
     filepath = Column(String(STR_LEN))
     has_image = Column(Boolean, default=False)
-    imagename = Column(String(STR_LEN))
-    imagepath = Column(String(STR_LEN))
-    file_dimensions = Column(Text)
-    image_dimensions = Column(Text)
+    filenames = Column(Text)
+    filepaths = Column(Text)
+    imagenames = Column(Text)
+    imagepaths = Column(Text)
+    filedims = Column(Text)
+    imagedims = Column(Text)
     detected_areas = Column(Text)
 
 
@@ -42,7 +46,6 @@ class Job(Base):
     __tablename__ = "jobs"
 
     job_id = Column(String(ID_LEN), primary_key=True)
-    page_numbers = Column(Text)
     datapath = Column(String(STR_LEN), default=None)
     render_files = Column(Text, default=json.dumps([]))
     is_finished = Column(Boolean, default=False)

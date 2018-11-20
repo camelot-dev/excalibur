@@ -5,6 +5,52 @@ from PyPDF2 import PdfFileReader, PdfFileWriter
 from camelot.utils import get_page_layout, get_text_objects, get_rotation
 
 
+def get_pages(filename, pages):
+        """Converts pages string to list of ints.
+
+        Parameters
+        ----------
+        filename : str
+            Path to PDF file.
+        pages : str, optional (default: '1')
+            Comma-separated page numbers.
+            Example: 1,3,4 or 1,4-end.
+
+        Returns
+        -------
+        N : int
+            Total pages.
+        P : list
+            List of int page numbers.
+
+        """
+        page_numbers = []
+        inputstream = open(filename, 'rb')
+        infile = PdfFileReader(inputstream, strict=False)
+        N = infile.getNumPages()
+        if pages == '1':
+            page_numbers.append({'start': 1, 'end': 1})
+        else:
+            if infile.isEncrypted:
+                infile.decrypt(self.password)
+            if pages == 'all':
+                page_numbers.append({'start': 1, 'end': infile.getNumPages()})
+            else:
+                for r in pages.split(','):
+                    if '-' in r:
+                        a, b = r.split('-')
+                        if b == 'end':
+                            b = infile.getNumPages()
+                        page_numbers.append({'start': int(a), 'end': int(b)})
+                    else:
+                        page_numbers.append({'start': int(r), 'end': int(r)})
+        inputstream.close()
+        P = []
+        for p in page_numbers:
+            P.extend(range(p['start'], p['end'] + 1))
+        return sorted(set(P)), N
+
+
 def save_page(filepath, page_number):
     infile = PdfFileReader(open(filepath, 'rb'), strict=False)
     page = infile.getPage(page_number - 1)
@@ -37,11 +83,11 @@ def save_page(filepath, page_number):
             outfile.write(f)
 
 
-def get_file_dimensions(filepath):
+def get_file_dim(filepath):
     layout, dimensions = get_page_layout(filepath)
     return list(dimensions)
 
 
-def get_image_dimensions(imagepath):
+def get_image_dim(imagepath):
     image = cv2.imread(imagepath)
     return [image.shape[1], image.shape[0]]
