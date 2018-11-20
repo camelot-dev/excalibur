@@ -128,8 +128,8 @@ const onFlavorChange = function () {
   }
 };
 
-const onSavedRuleChange = function () {
-  const rule_id = document.getElementById('rules').value;
+const onSavedRuleClick = function (e) {
+  const rule_id = e.getAttribute('data-rule-id');
   $.ajax({
       url: '/rules/{0}'.format(rule_id),
       type: 'GET',

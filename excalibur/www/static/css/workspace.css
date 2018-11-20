@@ -4,6 +4,12 @@ img {
   margin: 0 auto;
 }
 
+div .control-panel {
+  background-color : #ffffff;
+  box-shadow : 0 0 6px #ffffff;
+  padding: 0;
+}
+
 div .image-area {
   -moz-border-radius : 5px 5px 5px 5px;
   -moz-box-shadow : 0 0 6px #c8c8c8;
