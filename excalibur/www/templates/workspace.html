@@ -41,7 +41,7 @@
       </div>
       <div class="row">
         <section class="col-md-2">
-          <div class="row mx-0">
+          <div class="row mx-0 thumbnail-container">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <ul id="thumbnail-list" class="thumbnail-list">
                 {% for page, imagepath in imagepaths.items() %}
@@ -57,14 +57,14 @@
           </div>
         </section>
         <section class="col-md-8" data-spy="scroll" data-target="#thumbnail-list">
-          <div class="row mx-0 mt-2 mb-2">
-            <div class="col-md-3 col-sm-3 col-xs-3 pl-0">
-              <button type="button" class="btn btn-block btn-primary add-separator mt-1" onclick="onAddSeparatorClick(this)" data-page="{{ page }}" disabled><i class="fas fa-columns mr-2"></i>Add column</button>
-            </div>
-          </div>
           <div class="jumbotron page-container">
             {% for page, imagepath in imagepaths.items() %}
-              <div class="row mx-0">
+              <div class="row mx-0 mb-2">
+                <div class="col-md-3 col-sm-3 col-xs-3">
+                  <button type="button" class="btn btn-block btn-primary add-separator mt-1" onclick="onAddSeparatorClick(this)" data-page="{{ page }}" disabled><i class="fas fa-columns mr-2"></i>Add column</button>
+                </div>
+              </div>
+              <div class="row mx-0 mb-2">
                 <div class="col-md-12 col-sm-12 col-xs-12">
                   <div id="image-div-{{ page }}">
                     <img src="{{ imagepath }}" id="image-{{ page }}" class="image-area"/>
