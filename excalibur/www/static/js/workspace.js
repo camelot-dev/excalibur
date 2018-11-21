@@ -86,9 +86,10 @@ const onSavedRuleClick = function (e) {
 
         console.log(ruleOptions);
         if (Object.keys(ruleOptions['pages']).length) {
+          resetTableAreas();
+          resetColumnSeparators();
           for (let page in ruleOptions['pages']) {
             if ('table_areas' in ruleOptions['pages'][page]) {
-              resetTableAreas();
               let tableAreas = [];
               const table_areas = ruleOptions['pages'][page]['table_areas'];
               table_areas.forEach(function (t) {
@@ -97,7 +98,6 @@ const onSavedRuleClick = function (e) {
               renderTableAreas(page, tableAreas);
             }
             if ('columns' in ruleOptions['pages'][page]) {
-              resetColumnSeparators();
               let columnSeparators = [];
               const columns = ruleOptions['pages'][page]['columns'];
               columns.forEach(function (c) {
@@ -224,7 +224,6 @@ const getRuleOptions = function () {
 // table areas
 
 const renderTableAreas = function (page, tableAreas) {
-  console.log(page, tableAreas);
   tableAreas = getTableAreasForRender(page, tableAreas);
   $('#image-{0}'.format(page)).selectAreas('add', tableAreas);
 };
@@ -245,9 +244,8 @@ const resetTableAreas = () => {
 // columns
 
 const renderColumnSeparators = function(page, columnSeparators) {
-  console.log(page, columnSeparators);
   const imageWidth = $('#image-{0}'.format(page)).width();
-  const scalingFactorX = imageWidth / fileDims[0];
+  const scalingFactorX = imageWidth / fileDims[page][0];
 
   for (let i = 0; i < columnSeparators.length; i++) {
     addColumnSeparator(page, columnSeparators[i] * scalingFactorX);
