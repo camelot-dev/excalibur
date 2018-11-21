@@ -4,6 +4,12 @@
   margin: 0;
 }
 
+.page-container {
+  max-height: 100vh;
+  min-height: 800px;
+  overflow-y: auto;
+}
+
 img {
   max-width: 100%;
   max-height: auto;
