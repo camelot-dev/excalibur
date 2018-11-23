@@ -79,6 +79,7 @@
             <div class="card-body">
               <div class="card-title">
                 <h5>Advanced</h5>
+                <h6><a href="https://camelot-py.readthedocs.io/en/master/user/advanced.html" target="_blank">See docs</a></h6>
               </div>
               <form class="form-group">
                 <div class="row py-3">
@@ -100,53 +101,53 @@
                       </div>
                       <div class="col-md-12">
                         <div class="form-group">
-                          <label for="line-size-scaling">Line size scaling factor</label>
+                          <label for="line-size-scaling">Detect small lines</label>
                           <input type="text" class="form-control" id="line-size-scaling" aria-describedby="line-size-scaling-help" placeholder="15">
-                          <small id="line-size-scaling-help" class="form-text text-muted">The larger the value the smaller the detected lines. Making it very large will lead to text being detected as lines.</small>
+                          <small id="line-size-scaling-help" class="form-text text-muted">Small lines can be detected by increasing this value. Range: 15-100</small>
                         </div>
                       </div>
                       <div class="col-md-12">
                         <div class="form-group">
-                          <label for="split-text-l">Split text</label>
+                          <label for="split-text-l">Cut text</label>
                           <input type="text" class="form-control" id="split-text-l" aria-describedby="split-text-l-help" placeholder="false">
-                          <small id="split-text-l-help" class="form-text text-muted">Split text that spans across multiple cells.</small>
+                          <small id="split-text-l-help" class="form-text text-muted">Cut text along column separators.</small>
                         </div>
                       </div>
                       <div class="col-md-12">
                         <div class="form-group">
-                          <label for="flag-size-l">Flag size</label>
+                          <label for="flag-size-l">Detect superscripts</label>
                           <input type="text" class="form-control" id="flag-size-l" aria-describedby="flag-size-l-help" placeholder="false">
-                          <small id="flag-size-l-help" class="form-text text-muted">Flag text based on font size. Useful to detect super/subscripts.</small>
+                          <small id="flag-size-l-help" class="form-text text-muted">Detect super and subscripts.</small>
                         </div>
                       </div>
                     </div>
                     <div class="row mx-0 stream mt-3" style="display: none">
                       <div class="col-md-12">
                         <div class="form-group">
-                          <label for="row-close-tol">Row close tolerance</label>
+                          <label for="row-close-tol">Group into row</label>
                           <input type="text" class="form-control" id="row-close-tol" aria-describedby="row-close-tol-help" placeholder="2">
-                          <small id="row-close-tol-help" class="form-text text-muted">Tolerance parameter used to combine text vertically, to generate rows.</small>
+                          <small id="row-close-tol-help" class="form-text text-muted">Group vertically closer text lines together into the same row. Range: 10-50</small>
                         </div>
                       </div>
                       <div class="col-md-12">
                         <div class="form-group">
-                          <label for="col-close-tol">Column close tolerance</label>
+                          <label for="col-close-tol">Group into column</label>
                           <input type="text" class="form-control" id="col-close-tol" aria-describedby="col-close-tol-help" placeholder="0">
-                          <small id="col-close-tol-help" class="form-text text-muted">Tolerance parameter used to combine text horizontally, to generate columns.</small>
+                          <small id="col-close-tol-help" class="form-text text-muted">Group horizontally closer text lines together into the same column. Range: 10-50</small>
                         </div>
                       </div>
                       <div class="col-md-12">
                         <div class="form-group">
-                          <label for="split-text-s">Split text</label>
+                          <label for="split-text-s">Cut text</label>
                           <input type="text" class="form-control" id="split-text-s" aria-describedby="split-text-s-help" placeholder="false">
-                          <small id="split-text-s-help" class="form-text text-muted">Split text that spans across multiple cells.</small>
+                          <small id="split-text-s-help" class="form-text text-muted">Cut text along column separators.</small>
                         </div>
                       </div>
                       <div class="col-md-12">
                         <div class="form-group">
-                          <label for="flag-size-s">Flag size</label>
+                          <label for="flag-size-s">Detect superscripts</label>
                           <input type="text" class="form-control" id="flag-size-s" aria-describedby="flag-size-s-help" placeholder="false">
-                          <small id="flag-size-s-help" class="form-text text-muted">Flag text based on font size. Useful to detect super/subscripts.</small>
+                          <small id="flag-size-s-help" class="form-text text-muted">Detect super and subscripts.</small>
                         </div>
                       </div>
                     </div>
