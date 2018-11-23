@@ -97,7 +97,7 @@ def split(file_id):
             if len(tables):
                 lattice_areas = []
                 for table in tables:
-                    x1, y1, x2, y2 = tables[0]._bbox
+                    x1, y1, x2, y2 = table._bbox
                     lattice_areas.append((x1, y2, x2, y1))
             # stream
             parser = Stream()
@@ -105,7 +105,7 @@ def split(file_id):
             if len(tables):
                 stream_areas = []
                 for table in tables:
-                    x1, y1, x2, y2 = tables[0]._bbox
+                    x1, y1, x2, y2 = table._bbox
                     stream_areas.append((x1, y2, x2, y1))
 
             detected_areas[page] = {

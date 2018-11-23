@@ -229,9 +229,16 @@ const renderTableAreas = function (page, tableAreas) {
 };
 
 const onDetectAreasClick = (e) => {
-  const flavor = e.getAttribute('data-flavor');
   for (let page in detectedAreas) {
+    let flavor = '';
+    if (detectedAreas[page]['lattice'] != null) {
+      flavor = 'lattice';
+    } else {
+      flavor = 'stream';
+    }
     renderTableAreas(page, detectedAreas[page][flavor]);
+    onFlavorChange();
+    document.getElementById('flavors').value = flavor.charAt(0).toUpperCase() + flavor.slice(1);
   }
 }
 
