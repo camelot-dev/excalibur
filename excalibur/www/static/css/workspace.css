@@ -1,3 +1,9 @@
+.thumbnail-container {
+  max-height: 100vh;
+  min-height: 800px;
+  overflow-y: auto;
+}
+
 .thumbnail-list {
   list-style-type: none;
   padding: 0;
