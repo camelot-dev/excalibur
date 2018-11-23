@@ -1,9 +1,21 @@
 # -*- coding: utf-8 -*-
 
-VERSION = (0, 3, 0)
+VERSION = (0, 4, 0)
+PRERELEASE = None # alpha, beta or rc
+REVISION = None
+
+
+def generate_version(version, prerelease=None, revision=None):
+    version_parts = ['.'.join(map(str, version))]
+    if prerelease is not None:
+        version_parts.append('-{}'.format(prerelease))
+    if revision is not None:
+        version_parts.append('.{}'.format(revision))
+    return ''.join(version_parts)
+
 
 __title__ = 'excalibur-py'
-__description__ = 'A web interface for Camelot (PDF Table Extraction for Humans).'
+__description__ = 'A web interface to extract tabular data from PDFs.'
 __url__ = 'https://excalibur-py.readthedocs.io/'
 __version__ = '.'.join(map(str, VERSION))
 __author__ = 'Vinayak Mehta'
