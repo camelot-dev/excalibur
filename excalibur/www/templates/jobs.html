@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% set active_page = "jobs" %}
+{% block stylesheet %}
+{% endblock %}
+
+{% block rules %}
+<div class="container">
+  <div class="row mb-4 border-bottom mb-5">
+    <div class="col-md-12 text-center">
+        <h1 class="display-4 align-items-center d-flex justify-content-center">
+          <span>Jobs</span>
+        </h1>
+    </div>
+  </div>
+
+  <div class="card depth-1 mb-5">
+    <div class="card-body p-0">
+      <div class="row">
+        <div class="col-md-12">
+          <table class="table text-left table-borderless table-hover mb-0">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Filename</th>
+                <th scope="col">Started at</th>
+                <th scope="col">Finished at</th>
+                <th scope="col">&nbsp</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% if jobs_response|length > 0 %}
+                {% for job in jobs_response %}
+                  <tr>
+                    <th width="10%" scope="row">{{ loop.index }}</th>
+                    <td width="30%">{{ job.filename }}</td>
+                    <td width="20%">{{ job.started_at }}</td>
+                    <td width="20%">{{ job.finished_at }}</td>
+                    <td width="20%"><a href="/jobs/{{ job.job_id }}" class="btn btn-sm btn-outline-primary">Download</a></td>
+                  </tr>
+                {% endfor %}
+              {% else %}
+                <tr>
+                  <td colspan="4" style="text-align: center">No jobs started.</td>
+                </tr>
+              {% endif %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/jobs.js') }}"></script>
+{% endblock %}
