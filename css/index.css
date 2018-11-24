@@ -4,6 +4,196 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-freelancer/blob/master/LICENSE)
  */
 
+.tooltipped {
+  position: relative;
+  cursor: pointer;
+}
+
+.tooltipped::after {
+  content: attr(aria-label);
+  position: absolute;
+  z-index: 1000000;
+  display: none;
+  padding: 5px 8px;
+  font-size: 17px;
+  font-weight: normal;
+  -webkit-font-smoothing: subpixel-antialiased;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: none;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: break-word;
+  white-space: pre;
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 2px;
+  opacity: 0;
+}
+
+.tooltipped::before {
+  position: absolute;
+  z-index: 1000001;
+  display: none;
+  width: 0;
+  height: 0;
+  color: rgba(0, 0, 0, 0.7);
+  pointer-events: none;
+  content: "";
+  border: 5px solid transparent;
+  opacity: 0;
+}
+
+@-webkit-keyframes tooltip-appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes tooltip-appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.tooltipped:hover::before, .tooltipped:hover::after,
+.tooltipped:active::before,
+.tooltipped:active::after,
+.tooltipped:focus::before,
+.tooltipped:focus::after,
+.tooltipped-immediate::before,
+.tooltipped-immediate::after {
+  display: inline-block;
+  text-decoration: none;
+  -webkit-animation-name: tooltip-appear;
+  animation-name: tooltip-appear;
+  -webkit-animation-duration: 0.1s;
+  animation-duration: 0.1s;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-timing-function: ease-in;
+  animation-timing-function: ease-in;
+  -webkit-animation-delay: 0.4s;
+  animation-delay: 0.4s;
+}
+
+.tooltipped-no-delay:hover::before, .tooltipped-no-delay:hover::after,
+.tooltipped-no-delay:active::before,
+.tooltipped-no-delay:active::after,
+.tooltipped-no-delay:focus::before,
+.tooltipped-no-delay:focus::after {
+  opacity: 1;
+  -webkit-animation: none;
+  animation: none;
+}
+
+.tooltipped-multiline:hover::after,
+.tooltipped-multiline:active::after,
+.tooltipped-multiline:focus::after {
+  display: table-cell;
+}
+
+.tooltipped-s::after,
+.tooltipped-se::after,
+.tooltipped-sw::after {
+  top: 100%;
+  right: 50%;
+  margin-top: 5px;
+}
+
+.tooltipped-s::before,
+.tooltipped-se::before,
+.tooltipped-sw::before {
+  top: auto;
+  right: 50%;
+  bottom: -5px;
+  margin-right: -5px;
+  border-bottom-color: rgba(0, 0, 0, 0.7);
+}
+
+.tooltipped-se::after {
+  right: auto;
+  left: 50%;
+  margin-left: -15px;
+}
+
+.tooltipped-sw::after {
+  margin-right: -15px;
+}
+
+.tooltipped-n::after,
+.tooltipped-ne::after,
+.tooltipped-nw::after {
+  right: 50%;
+  bottom: 100%;
+  margin-bottom: 5px;
+}
+
+.tooltipped-n::before,
+.tooltipped-ne::before,
+.tooltipped-nw::before {
+  top: -5px;
+  right: 50%;
+  bottom: auto;
+  margin-right: -5px;
+  border-top-color: rgba(0, 0, 0, 0.7);
+}
+
+.tooltipped-ne::after {
+  right: auto;
+  left: 50%;
+  margin-left: -15px;
+}
+
+.tooltipped-nw::after {
+  margin-right: -15px;
+}
+
+.tooltipped-s::after,
+.tooltipped-n::after {
+  -webkit-transform: translateX(50%);
+  transform: translateX(50%);
+}
+
+.tooltipped-w::after {
+  right: 100%;
+  bottom: 50%;
+  margin-right: 5px;
+  -webkit-transform: translateY(50%);
+  transform: translateY(50%);
+}
+
+.tooltipped-w::before {
+  top: 50%;
+  bottom: 50%;
+  left: -5px;
+  margin-top: -5px;
+  border-left-color: rgba(0, 0, 0, 0.7);
+}
+
+.tooltipped-e::after {
+  bottom: 50%;
+  left: 100%;
+  margin-left: 5px;
+  -webkit-transform: translateY(50%);
+  transform: translateY(50%);
+}
+
+.tooltipped-e::before {
+  top: 50%;
+  right: -5px;
+  bottom: 50%;
+  margin-top: -5px;
+  border-right-color: rgba(0, 0, 0, 0.7);
+}
+
 body {
   font-family: 'Lato';
 }
@@ -125,6 +315,76 @@ section h2 {
   .title-separator {
     -webkit-transform: rotate(0deg);
     transform: rotate(0deg);
+  }
+}
+
+/*!
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+.package-header__pip-instructions {
+  display: inline-block;
+  padding-bottom: 0;
+}
+
+.package-header__pip-instructions span {
+  font-family: "Source Code Pro", monospace;
+  font-weight: 500;
+  font-size: 22px;
+  float: left;
+  background-color: rgba(0, 0, 0, 0.15);
+  padding: 10px;
+  border: 1px dotted rgba(255, 255, 255, 0.4);
+  line-height: 30px;
+}
+
+@media only screen and (max-width: 800px) {
+  .package-header__pip-instructions span {
+    font-size: 20px;
+    line-height: 25px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .package-header__pip-instructions span {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+
+.package-header__pip-instructions button {
+  color: #fff;
+  line-height: 30px;
+  float: left;
+  cursor: pointer;
+  padding: 10px 15px;
+  background-color: rgba(0, 0, 0, 0.15);
+  border: 1px dotted rgba(255, 255, 255, 0.4);
+}
+
+.package-header__pip-instructions button:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+@media only screen and (max-width: 800px) {
+  .package-header__pip-instructions button {
+    line-height: 25px;
+    padding: 10px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .package-header__pip-instructions button {
+    display: none;
   }
 }
 
@@ -323,11 +583,8 @@ a:focus, a:hover, a:active {
   color: #007033;
 }
 
-.form-control {
-  border-radius: 2px;
-  border: none;
-  -webkit-box-shadow: none;
-  box-shadow: none;
+textarea.form-control {
+  height: 150px;
 }
 
 .btn {

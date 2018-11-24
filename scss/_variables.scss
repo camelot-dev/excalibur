@@ -22,3 +22,22 @@ $linkedin-icon-color: #0068B5;
 $github-icon-color: #212121;
 
 $anchor-text-color: $accent;
+
+// pypi
+
+// font
+$code-font: "Source Code Pro", monospace;
+$base-font-size:   17px;
+
+// colors
+$transparent-white: transparentize($white, 0.6);
+
+// spacing
+$spacing-unit: 30px;
+
+// viewports
+$mobile:          400px;
+$small-tablet:    600px;
+$tablet:          800px;
+$desktop:         1000px;
+$large-desktop:   1200px;

@@ -43,10 +43,10 @@
               <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#usage">Usage</a>
             </li>
             <li class="nav-item mx-0 mx-lg-1">
-              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#download">Download</a>
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#team">Team</a>
             </li>
             <li class="nav-item mx-0 mx-lg-1">
-              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#team">Team</a>
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">Contact</a>
             </li>
           </ul>
         </div>
@@ -62,26 +62,24 @@
               width="150" height="auto" alt="Excalibur">
             <hr class="star-light">
             <h1 class="text-uppercase mb-1 lead">Excalibur</h1>
-            <h4 class="mb-4 mt-3">PDF Table Extraction for Humans</h4>
+            <h4 class="mb-4 mt-3">Extract tables from PDFs into Excels</h4>
             <a class="github-button" href="https://github.com/camelot-dev/excalibur" data-size="large" data-show-count="true" aria-label="Star camelot-dev/excalibur on GitHub">Star</a>
           </div>
-          <div class="col-md-4 offset-md-2 offset-sm-0 col-sm-12 col-xs-12 mt-4">
-            <div>
-              <h4 class="lead">Do you have feedback or want us to build a new feature? Just holler!</h4>
-              <hr>
+          <div class="col-md-5 offset-md-1 offset-sm-0 col-sm-12 col-xs-12 mt-4">
+            <div class="text-center">
+              <h5 class="mb-1">Available for Windows, macOS and Linux</h5>
+              <p class="lead">Excalibur can be easily installed using pip.</p>
+              <p class="package-header__pip-instructions">
+                <span id="pip-command">pip install excalibur-py</span>
+                <button class="-js-copy-pip-command tooltipped tooltipped-s" data-clipboard-target="#pip-command" aria-label="Copy to clipboard" data-original-label="Copy to clipboard"><i class="fa fa-copy" aria-hidden="true"></i></button>
+              </p>
             </div>
-            <div class="d-flex align-items-center justify-content-center mt-2">
-              <form action="https://formspree.io/vmehta94@gmail.com" method="POST">
-                <label class="text-white" for="emailID">E-mail</label>
-                <input class="form-control form-control-lg mb-3" type="email" name="emailID" id="email" placeholder="example@domain.com">
-
-                <label class="text-white" for="comment">Message</label>
-                <textarea class="form-control form-control-lg mb-3" name="comment" id="comment" cols="30" rows="5" placeholder="Give us feedback, tell us about your awesome use case or just say hello!"></textarea>
-
-                <div class="text-right">
-                  <button type="submit" value="Send" class="btn btn-lg btn-block btn-accent">Submit</button>
-                </div>
-              </form>
+            <div class="text-center">
+              <p class="lead">Or run directly with the executable!</p>
+              <a class="btn btn-secondary btn-xl" href="https://github.com/camelot-dev/excalibur/releases" target="_blank">
+                <i class="fas fa-download mr-2"></i>
+                Download Now!
+              </a>
             </div>
           </div>
         </div>
@@ -199,32 +197,6 @@
       </div>
     </section>
 
-    <!-- Download Section -->
-    <section id="download">
-      <div class="container-fluid">
-        <h2 class="text-center text-uppercase text-secondary">Download</h2>
-        <hr class="star-dark mb-5">
-      </div>
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 text-center mt-4">
-            <h5 class="mb-1 text-accent">Available for Windows, macOS and Linux</h5>
-            <p class="lead text-helper">Excalibur can be easily installed using <a href="https://en.wikipedia.org/wiki/Pip_(package_manager)">pip</a> which is a package manager for Python packages.</p>
-            <div class="text-center">
-              <a href="https://pypi.org/project/excalibur-py/" target="_blank">
-                <img src="pip-excalibur.png" class="rounded mb-2" width="234.33">
-              </a>
-            </div>
-            <p class="lead text-helper">Or you can just download the executable and run it directly!</p>
-            <a class="btn btn-xl btn-accent" href="https://github.com/camelot-dev/excalibur/releases" target="_blank">
-              <i class="fas fa-download mr-2"></i>
-              Download Now!
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- Team Section -->
     <section class="bg-grey" id="team">
       <div class="container">
@@ -277,6 +249,34 @@
       </div>
     </section>
 
+    <!-- Contact Section -->
+    <section id="contact">
+      <div class="container">
+        <h2 class="text-center text-uppercase text-secondary">Contact</h2>
+        <hr class="star-dark mb-5">
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3"></div>
+          <div class="col-md-6">
+            <h4 class="lead">Do you have feedback or want us to build a new feature? Just holler!</h4>
+            <hr>
+            <form action="https://formspree.io/vmehta94@gmail.com" method="POST">
+            <label for="emailID">E-mail</label>
+            <input class="form-control form-control-lg mb-3" type="email" name="emailID" id="email" placeholder="example@domain.com">
+
+            <label for="comment">Message</label>
+            <textarea class="form-control form-control-lg mb-3" name="comment" id="comment" cols="30" rows="5" placeholder="Give us feedback, tell us about your awesome use case or just say hello!"></textarea>
+
+            <div class="text-right">
+              <button type="submit" value="Send" class="btn btn-lg btn-block btn-accent">Submit</button>
+            </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Footer -->
     <footer class="footer text-center">
       <div class="container">
@@ -315,6 +315,9 @@
 
     <!-- Plugin JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+
+    <!-- Clipboard -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
