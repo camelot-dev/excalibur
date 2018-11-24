@@ -229,16 +229,24 @@ const renderTableAreas = function (page, tableAreas) {
 };
 
 const onDetectAreasClick = (e) => {
-  for (let page in detectedAreas) {
-    let flavor = '';
-    if (detectedAreas[page]['lattice'] != null) {
-      flavor = 'lattice';
-    } else {
-      flavor = 'stream';
+  resetTableAreas();
+  let flavor = document.getElementById('flavors').value;
+  if (flavor == 'Select flavor') {
+    for (let page in detectedAreas) {
+      let f = '';
+      if (detectedAreas[page]['lattice'] != null) {
+        f = 'lattice';
+      } else {
+        f = 'stream';
+      }
+      renderTableAreas(page, detectedAreas[page][f]);
+      onFlavorChange();
+      document.getElementById('flavors').value = f.charAt(0).toUpperCase() + f.slice(1);
     }
-    renderTableAreas(page, detectedAreas[page][flavor]);
-    onFlavorChange();
-    document.getElementById('flavors').value = flavor.charAt(0).toUpperCase() + flavor.slice(1);
+  } else {
+    for (let page in detectedAreas) {
+      renderTableAreas(page, detectedAreas[page][flavor.toLowerCase()]);
+    }
   }
 }
 
