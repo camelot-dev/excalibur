@@ -41,7 +41,7 @@ And then start the webserver using::
 
     $ excalibur webserver
 
-That's it! Now you can go to http://localhost:5000 and extract tabular data from your PDFs.
+That's it! Now you can go to http://localhost:5000 and start extracting tabular data from your PDFs.
 
 1. **Upload** a PDF and enter the page numbers you want to extract tables from.
 
