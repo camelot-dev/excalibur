@@ -3,7 +3,7 @@
 Installation of Excalibur
 =========================
 
-This part of the documentation covers how to install Excalibur.
+This part of the documentation covers the steps to install Excalibur.
 
 Using pip
 ---------
@@ -13,7 +13,7 @@ After installing `ghostscript`_, which is one of the requirements for Camelot (S
     $ pip install excalibur-py
 
 .. _ghostscript: https://www.ghostscript.com/
-.. _install instructions: https://camelot-py.readthedocs.io/en/master/user/install.html#using-pip
+.. _install instructions: https://camelot-py.readthedocs.io/en/master/user/install-deps.html
 
 From the source code
 --------------------

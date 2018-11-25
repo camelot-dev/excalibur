@@ -3,7 +3,7 @@
 How-to Guides
 =============
 
-Excalibur's architecture is heavily inspired from Airflow, so you may get a feeling of déjà vu while reading this page of the documentation. `Airflow LICENSE`_.
+Excalibur's architecture is heavily inspired from Airflow, so you may experience déjà vu while reading this page of the documentation. `Airflow LICENSE`_.
 
 .. _Airflow LICENSE: https://github.com/apache/incubator-airflow/blob/master/LICENSE
 
@@ -20,7 +20,7 @@ For example, the metadata database connection string can be set in ``excalibur.c
 Resetting the Metadata Database
 -------------------------------
 
-.. warning:: The following command will wipe your Excalibur metadata database, removing all information about uploaded files, saved extraction rules and finished/in-progress jobs.
+.. warning:: The following command will wipe your Excalibur metadata database, removing all information about uploaded files, saved settings and finished/in-progress jobs.
 
 You can reset the metadata database using::
 
@@ -29,7 +29,7 @@ You can reset the metadata database using::
 Using the MySQL Database Backend
 --------------------------------
 
-Excalibur uses SqlAlchemy to connect to a database backend. By default, stores all metadata in a sqlite database. To use MySQL, you need to first install MySQL and then create a database and a user.
+Excalibur uses SqlAlchemy to connect to a database backend. By default, a sqlite database is used. To use MySQL, you need to first install MySQL and then create a database and a user.
 
 Installing MySQL
 ^^^^^^^^^^^^^^^^
@@ -45,7 +45,7 @@ You can install MySQL using your system's package manager. For Ubuntu::
 
 And then set it up using::
 
-    $ mysql_secure_installation
+    $ sudo mysql_secure_installation
 
 Setup
 ^^^^^
