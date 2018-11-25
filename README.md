@@ -50,7 +50,7 @@ That's it! Now you can go to http://localhost:5000 and extract tabular data from
 
 - Extracting tables from PDFs is hard. A simple copy-and-paste from a PDF into an Excel doesn't preserve table structure. **Excalibur makes PDF table extraction very easy**, by automatically detecting tables in PDFs and letting you save them into CSVs and Excels.
 - Excalibur uses [Camelot](https://camelot-py.readthedocs.io/) under the hood, which gives you additional settings to tweak table extraction and get the best results. You can see how it performs better than other open-source tools and libraries [in this comparison](https://github.com/socialcopsdev/camelot/wiki/Comparison-with-other-PDF-Table-Extraction-libraries-and-tools).
-- You can save table extraction [settings](https://excalibur-py.readthedocs.io/en/master/user/concepts.html#rule) (like table areas) for a PDF once, and apply them on new PDFs to extract tables with similar structures.
+- You can save table extraction [settings](https://excalibur-py.readthedocs.io/en/master/user/faq.html#faq) (like table areas) for a PDF once, and apply them on new PDFs to extract tables with similar structures.
 - You get complete control over your data. All file storage and processing happens on your own local or remote machine.
 - Excalibur can be configured with MySQL and Celery for parallel and distributed workloads. By default, sqlite and multiprocessing are used for sequential workloads.
 
