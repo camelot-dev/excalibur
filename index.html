@@ -96,10 +96,19 @@
         <div class="row">
           <div class="col-lg-6">
             <div class="media mt-4">
+              <h3><i class="fas fa-file-pdf text-accent mr-3"></i></h3>
+              <div class="media-body">
+                <h5 class="mb-1 text-accent">The Portable Document Format</h5>
+                <p class="lead text-helper">A PDF file defines instructions to place characters at precise <strong class="font-weight-bold">x,y</strong> coordinates relative to the bottom-left corner of the page. Words are simulated by placing some characters closer than others. Spaces are simulated by placing words relatively far apart. And finally tables are simulated by placing words as they would appear in a spreadsheet. The format has no internal representation of a table structure.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="media mt-4">
               <h3><i class="fa fa-table text-accent mr-3"></i></h3>
               <div class="media-body">
                 <h5 class="mb-1 text-accent">Extracting tables from PDFs is hard</h5>
-                <p class="lead text-helper">The Portable Document Format (PDF) was not designed for tabular data. Sadly, a lot of open data is shared as PDFs and getting tables out for analysis and record-keeping is a pain. <strong class="font-weight-bold">Excalibur makes PDF table extraction very easy.</strong> You can download the extracted tables as CSVs or an Excel spreadsheet. All data remains on your machine.</p>
+                <p class="lead text-helper">The Portable Document Format was not designed for tabular data. Sadly, a lot of open data is shared as PDFs and getting tables out for analysis is a pain. A simple copy-and-paste doesn't work. <strong class="font-weight-bold">Excalibur makes PDF table extraction very easy</strong>, by automatically detecting tables in PDFs and letting you save them into CSVs and Excels through a web interface.</p>
               </div>
             </div>
           </div>
@@ -108,16 +117,7 @@
               <h3><i class="fa fa-wrench text-accent mr-3"></i></h3>
               <div class="media-body">
                 <h5 class="mb-1 text-accent">Why another tool?</h5>
-                <p class="lead text-helper">There are both open and closed-source tools that are widely used for PDF table extraction. They either give a nice output or fail miserably. Excalibur is powered by <a href="https://camelot-py.readthedocs.io">Camelot</a> (written by one of the authors) which gives users complete control over table extraction. If you don't get the desired output with default settings, you can tweak them and get the job done!</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-6">
-            <div class="media mt-4">
-              <h3><i class="fa fa-cubes text-accent mr-3"></i></h3>
-              <div class="media-body">
-                <h5 class="mb-1 text-accent">Automate your workflow</h5>
-                <p class="lead text-helper">Excalibur can detect tables in your PDFs automatically. For cases where it doesn't, you can tweak table extraction settings, save them as presets and then apply them on different PDFs with similar table structures. After v0.5.0, Excalibur will have a web API which can be used to start table extraction jobs and download extracted tables when jobs finish.</p>
+                <p class="lead text-helper">There are both open and closed-source tools that are widely used for PDF table extraction. They either give a nice output or fail miserably. Excalibur is powered by <a href="https://camelot-py.readthedocs.io">Camelot</a> which gives users additional settings to tweak table extraction and get the best results. You can see how it performs better than other open-source tools and libraries <a href="https://github.com/socialcopsdev/camelot/wiki/Comparison-with-other-PDF-Table-Extraction-libraries-and-tools" target="_blank">in this comparison</a>.</p>
               </div>
             </div>
           </div>
@@ -125,8 +125,8 @@
             <div class="media mt-4">
               <h3><i class="fa fa-rocket text-accent mr-3"></i></h3>
               <div class="media-body">
-                <h5 class="mb-1 text-accent">Built for scale</h5>
-                <p class="lead text-helper">Excalibur can be configured with MySQL and <a href="http://www.celeryproject.org/" target="_blank">Celery</a> to execute table extraction jobs in a parallel and distributed manner. By default, jobs are executed sequentially. You can check out the documentation at <a href="https://excalibur-py.readthedocs.io" target="_blank">https://excalibur-py.readthedocs.io</a> for more details.</p>
+                <h5 class="mb-1 text-accent">Secure and built for scale</h5>
+                <p class="lead text-helper">You get complete control over your data, since all file storage and processing happens on your own local or remote machine. Excalibur can also be configured with MySQL and <a href="http://www.celeryproject.org/" target="_blank">Celery</a> to execute table extraction jobs in a parallel and distributed manner. By default, jobs are executed sequentially.</p>
               </div>
             </div>
           </div>
@@ -146,8 +146,9 @@
             </a>
           </div>
           <div class="col-md-6 order-lg-last">
-            <h3>Upload your PDF</h3>
-            <p>You can upload your PDF using the web interface. You can also see previous uploads. All file storage and processing happens on your own local or remote machine, which means that you have complete control over your data.</p>
+            <h3>Upload a PDF</h3>
+            <p>You can upload a PDF using the web interface. You can also interact with previous uploads.
+            </p>
           </div>
         </div>
         <div class="row align-items-center mb-5 text-white">
@@ -157,8 +158,8 @@
             </a>
           </div>
           <div class="col-md-6 order-lg-first">
-            <h3>Auto-detect table areas</h3>
-            <p>You don't need to draw table areas and column separators in most cases, because Excalibur can do that automatically.</p>
+            <h3>Autodetect tables</h3>
+            <p>Excalibur can automatically detect tables in your PDF.</p>
           </div>
         </div>
         <div class="row align-items-center mb-5 text-white">
@@ -169,7 +170,7 @@
           </div>
           <div class="col-md-6 order-lg-first">
             <h3>Or draw table areas and/or column separators</h3>
-            <p>You can draw table areas and also add column separators in cases where the tables are buried deep inside the text on the page.</p>
+            <p>You can guide the tool by drawing table areas and column separators in cases where the tables are buried deep inside the text and autodetection fails.</p>
           </div>
         </div>
         <div class="row align-items-center mb-5 text-white">
@@ -179,8 +180,8 @@
             </a>
           </div>
           <div class="col-md-6 order-lg-first">
-            <h3>Or load a saved table extraction rule</h3>
-            <p>Each new table extraction rule (table areas, column separators and other settings) is saved by default. You can load it next time you see a PDF with a similar table structure.</p>
+            <h3>Or load saved settings</h3>
+            <p>You can save table extraction settings for a PDF once, and apply them on new PDFs to extract tables with similar structures.</p>
           </div>
         </div>
         <div class="row align-items-center mb-5 text-white">
@@ -190,8 +191,8 @@
             </a>
           </div>
           <div class="col-md-6 order-lg-first">
-            <h3>Download extracted tables in structured formats</h3>
-            <p>You can view the extracted tables and then download them as CSVs or an Excel spreadsheet. Excalibur also supports JSON and HTML.</p>
+            <h3>View and download data</h3>
+            <p>Finally, you can view the extracted tables and download them as CSVs or Excels. Excalibur also supports JSON and HTML.</p>
           </div>
         </div>
       </div>
