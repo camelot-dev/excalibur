@@ -45,6 +45,8 @@ That's it! Now you can go to http://localhost:5000 and start extracting tabular 
 
 **Note:** You can also download executables for Windows and Linux from the [releases page](https://github.com/camelot-dev/excalibur/releases) and run them directly!
 
+![usage.gif](https://excalibur-py.readthedocs.io/en/master/_images/usage.gif)
+
 ## Why Excalibur?
 
 - Extracting tables from PDFs is hard. A simple copy-and-paste from a PDF into an Excel doesn't preserve table structure. **Excalibur makes PDF table extraction very easy**, by automatically detecting tables in PDFs and letting you save them into CSVs and Excels.
