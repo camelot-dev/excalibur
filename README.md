@@ -5,7 +5,6 @@
 # Excalibur: A web interface to extract tabular data from PDFs
 
 [![Documentation Status](https://readthedocs.org/projects/excalibur-py/badge/?version=master)](https://excalibur-py.readthedocs.io/en/master/) [![image](https://img.shields.io/pypi/v/excalibur-py.svg)](https://pypi.org/project/excalibur-py/) [![image](https://img.shields.io/pypi/l/excalibur-py.svg)](https://pypi.org/project/excalibur-py/) [![image](https://img.shields.io/pypi/pyversions/excalibur-py.svg)](https://pypi.org/project/excalibur-py/) [![Gitter chat](https://badges.gitter.im/camelot-dev/Lobby.png)](https://gitter.im/camelot-dev/Lobby)
-[![Backers on Open Collective](https://opencollective.com/excalibur/backers/badge.svg)](#backers) [![Sponsors on Open Collective](https://opencollective.com/excalibur/sponsors/badge.svg)](#sponsors) 
 
 **Excalibur** is a web interface to extract tabular data from PDFs, written in **Python 3**! It is powered by [Camelot](https://camelot-py.readthedocs.io/).
 
@@ -53,10 +52,6 @@ That's it! Now you can go to http://localhost:5000 and start extracting tabular 
 - You can save table extraction [settings](https://excalibur-py.readthedocs.io/en/master/user/faq.html#faq) (like table areas) for a PDF once, and apply them on new PDFs to extract tables with similar structures.
 - You get complete control over your data. All file storage and processing happens on your own local or remote machine.
 - Excalibur can be configured with MySQL and Celery for parallel and distributed workloads. By default, sqlite and multiprocessing are used for sequential workloads.
-
-## Support us on OpenCollective
-
-If Excalibur helped you extract tables from PDFs, please consider supporting its development by [becoming a backer or a sponsor on OpenCollective](https://opencollective.com/excalibur)!
 
 ## Installation
 
@@ -119,36 +114,15 @@ $ python setup.py test
 
 Excalibur uses [Semantic Versioning](https://semver.org/). For the available versions, see the tags on this repository. For the changelog, you can check out [HISTORY.md](https://github.com/camelot-dev/excalibur/blob/master/HISTORY.md).
 
-## Contributors
-
-This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
-<a href="https://github.com/camelot-dev/excalibur/graphs/contributors"><img src="https://opencollective.com/excalibur/contributors.svg?width=890&button=false" /></a>
-
-
-## Backers
-
-Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/excalibur#backer)]
-
-<a href="https://opencollective.com/excalibur#backers" target="_blank"><img src="https://opencollective.com/excalibur/backers.svg?width=890"></a>
-
-
-## Sponsors
-
-Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/excalibur#sponsor)]
-
-<a href="https://opencollective.com/excalibur/sponsor/0/website" target="_blank"><img src="https://opencollective.com/excalibur/sponsor/0/avatar.svg"></a>
-<a href="https://opencollective.com/excalibur/sponsor/1/website" target="_blank"><img src="https://opencollective.com/excalibur/sponsor/1/avatar.svg"></a>
-<a href="https://opencollective.com/excalibur/sponsor/2/website" target="_blank"><img src="https://opencollective.com/excalibur/sponsor/2/avatar.svg"></a>
-<a href="https://opencollective.com/excalibur/sponsor/3/website" target="_blank"><img src="https://opencollective.com/excalibur/sponsor/3/avatar.svg"></a>
-<a href="https://opencollective.com/excalibur/sponsor/4/website" target="_blank"><img src="https://opencollective.com/excalibur/sponsor/4/avatar.svg"></a>
-<a href="https://opencollective.com/excalibur/sponsor/5/website" target="_blank"><img src="https://opencollective.com/excalibur/sponsor/5/avatar.svg"></a>
-<a href="https://opencollective.com/excalibur/sponsor/6/website" target="_blank"><img src="https://opencollective.com/excalibur/sponsor/6/avatar.svg"></a>
-<a href="https://opencollective.com/excalibur/sponsor/7/website" target="_blank"><img src="https://opencollective.com/excalibur/sponsor/7/avatar.svg"></a>
-<a href="https://opencollective.com/excalibur/sponsor/8/website" target="_blank"><img src="https://opencollective.com/excalibur/sponsor/8/avatar.svg"></a>
-<a href="https://opencollective.com/excalibur/sponsor/9/website" target="_blank"><img src="https://opencollective.com/excalibur/sponsor/9/avatar.svg"></a>
-
-
-
 ## License
 
 This project is licensed under the MIT License, see the [LICENSE](https://github.com/camelot-dev/excalibur/blob/master/LICENSE) file for details.
+
+## Support the development
+
+You can support our work on Excalibur with a one-time or monthly donation [on OpenCollective](https://opencollective.com/excalibur). Organizations who use Excalibur can also sponsor the project for an acknowledgement on [our official site](https://www.tryexcalibur.com/) and this README.
+
+Special thanks to all the users and organizations that support Excalibur!
+
+<a href="https://opencollective.com/excalibur/backer/0/website" target="_blank"><img src="https://opencollective.com/excalibur/backer/0/avatar.svg"></a>
+<a href="https://opencollective.com/excalibur/sponsor/0/website" target="_blank"><img src="https://opencollective.com/excalibur/sponsor/0/avatar.svg"></a>
