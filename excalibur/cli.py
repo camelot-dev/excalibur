@@ -55,7 +55,9 @@ def webserver(*args, **kwargs):
             initialize_database()
 
     app = create_app(conf)
-    app.run(host=conf.get('webserver', 'web_server_host'), use_reloader=False)
+    app.run(port=conf.get('webserver', 'web_server_port'),
+            host=conf.get('webserver', 'web_server_host'),
+            use_reloader=False)
 
 
 @cli.command('worker')
