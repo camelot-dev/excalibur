@@ -4,6 +4,23 @@ Release History
 master
 ------
 
+0.4.1 (2018-11-05)
+------------------
+
+**Bugfixes**
+
+* [#32](https://github.com/camelot-dev/excalibur/issues/32) Changing port in excalibur.cfg has no effect. [#34](https://github.com/camelot-dev/excalibur/pull/34) by Vinayak Mehta.
+
+0.4.0 (2018-11-26)
+------------------
+
+This release adds a lot of UI enhancements (based on user feedback), and updates to the docs and website. Table autodetection is now even more awesome 🔥 since Camelot v0.4.0 adds an improved Stream table detection algorithm. To know more, check out [#206](https://github.com/socialcopsdev/camelot/pull/206).
+
+0.3.0 (2018-11-12)
+------------------
+
+This release adds enhancements to the static website, a rule manager to view, upload and download table extraction rules and an option to load a saved extraction rule on the workspace.
+
 0.2.0 (2018-11-05)
 ------------------
 
