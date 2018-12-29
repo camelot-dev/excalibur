@@ -126,3 +126,4 @@ Special thanks to all the users and organizations that support Excalibur!
 
 <a href="https://opencollective.com/excalibur/backer/0/website" target="_blank"><img src="https://opencollective.com/excalibur/backer/0/avatar.svg"></a>
 <a href="https://opencollective.com/excalibur/sponsor/0/website" target="_blank"><img src="https://opencollective.com/excalibur/sponsor/0/avatar.svg"></a>
+<a href="https://opencollective.com/excalibur/backer/1/website" target="_blank"><img src="https://opencollective.com/excalibur/backer/1/avatar.svg"></a>
