@@ -4,6 +4,13 @@ Release History
 master
 ------
 
+0.4.2 (2019-01-09)
+------------------
+
+**Bugfixes**
+
+* [#41](https://github.com/camelot-dev/excalibur/issues/41) Fix failed function call wrt to upstream changes. [#42](https://github.com/camelot-dev/excalibur/pull/42) by Vinayak Mehta.
+
 0.4.1 (2018-11-05)
 ------------------
 
