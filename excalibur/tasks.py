@@ -10,6 +10,7 @@ import datetime as dt
 import camelot
 from camelot.core import TableList
 from camelot.parsers import Lattice, Stream
+from camelot.ext.ghostscript import Ghostscript
 
 from . import configuration as conf
 from .models import File, Rule, Job
@@ -21,39 +22,6 @@ from .utils.task import (get_pages, save_page, get_page_layout, get_file_dim,
 
 def split(file_id):
     try:
-        def get_executable():
-            import platform
-            from distutils.spawn import find_executable
-
-            class GhostscriptNotFound(Exception): pass
-
-            gs = None
-            system = platform.system().lower()
-            try:
-                if system == 'windows':
-                    if find_executable('gswin32c.exe'):
-                        gs = 'gswin32c.exe'
-                    elif find_executable('gswin64c.exe'):
-                        gs = 'gswin64c.exe'
-                    else:
-                        raise ValueError
-                else:
-                    if find_executable('gs'):
-                        gs = 'gs'
-                    elif find_executable('gsc'):
-                        gs = 'gsc'
-                    else:
-                        raise ValueError
-                if 'ghostscript' not in subprocess.check_output(
-                        [gs, '-version']).decode('utf-8').lower():
-                    raise ValueError
-            except ValueError:
-                raise GhostscriptNotFound(
-                    'Please make sure that Ghostscript is installed'
-                    ' and available on the PATH environment variable')
-
-            return gs
-
         session = Session()
         file = session.query(File).filter(File.file_id == file_id).first()
         extract_pages, total_pages = get_pages(file.filepath, file.pages)
@@ -69,19 +37,13 @@ def split(file_id):
             imagepath = os.path.join(conf.PDFS_FOLDER, file_id, imagename)
 
             # convert single-page PDF to PNG
-            gs_call = [
-                '-q',
-                '-sDEVICE=png16m',
-                '-o',
-                imagepath,
-                '-r600',
-                filepath
-            ]
-            gs = get_executable()
-            gs_call.insert(0, gs)
-            process = subprocess.Popen(gs_call)
-            out = process.communicate()[0]
-            ret = process.wait()
+            gs_call = '-q -sDEVICE=png16m -o {} -r300 {}'.format(
+                imagepath, filepath)
+            gs_call = gs_call.encode().split()
+            null = open(os.devnull, 'wb')
+            with Ghostscript(*gs_call, stdout=null) as gs:
+                pass
+            null.close()
 
             filenames[page] = filename
             filepaths[page] = filepath
