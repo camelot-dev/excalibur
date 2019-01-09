@@ -33,7 +33,9 @@ Release v\ |version|. (:ref:`Installation <install>`)
 Using Excalibur
 ---------------
 
-After :ref:`installation with pip <install>`, you can initialize the metadata database using::
+**Note:** You need to `install ghostscript <https://camelot-py.readthedocs.io/en/master/user/install-deps.html>`_ before moving forward.
+
+After :ref:`installing Excalibur with pip <install>` (), you can initialize the metadata database using::
 
     $ excalibur initdb
 

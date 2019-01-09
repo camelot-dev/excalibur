@@ -12,7 +12,9 @@
 
 ## Using Excalibur
 
-After [installation with pip](https://excalibur-py.readthedocs.io/en/master/user/install.html), you need to initialize the metadata database using:
+**Note:** You need to [install ghostscript](https://camelot-py.readthedocs.io/en/master/user/install-deps.html) before moving forward.
+
+After [installing Excalibur with pip](https://excalibur-py.readthedocs.io/en/master/user/install.html), you need to initialize the metadata database using:
 
 <pre>
 $ excalibur initdb
