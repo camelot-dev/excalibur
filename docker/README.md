@@ -3,7 +3,7 @@
 </p>
 
 # Excalibur: Docker
-This is the Docker configuration which allows you to run Apache Spark without installing any dependencies on your machine!<br/>
+This is the Docker configuration which allows you to run Excalibur without installing any dependencies on your machine!<br/>
 OK, any except `docker`.
 
 ## Prerequisites
