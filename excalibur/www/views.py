@@ -85,6 +85,7 @@ def workspaces(file_id):
         for page in imagepaths:
             imagepaths[page] = imagepaths[page].replace(
             os.path.join(conf.PROJECT_ROOT, 'www'), '')
+            imagepaths[page] = imagepaths[page].replace(os.sep, '/')
         filedims = file.filedims
         imagedims = file.imagedims
         detected_areas = file.detected_areas
