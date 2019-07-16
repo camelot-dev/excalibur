@@ -1,6 +1,11 @@
 let columnCountBuffer = 0;
 let globalRuleId = '';
 
+var dgebi = document.getElementById.bind(document);
+var dgebcn = document.getElementsByClassName.bind(document);
+var dqs = document.querySelector.bind(document);
+var dqsa = document.querySelectorAll.bind(document);
+
 // https://coderwall.com/p/flonoa/simple-string-format-in-javascript
 String.prototype.format = function () {
   let str = this;
@@ -15,8 +20,9 @@ const compare = function (a, b) {
 }
 
 const getTableAreasForRender = function (page, detectedAreas) {
-  const imageWidth = $('#image-{0}'.format(page)).width();
-  const imageHeight = $('#image-{0}'.format(page)).height();
+  let br = dgebi('image-{0}'.format(page)).getBoundingClientRect();
+  const imageWidth = br.width;
+  const imageHeight = br.height;
   const scalingFactorX = imageWidth / fileDims[page][0];
   const scalingFactorY = imageHeight / fileDims[page][1];
 
@@ -39,8 +45,9 @@ const getTableAreasForRender = function (page, detectedAreas) {
 };
 
 const getTableAreasForJob = function (page, selectedAreas) {
-  const imageWidth = $('#image-{0}'.format(page)).width();
-  const imageHeight = $('#image-{0}'.format(page)).height();
+  let br = dgebi('image-{0}'.format(page)).getBoundingClientRect();
+  const imageWidth = br.width;
+  const imageHeight = br.height;
   const scalingFactorX = fileDims[page][0] / imageWidth;
   const scalingFactorY = fileDims[page][1] / imageHeight;
 
@@ -57,7 +64,7 @@ const getTableAreasForJob = function (page, selectedAreas) {
 };
 
 const getColumnSeparators = function (page, selectedSeparators) {
-  const imageWidth = $('#image-{0}'.format(page)).width();
+  const imageWidth = dgebi('image-{0}'.format(page)).getBoundingClientRect().width;
   const scalingFactorX = fileDims[page][0] / imageWidth;
 
   let colSeparators = [];
@@ -130,10 +137,10 @@ const onSavedRuleClick = function (e) {
 
 const getNewColPosOffset = function (page) {
   let prevColPos = 0, newOffset = 0;
-  const pageDiv = '#image-div-{0}'.format(page);
-  const columnList = document.getElementsByClassName("draggable-column");
-  const position = $(pageDiv).position();
-  const divWidth = $(pageDiv).width() - position.left;
+  const pageDiv = dgebi('image-div-{0}'.format(page));
+  const br = pageDiv.getBoundingClientRect();
+  const columnList = dgebcn("draggable-column");
+  const divWidth = br.width - pageDiv.offsetLeft;
 
   if (columnList.length) {
     prevColPos = parseInt(columnList[columnList.length-1].style.left);
@@ -149,24 +156,32 @@ const getNewColPosOffset = function (page) {
 }
 
 const addColumnSeparator = function (page, colPosOffset) {
-  const pageDiv = '#image-div-{0}'.format(page);
-  const position = $(pageDiv).position();
-  const column = $('<div id="dc" class="draggable-column" ondblclick="onColumnSeparatorDoubleClick(this)"><div class="background"></div><div id="line" class="line"></div></div>');
-  $(column).css({
-    'top': position.top,
-    'left': position.left + colPosOffset,
-    'height': $(pageDiv).height()
-  });
-  $(pageDiv).append(column);
-  $('.draggable-column').draggable({
-    axis: 'x',
-    containment: 'parent'
+  const pageDiv = dgebi('image-div-{0}'.format(page));
+  const column = document.createElement("div");
+  column.className = "draggable-column";
+  column.addEventListener("dblclick", onColumnSeparatorDoubleClick.bind(null, column), false);
+  const columnBg = document.createElement("div");
+  columnBg.className = "background";
+  column.appendChild(columnBg);
+  const columnLine = document.createElement("div");
+  columnLine.className = "line";
+  column.appendChild(columnLine);
+  
+  column.style.top=pageDiv.offsetTop+"px";
+  column.style.left=(pageDiv.offsetLeft + colPosOffset)+"px";
+  column.style.height=pageDiv.getBoundingClientRect().height+"px";
+  pageDiv.appendChild(column);
+  [...dgebcn("draggable-column")].forEach(e => {
+    $(e).draggable({
+      axis: 'x',
+      containment: 'parent'
+    });
   });
 };
 
 const getRuleOptions = function () {
   let ruleOptions = {'pages': {}};
-  const flavor = $('#flavors').val();
+  const flavor = dgebi("flavors").value;
   ruleOptions['flavor'] = flavor;
 
   if (flavor === null) {
@@ -175,17 +190,17 @@ const getRuleOptions = function () {
     // advanced settings
     switch(flavor.toString().toLowerCase()) {
       case 'lattice': {
-        ruleOptions['process_background'] = $("#process-background").val() ? true : false;
-        ruleOptions['line_size_scaling'] = $('#line-size-scaling').val() ? Number($('#line-size-scaling').val()) : 15;
-        ruleOptions['split_text'] = $("#split-text-l").val() ? true : false;
-        ruleOptions['flag_size'] = $("#flag-size-l").val() ? true : false;
+        ruleOptions['process_background'] = dgebi("process-background").value ? true : false;
+        ruleOptions['line_size_scaling'] = dgebi("line-size-scaling").value ? Number(dgebi("line-size-scaling").value) : 15;
+        ruleOptions['split_text'] = dgebi("split-text-l").value ? true : false;
+        ruleOptions['flag_size'] = dgebi("flag-size-l").value ? true : false;
         break;
       }
       case 'stream': {
-        ruleOptions['row_close_tol'] = $('#row-close-tol').val() ? Number($('#line-size-scaling').val()) : 2;
-        ruleOptions['col_close_tol'] = $('#col-close-tol').val() ? Number($('#line-size-scaling').val()) : 0;
-        ruleOptions['split_text'] = $("#split-text-s").val() ? true : false;
-        ruleOptions['flag_size'] = $("#flag-size-s").val() ? true : false;
+        ruleOptions['row_close_tol'] = dgebi("row-close-tol").value ? Number(dgebi("line-size-scaling").value) : 2;
+        ruleOptions['col_close_tol'] = dgebi("col-close-tol").value ? Number(dgebi("line-size-scaling").value) : 0;
+        ruleOptions['split_text'] = dgebi("split-text-s").value ? true : false;
+        ruleOptions['flag_size'] = dgebi("flag-size-s").value ? true : false;
         break;
       }
       default: {
@@ -197,8 +212,8 @@ const getRuleOptions = function () {
   // table areas and columns for each page
   for (let page in detectedAreas) {
     ruleOptions['pages'][page] = {};
-    const selectedAreas = $('#image-{0}'.format(page)).selectAreas('areas');
-    const hasColumnSeparator = $('#image-div-{0} > .draggable-column'.format(page)).length > 0;
+    const selectedAreas = $(dgebi('image-{0}'.format(page))).selectAreas('areas');
+    const hasColumnSeparator = document.querySelectorAll('#image-div-{0} > .draggable-column'.format(page)).length > 0;
 
     if (selectedAreas.length > 0) {
       ruleOptions['pages'][page]['table_areas'] = getTableAreasForJob(page, selectedAreas);
@@ -207,9 +222,9 @@ const getRuleOptions = function () {
     }
 
     if (hasColumnSeparator) {
-      let selectedSeparators = []
-      $('#image-div-{0} > .draggable-column'.format(page)).each(function (id, col) {
-        selectedSeparators.push(($(col).offset().left - $(col).parent().offset().left) + ($(col).width() / 2));
+      let selectedSeparators = [];
+      [...document.querySelectorAll('#image-div-{0} > .draggable-column'.format(page))].forEach(function (col) {
+        selectedSeparators.push((col.offsetLeft - col.parentNode.offsetLeft) + (col.getBoundingClientRect().width / 2));
       });
       ruleOptions['pages'][page]['columns'] = getColumnSeparators(page, selectedSeparators);
     } else {
@@ -225,11 +240,12 @@ const getRuleOptions = function () {
 
 const renderTableAreas = function (page, tableAreas) {
   tableAreas = getTableAreasForRender(page, tableAreas);
-  $('#image-{0}'.format(page)).selectAreas('add', tableAreas);
+  $(dgebi('image-{0}'.format(page))).selectAreas('add', tableAreas);
 };
 
 const onDetectAreasClick = (e) => {
   resetTableAreas();
+  console.log("detectedAreas", detectedAreas);
   let flavor = document.getElementById('flavors').value;
   if (flavor == 'Select flavor') {
     for (let page in detectedAreas) {
@@ -245,21 +261,34 @@ const onDetectAreasClick = (e) => {
     }
   } else {
     for (let page in detectedAreas) {
-      renderTableAreas(page, detectedAreas[page][flavor.toLowerCase()]);
+      let pa = detectedAreas[page];
+      if(pa){
+        let flName = flavor.toLowerCase();
+        let paFl = pa[flName];
+        if(paFl){
+          renderTableAreas(page, paFl);
+        }
+        else{
+          console.warn("no flavour", flName, "for page", page);
+        }
+      }
+      else{
+        console.warn("no detected areas for page", page);
+      }
     }
   }
 }
 
 const resetTableAreas = () => {
-  $('.image-area').each(function () {
-    $(this).selectAreas('reset');
+  [...dgebcn("image-area")].forEach(e => {
+    $(e).selectAreas('reset');
   });
 };
 
 // columns
 
 const renderColumnSeparators = function(page, columnSeparators) {
-  const imageWidth = $('#image-{0}'.format(page)).width();
+  const imageWidth = dgebi('image-{0}'.format(page)).getBoundingClientRect().width;
   const scalingFactorX = imageWidth / fileDims[page][0];
 
   for (let i = 0; i < columnSeparators.length; i++) {
@@ -291,13 +320,13 @@ const resetColumnSeparators = function () {
 const onFlavorChange = function () {
   const flavor = document.getElementById('flavors').value;
   if (flavor == 'Lattice') {
-    $('.stream').hide();
-    $('.lattice').show();
-    $('.add-separator').prop('disabled', true);
+    dgebcn("stream")[0].style.display="none";
+    dgebcn("lattice")[0].style.display="";
+    [...document.getElementsByClassName("add-separator")].forEach(e=>{e.disabled=true;});
   } else {
-    $('.stream').show();
-    $('.lattice').hide();
-    $('.add-separator').prop('disabled', false);
+    dgebcn("stream")[0].style.display="";
+    dgebcn("lattice")[0].style.display="none";
+    [...document.getElementsByClassName("add-separator")].forEach(e=>{e.disabled=false;});
   }
 };
 
@@ -309,30 +338,32 @@ const startJob = function () {
   if (!globalRuleId) {
     ruleOptions = getRuleOptions();
   }
-  $.ajax({
-    url: '/jobs',
-    data: {
-      file_id: loc[loc.length - 1],
-      rule_id: globalRuleId,
-      rule_options: JSON.stringify(ruleOptions)
+  let fd = new URLSearchParams();
+  fd.append('file_id', loc[loc.length - 1]);
+  fd.append('rule_id', globalRuleId);
+  fd.append('rule_options', JSON.stringify(ruleOptions));
+  fetch('/jobs', {
+    body: fd,
+    method: 'POST',
+  })
+  .then(function (resp) {
+      let js = resp.json().then(jsr =>{
+        const redirectUrl = '{0}//{1}/jobs/{2}'.format(window.location.protocol, window.location.host, jsr['job_id']);
+        window.location.replace(redirectUrl);
+      });
     },
-    type: 'POST',
-    success: function (data) {
-      const redirectUrl = '{0}//{1}/jobs/{2}'.format(window.location.protocol, window.location.host, data['job_id']);
-      window.location.replace(redirectUrl);
-    },
-    error: function (error) {
+    function (error) {
       console.error(error);
     }
-  });
+  );
 }
 
 const debugQtyAreas = function (event, id, areas) {
   return;
 };
 
-$(document).ready(function () {
-  $('.image-area').selectAreas({
+document.addEventListener("DOMContentLoaded", function () {
+  $(document.getElementsByClassName("image-area")).selectAreas({
     onChanged: debugQtyAreas
   });
-});
+}, false);
