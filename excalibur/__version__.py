@@ -14,10 +14,4 @@ def generate_version(version, prerelease=None, revision=None):
     return ''.join(version_parts)
 
 
-__title__ = 'excalibur-py'
-__description__ = 'A web interface to extract tabular data from PDFs.'
-__url__ = 'https://excalibur-py.readthedocs.io/'
 __version__ = '.'.join(map(str, VERSION))
-__author__ = 'Vinayak Mehta'
-__author_email__ = 'vmehta94@gmail.com'
-__license__ = 'MIT License'
