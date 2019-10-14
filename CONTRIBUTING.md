@@ -20,13 +20,13 @@ A great way to start contributing to Excalibur is to pick an issue tagged with t
 
 ## Setting up a development environment
 
-To install the dependencies needed for development, you can use pip:
+After [installing the dependencies](https://camelot-py.readthedocs.io/en/master/user/install-deps.html#install-deps), which include Tkinter and ghostscript, you can install the `dev` extra using pip:
 
 <pre>
 $ pip install excalibur-py[dev]
 </pre>
 
-Alternatively, you can clone the project repository, and install using pip:
+Alternatively, you can clone the project repository, and install the `dev` extra using pip:
 
 <pre>
 $ pip install -e ".[dev]"
