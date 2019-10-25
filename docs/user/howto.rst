@@ -53,7 +53,7 @@ Setup
 Now you can create the a database and a user for Excalibur::
 
     > CREATE DATABASE excalibur CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-    > grant all on excalibur.* TO 'excalibur'@'%' IDENTIFIED BY '1234';
+    > GRANT ALL ON excalibur.* TO 'excalibur'@'%' IDENTIFIED BY '1234';
 
 Finally, you need to change the ``sql_alchemy_conn`` in ``excalibur.cfg`` to::
 
