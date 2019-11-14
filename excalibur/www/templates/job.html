@@ -62,10 +62,11 @@
     {% endfor %}
   </div>
 {% else %}
+  <meta http-equiv="refresh" content="0.5" >
   <div class="container">
     <div class="jumbotron">
-      <h1 class="display-4">Refresh</h1>
-      <p class="lead">Please wait while the tables are extracted. Refresh again in some time.</p>
+      <h1 class="display-4">Processing</h1>
+      <p class="lead">Please wait while the tables are extracted.</p>
     </div>
   </div>
 {% endif %}
