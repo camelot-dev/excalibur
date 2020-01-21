@@ -132,8 +132,8 @@ conf.read(EXCALIBUR_CONFIG)
 # for Flask
 ALLOWED_EXTENSIONS = ['pdf', 'json']
 SECRET_KEY = conf.get('webserver', 'SECRET_KEY')
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-PDFS_FOLDER = os.path.join(PROJECT_ROOT, 'www/static/uploads')
+PROJECT_ROOT = os.path.normcase(os.path.dirname(os.path.abspath(__file__)))
+PDFS_FOLDER = os.path.normcase(os.path.join(PROJECT_ROOT, 'www/static/uploads'))
 USING_SQLITE = True if conf.get('core', 'SQL_ALCHEMY_CONN').startswith('sqlite') else False
 
 get = conf.get
