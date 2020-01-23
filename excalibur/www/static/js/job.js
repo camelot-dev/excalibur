@@ -11,7 +11,7 @@ const pollUntilServerIsReady = function () {
     
     httpRequest.open("GET", window.location);
     httpRequest.send();
-  }, 1000);
+  }, 500);
 };
 
 $(document).ready(function () {

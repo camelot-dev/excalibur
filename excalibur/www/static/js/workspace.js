@@ -27,7 +27,7 @@ const pollUntilServerIsReady = function () {
     
     httpRequest.open("GET", window.location);
     httpRequest.send();
-  }, 1000);
+  }, 500);
 };
 
 const getTableAreasForRender = function (page, detectedAreas) {
