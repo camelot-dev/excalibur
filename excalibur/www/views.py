@@ -7,7 +7,7 @@ import json
 import datetime as dt
 
 import pandas as pd
-from werkzeug import secure_filename
+from werkzeug.utils import secure_filename
 from flask import (Blueprint, jsonify, redirect, render_template, request,
                    send_from_directory, url_for)
 
