@@ -233,13 +233,13 @@ def jobs(job_id):
 @views.route('/download', methods=['POST'])
 def download():
     job_id = request.form['job_id']
-    format = request.form['format']
+    request_format = request.form['format']
 
     session = Session()
     job = session.query(Job).filter(Job.job_id == job_id).first()
     session.close()
 
-    datapath = os.path.join(job.datapath, format.lower())
+    datapath = os.path.join(job.datapath, request_format.lower())
     zipfile = glob.glob(os.path.join(datapath, '*.zip'))[0]
 
     directory = os.path.join(os.getcwd(), datapath)
