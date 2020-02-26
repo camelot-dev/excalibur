@@ -76,7 +76,7 @@ def files():
 def workspaces(file_id):
     session = Session()
     file = session.query(File).filter(File.file_id == file_id).first()
-    rules = session.query(Rule).order_by(Rule.created_at.desc()).all()
+    session_rules = session.query(Rule).order_by(Rule.created_at.desc()).all()
     session.close()
     imagepaths, saved_rules = (None for i in range(2))
     filedims, imagedims, detected_areas = ('null' for i in range(3))
@@ -93,7 +93,7 @@ def workspaces(file_id):
                 'rule_id': rule.rule_id,
                 'rule_name': rule.rule_name
             }
-            for rule in rules]
+            for rule in session_rules]
     return render_template(
         'workspace.html', filename=file.filename, imagepaths=imagepaths,
         filedims=filedims, imagedims=imagedims, detected_areas=detected_areas,
