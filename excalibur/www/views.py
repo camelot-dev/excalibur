@@ -159,7 +159,7 @@ def jobs(job_id):
 
             data = []
             render_files = json.loads(job.render_files)
-            regex = 'page-(\d)+-table-(\d)+'
+            regex = r'page-(\d)+-table-(\d)+'
             for k in sorted(render_files,
                     key=lambda x: (int(re.split(regex, x)[1]), int(re.split(regex, x)[2]))):
                 df = pd.read_json(render_files[k])
