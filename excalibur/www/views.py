@@ -115,7 +115,7 @@ def rules(rule_id):
                 rule_options = json.loads(rule.rule_options)
             return jsonify(message=message, rule_options=rule_options)
         session = Session()
-        rules = session.query(Rule).order_by(Rule.created_at.desc()).all()
+        session_rules = session.query(Rule).order_by(Rule.created_at.desc()).all()
         session.close()
         saved_rules = [
             {
@@ -124,7 +124,7 @@ def rules(rule_id):
                 'rule_name': rule.rule_name,
                 'rule_options': rule.rule_options
             }
-            for rule in rules]
+            for rule in session_rules]
         return render_template('rules.html', saved_rules=saved_rules)
     message='Rule invalid'
     file = request.files['file-0']
