@@ -54,14 +54,14 @@ def files():
         file.save(filepath)
 
         session = Session()
-        f = File(
+        new_file = File(
             file_id=file_id,
             uploaded_at=uploaded_at,
             pages=pages,
             filename=filename,
             filepath=filepath
         )
-        session.add(f)
+        session.add(new_file)
         session.commit()
         session.close()
 
@@ -136,13 +136,13 @@ def rules(rule_id):
         message = 'Rule saved'
 
         session = Session()
-        r = Rule(
+        rule = Rule(
             rule_id=rule_id,
             created_at=created_at,
             rule_name=rule_name,
             rule_options=rule_options
         )
-        session.add(r)
+        session.add(rule)
         session.commit()
         session.close()
     return jsonify(message=message)
@@ -160,13 +160,13 @@ def jobs(job_id):
             data = []
             render_files = json.loads(job.render_files)
             regex = r'page-(\d)+-table-(\d)+'
-            for k in sorted(render_files,
+            for file in sorted(render_files,
                     key=lambda x: (int(re.split(regex, x)[1]), int(re.split(regex, x)[2]))):
-                df = pd.read_json(render_files[k])
-                columns = df.columns.values
-                records = df.to_dict('records')
+                data_frame = pd.read_json(render_files[file])
+                columns = data_frame.columns.values
+                records = data_frame.to_dict('records')
                 data.append({
-                    'title': k,
+                    'title': file,
                     'columns': columns,
                     'records': records
                 })
@@ -199,13 +199,13 @@ def jobs(job_id):
         rule_options = request.form['rule_options']
 
         session = Session()
-        r = Rule(
+        rule = Rule(
             rule_id=rule_id,
             created_at=created_at,
             rule_name=rule_name,
             rule_options=rule_options
         )
-        session.add(r)
+        session.add(rule)
         session.commit()
         session.close()
 
@@ -213,13 +213,13 @@ def jobs(job_id):
     started_at = dt.datetime.now()
 
     session = Session()
-    j = Job(
+    job = Job(
         job_id=job_id,
         started_at=started_at,
         file_id=file_id,
         rule_id=rule_id
     )
-    session.add(j)
+    session.add(job)
     session.commit()
     session.close()
 
@@ -233,13 +233,13 @@ def jobs(job_id):
 @views.route('/download', methods=['POST'])
 def download():
     job_id = request.form['job_id']
-    f = request.form['format']
+    format = request.form['format']
 
     session = Session()
     job = session.query(Job).filter(Job.job_id == job_id).first()
     session.close()
 
-    datapath = os.path.join(job.datapath, f.lower())
+    datapath = os.path.join(job.datapath, format.lower())
     zipfile = glob.glob(os.path.join(datapath, '*.zip'))[0]
 
     directory = os.path.join(os.getcwd(), datapath)
