@@ -4,6 +4,18 @@ Release History
 master
 ------
 
+0.4.3 (2020-01-21)
+------------------
+
+**Improvements**
+
+* The command-line interface can now be run using `python -m excalibur`. [#97](https://github.com/camelot-dev/excalibur/pull/97).
+* Excalibur now follows the Black code style! [#98](https://github.com/camelot-dev/excalibur/pull/98).
+
+**Bugfixes**
+
+* [#95](https://github.com/camelot-dev/excalibur/issues/95) Fix Werkzeug import error. [#96](https://github.com/camelot-dev/excalibur/pull/96).
+
 0.4.2 (2019-01-09)
 ------------------
 
