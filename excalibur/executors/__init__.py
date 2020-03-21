@@ -11,8 +11,8 @@ DEFAULT_EXECUTOR = None
 
 
 class Executors:
-    CeleryExecutor = 'CeleryExecutor'
-    SequentialExecutor = 'SequentialExecutor'
+    CeleryExecutor = "CeleryExecutor"
+    SequentialExecutor = "SequentialExecutor"
 
 
 def get_default_executor():
@@ -21,7 +21,7 @@ def get_default_executor():
     if DEFAULT_EXECUTOR is not None:
         return DEFAULT_EXECUTOR
 
-    configure_executor(conf.get('core', 'EXECUTOR'))
+    configure_executor(conf.get("core", "EXECUTOR"))
 
     return DEFAULT_EXECUTOR
 
@@ -35,7 +35,7 @@ def configure_executor(executor_name):
         elif executor_name == Executors.SequentialExecutor:
             DEFAULT_EXECUTOR = SequentialExecutor()
         else:
-            raise NotImplementedError('Unknown executor')
+            raise NotImplementedError("Unknown executor")
 
 
 def dispose_executor():
@@ -45,5 +45,5 @@ def dispose_executor():
         DEFAULT_EXECUTOR.stop()
 
 
-configure_executor(conf.get('core', 'EXECUTOR'))
+configure_executor(conf.get("core", "EXECUTOR"))
 atexit.register(dispose_executor)

@@ -9,4 +9,7 @@ def mkdirs(path):
 
 
 def allowed_filename(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in conf.ALLOWED_EXTENSIONS
+    return (
+        "." in filename
+        and filename.rsplit(".", 1)[1].lower() in conf.ALLOWED_EXTENSIONS
+    )
