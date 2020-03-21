@@ -25,39 +25,39 @@ def get_pages(filename, pages):
 
     """
     page_numbers = []
-    inputstream = open(filename, 'rb')
+    inputstream = open(filename, "rb")
     infile = PdfFileReader(inputstream, strict=False)
     N = infile.getNumPages()
-    if pages == '1':
-        page_numbers.append({'start': 1, 'end': 1})
+    if pages == "1":
+        page_numbers.append({"start": 1, "end": 1})
     else:
         if infile.isEncrypted:
             infile.decrypt(self.password)
-        if pages == 'all':
-            page_numbers.append({'start': 1, 'end': infile.getNumPages()})
+        if pages == "all":
+            page_numbers.append({"start": 1, "end": infile.getNumPages()})
         else:
-            for r in pages.split(','):
-                if '-' in r:
-                    a, b = r.split('-')
-                    if b == 'end':
+            for r in pages.split(","):
+                if "-" in r:
+                    a, b = r.split("-")
+                    if b == "end":
                         b = infile.getNumPages()
-                    page_numbers.append({'start': int(a), 'end': int(b)})
+                    page_numbers.append({"start": int(a), "end": int(b)})
                 else:
-                    page_numbers.append({'start': int(r), 'end': int(r)})
+                    page_numbers.append({"start": int(r), "end": int(r)})
     inputstream.close()
     P = []
     for p in page_numbers:
-        P.extend(range(p['start'], p['end'] + 1))
+        P.extend(range(p["start"], p["end"] + 1))
     return sorted(set(P)), N
 
 
 def save_page(filepath, page_number):
-    infile = PdfFileReader(open(filepath, 'rb'), strict=False)
+    infile = PdfFileReader(open(filepath, "rb"), strict=False)
     page = infile.getPage(page_number - 1)
     outfile = PdfFileWriter()
     outfile.addPage(page)
-    outpath = os.path.join(os.path.dirname(filepath), 'page-{}.pdf'.format(page_number))
-    with open(outpath, 'wb') as f:
+    outpath = os.path.join(os.path.dirname(filepath), "page-{}.pdf".format(page_number))
+    with open(outpath, "wb") as f:
         outfile.write(f)
     froot, fext = os.path.splitext(outpath)
     layout, __ = get_page_layout(outpath)
@@ -66,20 +66,20 @@ def save_page(filepath, page_number):
     horizontal_text = get_text_objects(layout, ltype="horizontal_text")
     vertical_text = get_text_objects(layout, ltype="vertical_text")
     rotation = get_rotation(chars, horizontal_text, vertical_text)
-    if rotation != '':
-        outpath_new = ''.join([froot.replace('page', 'p'), '_rotated', fext])
+    if rotation != "":
+        outpath_new = "".join([froot.replace("page", "p"), "_rotated", fext])
         os.rename(outpath, outpath_new)
-        infile = PdfFileReader(open(outpath_new, 'rb'), strict=False)
+        infile = PdfFileReader(open(outpath_new, "rb"), strict=False)
         if infile.isEncrypted:
-            infile.decrypt('')
+            infile.decrypt("")
         outfile = PdfFileWriter()
         p = infile.getPage(0)
-        if rotation == 'anticlockwise':
+        if rotation == "anticlockwise":
             p.rotateClockwise(90)
-        elif rotation == 'clockwise':
+        elif rotation == "clockwise":
             p.rotateCounterClockwise(90)
         outfile.addPage(p)
-        with open(outpath, 'wb') as f:
+        with open(outpath, "wb") as f:
             outfile.write(f)
 
 

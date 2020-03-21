@@ -9,13 +9,12 @@ from .views import views
 
 def to_pretty_json(value):
     value = json.loads(value)
-    return json.dumps(value, sort_keys=True,
-                      indent=4, separators=(',', ': '))
+    return json.dumps(value, sort_keys=True, indent=4, separators=(",", ": "))
 
 
 def create_app(config=None):
     app = Flask(__name__)
     app.config.from_object(conf)
     app.register_blueprint(views)
-    app.jinja_env.filters['pretty'] = to_pretty_json
+    app.jinja_env.filters["pretty"] = to_pretty_json
     return app

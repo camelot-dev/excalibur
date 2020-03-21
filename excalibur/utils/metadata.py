@@ -8,8 +8,10 @@ def generate_uuid():
 
 
 def random_string(length):
-    ret = ''
+    ret = ""
     while length:
-        ret += random.choice(string.digits + string.ascii_lowercase + string.ascii_uppercase)
+        ret += random.choice(
+            string.digits + string.ascii_lowercase + string.ascii_uppercase
+        )
         length -= 1
     return ret

@@ -16,8 +16,13 @@ from . import configuration as conf
 from .models import File, Rule, Job
 from .settings import Session
 from .utils.file import mkdirs
-from .utils.task import (get_pages, save_page, get_page_layout, get_file_dim,
-                         get_image_dim)
+from .utils.task import (
+    get_pages,
+    save_page,
+    get_page_layout,
+    get_file_dim,
+    get_image_dim,
+)
 
 
 def split(file_id):
@@ -26,21 +31,28 @@ def split(file_id):
         file = session.query(File).filter(File.file_id == file_id).first()
         extract_pages, total_pages = get_pages(file.filepath, file.pages)
 
-        filenames, filepaths, imagenames, imagepaths, filedims, imagedims, detected_areas = ({} for i in range(7))
+        (
+            filenames,
+            filepaths,
+            imagenames,
+            imagepaths,
+            filedims,
+            imagedims,
+            detected_areas,
+        ) = ({} for i in range(7))
         for page in extract_pages:
             # extract into single-page PDF
             save_page(file.filepath, page)
 
-            filename = 'page-{}.pdf'.format(page)
+            filename = "page-{}.pdf".format(page)
             filepath = os.path.join(conf.PDFS_FOLDER, file_id, filename)
-            imagename = ''.join([filename.replace('.pdf', ''), '.png'])
+            imagename = "".join([filename.replace(".pdf", ""), ".png"])
             imagepath = os.path.join(conf.PDFS_FOLDER, file_id, imagename)
 
             # convert single-page PDF to PNG
-            gs_call = '-q -sDEVICE=png16m -o {} -r300 {}'.format(
-                imagepath, filepath)
+            gs_call = "-q -sDEVICE=png16m -o {} -r300 {}".format(imagepath, filepath)
             gs_call = gs_call.encode().split()
-            null = open(os.devnull, 'wb')
+            null = open(os.devnull, "wb")
             with Ghostscript(*gs_call, stdout=null) as gs:
                 pass
             null.close()
@@ -70,8 +82,7 @@ def split(file_id):
                     x1, y1, x2, y2 = table._bbox
                     stream_areas.append((x1, y2, x2, y1))
 
-            detected_areas[page] = {
-                'lattice': lattice_areas, 'stream': stream_areas}
+            detected_areas[page] = {"lattice": lattice_areas, "stream": stream_areas}
 
         file.extract_pages = json.dumps(extract_pages)
         file.total_pages = total_pages
@@ -98,15 +109,17 @@ def extract(job_id):
         file = session.query(File).filter(File.file_id == job.file_id).first()
 
         rule_options = json.loads(rule.rule_options)
-        flavor = rule_options.pop('flavor')
-        pages = rule_options.pop('pages')
+        flavor = rule_options.pop("flavor")
+        pages = rule_options.pop("pages")
 
         tables = []
         filepaths = json.loads(file.filepaths)
         for p in pages:
             kwargs = pages[p]
             kwargs.update(rule_options)
-            parser = Lattice(**kwargs) if flavor.lower() == 'lattice' else Stream(**kwargs)
+            parser = (
+                Lattice(**kwargs) if flavor.lower() == "lattice" else Stream(**kwargs)
+            )
             t = parser.extract_tables(filepaths[p])
             for _t in t:
                 _t.page = int(p)
@@ -115,19 +128,21 @@ def extract(job_id):
 
         froot, fext = os.path.splitext(file.filename)
         datapath = os.path.dirname(file.filepath)
-        for f in ['csv', 'excel', 'json', 'html']:
+        for f in ["csv", "excel", "json", "html"]:
             f_datapath = os.path.join(datapath, f)
             mkdirs(f_datapath)
-            ext = f if f != 'excel' else 'xlsx'
-            f_datapath = os.path.join(f_datapath, '{}.{}'.format(froot, ext))
+            ext = f if f != "excel" else "xlsx"
+            f_datapath = os.path.join(f_datapath, "{}.{}".format(froot, ext))
             tables.export(f_datapath, f=f, compress=True)
 
         # for render
-        jsonpath = os.path.join(datapath, 'json')
-        jsonpath = os.path.join(jsonpath, '{}.json'.format(froot))
-        tables.export(jsonpath, f='json')
-        render_files = {os.path.splitext(os.path.basename(f))[0]: f
-            for f in glob.glob(os.path.join(datapath, 'json/*.json'))}
+        jsonpath = os.path.join(datapath, "json")
+        jsonpath = os.path.join(jsonpath, "{}.json".format(froot))
+        tables.export(jsonpath, f="json")
+        render_files = {
+            os.path.splitext(os.path.basename(f))[0]: f
+            for f in glob.glob(os.path.join(datapath, "json/*.json"))
+        }
 
         job.datapath = datapath
         job.render_files = json.dumps(render_files)

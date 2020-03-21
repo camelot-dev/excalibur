@@ -12,14 +12,14 @@ def _read_default_config_file(file_name):
     https://github.com/apache/incubator-airflow/blob/master/airflow/configuration.py
     https://github.com/apache/incubator-airflow/blob/master/LICENSE
     """
-    templates_dir = os.path.join(os.path.dirname(__file__), 'config_templates')
+    templates_dir = os.path.join(os.path.dirname(__file__), "config_templates")
     file_path = os.path.join(templates_dir, file_name)
     if six.PY2:
         with open(file_path) as f:
             config = f.read()
-            return config.decode('utf-8')
+            return config.decode("utf-8")
     else:
-        with open(file_path, encoding='utf-8') as f:
+        with open(file_path, encoding="utf-8") as f:
             return f.read()
 
 
@@ -42,7 +42,7 @@ def expand_env_var(env_var):
             env_var = interpolated
 
 
-DEFAULT_CONFIG = _read_default_config_file('default_excalibur.cfg')
+DEFAULT_CONFIG = _read_default_config_file("default_excalibur.cfg")
 
 
 class ExcaliburConfigParser(ConfigParser):
@@ -56,10 +56,12 @@ class ExcaliburConfigParser(ConfigParser):
         self.is_validated = False
 
     def _validate(self):
-        if self.get("core", "executor") != 'SequentialExecutor' and \
-                "sqlite" in self.get('core', 'sql_alchemy_conn'):
-            raise ValueError('Cannot use sqlite with the {}'.format(
-                self.get('core', 'executor')))
+        if self.get(
+            "core", "executor"
+        ) != "SequentialExecutor" and "sqlite" in self.get("core", "sql_alchemy_conn"):
+            raise ValueError(
+                "Cannot use sqlite with the {}".format(self.get("core", "executor"))
+            )
 
         self.is_validated = True
 
@@ -69,15 +71,17 @@ class ExcaliburConfigParser(ConfigParser):
 
         if super(ExcaliburConfigParser, self).has_option(section, key):
             return expand_env_var(
-                super(ExcaliburConfigParser, self).get(section, key, **kwargs))
+                super(ExcaliburConfigParser, self).get(section, key, **kwargs)
+            )
 
         if self.excalibur_defaults.has_option(section, key):
-            return expand_env_var(
-                self.excalibur_defaults.get(section, key, **kwargs))
+            return expand_env_var(self.excalibur_defaults.get(section, key, **kwargs))
 
         else:
-            raise ValueError('section/key [{section}/{key}] not found in'
-                             ' config'.format(**locals()))
+            raise ValueError(
+                "section/key [{section}/{key}] not found in"
+                " config".format(**locals())
+            )
 
     def read(self, filename):
         super(ExcaliburConfigParser, self).read(filename)
@@ -89,17 +93,17 @@ def mkdirs(path):
         os.makedirs(path)
 
 
-if 'EXCALIBUR_HOME' not in os.environ:
-    EXCALIBUR_HOME = expand_env_var('~/excalibur')
+if "EXCALIBUR_HOME" not in os.environ:
+    EXCALIBUR_HOME = expand_env_var("~/excalibur")
 else:
-    EXCALIBUR_HOME = expand_env_var(os.environ['EXCALIBUR_HOME'])
+    EXCALIBUR_HOME = expand_env_var(os.environ["EXCALIBUR_HOME"])
 
 mkdirs(EXCALIBUR_HOME)
 
-if 'EXCALIBUR_CONFIG' not in os.environ:
-    EXCALIBUR_CONFIG = EXCALIBUR_HOME + '/excalibur.cfg'
+if "EXCALIBUR_CONFIG" not in os.environ:
+    EXCALIBUR_CONFIG = EXCALIBUR_HOME + "/excalibur.cfg"
 else:
-    EXCALIBUR_CONFIG = expand_env_var(os.environ['EXCALIBUR_CONFIG'])
+    EXCALIBUR_CONFIG = expand_env_var(os.environ["EXCALIBUR_CONFIG"])
 
 
 def parameterized_config(template):
@@ -116,12 +120,11 @@ def parameterized_config(template):
 
 
 if not os.path.isfile(EXCALIBUR_CONFIG):
-    print('Creating new Excalibur configuration file in: {}'.format(
-        EXCALIBUR_CONFIG))
-    with open(EXCALIBUR_CONFIG, 'w') as f:
+    print("Creating new Excalibur configuration file in: {}".format(EXCALIBUR_CONFIG))
+    with open(EXCALIBUR_CONFIG, "w") as f:
         cfg = parameterized_config(DEFAULT_CONFIG)
         if six.PY2:
-            cfg = cfg.encode('utf8')
+            cfg = cfg.encode("utf8")
         f.write(cfg)
 
 
@@ -130,11 +133,13 @@ conf = ExcaliburConfigParser(default_config=parameterized_config(DEFAULT_CONFIG)
 conf.read(EXCALIBUR_CONFIG)
 
 # for Flask
-ALLOWED_EXTENSIONS = ['pdf', 'json']
-SECRET_KEY = conf.get('webserver', 'SECRET_KEY')
+ALLOWED_EXTENSIONS = ["pdf", "json"]
+SECRET_KEY = conf.get("webserver", "SECRET_KEY")
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-PDFS_FOLDER = os.path.join(PROJECT_ROOT, 'www/static/uploads')
-USING_SQLITE = True if conf.get('core', 'SQL_ALCHEMY_CONN').startswith('sqlite') else False
+PDFS_FOLDER = os.path.join(PROJECT_ROOT, "www/static/uploads")
+USING_SQLITE = (
+    True if conf.get("core", "SQL_ALCHEMY_CONN").startswith("sqlite") else False
+)
 
 get = conf.get
 has_option = conf.has_option
