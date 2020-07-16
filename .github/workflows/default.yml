@@ -37,5 +37,5 @@ jobs:
       - name: Upload build artifacts
         uses: actions/upload-artifact@v1
         with:
-          name: builds
+          name: excalibur-${{ matrix.config.os }}-${{ matrix.config.arch }}
           path: dist/
