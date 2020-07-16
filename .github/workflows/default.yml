@@ -34,7 +34,7 @@ jobs:
         if: runner.os == 'Windows'
         run: |
           pyinstaller --onefile --hidden-import="pkg_resources.py2_warn" --add-data "excalibur/www/templates;excalibur/www/templates" --add-data "excalibur/www/static;excalibur/www/static" --add-data "excalibur/config_templates;excalibur/config_templates" --name "excalibur-${{ matrix.config.os }}-${{ matrix.config.arch }}" arthur.py
-      - name: Upload build artifacts
+      - name: Upload build artifact
         uses: actions/upload-artifact@v1
         with:
           name: excalibur-${{ matrix.config.os }}-${{ matrix.config.arch }}
