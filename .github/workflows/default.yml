@@ -1,4 +1,4 @@
-name: Package Excalibur with PyInstaller
+name: Build packages
 
 on:
   workflow_dispatch:
@@ -21,22 +21,21 @@ jobs:
         uses: actions/setup-python@v1
         with:
           python-version: 3.8
-      - name: Install dependencies
+      - name: Install Excalibur
         run: |
           python -m pip install --upgrade pip
-          pip install pyinstaller
+          python -m pip install pyinstaller
+          python -m pip install .
       - name: Build with PyInstaller on Ubuntu and MacOS
         if: runner.os == 'Linux' || runner.os == 'macOS'
         run: |
-          pyi-makespec --paths=excalibur/executors/celery_executor.py arthur.py
-          pyinstaller --onefile --add-data "excalibur/www/templates:excalibur/www/templates" --add-data "excalibur/www/static:excalibur/www/static" --add-data "excalibur/config_templates:excalibur/config_templates" --name "excalibur-${{ matrix.config.os }}-${{ matrix.config.arch }}" arthur.py
+          pyinstaller --onefile --hidden-import="pkg_resources.py2_warn" --add-data "excalibur/www/templates:excalibur/www/templates" --add-data "excalibur/www/static:excalibur/www/static" --add-data "excalibur/config_templates:excalibur/config_templates" --name "excalibur-${{ matrix.config.os }}-${{ matrix.config.arch }}" arthur.py
       - name: Build with PyInstaller on Windows
         if: runner.os == 'Windows'
         run: |
-          pyi-makespec --paths=excalibur/executors/celery_executor.py arthur.py
-          pyinstaller --onefile --add-data "excalibur/www/templates;excalibur/www/templates" --add-data "excalibur/www/static;excalibur/www/static" --add-data "excalibur/config_templates;excalibur/config_templates" --name "excalibur-${{ matrix.config.os }}-${{ matrix.config.arch }}" arthur.py
-      - name: Upload a build artifact
+          pyinstaller --onefile --hidden-import="pkg_resources.py2_warn" --add-data "excalibur/www/templates;excalibur/www/templates" --add-data "excalibur/www/static;excalibur/www/static" --add-data "excalibur/config_templates;excalibur/config_templates" --name "excalibur-${{ matrix.config.os }}-${{ matrix.config.arch }}" arthur.py
+      - name: Upload build artifacts
         uses: actions/upload-artifact@v1
         with:
-          name: Builds
+          name: builds
           path: dist/

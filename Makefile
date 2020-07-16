@@ -15,11 +15,11 @@ publish:
 	pip install twine
 	python setup.py sdist bdist_wheel --universal
 	twine upload dist/*
-	rm -fr build dist .egg excalibur_py.egg-info
+	rm -rf build dist .egg excalibur_py.egg-info
 
 build-executable:
 	pip install pyinstaller
 	# https://pythonhosted.org/PyInstaller/when-things-go-wrong.html#helping-pyinstaller-find-modules
 	# pyi-makespec --paths=excalibur/executors/celery_executor.py arthur.py
 	# replace : with ; for Windows
-	pyinstaller --add-data "excalibur/www/templates:excalibur/www/templates" --add-data "excalibur/www/static:excalibur/www/static" --add-data "excalibur/config_templates:excalibur/config_templates" arthur.py
+	pyinstaller --hidden-import="pkg_resources.py2_warn" --add-data "excalibur/www/templates:excalibur/www/templates" --add-data "excalibur/www/static:excalibur/www/static" --add-data "excalibur/config_templates:excalibur/config_templates" arthur.py
