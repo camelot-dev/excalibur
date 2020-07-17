@@ -10,17 +10,18 @@ jobs:
     strategy:
       matrix:
         config:
-          - { os: macos-latest, arch: x64, name: macos-latest }
-          - { os: ubuntu-latest, arch: x64, name: ubuntu-latest }
-          - { os: windows-latest, arch: x64, name: windows-latest }
-          - { os: windows-latest, arch: ia32, name: windows-latest-32 }
+          - { os: macos-latest, arch: x64, python-arch: x64, name: macos-latest }
+          - { os: ubuntu-latest, arch: x64, python-arch: x64, name: ubuntu-latest }
+          - { os: windows-latest, arch: x64, python-arch: x64, name: windows-latest }
+          - { os: windows-latest, arch: ia32, python-arch: x86, name: windows-latest-32 }
 
     steps:
       - uses: actions/checkout@v1
       - name: Set up Python 3.8
         uses: actions/setup-python@v1
         with:
-          python-version: 3.8
+          python-version: '3.8'
+          architecture: ${{ matrix.config.python-arch }}
       - name: Install Excalibur
         run: |
           python -m pip install --upgrade pip
