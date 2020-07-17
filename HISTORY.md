@@ -4,7 +4,9 @@ Release History
 master
 ------
 
-0.4.3 (2020-01-21)
+* Add GitHub Action for automated Linux, MacOS and Windows builds. [#107](https://github.com/camelot-dev/excalibur/pull/107) by [arky](https://github.com/arky).
+
+0.4.3 (2020-03-21)
 ------------------
 
 **Improvements**
@@ -33,7 +35,7 @@ master
 0.4.0 (2018-11-26)
 ------------------
 
-This release adds a lot of UI enhancements (based on user feedback), and updates to the docs and website. Table autodetection is now even more awesome 🔥 since Camelot v0.4.0 adds an improved Stream table detection algorithm. To know more, check out [#206](https://github.com/socialcopsdev/camelot/pull/206).
+This release adds a lot of UI enhancements (based on user feedback), and updates to the docs and website. Table autodetection is now even more awesome 🔥 since Camelot v0.4.0 adds an improved Stream table detection algorithm. To know more, check out [#206](https://github.com/camelot-dev/camelot/pull/206).
 
 0.3.0 (2018-11-12)
 ------------------
