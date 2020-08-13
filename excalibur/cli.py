@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import os
+from threading import Timer
 
 import click
 
@@ -49,6 +50,12 @@ def webserver(*args, **kwargs):
         sqlite_path = settings.SQL_ALCHEMY_CONN.replace("sqlite:///", "")
         if not os.path.isfile(sqlite_path):
             initialize_database()
+
+    # https://stackoverflow.com/a/54235461/2780127
+    def open_browser():
+        click.launch("http://localhost:5000")
+
+    Timer(1, open_browser).start()
 
     app = create_app(conf)
     app.run(
