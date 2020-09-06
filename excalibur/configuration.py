@@ -2,7 +2,6 @@
 
 import os
 import six
-import shutil
 
 from backports.configparser import ConfigParser
 
