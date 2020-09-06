@@ -1,7 +1,6 @@
 import json
 
-from flask import Flask, Blueprint
-from werkzeug.utils import find_modules, import_string
+from flask import Flask
 
 from .. import configuration as conf
 from .views import views

@@ -4,10 +4,8 @@ import os
 import glob
 import json
 import logging
-import subprocess
 import datetime as dt
 
-import camelot
 from camelot.core import TableList
 from camelot.parsers import Lattice, Stream
 from camelot.ext.ghostscript import Ghostscript
@@ -19,7 +17,6 @@ from .utils.file import mkdirs
 from .utils.task import (
     get_pages,
     save_page,
-    get_page_layout,
     get_file_dim,
     get_image_dim,
 )
