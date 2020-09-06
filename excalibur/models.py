@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import os
 import json
 import datetime as dt
 
