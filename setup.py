@@ -2,10 +2,10 @@
 
 import os
 from setuptools import find_packages
-
+from typing import Any, Dict  # noqa
 
 here = os.path.abspath(os.path.dirname(__file__))
-about = {}
+about = {}  # type: Dict[str, Any]
 with open(os.path.join(here, "excalibur", "__version__.py"), "r") as f:
     exec(f.read(), about)
 

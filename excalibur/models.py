@@ -2,12 +2,13 @@
 
 import json
 import datetime as dt
+from typing import Any  # noqa
 
 from sqlalchemy import Boolean, Column, DateTime, Integer, String, Text, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 
 
-Base = declarative_base()
+Base = declarative_base()  # type: Any
 ID_LEN = 100
 STR_LEN = 500
 
