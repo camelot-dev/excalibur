@@ -1,6 +1,5 @@
 from .. import configuration as conf
 
-
 broker_url = conf.get("celery", "BROKER_URL")
 
 DEFAULT_CELERY_CONFIG = {

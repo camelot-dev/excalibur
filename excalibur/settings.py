@@ -1,14 +1,11 @@
-# -*- coding: utf-8 -*-
-
-import os
 import atexit
+import os
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.pool import NullPool
 
 from . import configuration as conf
-
 
 EXCALIBUR_HOME = None
 SQL_ALCHEMY_CONN = None

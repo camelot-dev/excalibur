@@ -1,12 +1,17 @@
-# -*- coding: utf-8 -*-
-
-import json
 import datetime as dt
+import json
 from typing import Any  # noqa
 
-from sqlalchemy import Boolean, Column, DateTime, Integer, String, Text, ForeignKey
+from sqlalchemy import (
+    Boolean,
+    Column,
+    DateTime,
+    ForeignKey,
+    Integer,
+    String,
+    Text,
+)
 from sqlalchemy.ext.declarative import declarative_base
-
 
 Base = declarative_base()  # type: Any
 ID_LEN = 100

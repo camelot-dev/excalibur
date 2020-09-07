@@ -1,8 +1,6 @@
-# -*- coding: utf-8 -*-
-
 import os
-import six
 
+import six
 from backports.configparser import ConfigParser
 
 
@@ -13,13 +11,8 @@ def _read_default_config_file(file_name):
     """
     templates_dir = os.path.join(os.path.dirname(__file__), "config_templates")
     file_path = os.path.join(templates_dir, file_name)
-    if six.PY2:
-        with open(file_path) as f:
-            config = f.read()
-            return config.decode("utf-8")
-    else:
-        with open(file_path, encoding="utf-8") as f:
-            return f.read()
+    with open(file_path, encoding="utf-8") as f:
+        return f.read()
 
 
 def expand_env_var(env_var):
@@ -46,7 +39,7 @@ DEFAULT_CONFIG = _read_default_config_file("default_excalibur.cfg")
 
 class ExcaliburConfigParser(ConfigParser):
     def __init__(self, default_config=None, *args, **kwargs):
-        super(ExcaliburConfigParser, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         self.excalibur_defaults = ConfigParser(*args, **kwargs)
         if default_config is not None:
@@ -68,10 +61,8 @@ class ExcaliburConfigParser(ConfigParser):
         section = str(section).lower()
         key = str(key).lower()
 
-        if super(ExcaliburConfigParser, self).has_option(section, key):
-            return expand_env_var(
-                super(ExcaliburConfigParser, self).get(section, key, **kwargs)
-            )
+        if super().has_option(section, key):
+            return expand_env_var(super().get(section, key, **kwargs))
 
         if self.excalibur_defaults.has_option(section, key):
             return expand_env_var(self.excalibur_defaults.get(section, key, **kwargs))
@@ -83,7 +74,7 @@ class ExcaliburConfigParser(ConfigParser):
             )
 
     def read(self, filename):
-        super(ExcaliburConfigParser, self).read(filename)
+        super().read(filename)
         self._validate()
 
 
@@ -119,7 +110,7 @@ def parameterized_config(template):
 
 
 if not os.path.isfile(EXCALIBUR_CONFIG):
-    print("Creating new Excalibur configuration file in: {}".format(EXCALIBUR_CONFIG))
+    print(f"Creating new Excalibur configuration file in: {EXCALIBUR_CONFIG}")
     with open(EXCALIBUR_CONFIG, "w") as f:
         cfg = parameterized_config(DEFAULT_CONFIG)
         if six.PY2:

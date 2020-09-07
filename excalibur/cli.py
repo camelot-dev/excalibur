@@ -1,14 +1,13 @@
-# -*- coding: utf-8 -*-
-
 import os
 from threading import Timer
 
 import click
 
-from . import __version__, settings
+from . import __version__
 from . import configuration as conf
+from . import settings
 from .operators.python_operator import PythonOperator
-from .tasks import split, extract
+from .tasks import extract, split
 from .utils.database import initialize_database, reset_database
 from .www.app import create_app
 
@@ -68,6 +67,7 @@ def webserver(*args, **kwargs):
 @cli.command("worker")
 def worker(*args, **kwargs):
     from celery.bin import worker
+
     from .executors.celery_executor import app as celery_app
 
     worker = worker.worker(app=celery_app)

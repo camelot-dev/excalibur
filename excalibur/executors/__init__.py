@@ -1,11 +1,8 @@
-# -*- coding: utf-8 -*-
-
 import atexit
 
+from .. import configuration as conf
 from .celery_executor import CeleryExecutor
 from .sequential_executor import SequentialExecutor
-from .. import configuration as conf
-
 
 DEFAULT_EXECUTOR = None
 

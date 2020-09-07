@@ -1,7 +1,5 @@
-# -*- coding: utf-8 -*-
-
-import traceback
 import subprocess
+import traceback
 from concurrent.futures import ProcessPoolExecutor
 
 from .base_executor import BaseExecutor
@@ -19,7 +17,7 @@ def execute_command(command):
         task_id = command[-1]
         _run(task_name, task_id)
     except Exception as e:
-        traceback.print_exc()
+        traceback.print_exc(e)
 
 
 class SequentialExecutor(BaseExecutor):

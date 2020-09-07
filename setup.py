@@ -1,15 +1,14 @@
-# -*- coding: utf-8 -*-
-
 import os
-from setuptools import find_packages
 from typing import Any, Dict  # noqa
+
+from setuptools import find_packages
 
 here = os.path.abspath(os.path.dirname(__file__))
 about = {}  # type: Dict[str, Any]
-with open(os.path.join(here, "excalibur", "__version__.py"), "r") as f:
+with open(os.path.join(here, "excalibur", "__version__.py")) as f:
     exec(f.read(), about)
 
-with open("README.md", "r") as f:
+with open("README.md") as f:
     readme = f.read()
 
 requires = [
@@ -47,14 +46,18 @@ def setup_package():
         include_package_data=True,
         install_requires=requires,
         extras_require={"all": all_requires, "mysql": mysql, "dev": dev_requires},
-        entry_points={"console_scripts": ["excalibur = excalibur.cli:cli",],},
+        entry_points={
+            "console_scripts": [
+                "excalibur = excalibur.cli:cli",
+            ],
+        },
         classifiers=[
             # Trove classifiers
             # Full list: https://pypi.python.org/pypi?%3Aaction=list_classifiers
             "License :: OSI Approved :: MIT License",
-            "Programming Language :: Python :: 3.5",
             "Programming Language :: Python :: 3.6",
             "Programming Language :: Python :: 3.7",
+            "Programming Language :: Python :: 3.8",
         ],
     )
 

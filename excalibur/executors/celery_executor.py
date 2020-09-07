@@ -1,15 +1,12 @@
-# -*- coding: utf-8 -*-
-
-import traceback
 import subprocess
+import traceback
 
 from celery import Celery
 
-from .base_executor import BaseExecutor
 from .. import configuration as conf
 from ..config_templates.default_celery import DEFAULT_CELERY_CONFIG
 from ..utils.module_loading import import_string
-
+from .base_executor import BaseExecutor
 
 if conf.has_option("celery", "celery_config_options"):
     celery_configuration = import_string(conf.get("celery", "celery_config_options"))
@@ -27,7 +24,7 @@ def execute_command(command):
     try:
         subprocess.check_call(command, stderr=subprocess.STDOUT, close_fds=True)
     except Exception as e:
-        traceback.print_exc()
+        traceback.print_exc(e)
 
 
 class CeleryExecutor(BaseExecutor):

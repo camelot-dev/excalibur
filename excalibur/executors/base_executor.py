@@ -1,7 +1,4 @@
-# -*- coding: utf-8 -*-
-
-
-class BaseExecutor(object):
+class BaseExecutor:
     def __init__(self):
         pass
 
