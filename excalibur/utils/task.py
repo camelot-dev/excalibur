@@ -5,7 +5,7 @@ from camelot.utils import get_page_layout, get_rotation, get_text_objects
 from PyPDF2 import PdfFileReader, PdfFileWriter
 
 
-def get_pages(filename, pages):
+def get_pages(filename, pages, password=""):
     """Converts pages string to list of ints.
 
     Parameters
@@ -32,7 +32,7 @@ def get_pages(filename, pages):
         page_numbers.append({"start": 1, "end": 1})
     else:
         if infile.isEncrypted:
-            infile.decrypt(self.password)  # TODO: Error! What should self be?
+            infile.decrypt(password)
         if pages == "all":
             page_numbers.append({"start": 1, "end": infile.getNumPages()})
         else:
