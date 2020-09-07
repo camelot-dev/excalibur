@@ -1,16 +1,14 @@
-# -*- coding: utf-8 -*-
-
 import os
 from threading import Timer
 
 import click
 
-from . import __version__, settings
+from . import settings, __version__
 from . import configuration as conf
-from .operators.python_operator import PythonOperator
 from .tasks import split, extract
-from .utils.database import initialize_database, reset_database
 from .www.app import create_app
+from .utils.database import reset_database, initialize_database
+from .operators.python_operator import PythonOperator
 
 
 def abort_if_false(ctx, param, value):
@@ -68,6 +66,7 @@ def webserver(*args, **kwargs):
 @cli.command("worker")
 def worker(*args, **kwargs):
     from celery.bin import worker
+
     from .executors.celery_executor import app as celery_app
 
     worker = worker.worker(app=celery_app)

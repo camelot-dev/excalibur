@@ -1,7 +1,4 @@
-# -*- coding: utf-8 -*-
-
-
-class BaseOperator(object):
+class BaseOperator:
     def __init__(self):
         pass
 

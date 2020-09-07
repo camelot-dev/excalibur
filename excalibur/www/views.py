@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import os
 import re
 import glob
@@ -7,24 +5,23 @@ import json
 import datetime as dt
 
 import pandas as pd
-from werkzeug import secure_filename
 from flask import (
     Blueprint,
     jsonify,
+    request,
+    url_for,
     redirect,
     render_template,
-    request,
     send_from_directory,
-    url_for,
 )
+from werkzeug import secure_filename
 
 from .. import configuration as conf
-from ..executors import get_default_executor
-from ..models import File, Rule, Job
+from ..models import Job, File, Rule
 from ..settings import Session
+from ..executors import get_default_executor
 from ..utils.file import mkdirs, allowed_filename
 from ..utils.metadata import generate_uuid, random_string
-
 
 views = Blueprint("views", __name__)
 
@@ -177,7 +174,7 @@ def jobs(job_id):
 
             data = []
             render_files = json.loads(job.render_files)
-            regex = "page-(\d)+-table-(\d)+"
+            regex = r"page-(\d)+-table-(\d)+"
             for k in sorted(
                 render_files,
                 key=lambda x: (int(re.split(regex, x)[1]), int(re.split(regex, x)[2])),

@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.7]
+        python-version: [3.8]
 
     steps:
     - uses: actions/checkout@v2
@@ -29,5 +29,8 @@ jobs:
         pip install -r requirements-dev.txt
         pip install .
     - name: Type-checking with mypy
-      run: |
-        mypy .
+      run: mypy .
+    - name: Style-checking with black
+      run: black --check .
+    - name: Style-checking with flake8
+      run: flake8 .
