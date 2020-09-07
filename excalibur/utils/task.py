@@ -1,8 +1,8 @@
 import os
 
 import cv2
-from camelot.utils import get_page_layout, get_rotation, get_text_objects
 from PyPDF2 import PdfFileReader, PdfFileWriter
+from camelot.utils import get_rotation, get_page_layout, get_text_objects
 
 
 def get_pages(filename, pages, password=""):

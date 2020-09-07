@@ -1,18 +1,18 @@
-import datetime as dt
+import os
 import glob
 import json
 import logging
-import os
+import datetime as dt
 
 from camelot.core import TableList
+from camelot.parsers import Stream, Lattice
 from camelot.ext.ghostscript import Ghostscript
-from camelot.parsers import Lattice, Stream
 
 from . import configuration as conf
-from .models import File, Job, Rule
+from .models import Job, File, Rule
 from .settings import Session
 from .utils.file import mkdirs
-from .utils.task import get_file_dim, get_image_dim, get_pages, save_page
+from .utils.task import get_pages, save_page, get_file_dim, get_image_dim
 
 
 def split(file_id):

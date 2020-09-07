@@ -1,8 +1,8 @@
-import atexit
 import os
+import atexit
 
 from sqlalchemy import create_engine
-from sqlalchemy.orm import scoped_session, sessionmaker
+from sqlalchemy.orm import sessionmaker, scoped_session
 from sqlalchemy.pool import NullPool
 
 from . import configuration as conf

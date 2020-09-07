@@ -1,26 +1,26 @@
-import datetime as dt
-import glob
-import json
 import os
 import re
+import glob
+import json
+import datetime as dt
 
 import pandas as pd
 from flask import (
     Blueprint,
     jsonify,
+    request,
+    url_for,
     redirect,
     render_template,
-    request,
     send_from_directory,
-    url_for,
 )
 from werkzeug import secure_filename
 
 from .. import configuration as conf
-from ..executors import get_default_executor
-from ..models import File, Job, Rule
+from ..models import Job, File, Rule
 from ..settings import Session
-from ..utils.file import allowed_filename, mkdirs
+from ..executors import get_default_executor
+from ..utils.file import mkdirs, allowed_filename
 from ..utils.metadata import generate_uuid, random_string
 
 views = Blueprint("views", __name__)

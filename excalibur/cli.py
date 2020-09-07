@@ -3,13 +3,12 @@ from threading import Timer
 
 import click
 
-from . import __version__
+from . import settings, __version__
 from . import configuration as conf
-from . import settings
-from .operators.python_operator import PythonOperator
-from .tasks import extract, split
-from .utils.database import initialize_database, reset_database
+from .tasks import split, extract
 from .www.app import create_app
+from .utils.database import reset_database, initialize_database
+from .operators.python_operator import PythonOperator
 
 
 def abort_if_false(ctx, param, value):

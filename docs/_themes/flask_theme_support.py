@@ -1,18 +1,18 @@
 # flasky pygments style based on tango style
 from pygments.style import Style
 from pygments.token import (
-    Comment,
+    Name,
     Error,
+    Other,
+    Number,
+    String,
+    Comment,
     Generic,
     Keyword,
     Literal,
-    Name,
-    Number,
     Operator,
-    Other,
-    Punctuation,
-    String,
     Whitespace,
+    Punctuation,
 )
 
 

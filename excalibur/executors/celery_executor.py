@@ -1,12 +1,12 @@
-import subprocess
 import traceback
+import subprocess
 
 from celery import Celery
 
 from .. import configuration as conf
-from ..config_templates.default_celery import DEFAULT_CELERY_CONFIG
-from ..utils.module_loading import import_string
 from .base_executor import BaseExecutor
+from ..utils.module_loading import import_string
+from ..config_templates.default_celery import DEFAULT_CELERY_CONFIG
 
 if conf.has_option("celery", "celery_config_options"):
     celery_configuration = import_string(conf.get("celery", "celery_config_options"))

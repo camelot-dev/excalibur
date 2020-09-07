@@ -1,6 +1,6 @@
+import uuid
 import random
 import string
-import uuid
 
 
 def generate_uuid():
