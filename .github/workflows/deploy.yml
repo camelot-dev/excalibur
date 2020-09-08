@@ -9,7 +9,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
+    - name: Checkout code
+      uses: actions/checkout@v2
+      with:
+        ref: 'v0.4.2'
     - name: Publish to Github Packages Registry
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
@@ -18,7 +21,7 @@ jobs:
         username: ${{ secrets.GITBUH_USERNAME }}
         password: ${{ secrets.GITHUB_TOKEN }}
         dockerfile: Dockerfile
-        tags: v0.4.2
+        tags: latest
     - name: Deploy package to digitalocean
       uses: appleboy/ssh-action@master
       env:
