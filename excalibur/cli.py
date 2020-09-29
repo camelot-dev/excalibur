@@ -3,9 +3,8 @@ from threading import Timer
 
 import click
 
-from . import settings
+from . import settings, __version__
 from . import configuration as conf
-from .__version__ import __version__
 from .tasks import split, extract
 from .www.app import create_app
 from .utils.database import reset_database, initialize_database
@@ -25,7 +24,7 @@ def _run(task_name, task_id):
 
 
 @click.group()
-@click.version_option(version=__version__)
+@click.version_option(version=__version__.__version__)
 def cli(*args, **kwargs):
     pass
 
