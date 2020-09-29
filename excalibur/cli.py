@@ -3,7 +3,7 @@ from threading import Timer
 
 import click
 
-from . import settings, __version__
+from . import settings
 from . import configuration as conf
 from .tasks import split, extract
 from .www.app import create_app
@@ -24,7 +24,7 @@ def _run(task_name, task_id):
 
 
 @click.group()
-@click.version_option(version=__version__.__version__)
+@click.version_option()
 def cli(*args, **kwargs):
     pass
 
