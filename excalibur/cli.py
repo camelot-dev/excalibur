@@ -3,8 +3,9 @@ from threading import Timer
 
 import click
 
-from . import settings, __version__
+from . import settings
 from . import configuration as conf
+from .__version__ import __version__
 from .tasks import split, extract
 from .www.app import create_app
 from .utils.database import reset_database, initialize_database
