@@ -14,41 +14,22 @@ Follow the instructions on [Install Docker](https://docs.docker.com/engine/insta
 
 ## Usage
 
+### With compose
+
+Switch to `docker` directory and run `docker-compose up --build`
+
+Open your browser to http://localhost and start extracting tabular data from your PDFs.
+
+### Running the container youself
+
 ### Prepare the image
 
-Switch to `docker` directory here and run `docker build -t excalibur .` (don't forget the final `.`) to build your docker image. That may take some time but is only required once. Or perhaps a few times after you tweak something in a `Dockerfile`.
+Switch to `docker` directory and run `docker build -t excalibur ./excalibur` to build your docker image. That may take some time but is only required once. Or perhaps a few times after you tweak something in a `Dockerfile`.
 
 After the process is finished you have a `excalibur` image, that will be the base for your experiments. You can confirm that looking on results of `docker images` command.
 
 ### Run the container
 
-From your project folder, run `docker run -it -p 5000:5000 -v $(pwd):/excalibur/ excalibur /bin/sh`
-This will start the container and open up a bash console inside it.
-
-At this point you need to initialize the metadata database using:
-
-<pre>
-$ excalibur initdb
-</pre>
-
-Once initialized, you need to enable connectivity from outside the container:
-
-Use nano to open the config file ...
-
-<pre>
-$ nano /root/excalibur/excalibur.cfg
-</pre>
-
-... and modify the [webserver] section as:
-
-<pre>
-web_server_host = 0.0.0.0
-</pre>
-
-And then start the webserver using:
-
-<pre>
-$ excalibur webserver
-</pre>
+From your project folder, run `docker run -it -p 5000:5000 excalibur`
 
 That's it! Now you can go to http://localhost:5000 and start extracting tabular data from your PDFs.
