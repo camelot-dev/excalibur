@@ -13,5 +13,9 @@ ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
 
 ENV EXCALIBUR_HOME="/excalibur" PYTHONUNBUFFERED="1"
+
+RUN excalibur initdb
+RUN cat /excalibur/excalibur.cfg | sed 's/127.0.0.1/0.0.0.0/g' > /excalibur/excalibur.tmp; \
+    mv /excalibur/excalibur.tmp /excalibur/excalibur.cfg
 WORKDIR /excalibur/
 CMD ["excalibur", "webserver"]
