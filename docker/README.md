@@ -22,7 +22,7 @@ After the process is finished you have a `excalibur` image, that will be the bas
 
 ### Run the container
 
-From your project folder, run `docker run -it -p 5000:5000 -v $(pwd):/excalibur/ excalibur /bin/bash`
+From your project folder, run `docker run -it -p 5000:5000 -v $(pwd):/excalibur/ excalibur /bin/sh`
 This will start the container and open up a bash console inside it.
 
 At this point you need to initialize the metadata database using:
