@@ -1,26 +1,17 @@
-FROM ubuntu
+FROM python:3.9.4-alpine3.13
 
-RUN apt-get update \
-    && apt-get install -y \
-    apt-utils \
-    curl \
-    wget \
-    nano \
-    libsm6 \
-    libxrender1 \
-    libxext6 \
-    ghostscript \
-    python3-minimal \
-    python3-setuptools \
-    python3-pip \
-    && ln -s /usr/bin/python3 /usr/bin/python \
-    && ln -s /usr/bin/pip3 /usr/bin/pip
+COPY requirements.txt /requirements.txt
 
-RUN pip install excalibur-py[dev]
+RUN /sbin/apk add --no-cache ghostscript-dev libstdc++
+RUN /sbin/apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/v3.9/main qt-x11
+RUN /usr/local/bin/pip install --no-cache-dir --requirement /requirements.txt
+
 
 EXPOSE 5000
 
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
 
+ENV EXCALIBUR_HOME="/excalibur" PYTHONUNBUFFERED="1"
 WORKDIR /excalibur/
+CMD ["excalibur", "webserver"]
