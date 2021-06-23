@@ -50,7 +50,7 @@ def split(file_id):
             filenames[page] = filename
             filepaths[page] = filepath
             imagenames[page] = imagename
-            imagepaths[page] = imagepath
+            imagepaths[page] = imagepaths[page].replace("\\", "/")
             filedims[page] = get_file_dim(filepath)
             imagedims[page] = get_image_dim(imagepath)
 
