@@ -20,7 +20,6 @@ requires = [
     "configparser>=3.5.0, <3.6.0",
     "Flask==2.1.1",
     "SQLAlchemy>=1.2.12",
-    "Werkzeug<1.0.0",
 ]
 mysql = ["mysqlclient>=1.3.6"]
 all_requires = requires + mysql
