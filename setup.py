@@ -11,12 +11,14 @@ with open(os.path.join(here, "excalibur", "__version__.py")) as f:
 with open("README.md") as f:
     readme = f.read()
 
+# Flask version update to 2.1.1
+# see: https://github.com/camelot-dev/excalibur/issues/157
 requires = [
     "camelot-py[cv]>=0.7.1",
     "celery>=4.1.1",
     "Click>=7.0",
     "configparser>=3.5.0, <3.6.0",
-    "Flask>=1.0.2",
+    "Flask==2.1.1",
     "SQLAlchemy>=1.2.12",
     "Werkzeug<1.0.0",
 ]
