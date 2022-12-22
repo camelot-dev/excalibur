@@ -6,7 +6,7 @@ import datetime as dt
 
 from camelot.core import TableList
 from camelot.parsers import Stream, Lattice
-from camelot.ext.ghostscript import Ghostscript
+from ghostscript import Ghostscript
 
 from . import configuration as conf
 from .models import Job, File, Rule
