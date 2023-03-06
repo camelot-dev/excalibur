@@ -1,7 +1,7 @@
 import os
 
 import six
-from backports.configparser import ConfigParser
+from configparser import ConfigParser
 
 
 def _read_default_config_file(file_name):
