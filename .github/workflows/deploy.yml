@@ -1,0 +1,37 @@
+name: deploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Publish to Github Packages Registry
+      uses: elgohr/Publish-Docker-Github-Action@master
+      with:
+        name: aakashlpin/excalibur/excalibur
+        registry: docker.pkg.github.com
+        username: ${{ secrets.GITBUH_USERNAME }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+        dockerfile: Dockerfile
+        tags: latest
+    - name: Deploy package to digitalocean
+      uses: appleboy/ssh-action@master
+      env:
+        GITBUH_USERNAME: ${{ secrets.GITBUH_USERNAME }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        host: ${{ secrets.DO_HOST }}
+        username: ${{ secrets.DO_USERNAME }}
+        key: ${{ secrets.SSH_ID_RSA }}
+        envs: GITBUH_USERNAME, GITHUB_TOKEN
+        script: |
+          docker login docker.pkg.github.com -u $GITBUH_USERNAME -p $GITHUB_TOKEN
+          docker pull docker.pkg.github.com/aakashlpin/excalibur/excalibur:latest
+          docker stop excalibur
+          docker run -dit --rm -p 5000:5000 --name excalibur docker.pkg.github.com/aakashlpin/excalibur/excalibur:latest
