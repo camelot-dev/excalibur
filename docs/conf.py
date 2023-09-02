@@ -84,6 +84,9 @@ html_theme_options = {
     'github_repo': 'excalibur',
     'github_banner': True,
     'show_related': False,
+    'show_relbars': True,
+    'show_relbar_top': False,
+    'show_relbar_bottom': True,
     'note_bg': '#FFF59C'
 }
 
