@@ -92,18 +92,22 @@ const onSavedRuleClick = function (e) {
             if ('table_areas' in ruleOptions['pages'][page]) {
               let tableAreas = [];
               const table_areas = ruleOptions['pages'][page]['table_areas'];
-              table_areas.forEach(function (t) {
-                tableAreas.push(t.split(',').map(Number));
-              })
-              renderTableAreas(page, tableAreas);
+              if(table_areas != undefined){
+                table_areas.forEach(function (t) {
+                  tableAreas.push(t.split(',').map(Number));
+                })
+                renderTableAreas(page, tableAreas);
+              }
             }
             if ('columns' in ruleOptions['pages'][page]) {
               let columnSeparators = [];
               const columns = ruleOptions['pages'][page]['columns'];
-              columns.forEach(function (c) {
-                columnSeparators.push(c.split(',').map(Number));
-              })
-              renderColumnSeparators(page, columnSeparators);
+              if(columns != undefined){
+                columns.forEach(function (c) {
+                  columnSeparators = columnSeparators.concat(c.split(',').map(Number));
+                })
+                renderColumnSeparators(page, columnSeparators);
+              }
             }
           }
         }
@@ -148,19 +152,23 @@ const getNewColPosOffset = function (page) {
   return newOffset;
 }
 
-const addColumnSeparator = function (page, colPosOffset) {
+const addColumnSeparator = function (page, colPosOffset, newCol) {
   const pageDiv = '#image-div-{0}'.format(page);
   const position = $(pageDiv).position();
   const column = $('<div id="dc" class="draggable-column" ondblclick="onColumnSeparatorDoubleClick(this)"><div class="background"></div><div id="line" class="line"></div></div>');
-  $(column).css({
-    'top': position.top,
-    'left': position.left + colPosOffset,
-    'height': $(pageDiv).height()
-  });
+  
   $(pageDiv).append(column);
   $('.draggable-column').draggable({
     axis: 'x',
     containment: 'parent'
+  });
+  if(!newCol){
+    colPosOffset = colPosOffset - ($(column).width() / 2)
+  }
+  $(column).css({
+    'top': position.top,
+    'left': position.left + colPosOffset,
+    'height': $(pageDiv).height()
   });
 };
 
@@ -170,22 +178,21 @@ const getRuleOptions = function () {
   ruleOptions['flavor'] = flavor;
 
   if (flavor === null) {
-    alert('Please select a Flavor from Advanced.')
+    throw 'Please select a Flavor from Advanced.'
   } else {
     // advanced settings
     switch(flavor.toString().toLowerCase()) {
       case 'lattice': {
-        ruleOptions['process_background'] = $("#process-background").val() ? true : false;
+        ruleOptions['process_background'] = $("#process-background").val() == "true";
         ruleOptions['line_size_scaling'] = $('#line-size-scaling').val() ? Number($('#line-size-scaling').val()) : 15;
-        ruleOptions['split_text'] = $("#split-text-l").val() ? true : false;
-        ruleOptions['flag_size'] = $("#flag-size-l").val() ? true : false;
-        break;
+        ruleOptions['split_text'] = $("#split-text-l").val() == "true";
+        ruleOptions['flag_size'] = $("#flag-size-l").val() == "true";
       }
       case 'stream': {
         ruleOptions['row_close_tol'] = $('#row-close-tol').val() ? Number($('#line-size-scaling').val()) : 2;
         ruleOptions['col_close_tol'] = $('#col-close-tol').val() ? Number($('#line-size-scaling').val()) : 0;
-        ruleOptions['split_text'] = $("#split-text-s").val() ? true : false;
-        ruleOptions['flag_size'] = $("#flag-size-s").val() ? true : false;
+        ruleOptions['split_text'] = $("#split-text-s").val() == "true"; 
+        ruleOptions['flag_size'] = $("#flag-size-s").val() == "true";
         break;
       }
       default: {
@@ -263,7 +270,7 @@ const renderColumnSeparators = function(page, columnSeparators) {
   const scalingFactorX = imageWidth / fileDims[page][0];
 
   for (let i = 0; i < columnSeparators.length; i++) {
-    addColumnSeparator(page, columnSeparators[i] * scalingFactorX);
+    addColumnSeparator(page, columnSeparators[i] * scalingFactorX, false);
   }
 };
 
@@ -271,7 +278,7 @@ const onAddSeparatorClick = (e) => {
   columnCountBuffer++;
   const page = e.getAttribute('data-page');
   const colPosOffset = getNewColPosOffset(page);
-  addColumnSeparator(page, colPosOffset);
+  addColumnSeparator(page, colPosOffset, true);
 }
 
 const onColumnSeparatorDoubleClick = (e) => {
@@ -306,25 +313,28 @@ const onFlavorChange = function () {
 const startJob = function () {
   let ruleOptions = {};
   const loc = window.location.pathname.split('/');
-  if (!globalRuleId) {
+  try {
     ruleOptions = getRuleOptions();
+    $.ajax({
+      url: '/jobs',
+      data: {
+        file_id: loc[loc.length - 1],
+        rule_id: globalRuleId,
+        rule_options: JSON.stringify(ruleOptions)
+      },
+      type: 'POST',
+      success: function (data) {
+        const redirectUrl = '{0}//{1}/jobs/{2}'.format(window.location.protocol, window.location.host, data['job_id']);
+        window.location.replace(redirectUrl);
+      },
+      error: function (error) {
+        console.error(error);
+      }
+    });
   }
-  $.ajax({
-    url: '/jobs',
-    data: {
-      file_id: loc[loc.length - 1],
-      rule_id: globalRuleId,
-      rule_options: JSON.stringify(ruleOptions)
-    },
-    type: 'POST',
-    success: function (data) {
-      const redirectUrl = '{0}//{1}/jobs/{2}'.format(window.location.protocol, window.location.host, data['job_id']);
-      window.location.replace(redirectUrl);
-    },
-    error: function (error) {
-      console.error(error);
-    }
-  });
+  catch(err) {
+    alert(err)
+  }
 }
 
 const debugQtyAreas = function (event, id, areas) {
