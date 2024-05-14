@@ -16,9 +16,10 @@ requires = [
     "celery>=4.1.1",
     "Click>=7.0",
     "configparser>=3.5.0, <3.6.0",
-    "Flask>=1.0.2",
+    "Flask>=2.1.1",
     "SQLAlchemy>=1.2.12",
-    "Werkzeug<1.0.0",
+    "PyPDF2==2.0",
+    "pandas==1.5.3",
 ]
 mysql = ["mysqlclient>=1.3.6"]
 all_requires = requires + mysql
