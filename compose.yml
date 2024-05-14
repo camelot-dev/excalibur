@@ -1,0 +1,8 @@
+version: '3.8'
+
+services:
+  excalibur:
+    build: .
+    ports:
+      - "5000:5000"
+
