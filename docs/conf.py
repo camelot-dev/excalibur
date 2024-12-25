@@ -22,7 +22,7 @@ import excalibur
 # -- Project information -----------------------------------------------------
 
 project = "Excalibur"
-copyright = "2018, Camelot Developers"
+copyright = "2024, Camelot Developers"
 author = "Camelot Developers"
 
 # The short X.Y version
