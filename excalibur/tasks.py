@@ -1,19 +1,21 @@
-import os
+import datetime as dt
 import glob
 import json
 import logging
-import datetime as dt
+import os
+import subprocess
 
+import camelot
 import pandas as pd
+from camelot.backends.ghostscript_backend import GhostscriptBackend
 from camelot.core import TableList
-from camelot.parsers import Stream, Lattice
-from camelot.ext.ghostscript import Ghostscript
+from camelot.parsers import Lattice, Stream
 
 from . import configuration as conf
-from .models import Job, File, Rule
+from .models import File, Job, Rule
 from .settings import Session
 from .utils.file import mkdirs
-from .utils.task import get_pages, save_page, get_file_dim, get_image_dim
+from .utils.task import get_file_dim, get_image_dim, get_pages, save_page
 
 
 def split(file_id):
@@ -41,12 +43,23 @@ def split(file_id):
             imagepath = os.path.join(conf.PDFS_FOLDER, file_id, imagename)
 
             # convert single-page PDF to PNG
-            gs_call = f"-q -sDEVICE=png16m -o {imagepath} -r300 {filepath}"
-            gs_call = gs_call.encode().split()
-            null = open(os.devnull, "wb")
-            with Ghostscript(*gs_call, stdout=null):
-                pass
-            null.close()
+            try:
+                backend = GhostscriptBackend()
+                backend.convert(filepath, imagepath, 300)
+            except OSError:
+                gs_command = [
+                    "gs",
+                    "-q",
+                    "-sDEVICE=png16m",
+                    f"-o{imagepath}",
+                    "-r300",
+                    filepath,
+                ]
+                try:
+                    subprocess.run(gs_command, check=True, capture_output=True)
+                except subprocess.CalledProcessError as e:
+                    logging.error(f"Ghostscript conversion failed: {e.stderr.decode()}")
+                    raise
 
             filenames[page] = filename
             filepaths[page] = filepath
@@ -57,16 +70,14 @@ def split(file_id):
 
             lattice_areas, stream_areas = (None for i in range(2))
             # lattice
-            parser = Lattice()
-            tables = parser.extract_tables(filepath)
+            tables = camelot.read_pdf(filepath, flavor="lattice")
             if len(tables):
                 lattice_areas = []
                 for table in tables:
                     x1, y1, x2, y2 = table._bbox
                     lattice_areas.append((x1, y2, x2, y1))
             # stream
-            parser = Stream()
-            tables = parser.extract_tables(filepath)
+            tables = camelot.read_pdf(filepath, flavor="stream")
             if len(tables):
                 stream_areas = []
                 for table in tables:
@@ -108,10 +119,11 @@ def extract(job_id):
         for p in pages:
             kwargs = pages[p]
             kwargs.update(rule_options)
-            parser = (
-                Lattice(**kwargs) if flavor.lower() == "lattice" else Stream(**kwargs)
-            )
-            t = parser.extract_tables(filepaths[p])
+            kwargs["flavor"] = flavor.lower()
+            if flavor.lower() == "lattice":
+                kwargs.pop("columns", None)
+
+            t = camelot.read_pdf(filepaths[p], **kwargs, backend="poppler")
             for _t in t:
                 _t.page = int(p)
             tables.extend(t)

@@ -12,7 +12,7 @@ with open("README.md") as f:
     readme = f.read()
 
 requires = [
-    "camelot-py[cv]>=0.7.1",
+    "camelot-py[base]>=0.11.0",
     "celery>=4.1.1",
     "Click>=7.0",
     "configparser>=7.1.0",
