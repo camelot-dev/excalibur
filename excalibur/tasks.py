@@ -4,6 +4,7 @@ import json
 import logging
 import datetime as dt
 
+import pandas as pd
 from camelot.core import TableList
 from camelot.parsers import Stream, Lattice
 from camelot.ext.ghostscript import Ghostscript
@@ -123,7 +124,14 @@ def extract(job_id):
             mkdirs(f_datapath)
             ext = f if f != "excel" else "xlsx"
             f_datapath = os.path.join(f_datapath, f"{froot}.{ext}")
-            tables.export(f_datapath, f=f, compress=True)
+
+            if f == "excel":
+                with pd.ExcelWriter(f_datapath) as writer:
+                    for i, table in enumerate(tables):
+                        sheet_name = f"Table_{i + 1}"
+                        table.df.to_excel(writer, sheet_name=sheet_name, index=False)
+            else:
+                tables.export(f_datapath, f=f, compress=True)
 
         # for render
         jsonpath = os.path.join(datapath, "json")

@@ -1,7 +1,7 @@
 import os
 
 import cv2
-from PyPDF2 import PdfFileReader, PdfFileWriter
+from PyPDF2 import PdfReader, PdfWriter
 from camelot.utils import get_rotation, get_page_layout, get_text_objects
 
 
@@ -26,21 +26,21 @@ def get_pages(filename, pages, password=""):
     """
     page_numbers = []
     inputstream = open(filename, "rb")
-    infile = PdfFileReader(inputstream, strict=False)
-    N = infile.getNumPages()
+    infile = PdfReader(inputstream, strict=False)
+    N = len(infile.pages)
     if pages == "1":
         page_numbers.append({"start": 1, "end": 1})
     else:
         if infile.isEncrypted:
             infile.decrypt(password)
         if pages == "all":
-            page_numbers.append({"start": 1, "end": infile.getNumPages()})
+            page_numbers.append({"start": 1, "end": len(infile.pages)})
         else:
             for r in pages.split(","):
                 if "-" in r:
                     a, b = r.split("-")
                     if b == "end":
-                        b = infile.getNumPages()
+                        b = len(infile.pages)
                     page_numbers.append({"start": int(a), "end": int(b)})
                 else:
                     page_numbers.append({"start": int(r), "end": int(r)})
@@ -52,10 +52,10 @@ def get_pages(filename, pages, password=""):
 
 
 def save_page(filepath, page_number):
-    infile = PdfFileReader(open(filepath, "rb"), strict=False)
-    page = infile.getPage(page_number - 1)
-    outfile = PdfFileWriter()
-    outfile.addPage(page)
+    infile = PdfReader(open(filepath, "rb"), strict=False)
+    page = infile.pages[page_number - 1]
+    outfile = PdfWriter()
+    outfile.add_page(page)
     outpath = os.path.join(os.path.dirname(filepath), f"page-{page_number}.pdf")
     with open(outpath, "wb") as f:
         outfile.write(f)
@@ -69,16 +69,16 @@ def save_page(filepath, page_number):
     if rotation != "":
         outpath_new = "".join([froot.replace("page", "p"), "_rotated", fext])
         os.rename(outpath, outpath_new)
-        infile = PdfFileReader(open(outpath_new, "rb"), strict=False)
+        infile = PdfReader(open(outpath_new, "rb"), strict=False)
         if infile.isEncrypted:
             infile.decrypt("")
-        outfile = PdfFileWriter()
-        p = infile.getPage(0)
+        outfile = PdfWriter()
+        p = infile.pages[0]
         if rotation == "anticlockwise":
             p.rotateClockwise(90)
         elif rotation == "clockwise":
             p.rotateCounterClockwise(90)
-        outfile.addPage(p)
+        outfile.add_page(p)
         with open(outpath, "wb") as f:
             outfile.write(f)
 

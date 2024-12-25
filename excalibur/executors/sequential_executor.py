@@ -1,14 +1,16 @@
+import sys
 import traceback
 import subprocess
 from concurrent.futures import ProcessPoolExecutor
-import sys
 
 from .base_executor import BaseExecutor
 
 
 def execute_command(command):
     try:
-        subprocess.check_call(command, stderr=subprocess.STDOUT, close_fds=(sys.platform != 'win32'))
+        subprocess.check_call(
+            command, stderr=subprocess.STDOUT, close_fds=(sys.platform != "win32")
+        )
     except FileNotFoundError:
         # TODO: PyInstaller does not package console_scripts
         # https://github.com/pyinstaller/pyinstaller/issues/305

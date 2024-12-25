@@ -1,7 +1,12 @@
 import os
 
 import six
-from backports.configparser import ConfigParser
+
+# With this:
+try:
+    from configparser import ConfigParser
+except ImportError:
+    from backports.configparser import ConfigParser
 
 
 def _read_default_config_file(file_name):
@@ -69,8 +74,9 @@ class ExcaliburConfigParser(ConfigParser):
 
         else:
             raise ValueError(
-                "section/key [{section}/{key}] not found in"
-                " config".format(**locals())
+                "section/key [{section}/{key}] not found in" " config".format(
+                    **locals()
+                )
             )
 
     def read(self, filename):
