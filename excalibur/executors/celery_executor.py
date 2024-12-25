@@ -1,6 +1,6 @@
+import sys
 import traceback
 import subprocess
-import sys
 
 from celery import Celery
 
@@ -23,7 +23,9 @@ app = Celery(
 @app.task
 def execute_command(command):
     try:
-        subprocess.check_call(command, stderr=subprocess.STDOUT, close_fds=(sys.platform != 'win32'))
+        subprocess.check_call(
+            command, stderr=subprocess.STDOUT, close_fds=(sys.platform != "win32")
+        )
     except Exception as e:
         traceback.print_exc(e)
 

@@ -17,16 +17,16 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
-      - name: Set up Python 3.8
+      - name: Set up Python 3.13
         uses: actions/setup-python@v1
         with:
-          python-version: '3.8'
+          python-version: '3.13'
           architecture: ${{ matrix.config.python-arch }}
       - name: Install Excalibur
         run: |
           python -m pip install --upgrade pip
           python -m pip install pyinstaller
-          python -m pip install .
+          python -m pip install ".[all]"
       - name: Build with PyInstaller on Ubuntu and MacOS
         if: runner.os == 'Linux' || runner.os == 'macOS'
         run: |

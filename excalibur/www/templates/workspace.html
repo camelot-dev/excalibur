@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block workspace %}
-  {% if imagepaths is not none %}
+  {% if imagepaths is not none or imagepaths|length == 0 %}
     <div class="container">
       <div class="row pb-4">
         <div class="col-md-12">
@@ -170,7 +170,6 @@
 {% endblock %}
 
 {% block javascript %}
-<script type="text/javascript" src="{{ url_for('static', filename='js/vendor/jquery.selectareas.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/vendor/jquery.selectareas.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/vendor/jquery-ui.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/workspace.js') }}"></script>

@@ -12,16 +12,14 @@ with open("README.md") as f:
     readme = f.read()
 
 requires = [
-    "camelot-py[cv]>=0.7.1",
+    "camelot-py[base]>=0.11.0",
     "celery>=4.1.1",
     "Click>=7.0",
-    "configparser>=3.5.0, <3.6.0",
-    "Flask>=1.0.2",
+    "configparser>=7.1.0",
+    "Flask>=3.1.0",
     "SQLAlchemy>=1.2.12",
-    "Werkzeug<1.0.0",
+    "Werkzeug>=3.1.3",
 ]
-mysql = ["mysqlclient>=1.3.6"]
-all_requires = requires + mysql
 dev_requires = [
     "codecov>=2.0.15",
     "pytest>=3.8.0",
@@ -29,6 +27,7 @@ dev_requires = [
     "pytest-runner>=4.2",
     "Sphinx>=1.8.1",
 ]
+all_requires = requires + dev_requires
 
 
 def setup_package():
@@ -45,7 +44,7 @@ def setup_package():
         packages=find_packages(exclude=("tests",)),
         include_package_data=True,
         install_requires=requires,
-        extras_require={"all": all_requires, "mysql": mysql, "dev": dev_requires},
+        extras_require={"all": all_requires, "dev": dev_requires},
         entry_points={
             "console_scripts": [
                 "excalibur = excalibur.cli:cli",
@@ -55,9 +54,9 @@ def setup_package():
             # Trove classifiers
             # Full list: https://pypi.python.org/pypi?%3Aaction=list_classifiers
             "License :: OSI Approved :: MIT License",
-            "Programming Language :: Python :: 3.6",
-            "Programming Language :: Python :: 3.7",
-            "Programming Language :: Python :: 3.8",
+            "Programming Language :: Python :: 3.11",
+            "Programming Language :: Python :: 3.12",
+            "Programming Language :: Python :: 3.13",
         ],
     )
 
