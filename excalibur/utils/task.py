@@ -1,8 +1,12 @@
 import os
 
 import cv2
+from camelot.utils import (
+    get_image_char_and_text_objects,
+    get_page_layout,
+    get_rotation,
+)
 from PyPDF2 import PdfReader, PdfWriter
-from camelot.utils import get_rotation, get_page_layout, get_text_objects
 
 
 def get_pages(filename, pages, password=""):
@@ -62,9 +66,9 @@ def save_page(filepath, page_number):
     froot, fext = os.path.splitext(outpath)
     layout, __ = get_page_layout(outpath)
     # fix rotated PDF
-    chars = get_text_objects(layout, ltype="char")
-    horizontal_text = get_text_objects(layout, ltype="horizontal_text")
-    vertical_text = get_text_objects(layout, ltype="vertical_text")
+    images, chars, horizontal_text, vertical_text = get_image_char_and_text_objects(
+        layout
+    )
     rotation = get_rotation(chars, horizontal_text, vertical_text)
     if rotation != "":
         outpath_new = "".join([froot.replace("page", "p"), "_rotated", fext])

@@ -110,7 +110,7 @@ const onSavedRuleClick = function (e) {
 
         if (ruleOptions['flavor'].toLowerCase() == 'lattice') {
           document.getElementById('process-background').value = ruleOptions['process_background'];
-          document.getElementById('line-size-scaling').value = ruleOptions['line_size_scaling'];
+          document.getElementById('line-scale').value = ruleOptions['line_scale'];
           document.getElementById('split-text-l').value = ruleOptions['split_text'];
           document.getElementById('flag-size-l').value = ruleOptions['flag_size'];
         } else if (ruleOptions['flavor'].toLowerCase() == 'stream') {
@@ -176,14 +176,14 @@ const getRuleOptions = function () {
     switch(flavor.toString().toLowerCase()) {
       case 'lattice': {
         ruleOptions['process_background'] = $("#process-background").val() ? true : false;
-        ruleOptions['line_size_scaling'] = $('#line-size-scaling').val() ? Number($('#line-size-scaling').val()) : 15;
+        ruleOptions['line_scale'] = $('#line-scale').val() ? Number($('#line-scale').val()) : 15;
         ruleOptions['split_text'] = $("#split-text-l").val() ? true : false;
         ruleOptions['flag_size'] = $("#flag-size-l").val() ? true : false;
         break;
       }
       case 'stream': {
-        ruleOptions['row_close_tol'] = $('#row-close-tol').val() ? Number($('#line-size-scaling').val()) : 2;
-        ruleOptions['col_close_tol'] = $('#col-close-tol').val() ? Number($('#line-size-scaling').val()) : 0;
+        ruleOptions['row_close_tol'] = $('#row-close-tol').val() ? Number($('#line-scale').val()) : 2;
+        ruleOptions['col_close_tol'] = $('#col-close-tol').val() ? Number($('#line-scale').val()) : 0;
         ruleOptions['split_text'] = $("#split-text-s").val() ? true : false;
         ruleOptions['flag_size'] = $("#flag-size-s").val() ? true : false;
         break;

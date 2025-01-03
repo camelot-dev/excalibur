@@ -1,15 +1,15 @@
-import json
 import datetime as dt
+import json
 from typing import Any  # noqa
 
 from sqlalchemy import (
-    Text,
-    Column,
-    String,
     Boolean,
-    Integer,
+    Column,
     DateTime,
     ForeignKey,
+    Integer,
+    String,
+    Text,
 )
 from sqlalchemy.ext.declarative import declarative_base
 

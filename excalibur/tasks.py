@@ -7,7 +7,7 @@ import subprocess
 
 import camelot
 import pandas as pd
-from camelot.backends.ghostscript_backend import GhostscriptBackend
+from camelot.backends.pdfium_backend import PdfiumBackend
 from camelot.core import TableList
 from camelot.parsers import Lattice, Stream
 
@@ -43,23 +43,8 @@ def split(file_id):
             imagepath = os.path.join(conf.PDFS_FOLDER, file_id, imagename)
 
             # convert single-page PDF to PNG
-            try:
-                backend = GhostscriptBackend()
-                backend.convert(filepath, imagepath, 300)
-            except OSError:
-                gs_command = [
-                    "gs",
-                    "-q",
-                    "-sDEVICE=png16m",
-                    f"-o{imagepath}",
-                    "-r300",
-                    filepath,
-                ]
-                try:
-                    subprocess.run(gs_command, check=True, capture_output=True)
-                except subprocess.CalledProcessError as e:
-                    logging.error(f"Ghostscript conversion failed: {e.stderr.decode()}")
-                    raise
+            backend = PdfiumBackend()
+            backend.convert(filepath, imagepath, 300)
 
             filenames[page] = filename
             filepaths[page] = filepath
@@ -123,7 +108,7 @@ def extract(job_id):
             if flavor.lower() == "lattice":
                 kwargs.pop("columns", None)
 
-            t = camelot.read_pdf(filepaths[p], **kwargs, backend="poppler")
+            t = camelot.read_pdf(filepaths[p], **kwargs)
             for _t in t:
                 _t.page = int(p)
             tables.extend(t)
