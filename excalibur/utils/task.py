@@ -6,7 +6,7 @@ from camelot.utils import (
     get_page_layout,
     get_rotation,
 )
-from PyPDF2 import PdfReader, PdfWriter
+from pypdf import PdfReader, PdfWriter
 
 
 def get_pages(filename, pages, password=""):
