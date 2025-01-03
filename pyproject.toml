@@ -1,6 +1,6 @@
 [project]
 name = "excalibur-py"
-version = "0.4.4"
+version = "1.0.0"
 description = "A web interface to extract tabular data from PDFs"
 authors = [
     {name = "Vinayak Mehta", email = "vmehta94@gmail.com"}
