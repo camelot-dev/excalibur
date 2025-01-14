@@ -35,7 +35,7 @@ def get_pages(filename, pages, password=""):
     if pages == "1":
         page_numbers.append({"start": 1, "end": 1})
     else:
-        if infile.isEncrypted:
+        if infile.is_encrypted:
             infile.decrypt(password)
         if pages == "all":
             page_numbers.append({"start": 1, "end": len(infile.pages)})
@@ -74,7 +74,7 @@ def save_page(filepath, page_number):
         outpath_new = "".join([froot.replace("page", "p"), "_rotated", fext])
         os.rename(outpath, outpath_new)
         infile = PdfReader(open(outpath_new, "rb"), strict=False)
-        if infile.isEncrypted:
+        if infile.is_encrypted:
             infile.decrypt("")
         outfile = PdfWriter()
         p = infile.pages[0]
