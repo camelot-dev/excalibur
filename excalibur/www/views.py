@@ -260,5 +260,5 @@ def download():
     directory = os.path.join(os.getcwd(), datapath)
     filename = os.path.basename(zipfile)
     return send_from_directory(
-        directory=directory, filename=filename, as_attachment=True
+        directory=directory, path=filename, as_attachment=True
     )
