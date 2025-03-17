@@ -103,6 +103,8 @@ def workspaces(file_id):
         saved_rules = [
             {"rule_id": rule.rule_id, "rule_name": rule.rule_name} for rule in rules
         ]
+    if not isinstance(imagepaths, dict):
+        imagepaths = {}  # Provide an empty fallback dictionary
     return render_template(
         "workspace.html",
         filename=file.filename,
