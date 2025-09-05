@@ -103,6 +103,8 @@ def workspaces(file_id):
         saved_rules = [
             {"rule_id": rule.rule_id, "rule_name": rule.rule_name} for rule in rules
         ]
+    if not isinstance(imagepaths, dict):
+        imagepaths = {}  # Provide an empty fallback dictionary
     return render_template(
         "workspace.html",
         filename=file.filename,
@@ -260,5 +262,5 @@ def download():
     directory = os.path.join(os.getcwd(), datapath)
     filename = os.path.basename(zipfile)
     return send_from_directory(
-        directory=directory, filename=filename, as_attachment=True
+        directory=directory, path=filename, as_attachment=True
     )
