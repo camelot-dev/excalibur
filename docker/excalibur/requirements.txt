@@ -1,0 +1,2 @@
+--extra-index-url https://alpine-wheels.github.io/index
+excalibur-py==0.4.3

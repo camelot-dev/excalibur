@@ -1,0 +1,17 @@
+version: "3.7"
+
+services:
+
+  excalibur:
+    build: ./excalibur
+    container_name: excalibur
+    restart: always
+    expose:
+      - 5000
+
+  nginx:
+    build: ./nginx
+    container_name: nginx
+    restart: always
+    ports:
+      - "80:80"
