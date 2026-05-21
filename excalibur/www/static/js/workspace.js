@@ -14,6 +14,22 @@ const compare = function (a, b) {
   return a - b;
 }
 
+const pollUntilServerIsReady = function () {
+  window.setInterval(() => {
+    const httpRequest = new XMLHttpRequest();
+    httpRequest.onloadend = () => {
+      if (httpRequest.status < 300) {
+        if(httpRequest.responseText.indexOf('__please-wait-symbol__') == -1) {
+          window.location.reload(true); 
+        }
+      } 
+    };
+    
+    httpRequest.open("GET", window.location);
+    httpRequest.send();
+  }, 500);
+};
+
 const getTableAreasForRender = function (page, detectedAreas) {
   const imageWidth = $('#image-{0}'.format(page)).width();
   const imageHeight = $('#image-{0}'.format(page)).height();
@@ -332,6 +348,10 @@ const debugQtyAreas = function (event, id, areas) {
 };
 
 $(document).ready(function () {
+  if(document.getElementById('__please-wait-symbol__') != null) {
+    pollUntilServerIsReady();
+  }
+  
   $('.image-area').selectAreas({
     onChanged: debugQtyAreas
   });
