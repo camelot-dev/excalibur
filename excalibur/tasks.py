@@ -17,6 +17,12 @@ from .settings import Session
 from .utils.file import mkdirs
 from .utils.task import get_file_dim, get_image_dim, get_pages, save_page
 
+# Camelot 2 renamed the stream tolerances. The web UI still posts the old names.
+_LEGACY_KWARGS = {
+    "row_close_tol": "row_tol",
+    "col_close_tol": "column_tol",
+}
+
 
 def split(file_id):
     try:
@@ -102,11 +108,16 @@ def extract(job_id):
         tables = []
         filepaths = json.loads(file.filepaths)
         for p in pages:
-            kwargs = pages[p]
+            kwargs = dict(pages[p])
             kwargs.update(rule_options)
             kwargs["flavor"] = flavor.lower()
-            if flavor.lower() == "lattice":
+            if kwargs["flavor"] == "lattice":
                 kwargs.pop("columns", None)
+            kwargs = {
+                _LEGACY_KWARGS.get(key, key): value
+                for key, value in kwargs.items()
+                if value is not None
+            }
 
             t = camelot.read_pdf(filepaths[p], **kwargs)
             for _t in t:
@@ -123,6 +134,8 @@ def extract(job_id):
             f_datapath = os.path.join(f_datapath, f"{froot}.{ext}")
 
             if f == "excel":
+                if len(tables) == 0:
+                    continue
                 with pd.ExcelWriter(f_datapath) as writer:
                     for i, table in enumerate(tables):
                         sheet_name = f"Table_{i + 1}"

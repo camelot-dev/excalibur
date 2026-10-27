@@ -6,13 +6,11 @@
 
 [![Documentation Status](https://readthedocs.org/projects/excalibur-py/badge/?version=master)](https://excalibur-py.readthedocs.io/en/master/) [![image](https://img.shields.io/pypi/v/excalibur-py.svg)](https://pypi.org/project/excalibur-py/) [![image](https://img.shields.io/pypi/l/excalibur-py.svg)](https://pypi.org/project/excalibur-py/) [![image](https://img.shields.io/pypi/pyversions/excalibur-py.svg)](https://pypi.org/project/excalibur-py/) [![Gitter chat](https://badges.gitter.im/camelot-dev/Lobby.png)](https://gitter.im/camelot-dev/Lobby) [![image](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black) [![image](https://img.shields.io/badge/continous%20quality-deepsource-lightgrey)](https://deepsource.io/gh/camelot-dev/excalibur/?ref=repository-badge)
 
-**Excalibur** is a web interface to extract tabular data from PDFs, written in **Python 3**! It is powered by [Camelot](https://camelot-py.readthedocs.io/).
+**Excalibur** is a web interface to extract tabular data from PDFs, written in **Python 3**! It is powered by [Camelot](https://camelot-py.readthedocs.io/) version 2.
 
 **Note:** Excalibur only works with text-based PDFs and not scanned documents. (As Tabula [explains](https://github.com/tabulapdf/tabula#why-tabula), "If you can click and drag to select text in your table in a PDF viewer, then your PDF is text-based".)
 
 ## Using Excalibur
-
-**Note:** You need to [install ghostscript](https://camelot-py.readthedocs.io/en/master/user/install-deps.html) before moving forward.
 
 After [installing Excalibur with pip](https://excalibur-py.readthedocs.io/en/master/user/install.html), you need to initialize the metadata database using:
 
@@ -26,8 +24,7 @@ And then start the webserver using:
 $ excalibur webserver
 </pre>
 
-That's it! Now you can go to http://localhost:5000 and start extracting tabular data from your PDFs.
-
+That's it! Now you can go to <http://localhost:5000> and start extracting tabular data from your PDFs.
 
 1. **Upload** a PDF and enter the page numbers you want to extract tables from.
 
@@ -59,7 +56,7 @@ That's it! Now you can go to http://localhost:5000 and start extracting tabular 
 
 ### Using pip
 
-After installing [ghostscript](https://www.ghostscript.com/), which is one of the requirements for Camelot (See [install instructions](https://camelot-py.readthedocs.io/en/master/user/install-deps.html)), you can simply use pip to install Excalibur:
+You can simply use pip to install Excalibur:
 
 <pre>
 $ pip install excalibur-py
@@ -104,12 +101,16 @@ You can install the development dependencies easily, using pip:
 $ pip install excalibur-py[dev]
 </pre>
 
-### Testing (soon)
+### Testing
 
 After installation, you can run tests using:
 
 <pre>
-$ python setup.py test
+$ make test
+
+# Or
+
+$ pytest --verbose tests
 </pre>
 
 ## Versioning

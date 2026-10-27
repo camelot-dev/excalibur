@@ -19,8 +19,8 @@ def execute_command(command):
         task_name = command[-3]
         task_id = command[-1]
         _run(task_name, task_id)
-    except Exception as e:
-        traceback.print_exc(e)
+    except Exception:
+        traceback.print_exc()
 
 
 class SequentialExecutor(BaseExecutor):

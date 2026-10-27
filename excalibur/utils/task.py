@@ -1,12 +1,31 @@
 import os
 
 import cv2
+import playa
 from camelot.utils import (
     get_image_char_and_text_objects,
     get_page_layout,
     get_rotation,
 )
 from pypdf import PdfReader, PdfWriter
+
+
+def _reader(source):
+    """Open a PDF with the lenient parser used by current and older pypdf."""
+    return PdfReader(source, strict=False)
+
+
+def _text_rotation(filepath):
+    """Return '', 'clockwise', or 'anticlockwise' for the first page.
+
+    Camelot 2's layout helpers take a playa page, not a filesystem path.
+    """
+    with playa.open(filepath, space="page") as pdf:
+        layout, _dimensions = get_page_layout(pdf.pages[0])
+        _images, chars, horizontal_text, vertical_text = (
+            get_image_char_and_text_objects(layout)
+        )
+        return get_rotation(chars, horizontal_text, vertical_text)
 
 
 def get_pages(filename, pages, password=""):
@@ -29,26 +48,24 @@ def get_pages(filename, pages, password=""):
 
     """
     page_numbers = []
-    inputstream = open(filename, "rb")
-    infile = PdfReader(inputstream, strict=False)
+    infile = _reader(filename)
+    if infile.is_encrypted:
+        infile.decrypt(password)
     N = len(infile.pages)
     if pages == "1":
         page_numbers.append({"start": 1, "end": 1})
     else:
-        if infile.is_encrypted:
-            infile.decrypt(password)
         if pages == "all":
-            page_numbers.append({"start": 1, "end": len(infile.pages)})
+            page_numbers.append({"start": 1, "end": N})
         else:
             for r in pages.split(","):
                 if "-" in r:
                     a, b = r.split("-")
                     if b == "end":
-                        b = len(infile.pages)
+                        b = N
                     page_numbers.append({"start": int(a), "end": int(b)})
                 else:
                     page_numbers.append({"start": int(r), "end": int(r)})
-    inputstream.close()
     P = []
     for p in page_numbers:
         P.extend(range(p["start"], p["end"] + 1))
@@ -56,7 +73,7 @@ def get_pages(filename, pages, password=""):
 
 
 def save_page(filepath, page_number):
-    infile = PdfReader(open(filepath, "rb"), strict=False)
+    infile = _reader(filepath)
     page = infile.pages[page_number - 1]
     outfile = PdfWriter()
     outfile.add_page(page)
@@ -64,32 +81,29 @@ def save_page(filepath, page_number):
     with open(outpath, "wb") as f:
         outfile.write(f)
     froot, fext = os.path.splitext(outpath)
-    layout, __ = get_page_layout(outpath)
-    # fix rotated PDF
-    images, chars, horizontal_text, vertical_text = get_image_char_and_text_objects(
-        layout
-    )
-    rotation = get_rotation(chars, horizontal_text, vertical_text)
+    # fix rotated PDF. pypdf 5+ removed rotateClockwise / rotateCounterClockwise.
+    rotation = _text_rotation(outpath)
     if rotation != "":
         outpath_new = "".join([froot.replace("page", "p"), "_rotated", fext])
         os.rename(outpath, outpath_new)
-        infile = PdfReader(open(outpath_new, "rb"), strict=False)
+        infile = _reader(outpath_new)
         if infile.is_encrypted:
             infile.decrypt("")
         outfile = PdfWriter()
         p = infile.pages[0]
         if rotation == "anticlockwise":
-            p.rotateClockwise(90)
+            p.rotate(90)
         elif rotation == "clockwise":
-            p.rotateCounterClockwise(90)
+            p.rotate(-90)
         outfile.add_page(p)
         with open(outpath, "wb") as f:
             outfile.write(f)
 
 
 def get_file_dim(filepath):
-    layout, dimensions = get_page_layout(filepath)
-    return list(dimensions)
+    with playa.open(filepath, space="page") as pdf:
+        _layout, dimensions = get_page_layout(pdf.pages[0])
+    return [float(dimensions[0]), float(dimensions[1])]
 
 
 def get_image_dim(imagepath):
