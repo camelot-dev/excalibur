@@ -157,3 +157,41 @@ def test_lattice_on_blank_pdf_finishes_with_no_tables(client):
         assert b"Please wait while the tables are extracted." not in body
     finally:
         _remove_upload(file_id)
+
+
+_LATTICE_RULE = {
+    "flavor": "Lattice",
+    "process_background": False,
+    "line_scale": 15,
+    "split_text": False,
+    "flag_size": False,
+    "pages": {"1": {"table_areas": None, "columns": None}},
+}
+
+
+@pytest.mark.parametrize(
+    "fmt,magic",
+    [("CSV", b"PK"), ("JSON", b"PK"), ("HTML", b"PK"), ("Excel", b"PK")],
+)
+def test_download_every_format(client, fmt, magic):
+    # Excel used to 500: it is written as a plain .xlsx, not a .zip (#196).
+    file_id = _upload(client, _table_pdf(), "table.pdf")
+    try:
+        job_id = _start_job(client, file_id, _LATTICE_RULE)
+        response = client.post("/download", data={"job_id": job_id, "format": fmt})
+        assert response.status_code == 200
+        assert response.data.startswith(magic)
+    finally:
+        _remove_upload(file_id)
+
+
+def test_excel_download_without_tables_is_404(client):
+    file_id = _upload(client, _blank_pdf(), "blank.pdf")
+    try:
+        job_id = _start_job(client, file_id, _LATTICE_RULE)
+        response = client.post(
+            "/download", data={"job_id": job_id, "format": "Excel"}
+        )
+        assert response.status_code == 404
+    finally:
+        _remove_upload(file_id)
