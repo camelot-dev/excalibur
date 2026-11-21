@@ -1,5 +1,5 @@
-# Excalibur web UI. Runs as a non-root user with uid 1000 so it also works on
-# Hugging Face Spaces (Docker SDK), which expects port 7860.
+# Excalibur web UI. Runs as a non-root user on port 7860. The public demo on
+# Render builds this file directly from the repository.
 FROM python:3.12-slim
 
 COPY --from=ghcr.io/astral-sh/uv:0.9 /uv /usr/local/bin/uv
