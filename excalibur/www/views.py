@@ -122,6 +122,7 @@ def workspaces(file_id):
     return render_template(
         "workspace.html",
         filename=file.filename,
+        error=file.error,
         imagepaths=imagepaths,
         filedims=filedims,
         imagedims=imagedims,
@@ -202,6 +203,7 @@ def jobs(job_id):
             return render_template(
                 "job.html",
                 is_finished=job.is_finished,
+                error=job.error,
                 started_at=job.started_at,
                 finished_at=job.finished_at,
                 datapath=job.datapath,

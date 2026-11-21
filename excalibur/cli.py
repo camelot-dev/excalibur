@@ -5,7 +5,6 @@ import click
 
 from . import __version__
 from . import configuration as conf
-from . import settings
 from .operators.python_operator import PythonOperator
 from .tasks import extract
 from .tasks import split
@@ -47,10 +46,8 @@ def resetdb(*args, **kwargs):
 
 @cli.command("webserver")
 def webserver(*args, **kwargs):
-    if conf.USING_SQLITE:
-        sqlite_path = settings.SQL_ALCHEMY_CONN.replace("sqlite:///", "")
-        if not os.path.isfile(sqlite_path):
-            initialize_database()
+    # Idempotent: creates missing tables and upgrades older databases.
+    initialize_database()
 
     port = int(
         os.environ.get("EXCALIBUR_WEB_PORT", conf.get("webserver", "web_server_port"))

@@ -193,3 +193,34 @@ def test_excel_download_without_tables_is_404(client):
         assert response.status_code == 404
     finally:
         _remove_upload(file_id)
+
+
+def test_split_error_is_shown_instead_of_processing(client):
+    file_id = _upload(client, b"this is not a pdf", "broken.pdf")
+    try:
+        workspace = client.get(f"/workspaces/{file_id}")
+        assert workspace.status_code == 200
+        assert b"Could not process this PDF" in workspace.data
+        assert b"data-processing" not in workspace.data
+    finally:
+        _remove_upload(file_id)
+
+
+def test_extract_error_is_shown_instead_of_processing(client):
+    file_id = _upload(client, _table_pdf(), "table.pdf")
+    try:
+        job_id = _start_job(
+            client,
+            file_id,
+            {
+                "flavor": "Lattice",
+                "line_scale": "not a number",
+                "pages": {"1": {"table_areas": None, "columns": None}},
+            },
+        )
+        job = client.get(f"/jobs/{job_id}")
+        assert job.status_code == 200
+        assert b"Table extraction failed" in job.data
+        assert b"data-processing" not in job.data
+    finally:
+        _remove_upload(file_id)
