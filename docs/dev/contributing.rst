@@ -35,7 +35,7 @@ A great way to start contributing to Excalibur is to pick an issue tagged with t
 Setting up a development environment
 ------------------------------------
 
-You need Python 3.10 or newer. Camelot 2 renders PDF pages with pypdfium2, so no Ghostscript or other system dependency is required. You can install the ``dev`` extra using pip::
+You need Python 3.11 or newer. Camelot 2 renders PDF pages with pypdfium2, so no Ghostscript or other system dependency is required. You can install the ``dev`` extra using pip::
 
     $ pip install excalibur-py[dev]
 

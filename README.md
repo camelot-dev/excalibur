@@ -68,7 +68,7 @@ $ pip install excalibur-py
 
 ### From the source code
 
-Excalibur requires Python 3.10 or newer. Camelot 2 renders PDF pages with pypdfium2, so Ghostscript is no longer needed.
+Excalibur requires Python 3.11 or newer. Camelot 2 renders PDF pages with pypdfium2, so Ghostscript is no longer needed.
 
 Clone the repo using:
 

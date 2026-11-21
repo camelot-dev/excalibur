@@ -5,7 +5,7 @@ Installation of Excalibur
 
 This part of the documentation covers the steps to install Excalibur.
 
-Excalibur requires Python 3.10 or newer and is built on Camelot 2. Camelot 2
+Excalibur requires Python 3.11 or newer and is built on Camelot 2. Camelot 2
 renders PDF pages with pypdfium2, so you no longer need to install Ghostscript
 or any other system dependency.
 
