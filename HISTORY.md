@@ -6,6 +6,11 @@ After 1.2.1, release notes are on [GitHub Releases](https://github.com/camelot-d
 1.2.1 (2026-11-21)
 ------------------
 
+**Improvements**
+
+* Bootstrap 5.3 and automatic dark mode (follows the OS setting). [#231](https://github.com/camelot-dev/excalibur/pull/231)
+* [#113](https://github.com/camelot-dev/excalibur/issues/113) The "Processing" page shows a spinner and the elapsed time, and failures link back to the upload page or the workspace. [#231](https://github.com/camelot-dev/excalibur/pull/231)
+
 **Bugfixes**
 
 * [#60](https://github.com/camelot-dev/excalibur/issues/60) Show errors from page conversion and table extraction on the page instead of "Processing" forever. Existing databases get the new column automatically when the webserver starts. [#228](https://github.com/camelot-dev/excalibur/pull/228)
@@ -13,7 +18,7 @@ After 1.2.1, release notes are on [GitHub Releases](https://github.com/camelot-d
 
 **Security**
 
-* Upgrade dependencies with open security advisories: pillow 13, pypdf 7, filelock, certifi, urllib3, requests, idna, jinja2. [#229](https://github.com/camelot-dev/excalibur/pull/229)
+* Upgrade dependencies with open security advisories: pillow 13, pypdf 7, filelock, certifi, urllib3, requests, idna, jinja2 [#229](https://github.com/camelot-dev/excalibur/pull/229), and the bundled jQuery 3.7.1 [#231](https://github.com/camelot-dev/excalibur/pull/231).
 
 **Removed**
 
