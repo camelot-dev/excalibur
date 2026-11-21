@@ -1,0 +1,9 @@
+.git
+.venv
+**/__pycache__
+*.egg-info
+.coverage
+coverage.xml
+docs/_build
+excalibur/www/static/uploads/*
+!excalibur/www/static/uploads/.gitignore
