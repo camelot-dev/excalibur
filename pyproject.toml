@@ -8,13 +8,13 @@ authors = [
 license = {text = "MIT"}
 readme = "README.md"
 classifiers = [
-    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
     "License :: OSI Approved :: MIT License",
 ]
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 dependencies = [
     "camelot-py>=2.0.0,<3",
     "celery>=4.1.1",
@@ -57,7 +57,7 @@ excalibur = "excalibur.cli:cli"
 
 [tool.ruff]
 # Same toolchain as camelot: Ruff replaces black, isort, flake8 and pyupgrade.
-target-version = "py310"
+target-version = "py311"
 line-length = 88
 extend-exclude = ["docs/_themes/*"]
 force-exclude = true
