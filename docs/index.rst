@@ -23,6 +23,8 @@ Release v\ |version|. (:ref:`Installation <install>`)
 
 **Excalibur** is a web interface to extract tabular data from PDFs, written in **Python 3**! It is powered by `Camelot <https://camelot-py.readthedocs.io/>`_ version 2.
 
+**Try it online:** a public demo runs at `excalibur-sh8m.onrender.com <https://excalibur-sh8m.onrender.com>`_. It runs on a free plan: the first visit after a quiet period takes about 30 seconds to wake up, and uploads are deleted whenever it restarts. Don't upload confidential PDFs.
+
 .. note:: Excalibur only works with text-based PDFs and not scanned documents. (As Tabula `explains`_, "If you can click and drag to select text in your table in a PDF viewer, then your PDF is text-based".)
 
 .. _explains: https://github.com/tabulapdf/tabula#why-tabula

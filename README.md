@@ -4,9 +4,11 @@
 
 # Excalibur: A web interface to extract tabular data from PDFs
 
-[![Documentation Status](https://readthedocs.org/projects/excalibur-py/badge/?version=master)](https://excalibur-py.readthedocs.io/en/master/) [![image](https://img.shields.io/pypi/v/excalibur-py.svg)](https://pypi.org/project/excalibur-py/) [![image](https://img.shields.io/pypi/l/excalibur-py.svg)](https://pypi.org/project/excalibur-py/) [![image](https://img.shields.io/pypi/pyversions/excalibur-py.svg)](https://pypi.org/project/excalibur-py/) [![image](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black) [![image](https://img.shields.io/badge/continous%20quality-deepsource-lightgrey)](https://deepsource.io/gh/camelot-dev/excalibur/?ref=repository-badge)
+[![Documentation Status](https://readthedocs.org/projects/excalibur-py/badge/?version=master)](https://excalibur-py.readthedocs.io/en/master/) [![image](https://img.shields.io/pypi/v/excalibur-py.svg)](https://pypi.org/project/excalibur-py/) [![image](https://img.shields.io/pypi/l/excalibur-py.svg)](https://pypi.org/project/excalibur-py/) [![image](https://img.shields.io/pypi/pyversions/excalibur-py.svg)](https://pypi.org/project/excalibur-py/) [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 
 **Excalibur** is a web interface to extract tabular data from PDFs, written in **Python 3**! It is powered by [Camelot](https://camelot-py.readthedocs.io/) version 2.
+
+**Try it online:** a public demo runs at [excalibur-sh8m.onrender.com](https://excalibur-sh8m.onrender.com). It runs on a free plan: the first visit after a quiet period takes about 30 seconds to wake up, and uploads are deleted whenever it restarts. Don't upload confidential PDFs.
 
 > **Maintenance mode:** Excalibur gets bug fixes and stays compatible with new Camelot releases, but no new features are planned. If you want to help maintain it, please open an issue. For scripted extraction, use [Camelot](https://camelot-py.readthedocs.io/) directly.
 
