@@ -1,10 +1,53 @@
-html, body {
-  font-family: 'Roboto Condensed', sans-serif;
+/* Brand palette, sampled from the logo (same green as the camelot docs). */
+:root {
+  --brand-green: #0f9d47;
+  --brand-green-dark: #0b7a38;
+  --brand-green-tint: #e6f4eb;
+  --brand-grey-dark: #2f3337;
+  --brand-grey: #939598;
+  --brand-grey-light: #d1d2d4;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Montserrat', sans-serif;
+html, body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: #212529;
 }
+
+a { color: var(--brand-green-dark); }
+a:hover { color: var(--brand-green); }
+
+/* Navbar: dark grey with the logo and a green active link. */
+.navbar.primary-bg { background-color: var(--brand-grey-dark) !important; border-bottom: 3px solid var(--brand-green); }
+.navbar-brand { display: flex; align-items: center; font-weight: 600; }
+.navbar-brand img { height: 32px; width: 32px; margin-right: .5rem; }
+.navbar-dark .navbar-nav .nav-item.active .nav-link { color: #fff; box-shadow: inset 0 -3px 0 var(--brand-green); }
+
+/* Bootstrap 4 has no theme variables for components, so recolour the
+   primary/info/success variants to the brand green and grey. */
+.btn-primary, .btn-success, .btn-info {
+  background-color: var(--brand-green); border-color: var(--brand-green); color: #fff;
+}
+.btn-primary:hover, .btn-success:hover, .btn-info:hover,
+.btn-primary:focus, .btn-success:focus, .btn-info:focus,
+.btn-primary:not(:disabled):active, .btn-success:not(:disabled):active, .btn-info:not(:disabled):active,
+.show > .btn-info.dropdown-toggle {
+  background-color: var(--brand-green-dark); border-color: var(--brand-green-dark); color: #fff;
+  box-shadow: none;
+}
+.btn-outline-primary, .btn-outline-success {
+  color: var(--brand-green-dark); border-color: var(--brand-green);
+}
+.btn-outline-primary:hover, .btn-outline-success:hover,
+.btn-outline-primary:not(:disabled):active, .btn-outline-success:not(:disabled):active {
+  background-color: var(--brand-green); border-color: var(--brand-green); color: #fff;
+}
+.btn-primary:disabled, .btn-primary.disabled { background-color: var(--brand-grey); border-color: var(--brand-grey); }
+.btn-secondary { background-color: #5f6368; border-color: #5f6368; }
+.btn-secondary:hover { background-color: var(--brand-grey-dark); border-color: var(--brand-grey-dark); }
+.alert-info { background-color: var(--brand-green-tint); border-color: #b9e2c8; color: var(--brand-green-dark); }
+.alert-info a { color: var(--brand-green-dark); font-weight: 600; }
+.form-control:focus, .custom-select:focus { border-color: var(--brand-green); }
+.thead-light th, .table thead th { background-color: #f1f3f4; }
 
 body {
   padding-top: 5rem;
@@ -30,11 +73,11 @@ input:active, .form-control:active {
 }
 
 .primary-bg {
-  background-color: #2196F3 !important;
+  background-color: var(--brand-grey-dark) !important;
 }
 
 .primary-text {
-  color: #2196F3;
+  color: var(--brand-green);
 }
 
 .clickable {
@@ -90,17 +133,17 @@ input:active, .form-control:active {
   width: 100%;
   line-height: 2em;
   opacity: 1;
-  color: #2196F3;
+  color: var(--brand-green);
   visibility: visible;
   text-align: center;
-  border: 0.1em dashed #2196F3;
+  border: 0.1em dashed var(--brand-green);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   overflow: hidden;
 }
 
 .uploadFile .uploadFile__input:hover ~ .uploadFile__label  {
   border-style: solid;
-  box-shadow: inset 0px 0px 0px 0.05em #2196F3;
+  box-shadow: inset 0px 0px 0px 0.05em var(--brand-green);
 }
 
 
