@@ -89,19 +89,20 @@ const onSavedRuleClick = function (e) {
           resetTableAreas();
           resetColumnSeparators();
           for (let page in ruleOptions['pages']) {
-            if ('table_areas' in ruleOptions['pages'][page]) {
+            const table_areas = ruleOptions['pages'][page]['table_areas'];
+            if (table_areas) {
               let tableAreas = [];
-              const table_areas = ruleOptions['pages'][page]['table_areas'];
               table_areas.forEach(function (t) {
                 tableAreas.push(t.split(',').map(Number));
               })
               renderTableAreas(page, tableAreas);
             }
-            if ('columns' in ruleOptions['pages'][page]) {
+            const columns = ruleOptions['pages'][page]['columns'];
+            if (columns) {
               let columnSeparators = [];
-              const columns = ruleOptions['pages'][page]['columns'];
+              // One comma-separated string per table area; flatten to x positions.
               columns.forEach(function (c) {
-                columnSeparators.push(c.split(',').map(Number));
+                columnSeparators = columnSeparators.concat(c.split(',').map(Number));
               })
               renderColumnSeparators(page, columnSeparators);
             }
@@ -148,20 +149,29 @@ const getNewColPosOffset = function (page) {
   return newOffset;
 }
 
-const addColumnSeparator = function (page, colPosOffset) {
+const addColumnSeparator = function (page, colPosOffset, centered = false) {
   const pageDiv = '#image-div-{0}'.format(page);
   const position = $(pageDiv).position();
   const column = $('<div id="dc" class="draggable-column" ondblclick="onColumnSeparatorDoubleClick(this)"><div class="background"></div><div id="line" class="line"></div></div>');
-  $(column).css({
-    'top': position.top,
-    'left': position.left + colPosOffset,
-    'height': $(pageDiv).height()
-  });
   $(pageDiv).append(column);
   $('.draggable-column').draggable({
     axis: 'x',
     containment: 'parent'
   });
+  // Saved separators store the line position; center the handle on it.
+  if (centered) {
+    colPosOffset -= $(column).width() / 2;
+  }
+  $(column).css({
+    'top': position.top,
+    'left': position.left + colPosOffset,
+    'height': $(pageDiv).height()
+  });
+};
+
+// The advanced options are free-text inputs, so "false" must not read as true.
+const isTrue = function (selector) {
+  return String($(selector).val()).trim().toLowerCase() === 'true';
 };
 
 const getRuleOptions = function () {
@@ -175,17 +185,17 @@ const getRuleOptions = function () {
     // advanced settings
     switch(flavor.toString().toLowerCase()) {
       case 'lattice': {
-        ruleOptions['process_background'] = $("#process-background").val() ? true : false;
+        ruleOptions['process_background'] = isTrue('#process-background');
         ruleOptions['line_scale'] = $('#line-scale').val() ? Number($('#line-scale').val()) : 15;
-        ruleOptions['split_text'] = $("#split-text-l").val() ? true : false;
-        ruleOptions['flag_size'] = $("#flag-size-l").val() ? true : false;
+        ruleOptions['split_text'] = isTrue('#split-text-l');
+        ruleOptions['flag_size'] = isTrue('#flag-size-l');
         break;
       }
       case 'stream': {
-        ruleOptions['row_close_tol'] = $('#row-close-tol').val() ? Number($('#line-scale').val()) : 2;
-        ruleOptions['col_close_tol'] = $('#col-close-tol').val() ? Number($('#line-scale').val()) : 0;
-        ruleOptions['split_text'] = $("#split-text-s").val() ? true : false;
-        ruleOptions['flag_size'] = $("#flag-size-s").val() ? true : false;
+        ruleOptions['row_close_tol'] = $('#row-close-tol').val() ? Number($('#row-close-tol').val()) : 2;
+        ruleOptions['col_close_tol'] = $('#col-close-tol').val() ? Number($('#col-close-tol').val()) : 0;
+        ruleOptions['split_text'] = isTrue('#split-text-s');
+        ruleOptions['flag_size'] = isTrue('#flag-size-s');
         break;
       }
       default: {
@@ -263,7 +273,7 @@ const renderColumnSeparators = function(page, columnSeparators) {
   const scalingFactorX = imageWidth / fileDims[page][0];
 
   for (let i = 0; i < columnSeparators.length; i++) {
-    addColumnSeparator(page, columnSeparators[i] * scalingFactorX);
+    addColumnSeparator(page, columnSeparators[i] * scalingFactorX, true);
   }
 };
 
