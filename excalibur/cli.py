@@ -49,18 +49,22 @@ def webserver(*args, **kwargs):
         if not os.path.isfile(sqlite_path):
             initialize_database()
 
+    port = int(
+        os.environ.get("EXCALIBUR_WEB_PORT", conf.get("webserver", "web_server_port"))
+    )
+    host = os.environ.get(
+        "EXCALIBUR_WEB_HOST", conf.get("webserver", "web_server_host")
+    )
+
     # https://stackoverflow.com/a/54235461/2780127
     def open_browser():
-        click.launch("http://localhost:5000")
+        click.launch(f"http://127.0.0.1:{port}")
 
-    Timer(1, open_browser).start()
+    if host in ("127.0.0.1", "localhost", "::1"):
+        Timer(1, open_browser).start()
 
     app = create_app(conf)
-    app.run(
-        port=conf.get("webserver", "web_server_port"),
-        host=conf.get("webserver", "web_server_host"),
-        use_reloader=False,
-    )
+    app.run(port=port, host=host, use_reloader=False)
 
 
 @cli.command("worker")

@@ -1,7 +1,5 @@
 import os
 
-import six
-
 # With this:
 try:
     from configparser import ConfigParser
@@ -119,8 +117,6 @@ if not os.path.isfile(EXCALIBUR_CONFIG):
     print(f"Creating new Excalibur configuration file in: {EXCALIBUR_CONFIG}")
     with open(EXCALIBUR_CONFIG, "w") as f:
         cfg = parameterized_config(DEFAULT_CONFIG)
-        if six.PY2:
-            cfg = cfg.encode("utf8")
         f.write(cfg)
 
 

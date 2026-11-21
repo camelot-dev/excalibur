@@ -26,8 +26,8 @@ def execute_command(command):
         subprocess.check_call(
             command, stderr=subprocess.STDOUT, close_fds=(sys.platform != "win32")
         )
-    except Exception as e:
-        traceback.print_exc(e)
+    except Exception:
+        traceback.print_exc()
 
 
 class CeleryExecutor(BaseExecutor):

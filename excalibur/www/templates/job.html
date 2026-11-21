@@ -35,6 +35,9 @@
           </form>
       </div>
     </div>
+    {% if data|length == 0 %}
+      <p class="lead">No tables were found with this flavor. Ruled tables use Lattice. Tables separated by whitespace use Stream.</p>
+    {% endif %}
     {% for d in data %}
       <div class="card depth-1 mb-5">
         <div class="card-body p-0">

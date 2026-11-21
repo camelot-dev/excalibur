@@ -5,7 +5,7 @@ install:
 	pip install ".[dev]"
 
 test:
-	pytest --verbose --cov-config .coveragerc --cov-report term --cov-report xml --cov=excalibur tests
+	pytest --verbose tests
 
 docs:
 	cd docs && make html

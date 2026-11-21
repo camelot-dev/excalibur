@@ -1,8 +1,9 @@
-import os
-import re
+import datetime as dt
 import glob
 import json
-import datetime as dt
+import os
+import re
+import sys
 
 import pandas as pd
 from flask import (
@@ -24,6 +25,20 @@ from ..utils.file import mkdirs, allowed_filename
 from ..utils.metadata import generate_uuid, random_string
 
 views = Blueprint("views", __name__)
+
+
+def _task_command(task_name, task_id):
+    """Run the task with this interpreter so the local install is used."""
+    return [
+        sys.executable,
+        "-m",
+        "excalibur",
+        "run",
+        "--task",
+        task_name,
+        "--uuid",
+        task_id,
+    ]
 
 
 @views.route("/", methods=["GET"])
@@ -76,10 +91,8 @@ def files():
         session.commit()
         session.close()
 
-        command = "excalibur run --task {} --uuid {}".format("split", file_id)
-        command_as_list = command.split(" ")
         executor = get_default_executor()
-        executor.execute_async(command_as_list)
+        executor.execute_async(_task_command("split", file_id))
     return jsonify(file_id=file_id)
 
 
@@ -103,8 +116,6 @@ def workspaces(file_id):
         saved_rules = [
             {"rule_id": rule.rule_id, "rule_name": rule.rule_name} for rule in rules
         ]
-    if not isinstance(imagepaths, dict):
-        imagepaths = {}  # Provide an empty fallback dictionary
     return render_template(
         "workspace.html",
         filename=file.filename,
@@ -176,7 +187,7 @@ def jobs(job_id):
 
             data = []
             render_files = json.loads(job.render_files)
-            regex = r"page-(\d)+-table-(\d)+"
+            regex = r"page-(\d+)-table-(\d+)"
             for k in sorted(
                 render_files,
                 key=lambda x: (int(re.split(regex, x)[1]), int(re.split(regex, x)[2])),
@@ -240,10 +251,8 @@ def jobs(job_id):
     session.commit()
     session.close()
 
-    command = "excalibur run --task {} --uuid {}".format("extract", job_id)
-    command_as_list = command.split(" ")
     executor = get_default_executor()
-    executor.execute_async(command_as_list)
+    executor.execute_async(_task_command("extract", job_id))
     return jsonify(job_id=job_id)
 
 
