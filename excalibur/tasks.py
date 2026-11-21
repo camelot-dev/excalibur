@@ -3,19 +3,22 @@ import glob
 import json
 import logging
 import os
-import subprocess
 
 import camelot
 import pandas as pd
 from camelot.backends.pdfium_backend import PdfiumBackend
 from camelot.core import TableList
-from camelot.parsers import Lattice, Stream
 
 from . import configuration as conf
-from .models import File, Job, Rule
+from .models import File
+from .models import Job
+from .models import Rule
 from .settings import Session
 from .utils.file import mkdirs
-from .utils.task import get_file_dim, get_image_dim, get_pages, save_page
+from .utils.task import get_file_dim
+from .utils.task import get_image_dim
+from .utils.task import get_pages
+from .utils.task import save_page
 
 # Camelot 2 renamed the stream tolerances. The web UI still posts the old names.
 _LEGACY_KWARGS = {

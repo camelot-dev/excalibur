@@ -7,7 +7,9 @@ import pytest
 from pypdf import PdfWriter
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import letter
-from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
+from reportlab.platypus import SimpleDocTemplate
+from reportlab.platypus import Table
+from reportlab.platypus import TableStyle
 
 from excalibur import configuration as conf
 from excalibur.executors import get_default_executor
@@ -41,9 +43,7 @@ def _table_pdf():
         ["Total", "", "11.50"],
     ]
     table = Table(rows, colWidths=[200, 80, 80])
-    table.setStyle(
-        TableStyle([("GRID", (0, 0), (-1, -1), 1, colors.black)])
-    )
+    table.setStyle(TableStyle([("GRID", (0, 0), (-1, -1), 1, colors.black)]))
     document.build([table])
     return buffer.getvalue()
 
@@ -189,9 +189,7 @@ def test_excel_download_without_tables_is_404(client):
     file_id = _upload(client, _blank_pdf(), "blank.pdf")
     try:
         job_id = _start_job(client, file_id, _LATTICE_RULE)
-        response = client.post(
-            "/download", data={"job_id": job_id, "format": "Excel"}
-        )
+        response = client.post("/download", data={"job_id": job_id, "format": "Excel"})
         assert response.status_code == 404
     finally:
         _remove_upload(file_id)

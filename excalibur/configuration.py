@@ -72,9 +72,7 @@ class ExcaliburConfigParser(ConfigParser):
 
         else:
             raise ValueError(
-                "section/key [{section}/{key}] not found in" " config".format(
-                    **locals()
-                )
+                "section/key [{section}/{key}] not found in config".format(**locals())
             )
 
     def read(self, filename):

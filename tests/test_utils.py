@@ -1,7 +1,8 @@
 from pypdf import PdfWriter
 
 from excalibur.utils.file import allowed_filename
-from excalibur.utils.task import get_file_dim, get_pages
+from excalibur.utils.task import get_file_dim
+from excalibur.utils.task import get_pages
 
 
 def test_allowed_filename():
