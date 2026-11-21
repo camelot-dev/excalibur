@@ -1,6 +1,46 @@
 Release History
 ===============
 
+After 1.2.1, release notes are on [GitHub Releases](https://github.com/camelot-dev/excalibur/releases).
+
+1.2.1 (2026-11-21)
+------------------
+
+**Bugfixes**
+
+* [#60](https://github.com/camelot-dev/excalibur/issues/60) Show errors from page conversion and table extraction on the page instead of "Processing" forever. Existing databases get the new column automatically when the webserver starts. [#228](https://github.com/camelot-dev/excalibur/pull/228)
+* `excalibur --version` reported 1.0.1; it now reads the installed package version.
+
+**Security**
+
+* Upgrade dependencies with open security advisories: pillow 13, pypdf 7, filelock, certifi, urllib3, requests, idna, jinja2. [#229](https://github.com/camelot-dev/excalibur/pull/229)
+
+**Removed**
+
+* The unmaintained PyInstaller build (`arthur.py`, `make build-executable` and the "Build packages" workflow). Install from PyPI or use the Docker image instead.
+
+1.2.0 (2026-11-21)
+------------------
+
+**Improvements**
+
+* New look in the Camelot brand colours, favicon, and flicker-free polling of the "Processing" pages. [#224](https://github.com/camelot-dev/excalibur/pull/224)
+* Documentation moved to sphinx-book-theme, matching the Camelot docs. [#221](https://github.com/camelot-dev/excalibur/pull/221)
+* Dockerfile, and a public demo at https://excalibur-sh8m.onrender.com. [#225](https://github.com/camelot-dev/excalibur/pull/225), [#226](https://github.com/camelot-dev/excalibur/pull/226)
+* Tooling aligned with Camelot: ruff, pre-commit, Dependabot auto-merge. [#220](https://github.com/camelot-dev/excalibur/pull/220)
+
+**Bugfixes**
+
+* Saved rules load again, Lattice `line_scale` is sent correctly, and Stream tolerances read their own fields. [#216](https://github.com/camelot-dev/excalibur/pull/216)
+
+1.1.0 (2026-11-21)
+------------------
+
+* Port to Camelot 2: no Ghostscript needed, Python 3.10 to 3.13. [#203](https://github.com/camelot-dev/excalibur/pull/203) by [Nitrodist](https://github.com/Nitrodist).
+* [#196](https://github.com/camelot-dev/excalibur/issues/196) Fix the Excel download returning a 500 error. [#215](https://github.com/camelot-dev/excalibur/pull/215)
+* CI with tests on Python 3.10 to 3.13 and a webserver smoke test. [#204](https://github.com/camelot-dev/excalibur/pull/204)
+* Excalibur is now in maintenance mode: bug fixes and Camelot compatibility only. [#219](https://github.com/camelot-dev/excalibur/pull/219)
+
 1.0.1 (2025-01-03)
 ------------------
 

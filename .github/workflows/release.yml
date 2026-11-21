@@ -78,11 +78,19 @@ jobs:
       - name: Create GitHub Release
         env:
           GITHUB_TOKEN: ${{ github.token }}
-        run: >-
-          gh release create
-          "$GITHUB_REF_NAME"
-          --repo "$GITHUB_REPOSITORY"
-          --notes ""
+        # Publish the release-drafter draft under this tag; fall back to
+        # GitHub's generated notes when there is no draft.
+        run: |
+          draft_id=$(gh api "repos/$GITHUB_REPOSITORY/releases" \
+            --jq '[.[] | select(.draft)][0].id // empty')
+          if [ -n "$draft_id" ]; then
+            gh api -X PATCH "repos/$GITHUB_REPOSITORY/releases/$draft_id" \
+              -f tag_name="$GITHUB_REF_NAME" -f name="$GITHUB_REF_NAME" \
+              -F draft=false > /dev/null
+          else
+            gh release create "$GITHUB_REF_NAME" \
+              --repo "$GITHUB_REPOSITORY" --generate-notes
+          fi
       - name: Upload artifact signatures to GitHub Release
         env:
           GITHUB_TOKEN: ${{ github.token }}

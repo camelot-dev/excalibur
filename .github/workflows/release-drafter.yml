@@ -1,0 +1,26 @@
+name: Release Drafter
+
+# Keeps a draft GitHub Release with notes built from merged PR titles and
+# labels, and auto-labels PRs from their conventional-commit title.
+# Pushing a vX.Y.Z tag (release.yml) publishes that draft.
+on:
+  push:
+    branches: [master]
+  pull_request_target:
+    types: [opened, reopened, synchronize, edited]
+
+permissions:
+  contents: read
+
+jobs:
+  update-draft:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: release-drafter/release-drafter@v7.11.0
+        with:
+          disable-releaser: ${{ github.event_name != 'push' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
