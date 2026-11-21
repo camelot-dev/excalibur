@@ -204,6 +204,7 @@ def jobs(job_id):
                 "job.html",
                 is_finished=job.is_finished,
                 error=job.error,
+                file_id=job.file_id,
                 started_at=job.started_at,
                 finished_at=job.finished_at,
                 datapath=job.datapath,

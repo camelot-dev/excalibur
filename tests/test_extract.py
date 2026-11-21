@@ -201,6 +201,7 @@ def test_split_error_is_shown_instead_of_processing(client):
         workspace = client.get(f"/workspaces/{file_id}")
         assert workspace.status_code == 200
         assert b"Could not process this PDF" in workspace.data
+        assert b"Upload another PDF" in workspace.data
         assert b"data-processing" not in workspace.data
     finally:
         _remove_upload(file_id)
@@ -221,6 +222,7 @@ def test_extract_error_is_shown_instead_of_processing(client):
         job = client.get(f"/jobs/{job_id}")
         assert job.status_code == 200
         assert b"Table extraction failed" in job.data
+        assert f"/workspaces/{file_id}".encode() in job.data
         assert b"data-processing" not in job.data
     finally:
         _remove_upload(file_id)

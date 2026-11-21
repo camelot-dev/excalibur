@@ -19,18 +19,16 @@
       </div>
       <div class="col-md-6 col-sm-6 col-xs-12">
           <form action="/download" method="post" id="download-form">
-            <label for="format">Download</label>
-            <div class="input-group">
-              <select class="form-control" name="format" id="format">
+            <label for="format" class="form-label">Download</label>
+            <div class="input-group mb-3">
+              <select class="form-select" name="format" id="format">
                 <option selected disabled>Select format</option>
                 <option>CSV</option>
                 <option>Excel</option>
                 <option>JSON</option>
                 <option>HTML</option>
               </select>
-              <div class="input-group-append mb-3">
-                <button type="button" id="download" class="btn btn-outline-secondary">Download</button>
-              </div>
+              <button type="button" id="download" class="btn btn-outline-secondary">Download</button>
             </div>
           </form>
       </div>
@@ -41,9 +39,9 @@
     {% for d in data %}
       <div class="card depth-1 mb-5">
         <div class="card-body p-0">
-          <table class="table text-left table-bordered table-hover mb-0">
-            <caption class="text-right text-dark mr-3"> <h6>{{ d.title }}</h6> </caption>
-            <thead class="thead-light">
+          <table class="table text-start table-bordered table-hover mb-0">
+            <caption class="text-end text-body me-3"> <h6>{{ d.title }}</h6> </caption>
+            <thead>
               <tr>
                 {% for column in d.columns %}
                   <th>{{ column }}</th>
@@ -70,13 +68,20 @@
       <h4 class="alert-heading">Table extraction failed</h4>
       <pre class="mb-2" style="white-space: pre-wrap;">{{ error }}</pre>
       <p class="mb-0">If this looks like a problem with the PDF, please report it at <a href="https://github.com/camelot-dev/camelot/issues" class="alert-link">camelot-dev/camelot</a>; otherwise at <a href="https://github.com/camelot-dev/excalibur/issues" class="alert-link">camelot-dev/excalibur</a>. The webserver log has the full traceback.</p>
+      <hr>
+      <a href="{{ url_for('views.workspaces', file_id=file_id) }}" class="btn btn-primary">Back to the workspace</a>
     </div>
   </div>
 {% else %}
   <div class="container" data-processing>
-    <div class="jumbotron">
-      <h1 class="display-4">Processing</h1>
+    <div class="p-5 mb-4 bg-body-tertiary rounded-3 text-center">
+      <div class="spinner-border text-primary mb-4" style="width: 3rem; height: 3rem;" role="status">
+        <span class="visually-hidden">Processing</span>
+      </div>
+      <h1 class="display-5">Processing</h1>
       <p class="lead">Please wait while the tables are extracted.</p>
+      <p class="text-body-secondary mb-0">Elapsed: <span data-elapsed>0s</span></p>
+      <p class="text-body-secondary mt-2 mb-0 d-none" data-slow-hint>Large or complex PDFs can take a few minutes. This page updates on its own.</p>
     </div>
   </div>
 {% endif %}

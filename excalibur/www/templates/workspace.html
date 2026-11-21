@@ -19,9 +19,9 @@
       <div class="row">
         <section class="col-md-2"></section>
         <section class="col-md-8">
-          <div class="jumbotron control-panel">
+          <div class="control-panel mb-4 rounded-3">
             <div class="btn-group">
-              <button id="select-rule" type="button" class="btn btn-info dropdown-toggle mr-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select Saved Rule</button>
+              <button id="select-rule" type="button" class="btn btn-info dropdown-toggle me-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select Saved Rule</button>
               <div class="dropdown-menu" aria-labelledby="select-rule">
                 <h6 class="dropdown-header">Saved Rules</h6>
                 {% if saved_rules is not none %}
@@ -31,12 +31,12 @@
                 {% endif %}
               </div>
             </div>
-            <button type="button" class="btn btn-secondary detect-areas mr-2" onclick="onDetectAreasClick(this)"><i class="fas fa-eye mr-2"></i>Autodetect Tables</button>
-            <button type="button" id="reset-areas" class="btn btn-secondary reset-areas mr-2" onclick="resetTableAreas()"><i class="fas fa-trash-alt mr-2"></i>Clear Tables</button>
+            <button type="button" class="btn btn-secondary detect-areas me-2" onclick="onDetectAreasClick(this)"><i class="fas fa-eye me-2"></i>Autodetect Tables</button>
+            <button type="button" id="reset-areas" class="btn btn-secondary reset-areas me-2" onclick="resetTableAreas()"><i class="fas fa-trash-alt me-2"></i>Clear Tables</button>
           </div>
         </section>
         <section class="col-md-2">
-          <button type="button" onclick="startJob()" class="btn btn-success"><i class="fas fa-table mr-2"></i>View and Download Data</button>
+          <button type="button" onclick="startJob()" class="btn btn-success"><i class="fas fa-table me-2"></i>View and Download Data</button>
         </section>
       </div>
       <div class="row">
@@ -56,16 +56,16 @@
             </div>
           </div>
         </section>
-        <section class="col-md-8" data-spy="scroll" data-target="#thumbnail-list">
-          <div class="jumbotron page-container">
+        <section class="col-md-8" data-bs-spy="scroll" data-bs-target="#thumbnail-list">
+          <div class="page-container px-3 py-4 px-sm-4 py-sm-5 mb-4 bg-body-tertiary rounded-3">
             {% for page, imagepath in imagepaths.items() %}
               <div class="row mx-0 mb-2">
                 <div class="col-md-3 col-sm-3 col-xs-3">
-                  <button type="button" class="btn btn-block btn-primary add-separator mt-1" onclick="onAddSeparatorClick(this)" data-page="{{ page }}" disabled><i class="fas fa-columns mr-2"></i>Add column</button>
+                  <button type="button" class="btn btn-primary w-100 add-separator mt-1" onclick="onAddSeparatorClick(this)" data-page="{{ page }}" disabled><i class="fas fa-columns me-2"></i>Add column</button>
                 </div>
               </div>
               <div class="row mx-0 mb-2">
-                <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="col-md-12 col-sm-12 col-xs-12 position-relative">
                   <div id="image-div-{{ page }}">
                     <img src="{{ imagepath }}" id="image-{{ page }}" class="image-area"/>
                   </div>
@@ -75,79 +75,79 @@
           </div>
         </section>
         <section class="col-md-2">
-          <div class="row mx-0 mb-3 card">
+          <div class="card mb-3">
             <div class="card-body">
               <div class="card-title">
                 <h5>Advanced</h5>
                 <h6><a href="https://camelot-py.readthedocs.io/en/master/user/advanced.html" target="_blank">See docs</a></h6>
               </div>
-              <form class="form-group">
+              <form>
                 <div class="row py-3">
                   <div class="col-md-12">
-                    <label for="flavors">Flavor</label>
-                    <select class="form-control" name="flavors" id="flavors" onchange="onFlavorChange()">
+                    <label for="flavors" class="form-label">Flavor</label>
+                    <select class="form-select" name="flavors" id="flavors" onchange="onFlavorChange()">
                       <option selected disabled>Select flavor</option>
                       <option value="Lattice">Lattice</option>
                       <option value="Stream">Stream</option>
                     </select>
                   </div>
-                    <div class="row mx-0 lattice mt-3" style="display: none">
+                    <div class="row mx-0 px-0 lattice mt-3" style="display: none">
                       <div class="col-md-12">
-                        <div class="form-group">
-                          <label for="process-background">Process background</label>
+                        <div class="mb-3">
+                          <label for="process-background" class="form-label">Process background</label>
                           <input type="text" class="form-control" id="process-background" aria-describedby="process-background-help" placeholder="false">
-                          <small id="process-background-help" class="form-text text-muted">Process background lines.</small>
+                          <small id="process-background-help" class="form-text">Process background lines.</small>
                         </div>
                       </div>
                       <div class="col-md-12">
-                        <div class="form-group">
-                          <label for="line-scale">Detect small lines</label>
+                        <div class="mb-3">
+                          <label for="line-scale" class="form-label">Detect small lines</label>
                           <input type="text" class="form-control" id="line-scale" aria-describedby="line-scale-help" placeholder="15">
-                          <small id="line-scale-help" class="form-text text-muted">Small lines can be detected by increasing this value. Range: 15-100</small>
+                          <small id="line-scale-help" class="form-text">Small lines can be detected by increasing this value. Range: 15-100</small>
                         </div>
                       </div>
                       <div class="col-md-12">
-                        <div class="form-group">
-                          <label for="split-text-l">Cut text</label>
+                        <div class="mb-3">
+                          <label for="split-text-l" class="form-label">Cut text</label>
                           <input type="text" class="form-control" id="split-text-l" aria-describedby="split-text-l-help" placeholder="false">
-                          <small id="split-text-l-help" class="form-text text-muted">Cut text along column separators.</small>
+                          <small id="split-text-l-help" class="form-text">Cut text along column separators.</small>
                         </div>
                       </div>
                       <div class="col-md-12">
-                        <div class="form-group">
-                          <label for="flag-size-l">Detect superscripts</label>
+                        <div class="mb-3">
+                          <label for="flag-size-l" class="form-label">Detect superscripts</label>
                           <input type="text" class="form-control" id="flag-size-l" aria-describedby="flag-size-l-help" placeholder="false">
-                          <small id="flag-size-l-help" class="form-text text-muted">Detect super and subscripts.</small>
+                          <small id="flag-size-l-help" class="form-text">Detect super and subscripts.</small>
                         </div>
                       </div>
                     </div>
-                    <div class="row mx-0 stream mt-3" style="display: none">
+                    <div class="row mx-0 px-0 stream mt-3" style="display: none">
                       <div class="col-md-12">
-                        <div class="form-group">
-                          <label for="row-close-tol">Group into row</label>
+                        <div class="mb-3">
+                          <label for="row-close-tol" class="form-label">Group into row</label>
                           <input type="text" class="form-control" id="row-close-tol" aria-describedby="row-close-tol-help" placeholder="2">
-                          <small id="row-close-tol-help" class="form-text text-muted">Group vertically closer text lines together into the same row. Range: 10-50</small>
+                          <small id="row-close-tol-help" class="form-text">Group vertically closer text lines together into the same row. Range: 10-50</small>
                         </div>
                       </div>
                       <div class="col-md-12">
-                        <div class="form-group">
-                          <label for="col-close-tol">Group into column</label>
+                        <div class="mb-3">
+                          <label for="col-close-tol" class="form-label">Group into column</label>
                           <input type="text" class="form-control" id="col-close-tol" aria-describedby="col-close-tol-help" placeholder="0">
-                          <small id="col-close-tol-help" class="form-text text-muted">Group horizontally closer text lines together into the same column. Range: 10-50</small>
+                          <small id="col-close-tol-help" class="form-text">Group horizontally closer text lines together into the same column. Range: 10-50</small>
                         </div>
                       </div>
                       <div class="col-md-12">
-                        <div class="form-group">
-                          <label for="split-text-s">Cut text</label>
+                        <div class="mb-3">
+                          <label for="split-text-s" class="form-label">Cut text</label>
                           <input type="text" class="form-control" id="split-text-s" aria-describedby="split-text-s-help" placeholder="false">
-                          <small id="split-text-s-help" class="form-text text-muted">Cut text along column separators.</small>
+                          <small id="split-text-s-help" class="form-text">Cut text along column separators.</small>
                         </div>
                       </div>
                       <div class="col-md-12">
-                        <div class="form-group">
-                          <label for="flag-size-s">Detect superscripts</label>
+                        <div class="mb-3">
+                          <label for="flag-size-s" class="form-label">Detect superscripts</label>
                           <input type="text" class="form-control" id="flag-size-s" aria-describedby="flag-size-s-help" placeholder="false">
-                          <small id="flag-size-s-help" class="form-text text-muted">Detect super and subscripts.</small>
+                          <small id="flag-size-s-help" class="form-text">Detect super and subscripts.</small>
                         </div>
                       </div>
                     </div>
@@ -164,13 +164,20 @@
         <h4 class="alert-heading">Could not process this PDF</h4>
         <pre class="mb-2" style="white-space: pre-wrap;">{{ error }}</pre>
         <p class="mb-0">If this looks like a problem with the PDF, please report it at <a href="https://github.com/camelot-dev/camelot/issues" class="alert-link">camelot-dev/camelot</a>; otherwise at <a href="https://github.com/camelot-dev/excalibur/issues" class="alert-link">camelot-dev/excalibur</a>. The webserver log has the full traceback.</p>
+        <hr>
+        <a href="{{ url_for('views.files') }}" class="btn btn-primary">Upload another PDF</a>
       </div>
     </div>
   {% else %}
     <div class="container" data-processing>
-      <div class="jumbotron">
-        <h1 class="display-4">Processing</h1>
+      <div class="p-5 mb-4 bg-body-tertiary rounded-3 text-center">
+        <div class="spinner-border text-primary mb-4" style="width: 3rem; height: 3rem;" role="status">
+          <span class="visually-hidden">Processing</span>
+        </div>
+        <h1 class="display-5">Processing</h1>
         <p class="lead">Please wait while the pages are converted to images.</p>
+        <p class="text-body-secondary mb-0">Elapsed: <span data-elapsed>0s</span></p>
+        <p class="text-body-secondary mt-2 mb-0 d-none" data-slow-hint>Large or complex PDFs can take a few minutes. This page updates on its own.</p>
       </div>
     </div>
   {% endif %}

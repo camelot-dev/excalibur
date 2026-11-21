@@ -5,8 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="color-scheme" content="light dark">
 
     <title>Excalibur</title>
+
+    <!-- Follow the OS light/dark preference (set before CSS to avoid a flash). -->
+    <script>
+      (function () {
+        const query = window.matchMedia('(prefers-color-scheme: dark)');
+        const apply = function () {
+          document.documentElement.dataset.bsTheme = query.matches ? 'dark' : 'light';
+        };
+        apply();
+        query.addEventListener('change', apply);
+      })();
+    </script>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
@@ -21,38 +34,38 @@
 
   <body>
 
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top primary-bg">
-      <a class="navbar-brand" href="/"><img src="{{ url_for('static', filename='img/excalibur-logo-64.png') }}" alt="">Excalibur</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+    <nav class="navbar navbar-expand-md fixed-top primary-bg" data-bs-theme="dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/"><img src="{{ url_for('static', filename='img/excalibur-logo-64.png') }}" alt="">Excalibur</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-      <!-- http://jinja.pocoo.org/docs/2.10/tricks/#highlighting-active-menu-items -->
-      {% set navigation_bar = [
-          ('/files', 'files', 'Files'),
-          ('/rules', 'rules', 'Rules'),
-          ('/jobs', 'jobs', 'Jobs')
-      ] -%}
-      {% set active_page = active_page|default('files') -%}
-      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
-          {% for href, id, caption in navigation_bar %}
-            {% if id == active_page %}
-              <li class="nav-item active">
-                <a class="nav-link" href="{{ href|e }}">{{ caption|e }}</a>
-              </li>
-            {% else %}
+        <!-- http://jinja.pocoo.org/docs/2.10/tricks/#highlighting-active-menu-items -->
+        {% set navigation_bar = [
+            ('/files', 'files', 'Files'),
+            ('/rules', 'rules', 'Rules'),
+            ('/jobs', 'jobs', 'Jobs')
+        ] -%}
+        {% set active_page = active_page|default('files') -%}
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+          <ul class="navbar-nav me-auto">
+            {% for href, id, caption in navigation_bar %}
               <li class="nav-item">
-                <a class="nav-link" href="{{ href|e }}">{{ caption|e }}</a>
+                {% if id == active_page %}
+                  <a class="nav-link active" aria-current="page" href="{{ href|e }}">{{ caption|e }}</a>
+                {% else %}
+                  <a class="nav-link" href="{{ href|e }}">{{ caption|e }}</a>
+                {% endif %}
               </li>
-            {% endif %}
-          {% endfor %}
-        </ul>
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="https://opencollective.com/excalibur/" target="_blank">Support Excalibur on OpenCollective!</a>
-          </li>
-        </ul>
+            {% endfor %}
+          </ul>
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="https://opencollective.com/excalibur/" target="_blank">Support Excalibur on OpenCollective!</a>
+            </li>
+          </ul>
+        </div>
       </div>
     </nav>
 
@@ -65,9 +78,8 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script type="text/javascript" src="{{ url_for('static', filename='js/vendor/jquery-3.3.1.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/vendor/popper.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/vendor/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/vendor/jquery-3.7.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/vendor/bootstrap.bundle.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/poll.js') }}"></script>
     {% block javascript %}{% endblock %}
   </body>
