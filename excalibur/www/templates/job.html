@@ -64,6 +64,14 @@
       </div>
     {% endfor %}
   </div>
+{% elif error %}
+  <div class="container">
+    <div class="alert alert-danger mt-4" role="alert">
+      <h4 class="alert-heading">Table extraction failed</h4>
+      <pre class="mb-2" style="white-space: pre-wrap;">{{ error }}</pre>
+      <p class="mb-0">If this looks like a problem with the PDF, please report it at <a href="https://github.com/camelot-dev/camelot/issues" class="alert-link">camelot-dev/camelot</a>; otherwise at <a href="https://github.com/camelot-dev/excalibur/issues" class="alert-link">camelot-dev/excalibur</a>. The webserver log has the full traceback.</p>
+    </div>
+  </div>
 {% else %}
   <div class="container" data-processing>
     <div class="jumbotron">

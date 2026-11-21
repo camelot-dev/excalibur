@@ -34,6 +34,7 @@ class File(Base):
     filedims = Column(Text)
     imagedims = Column(Text)
     detected_areas = Column(Text)
+    error = Column(Text, default=None)
 
 
 class Rule(Base):
@@ -56,3 +57,4 @@ class Job(Base):
     finished_at = Column(DateTime, default=dt.datetime.now())
     file_id = Column(String(ID_LEN), ForeignKey("files.file_id"))
     rule_id = Column(String(ID_LEN), ForeignKey("rules.rule_id"))
+    error = Column(Text, default=None)

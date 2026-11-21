@@ -24,3 +24,27 @@ def test_get_pages_and_dimensions(tmp_path):
     width, height = get_file_dim(str(pdf))
     assert width == 612
     assert height == 792
+
+
+def test_initialize_database_adds_error_column_to_old_tables(tmp_path, monkeypatch):
+    from sqlalchemy import create_engine
+    from sqlalchemy import inspect
+    from sqlalchemy import text
+
+    from excalibur.utils import database
+
+    engine = create_engine(f"sqlite:///{tmp_path / 'old.db'}")
+    with engine.begin() as connection:
+        connection.execute(
+            text("CREATE TABLE files (file_id VARCHAR(100) PRIMARY KEY)")
+        )
+        connection.execute(text("CREATE TABLE jobs (job_id VARCHAR(100) PRIMARY KEY)"))
+    monkeypatch.setattr(database, "engine", engine)
+
+    database.initialize_database()
+    database.initialize_database()  # idempotent
+
+    inspector = inspect(engine)
+    for table in ("files", "jobs"):
+        names = {column["name"] for column in inspector.get_columns(table)}
+        assert "error" in names

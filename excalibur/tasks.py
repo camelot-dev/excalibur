@@ -27,6 +27,29 @@ _LEGACY_KWARGS = {
 }
 
 
+def _error_message(exc):
+    message = str(exc).strip()
+    name = type(exc).__name__
+    return f"{name}: {message}" if message else name
+
+
+def _record_error(model, column, record_id, exc):
+    """Store the error so the page can show it instead of waiting forever."""
+    session = Session()
+    try:
+        # Session is scoped: this is the task's own session, so drop
+        # whatever the failed task left half-done first.
+        session.rollback()
+        record = session.query(model).filter(column == record_id).first()
+        if record is not None:
+            record.error = _error_message(exc)
+            session.commit()
+    except Exception:
+        logging.exception("Could not record the task error")
+    finally:
+        session.close()
+
+
 def split(file_id):
     try:
         session = Session()
@@ -95,6 +118,7 @@ def split(file_id):
         session.close()
     except Exception as e:
         logging.exception(e)
+        _record_error(File, File.file_id, file_id, e)
 
 
 def extract(job_id):
@@ -164,3 +188,4 @@ def extract(job_id):
         session.close()
     except Exception as e:
         logging.exception(e)
+        _record_error(Job, Job.job_id, job_id, e)
