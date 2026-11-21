@@ -1,0 +1,130 @@
+/*
+ * Excalibur brand theme overlay on top of sphinx-book-theme.
+ *
+ * sphinx-book-theme inherits from pydata-sphinx-theme. Both expose CSS
+ * custom properties for accent colours; this file rewires them to the
+ * same saturated green as the Camelot docs, so both projects share one
+ * look (adapted from camelot-dev/camelot docs/_static/camelot-theme.css).
+ *
+ * Brand green:                        #0F9D47
+ * Darker for hover/active:            #0B7A38
+ * Light tint for hovered backgrounds: #E6F4EB
+ */
+
+:root,
+html[data-theme="light"] {
+  /* pydata-sphinx-theme custom properties */
+  --pst-color-primary: #0f9d47;
+  --pst-color-primary-text: #ffffff;
+  --pst-color-primary-highlight: #0b7a38;
+  --pst-color-primary-bg: #e6f4eb;
+  --pst-color-secondary: #0b7a38;
+  --pst-color-secondary-text: #ffffff;
+  --pst-color-secondary-highlight: #0f9d47;
+  --pst-color-link: #0b7a38;
+  --pst-color-link-hover: #0f9d47;
+  --pst-color-accent: #0f9d47;
+  /* sphinx-book-theme aliases */
+  --sbt-color-link: var(--pst-color-link);
+  --sbt-color-link-hover: var(--pst-color-link-hover);
+}
+
+html[data-theme="dark"] {
+  --pst-color-primary: #2cc36b;
+  --pst-color-primary-text: #0a1f12;
+  --pst-color-primary-highlight: #5bd98f;
+  --pst-color-primary-bg: #0e2418;
+  --pst-color-secondary: #5bd98f;
+  --pst-color-secondary-text: #0a1f12;
+  --pst-color-secondary-highlight: #2cc36b;
+  --pst-color-link: #5bd98f;
+  --pst-color-link-hover: #8be6ad;
+  --pst-color-accent: #2cc36b;
+  --sbt-color-link: var(--pst-color-link);
+  --sbt-color-link-hover: var(--pst-color-link-hover);
+}
+
+/* Force in-text links to use the green even where the theme falls back
+ * to a per-element default (pydata-sphinx-theme has hard-coded link
+ * colours in places the variable doesn't reach). High-specificity
+ * selector covers article body, sidebars, and TOC. */
+.bd-content a:not(.btn):not(.headerlink):not(.tag):not(.sd-btn),
+.bd-sidebar-primary a:not(.btn),
+.bd-toc-link,
+.bd-toc-item a,
+.toc-tree a,
+article a:not(.btn):not(.headerlink) {
+  color: var(--pst-color-link);
+}
+
+.bd-content a:not(.btn):not(.headerlink):not(.tag):not(.sd-btn):hover,
+.bd-sidebar-primary a:not(.btn):hover,
+.bd-toc-link:hover,
+.bd-toc-item a:hover,
+.toc-tree a:hover,
+article a:not(.btn):not(.headerlink):hover {
+  color: var(--pst-color-link-hover);
+}
+
+/* Left sidebar — active page indicator + TOC tree current-section. */
+.bd-sidebar-primary .nav-link.active,
+.bd-sidebar-primary .current > a,
+.bd-sidebar-primary li.toctree-l1.current > a,
+.bd-sidebar-primary li.toctree-l2.current > a,
+.bd-sidebar-primary li.toctree-l3.current > a {
+  color: var(--pst-color-primary);
+  border-left-color: var(--pst-color-primary);
+}
+
+/* Top navbar (when sphinx-book-theme renders one). */
+.bd-header .navbar-nav .nav-link:hover,
+.bd-header .navbar-nav .nav-link.active {
+  color: var(--pst-color-primary-highlight);
+}
+
+/* Right "On this page" sidebar — active TOC entry highlight. */
+.bd-toc-item.active > .bd-toc-link,
+.bd-toc-item.active > a,
+.toc-h2.active > .toc-entry > a,
+.toc-entry a.active {
+  color: var(--pst-color-primary);
+  border-left-color: var(--pst-color-primary);
+}
+
+/* Heading anchors that appear on hover. */
+h1 .headerlink,
+h2 .headerlink,
+h3 .headerlink,
+h4 .headerlink,
+h5 .headerlink,
+h6 .headerlink {
+  color: var(--pst-color-primary);
+}
+
+/* Inline code — faint green-tinted background without sacrificing
+ * legibility of syntax-highlighted code in fenced blocks (those keep
+ * their default palette). */
+:not(pre) > code.literal,
+:not(pre) > code.docutils {
+  background-color: rgba(15, 157, 71, 0.08);
+  border-color: rgba(15, 157, 71, 0.2);
+}
+
+html[data-theme="dark"] :not(pre) > code.literal,
+html[data-theme="dark"] :not(pre) > code.docutils {
+  background-color: rgba(44, 195, 107, 0.15);
+  border-color: rgba(44, 195, 107, 0.3);
+}
+
+/* Primary buttons (e.g. "Edit this page"). */
+.btn-primary,
+.btn-primary:focus,
+.sd-btn-primary {
+  background-color: var(--pst-color-primary) !important;
+  border-color: var(--pst-color-primary) !important;
+}
+.btn-primary:hover,
+.sd-btn-primary:hover {
+  background-color: var(--pst-color-primary-highlight) !important;
+  border-color: var(--pst-color-primary-highlight) !important;
+}

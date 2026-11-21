@@ -35,15 +35,13 @@ A great way to start contributing to Excalibur is to pick an issue tagged with t
 Setting up a development environment
 ------------------------------------
 
-After `installing the dependencies`_, which include Tkinter and ghostscript, you can install the `dev` extra using pip::
+You need Python 3.10 or newer. Camelot 2 renders PDF pages with pypdfium2, so no Ghostscript or other system dependency is required. You can install the ``dev`` extra using pip::
 
     $ pip install excalibur-py[dev]
 
 Alternatively, you can clone the project repository, and install the `dev` extra using pip::
 
     $ pip install -e ".[dev]"
-
-.. _installing the dependencies: https://camelot-py.readthedocs.io/en/master/user/install-deps.html#install-deps
 
 Pull Requests
 -------------

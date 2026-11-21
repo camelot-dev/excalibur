@@ -21,10 +21,7 @@ Release v\ |version|. (:ref:`Installation <install>`)
 .. image:: https://img.shields.io/pypi/pyversions/excalibur-py.svg
     :target: https://pypi.org/project/excalibur-py/
 
-.. image:: https://badges.gitter.im/camelot-dev/Lobby.png
-    :target: https://gitter.im/camelot-dev/Lobby
-
-**Excalibur** is a web interface to extract tabular data from PDFs, written in **Python 3**! It powered by `Camelot <https://camelot-py.readthedocs.io/>`_.
+**Excalibur** is a web interface to extract tabular data from PDFs, written in **Python 3**! It is powered by `Camelot <https://camelot-py.readthedocs.io/>`_ version 2.
 
 .. note:: Excalibur only works with text-based PDFs and not scanned documents. (As Tabula `explains`_, "If you can click and drag to select text in your table in a PDF viewer, then your PDF is text-based".)
 
@@ -33,9 +30,7 @@ Release v\ |version|. (:ref:`Installation <install>`)
 Using Excalibur
 ---------------
 
-**Note:** You need to `install ghostscript <https://camelot-py.readthedocs.io/en/master/user/install-deps.html>`_ before moving forward.
-
-After :ref:`installing Excalibur with pip <install>` (), you can initialize the metadata database using::
+After :ref:`installing Excalibur with pip <install>`, you can initialize the metadata database using::
 
     $ excalibur initdb
 
