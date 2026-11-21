@@ -19,18 +19,16 @@
       </div>
       <div class="col-md-6 col-sm-6 col-xs-12">
           <form action="/download" method="post" id="download-form">
-            <label for="format">Download</label>
-            <div class="input-group">
-              <select class="form-control" name="format" id="format">
+            <label for="format" class="form-label">Download</label>
+            <div class="input-group mb-3">
+              <select class="form-select" name="format" id="format">
                 <option selected disabled>Select format</option>
                 <option>CSV</option>
                 <option>Excel</option>
                 <option>JSON</option>
                 <option>HTML</option>
               </select>
-              <div class="input-group-append mb-3">
-                <button type="button" id="download" class="btn btn-outline-secondary">Download</button>
-              </div>
+              <button type="button" id="download" class="btn btn-outline-secondary">Download</button>
             </div>
           </form>
       </div>
@@ -41,9 +39,9 @@
     {% for d in data %}
       <div class="card depth-1 mb-5">
         <div class="card-body p-0">
-          <table class="table text-left table-bordered table-hover mb-0">
-            <caption class="text-right text-dark mr-3"> <h6>{{ d.title }}</h6> </caption>
-            <thead class="thead-light">
+          <table class="table text-start table-bordered table-hover mb-0">
+            <caption class="text-end text-body me-3"> <h6>{{ d.title }}</h6> </caption>
+            <thead>
               <tr>
                 {% for column in d.columns %}
                   <th>{{ column }}</th>
@@ -74,7 +72,7 @@
   </div>
 {% else %}
   <div class="container" data-processing>
-    <div class="jumbotron">
+    <div class="p-5 mb-4 bg-body-tertiary rounded-3">
       <h1 class="display-4">Processing</h1>
       <p class="lead">Please wait while the tables are extracted.</p>
     </div>

@@ -1,53 +1,117 @@
 /* Brand palette, sampled from the logo (same green as the camelot docs). */
-:root {
+:root,
+[data-bs-theme=light] {
   --brand-green: #0f9d47;
+  --brand-green-rgb: 15, 157, 71;
   --brand-green-dark: #0b7a38;
   --brand-green-tint: #e6f4eb;
+  --brand-green-border: #b9e2c8;
   --brand-grey-dark: #2f3337;
   --brand-grey: #939598;
   --brand-grey-light: #d1d2d4;
+  /* Text/link green: the darker shade keeps contrast on a light background. */
+  --brand-green-text: var(--brand-green-dark);
+  --brand-green-text-rgb: 11, 122, 56;
+
+  --bs-primary: var(--brand-green);
+  --bs-primary-rgb: var(--brand-green-rgb);
+  --bs-primary-text-emphasis: var(--brand-green-dark);
+  --bs-primary-bg-subtle: var(--brand-green-tint);
+  --bs-primary-border-subtle: var(--brand-green-border);
+  --bs-link-color: var(--brand-green-text);
+  --bs-link-color-rgb: var(--brand-green-text-rgb);
+  --bs-link-hover-color: var(--brand-green);
+  --bs-link-hover-color-rgb: var(--brand-green-rgb);
+  --bs-focus-ring-color: rgba(var(--brand-green-rgb), .25);
+  --bs-body-font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  --panel-bg: #fff;
+  --panel-shadow: rgba(0, 0, 0, .12);
+  --table-head-bg: #f1f3f4;
+}
+
+[data-bs-theme=dark] {
+  /* A lighter green keeps links and green text readable on dark surfaces. */
+  --brand-green-text: #2fbf6a;
+  --brand-green-text-rgb: 47, 191, 106;
+  --brand-green-tint: #0f2a1a;
+  --brand-green-border: #1d5c36;
+
+  --bs-primary-text-emphasis: var(--brand-green-text);
+  --bs-primary-bg-subtle: var(--brand-green-tint);
+  --bs-primary-border-subtle: var(--brand-green-border);
+  --bs-link-color: var(--brand-green-text);
+  --bs-link-color-rgb: var(--brand-green-text-rgb);
+  --bs-link-hover-color: #5fd690;
+  --bs-link-hover-color-rgb: 95, 214, 144;
+
+  --panel-bg: var(--bs-secondary-bg);
+  --panel-shadow: rgba(0, 0, 0, .5);
+  --table-head-bg: var(--bs-tertiary-bg);
 }
 
 html, body {
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  color: #212529;
+  font-family: var(--bs-body-font-family);
 }
-
-a { color: var(--brand-green-dark); }
-a:hover { color: var(--brand-green); }
 
 /* Navbar: dark grey with the logo and a green active link. */
 .navbar.primary-bg { background-color: var(--brand-grey-dark) !important; border-bottom: 3px solid var(--brand-green); }
 .navbar-brand { display: flex; align-items: center; font-weight: 600; }
 .navbar-brand img { height: 32px; width: 32px; margin-right: .5rem; }
-.navbar-dark .navbar-nav .nav-item.active .nav-link { color: #fff; box-shadow: inset 0 -3px 0 var(--brand-green); }
+.navbar .navbar-nav .nav-link.active { color: #fff; box-shadow: inset 0 -3px 0 var(--brand-green); }
 
-/* Bootstrap 4 has no theme variables for components, so recolour the
-   primary/info/success variants to the brand green and grey. */
+/* Brand green for the primary/info/success variants, grey when disabled. */
 .btn-primary, .btn-success, .btn-info {
-  background-color: var(--brand-green); border-color: var(--brand-green); color: #fff;
-}
-.btn-primary:hover, .btn-success:hover, .btn-info:hover,
-.btn-primary:focus, .btn-success:focus, .btn-info:focus,
-.btn-primary:not(:disabled):active, .btn-success:not(:disabled):active, .btn-info:not(:disabled):active,
-.show > .btn-info.dropdown-toggle {
-  background-color: var(--brand-green-dark); border-color: var(--brand-green-dark); color: #fff;
-  box-shadow: none;
+  --bs-btn-color: #fff;
+  --bs-btn-bg: var(--brand-green);
+  --bs-btn-border-color: var(--brand-green);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: var(--brand-green-dark);
+  --bs-btn-hover-border-color: var(--brand-green-dark);
+  --bs-btn-focus-shadow-rgb: var(--brand-green-rgb);
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: var(--brand-green-dark);
+  --bs-btn-active-border-color: var(--brand-green-dark);
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: var(--brand-grey);
+  --bs-btn-disabled-border-color: var(--brand-grey);
 }
 .btn-outline-primary, .btn-outline-success {
-  color: var(--brand-green-dark); border-color: var(--brand-green);
+  --bs-btn-color: var(--brand-green-text);
+  --bs-btn-border-color: var(--brand-green);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: var(--brand-green);
+  --bs-btn-hover-border-color: var(--brand-green);
+  --bs-btn-focus-shadow-rgb: var(--brand-green-rgb);
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: var(--brand-green-dark);
+  --bs-btn-active-border-color: var(--brand-green-dark);
+  --bs-btn-disabled-color: var(--brand-grey);
+  --bs-btn-disabled-border-color: var(--brand-grey);
 }
-.btn-outline-primary:hover, .btn-outline-success:hover,
-.btn-outline-primary:not(:disabled):active, .btn-outline-success:not(:disabled):active {
-  background-color: var(--brand-green); border-color: var(--brand-green); color: #fff;
+.btn-secondary {
+  --bs-btn-bg: #5f6368;
+  --bs-btn-border-color: #5f6368;
+  --bs-btn-hover-bg: var(--brand-grey-dark);
+  --bs-btn-hover-border-color: var(--brand-grey-dark);
+  --bs-btn-active-bg: var(--brand-grey-dark);
+  --bs-btn-active-border-color: var(--brand-grey-dark);
 }
-.btn-primary:disabled, .btn-primary.disabled { background-color: var(--brand-grey); border-color: var(--brand-grey); }
-.btn-secondary { background-color: #5f6368; border-color: #5f6368; }
-.btn-secondary:hover { background-color: var(--brand-grey-dark); border-color: var(--brand-grey-dark); }
-.alert-info { background-color: var(--brand-green-tint); border-color: #b9e2c8; color: var(--brand-green-dark); }
-.alert-info a { color: var(--brand-green-dark); font-weight: 600; }
-.form-control:focus, .custom-select:focus { border-color: var(--brand-green); }
-.thead-light th, .table thead th { background-color: #f1f3f4; }
+.alert-info {
+  --bs-alert-bg: var(--brand-green-tint);
+  --bs-alert-border-color: var(--brand-green-border);
+  --bs-alert-color: var(--brand-green-text);
+  --bs-alert-link-color: var(--brand-green-text);
+}
+.alert-info a { font-weight: 600; }
+.form-control:focus, .form-select:focus {
+  border-color: var(--brand-green);
+  box-shadow: none;
+}
+.table > thead > tr > th { --bs-table-bg: var(--table-head-bg); }
+
+/* Bootstrap 5 no longer makes .form-text a block. */
+.form-text { display: block; }
 
 body {
   padding-top: 5rem;
@@ -77,7 +141,7 @@ input:active, .form-control:active {
 }
 
 .primary-text {
-  color: var(--brand-green);
+  color: var(--brand-green-text);
 }
 
 .clickable {
@@ -86,6 +150,10 @@ input:active, .form-control:active {
 
 .depth-1 {
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+[data-bs-theme=dark] .depth-1 {
+  box-shadow: 0 0 0 1px var(--bs-border-color), 0 1px 3px rgba(0,0,0,0.5);
 }
 
 .depth-2 {
@@ -104,9 +172,17 @@ input:active, .form-control:active {
   vertical-align: middle;
 }
 
-.table-hover tbody tr:hover {
-  /* OVERWRITE */
-  background-color: rgba(0,0,0,.02);
+.table-hover {
+  /* OVERWRITE: a subtler hover than Bootstrap's default */
+  --bs-table-hover-bg: rgba(var(--bs-emphasis-color-rgb), .03);
+}
+
+/* Styled file picker (replaces Bootstrap 4's .custom-file box). */
+.uploadFile {
+  position: relative;
+  flex: 1 1 auto;
+  width: 100%;
+  height: calc(1.5em + .75rem + 2px);
 }
 
 .uploadFile .uploadFile__input {
@@ -133,7 +209,7 @@ input:active, .form-control:active {
   width: 100%;
   line-height: 2em;
   opacity: 1;
-  color: var(--brand-green);
+  color: var(--brand-green-text);
   visibility: visible;
   text-align: center;
   border: 0.1em dashed var(--brand-green);

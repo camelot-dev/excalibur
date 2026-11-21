@@ -8,7 +8,7 @@
   <div class="row mb-4 border-bottom mb-5">
     <div class="col-md-12 text-center">
         <h1 class="display-4 align-items-center d-flex justify-content-center">
-            <img src="https://excalibur-py.readthedocs.io/en/master/_static/excalibur-logo.png" class="img-responsive" width="40" height="auto" alt="Excalibur">
+            <img src="https://excalibur-py.readthedocs.io/en/master/_static/excalibur-logo.png" class="img-fluid" width="40" height="auto" alt="Excalibur">
             <span>Excalibur</span>
         </h1>
         <p class="lead">A web interface to extract tabular data from PDFs</p>
@@ -19,31 +19,29 @@
     <div class="row align-items-center">
       <div class="col-md-6 col-sm-6 col-xs-12">
         <div class="input-group">
-          <div class="custom-file uploadFile">
+          <div class="uploadFile">
             <input type="file" class="uploadFile__input" id="file" name="file" accept="application/pdf">
             <label for="file" class="uploadFile__label">Upload PDF</label>
           </div>
         </div>
       </div>
       <div class="col-md-6 col-sm-6 col-xs-12 py-2">
-        <label for="pages">Page numbers (example inputs: 1,3 or 5-8 or 1-end or all)</label>
+        <label for="pages" class="form-label">Page numbers (example inputs: 1,3 or 5-8 or 1-end or all)</label>
         <div class="input-group">
           <input type="text" class="form-control" id="pages" placeholder="Comma-separated page numbers to extract tables from.">
-          <div class="input-group-append">
-            <button type="button" id="upload" class="btn btn-outline-secondary">Upload</button>
-          </div>
+          <button type="button" id="upload" class="btn btn-outline-secondary">Upload</button>
         </div>
       </div>
     </div>
   </form>
-  <h5 class="card-title py-3 mb-0 text-dark font-weight-bold">Previous Uploads</h5>
+  <h5 class="card-title py-3 mb-0 fw-bold">Previous Uploads</h5>
 
   <div class="card depth-1 mb-5">
     <div class="card-body p-0">
         <div class="row">
             <div class="col-md-12">
-                <table class="table text-left table-borderless table-hover mb-0">
-                  <thead class="thead-light">
+                <table class="table text-start table-borderless table-hover mb-0">
+                  <thead>
                     <tr>
                       <th scope="col">#</th>
                       <th scope="col">Filename</th>

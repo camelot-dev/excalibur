@@ -1,3 +1,13 @@
+/* Workspace page. Brand variables come from base.css. */
+:root,
+[data-bs-theme=light] {
+  --page-shadow: #c8c8c8;
+}
+
+[data-bs-theme=dark] {
+  --page-shadow: rgba(0, 0, 0, .6);
+}
+
 .thumbnail-container {
   max-height: 100vh;
   min-height: 800px;
@@ -23,20 +33,21 @@ img {
 }
 
 div .control-panel {
-  background-color : #ffffff;
-  box-shadow : 0 0 6px #ffffff;
+  background-color : var(--panel-bg);
+  box-shadow : 0 0 6px var(--panel-bg);
   padding: 0;
 }
 
 div .image-area {
   -moz-border-radius : 5px 5px 5px 5px;
-  -moz-box-shadow : 0 0 6px #c8c8c8;
+  -moz-box-shadow : 0 0 6px var(--page-shadow);
   -webkit-border-radius : 5px 5px 5px 5px;
-  -webkit-box-shadow : 0 0 6px #c8c8c8;
+  -webkit-box-shadow : 0 0 6px var(--page-shadow);
+  /* The rendered PDF page stays white in both themes. */
   background-color : #ffffff;
   border : 0;
   border-radius : 5px 5px 5px 5px;
-  box-shadow : 0 0 6px #c8c8c8;
+  box-shadow : 0 0 6px var(--page-shadow);
   display : inline-block;
   padding : 0;
   position: relative;
@@ -69,9 +80,19 @@ div .image-area {
   position: relative;
   height: 100%;
   width: 2px;
-  background-color: #0f9d47;
+  background-color: var(--brand-green);
   margin: 0 auto;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
 /* .add-separator {} */
+
+/* Dim the white page a little in dark mode. jquery.selectareas blurs the
+   image with `filter` while a selection is active, so keep both filters. */
+[data-bs-theme=dark] .image-area {
+  filter: brightness(.9);
+}
+
+[data-bs-theme=dark] .image-area.blurred {
+  filter: blur(3px) brightness(.9);
+}
