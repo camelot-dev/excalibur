@@ -1,0 +1,60 @@
+categories:
+  - title: ":boom: Breaking Changes"
+    label: "breaking"
+  - title: ":rocket: Features"
+    label: "enhancement"
+  - title: ":fire: Removals and Deprecations"
+    label: "removal"
+  - title: ":beetle: Fixes"
+    label: "bug"
+  - title: ":lock: Security"
+    label: "security"
+  - title: ":racehorse: Performance"
+    label: "performance"
+  - title: ":rotating_light: Testing"
+    label: "testing"
+  - title: ":construction_worker: Continuous Integration"
+    label: "ci"
+  - title: ":books: Documentation"
+    labels:
+      - "documentation"
+      - "docs"
+  - title: ":hammer: Refactoring"
+    label: "refactoring"
+  - title: ":lipstick: Style"
+    label: "style"
+  - title: ":package: Dependencies"
+    labels:
+      - "dependencies"
+      - "build"
+name-template: "v$RESOLVED_VERSION"
+tag-template: "v$RESOLVED_VERSION"
+template: |
+  ## Changes
+
+  $CHANGES
+autolabeler:
+  - label: "breaking"
+    title:
+      - "/(^|\\s)\\w+(\\(.*\\))?!:/" # conventional "type!:" breaking marker
+      - "/breaking change/i"
+  - label: "enhancement"
+    title: ["/^feat([(!:]|ure)/i"]
+  - label: "bug"
+    title: ["/^fix[(!:]/i"]
+  - label: "documentation"
+    title: ["/^docs[(:]/i"]
+  - label: "testing"
+    title: ["/^test[(:]/i"]
+  - label: "performance"
+    title: ["/^perf[(:]/i"]
+  - label: "ci"
+    title: ["/^ci[(:]/i"]
+  - label: "style"
+    title: ["/^style[(:]/i"]
+  - label: "refactoring"
+    title: ["/^refactor[(:]/i"]
+  - label: "dependencies"
+    title:
+      - "/^build[(:]/i"
+      - "/^chore\\(deps\\)/i"
