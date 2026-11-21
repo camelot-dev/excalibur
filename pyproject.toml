@@ -46,9 +46,30 @@ dev = [
     "pytest>=3.8.0",
     "pytest-cov>=6.0.0",
     "pytest-runner>=6.0.1",
+    "pre-commit>=3.5",
     "reportlab>=4",
+    "ruff>=0.14",
     "sphinx>=4.3.2",
 ]
 
 [project.scripts]
 excalibur = "excalibur.cli:cli"
+
+[tool.ruff]
+# Same toolchain as camelot: Ruff replaces black, isort, flake8 and pyupgrade.
+target-version = "py310"
+line-length = 88
+extend-exclude = ["docs/_themes/*"]
+force-exclude = true
+
+[tool.ruff.lint]
+select = ["B", "E", "F", "I", "S", "UP", "W"]
+ignore = [
+    "E501", # line too long: the formatter owns wrapping
+]
+
+[tool.ruff.lint.isort]
+force-single-line = true
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101"]

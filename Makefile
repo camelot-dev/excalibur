@@ -1,21 +1,16 @@
-.PHONY: docs
+.PHONY: install test lint docs build-executable
 
 install:
-	pip install --upgrade pip
-	pip install ".[dev]"
+	uv sync --extra dev
 
 test:
-	pytest --verbose tests
+	uv run pytest
+
+lint:
+	uvx pre-commit run --all-files
 
 docs:
 	cd docs && make html
-	@echo "\033[95m\n\nBuild successful! View the docs homepage at docs/_build/html/index.html.\n\033[0m"
-
-publish:
-	pip install twine
-	python setup.py sdist bdist_wheel --universal
-	twine upload dist/*
-	rm -rf build dist .egg excalibur_py.egg-info
 
 build-executable:
 	pip install pyinstaller

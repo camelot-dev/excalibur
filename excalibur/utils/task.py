@@ -2,12 +2,11 @@ import os
 
 import cv2
 import playa
-from camelot.utils import (
-    get_image_char_and_text_objects,
-    get_page_layout,
-    get_rotation,
-)
-from pypdf import PdfReader, PdfWriter
+from camelot.utils import get_image_char_and_text_objects
+from camelot.utils import get_page_layout
+from camelot.utils import get_rotation
+from pypdf import PdfReader
+from pypdf import PdfWriter
 
 
 def _reader(source):

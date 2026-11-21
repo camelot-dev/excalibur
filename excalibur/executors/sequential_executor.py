@@ -1,6 +1,6 @@
+import subprocess
 import sys
 import traceback
-import subprocess
 from concurrent.futures import ProcessPoolExecutor
 
 from .base_executor import BaseExecutor
@@ -8,7 +8,7 @@ from .base_executor import BaseExecutor
 
 def execute_command(command):
     try:
-        subprocess.check_call(
+        subprocess.check_call(  # noqa: S603 -- argv list from _task_command, no shell
             command, stderr=subprocess.STDOUT, close_fds=(sys.platform != "win32")
         )
     except FileNotFoundError:

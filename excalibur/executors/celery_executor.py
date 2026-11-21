@@ -1,13 +1,13 @@
+import subprocess
 import sys
 import traceback
-import subprocess
 
 from celery import Celery
 
 from .. import configuration as conf
-from .base_executor import BaseExecutor
-from ..utils.module_loading import import_string
 from ..config_templates.default_celery import DEFAULT_CELERY_CONFIG
+from ..utils.module_loading import import_string
+from .base_executor import BaseExecutor
 
 if conf.has_option("celery", "celery_config_options"):
     celery_configuration = import_string(conf.get("celery", "celery_config_options"))
@@ -23,7 +23,7 @@ app = Celery(
 @app.task
 def execute_command(command):
     try:
-        subprocess.check_call(
+        subprocess.check_call(  # noqa: S603 -- argv list from _task_command, no shell
             command, stderr=subprocess.STDOUT, close_fds=(sys.platform != "win32")
         )
     except Exception:

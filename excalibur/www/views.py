@@ -6,24 +6,26 @@ import re
 import sys
 
 import pandas as pd
-from flask import (
-    Blueprint,
-    abort,
-    jsonify,
-    request,
-    url_for,
-    redirect,
-    render_template,
-    send_from_directory,
-)
+from flask import Blueprint
+from flask import abort
+from flask import jsonify
+from flask import redirect
+from flask import render_template
+from flask import request
+from flask import send_from_directory
+from flask import url_for
 from werkzeug.utils import secure_filename
 
 from .. import configuration as conf
-from ..models import Job, File, Rule
-from ..settings import Session
 from ..executors import get_default_executor
-from ..utils.file import mkdirs, allowed_filename
-from ..utils.metadata import generate_uuid, random_string
+from ..models import File
+from ..models import Job
+from ..models import Rule
+from ..settings import Session
+from ..utils.file import allowed_filename
+from ..utils.file import mkdirs
+from ..utils.metadata import generate_uuid
+from ..utils.metadata import random_string
 
 views = Blueprint("views", __name__)
 
@@ -277,6 +279,4 @@ def download():
 
     directory = os.path.join(os.getcwd(), datapath)
     filename = os.path.basename(matches[0])
-    return send_from_directory(
-        directory=directory, path=filename, as_attachment=True
-    )
+    return send_from_directory(directory=directory, path=filename, as_attachment=True)
