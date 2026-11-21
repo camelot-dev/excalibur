@@ -1,4 +1,4 @@
 sphinx>=8.1
 sphinx-book-theme>=1.1.4
 sphinx-copybutton>=0.5.2
-myst-parser>=4.0
+myst-parser>=5.2.0
