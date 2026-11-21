@@ -79,6 +79,15 @@ $ cd excalibur
 $ pip install .
 </pre>
 
+### Docker
+
+```console
+$ docker build -t excalibur .
+$ docker run -p 7860:7860 excalibur
+```
+
+Then open http://localhost:7860. Uploads live inside the container, so they are gone when it is removed.
+
 ## Documentation
 
 Fantastic documentation is available at [http://excalibur-py.readthedocs.io/](http://excalibur-py.readthedocs.io/).
