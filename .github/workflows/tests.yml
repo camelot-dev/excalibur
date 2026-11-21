@@ -2,28 +2,56 @@ name: Tests
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
+
+permissions:
+  contents: read
 
 jobs:
-  build:
-
+  tests:
+    name: tests ${{ matrix.python-version }}
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
-        python-version: [3.11, 3.12, 3.13]
+        python-version: ["3.10", "3.11", "3.12", "3.13"]
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        python -m pip install ".[dev]"
-    - name: Test with pytest
-      run: |
-        python -m pytest
+      - uses: actions/checkout@v5
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies from the lockfile
+        run: uv sync --frozen --extra dev
+
+      - name: Test with pytest
+        run: uv run --frozen python -m pytest
+
+      - name: Smoke test (initdb + webserver)
+        env:
+          HOME: ${{ runner.temp }}/excalibur-home
+        run: |
+          mkdir -p "$HOME"
+          uv run --frozen excalibur initdb
+          uv run --frozen excalibur webserver > webserver.log 2>&1 &
+          for i in $(seq 30); do
+            code=$(curl -s -o /dev/null -w "%{http_code}" -L http://127.0.0.1:5000/ || true)
+            [ "$code" = 200 ] && echo "webserver OK" && exit 0
+            sleep 1
+          done
+          cat webserver.log
+          exit 1
+
+  # Single required status check for branch protection.
+  ci-ok:
+    name: ci-ok
+    runs-on: ubuntu-latest
+    needs: [tests]
+    if: always()
+    steps:
+      - run: test "${{ needs.tests.result }}" = success
