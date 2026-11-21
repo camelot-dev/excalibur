@@ -8,6 +8,7 @@ import sys
 import pandas as pd
 from flask import (
     Blueprint,
+    abort,
     jsonify,
     request,
     url_for,
@@ -266,10 +267,16 @@ def download():
     session.close()
 
     datapath = os.path.join(job.datapath, f.lower())
-    zipfile = glob.glob(os.path.join(datapath, "*.zip"))[0]
+    # Excel is written as a single .xlsx (one sheet per table); the other
+    # formats are zipped. No file means no tables were found.
+    matches = glob.glob(os.path.join(datapath, "*.zip")) or glob.glob(
+        os.path.join(datapath, "*.xlsx")
+    )
+    if not matches:
+        abort(404)
 
     directory = os.path.join(os.getcwd(), datapath)
-    filename = os.path.basename(zipfile)
+    filename = os.path.basename(matches[0])
     return send_from_directory(
         directory=directory, path=filename, as_attachment=True
     )
